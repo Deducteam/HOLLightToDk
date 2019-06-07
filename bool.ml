@@ -75,11 +75,13 @@ export_theory "bool-def";;
 (* Rules for T                                                               *)
 (* ------------------------------------------------------------------------- *)
 
-let T_DEF = new_basic_definition
+let T_DEF' = new_basic_definition
  `T = ((\p:bool. p) = (\p:bool. p))`;;
 
+export_namedthm T_DEF' "T_DEF'";;
+
 let TRUTH =
-	let truthth = EQ_MP (SYM T_DEF) (REFL `\p:bool. p`) in
+	let truthth = EQ_MP (SYM T_DEF') (REFL `\p:bool. p`) in
 	let () = replace_proof truthth Truth_proof in
 	truthth;;
 
@@ -101,8 +103,10 @@ let EQT_INTRO =
 (* Rules for /\                                                              *)
 (* ------------------------------------------------------------------------- *)
 
-let AND_DEF = new_basic_definition
+let AND_DEF' = new_basic_definition
  `(/\) = \p q. (\f:bool->bool->bool. f p q) = (\f. f T T)`;;
+
+export_namedthm AND_DEF' "AND_DEF'";;
 
 let mk_conj = mk_binary "/\\";;
 let list_mk_conj = end_itlist (curry mk_conj);;
@@ -112,7 +116,7 @@ let CONJ =
   and p = `p:bool`
   and q = `q:bool` in
   let pth1 =
-    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM AND_DEF p) in
+    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM AND_DEF' p) in
     let th2 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM th1 q) in
     let th3 = EQ_MP th2 (ASSUME(mk_conj(p,q))) in
     EQT_ELIM(BETA_RULE (AP_THM th3 `\(p:bool) (q:bool). q`))
@@ -121,7 +125,7 @@ let CONJ =
     and qth = ASSUME q in
     let th1 = MK_COMB(AP_TERM f (EQT_INTRO pth),EQT_INTRO qth) in
     let th2 = ABS f th1 in
-    let th3 = BETA_RULE (AP_THM (AP_THM AND_DEF p) q) in
+    let th3 = BETA_RULE (AP_THM (AP_THM AND_DEF' p) q) in
     EQ_MP (SYM th3) th2 in
   let pth = DEDUCT_ANTISYM_RULE pth1 pth2 in
   fun th1 th2 ->
@@ -133,7 +137,7 @@ let CONJ =
 let CONJUNCT1 =
   let P = `P:bool` and Q = `Q:bool` in
   let pth =
-    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM AND_DEF P) in
+    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM AND_DEF' P) in
     let th2 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM th1 Q) in
     let th3 = EQ_MP th2 (ASSUME(mk_conj(P,Q))) in
     EQT_ELIM(BETA_RULE (AP_THM th3 `\(p:bool) (q:bool). p`)) in
@@ -147,7 +151,7 @@ let CONJUNCT1 =
 let CONJUNCT2 =
   let P = `P:bool` and Q = `Q:bool` in
   let pth =
-    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM AND_DEF P) in
+    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM AND_DEF' P) in
     let th2 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM th1 Q) in
     let th3 = EQ_MP th2 (ASSUME(mk_conj(P,Q))) in
     EQT_ELIM(BETA_RULE (AP_THM th3 `\(p:bool) (q:bool). q`)) in
@@ -168,20 +172,22 @@ let CONJUNCTS = striplist CONJ_PAIR;;
 (* Rules for ==>                                                             *)
 (* ------------------------------------------------------------------------- *)
 
-let IMP_DEF = new_basic_definition
+let IMP_DEF' = new_basic_definition
   `(==>) = \p q. p /\ q <=> p`;;
+
+export_namedthm IMP_DEF' "IMP_DEF'";;
 
 let mk_imp = mk_binary "==>";;
 
 let MP =
   let p = `p:bool` and q = `q:bool` in
   let pth =
-    let th1 = BETA_RULE (AP_THM (AP_THM IMP_DEF p) q)
+    let th1 = BETA_RULE (AP_THM (AP_THM IMP_DEF' p) q)
     and th2 = CONJ (ASSUME p) (ASSUME q)
     and th3 = CONJUNCT1(ASSUME(mk_conj(p,q))) in
     EQ_MP (SYM th1) (DEDUCT_ANTISYM_RULE th2 th3)
   and qth =
-    let th1 = BETA_RULE (AP_THM (AP_THM IMP_DEF p) q) in
+    let th1 = BETA_RULE (AP_THM (AP_THM IMP_DEF' p) q) in
     let th2 = EQ_MP th1 (ASSUME(mk_imp(p,q))) in
     CONJUNCT2 (EQ_MP (SYM th2) (ASSUME p)) in
   let rth = DEDUCT_ANTISYM_RULE pth qth in
@@ -196,7 +202,7 @@ let MP =
 let DISCH =
   let p = `p:bool`
   and q = `q:bool` in
-  let pth = SYM(BETA_RULE (AP_THM (AP_THM IMP_DEF p) q)) in
+  let pth = SYM(BETA_RULE (AP_THM (AP_THM IMP_DEF' p) q)) in
   fun a th ->
     let th1 = CONJ (ASSUME a) th in
     let th2 = CONJUNCT1 (ASSUME (concl th1)) in
@@ -257,8 +263,10 @@ let IMP_TRANS =
 (* Rules for !                                                               *)
 (* ------------------------------------------------------------------------- *)
 
-let FORALL_DEF = new_basic_definition
+let FORALL_DEF' = new_basic_definition
  `(!) = \P:A->bool. P = \x. T`;;
+
+export_namedthm FORALL_DEF' "FORALL_DEF'";;
 
 let mk_forall = mk_binder "!";;
 let list_mk_forall(vs,bod) = itlist (curry mk_forall) vs bod;;
@@ -267,7 +275,7 @@ let SPEC =
   let P = `P:A->bool`
   and x = `x:A` in
   let pth =
-    let th1 = EQ_MP(AP_THM FORALL_DEF `P:A->bool`) (ASSUME `(!)(P:A->bool)`) in
+    let th1 = EQ_MP(AP_THM FORALL_DEF' `P:A->bool`) (ASSUME `(!)(P:A->bool)`) in
     let th2 = AP_THM (CONV_RULE BETA_CONV th1) `x:A` in
     let th3 = CONV_RULE (RAND_CONV BETA_CONV) th2 in
     DISCH_ALL (EQT_ELIM th3) in
@@ -308,7 +316,7 @@ let ISPECL tms th =
 
 let GEN =
   let pth = SYM(CONV_RULE (RAND_CONV BETA_CONV)
-                          (AP_THM FORALL_DEF `P:A->bool`)) in
+                          (AP_THM FORALL_DEF' `P:A->bool`)) in
   fun x ->
     let qth = INST_TYPE[snd(dest_var x),aty] pth in
     let ptm = rand(rand(concl qth)) in
@@ -331,8 +339,10 @@ let GEN_ALL th =
 (* Rules for ?                                                               *)
 (* ------------------------------------------------------------------------- *)
 
-let EXISTS_DEF = new_basic_definition
+let EXISTS_DEF' = new_basic_definition
  `(?) = \P:A->bool. !q. (!x. P x ==> q) ==> q`;;
+
+export_namedthm EXISTS_DEF' "EXISTS_DEF'";;
 
 let mk_exists =  mk_binder "?";;
 let list_mk_exists(vs,bod) =  itlist (curry mk_exists) vs bod;;
@@ -340,7 +350,7 @@ let list_mk_exists(vs,bod) =  itlist (curry mk_exists) vs bod;;
 let EXISTS =
   let P = `P:A->bool` and x = `x:A` in
   let pth =
-    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM EXISTS_DEF P) in
+    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM EXISTS_DEF' P) in
     let th2 = SPEC `x:A` (ASSUME `!x:A. P x ==> Q`) in
     let th3 = DISCH `!x:A. P x ==> Q` (MP th2 (ASSUME `(P:A->bool) x`)) in
     EQ_MP (SYM th1) (GEN `Q:bool` th3) in
@@ -359,7 +369,7 @@ let SIMPLE_EXISTS v th =
 let CHOOSE =
   let P = `P:A->bool` and Q = `Q:bool` in
   let pth =
-    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM EXISTS_DEF P) in
+    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM EXISTS_DEF' P) in
     let th2 = SPEC `Q:bool` (UNDISCH(fst(EQ_IMP_RULE th1))) in
     DISCH_ALL (DISCH `(?) (P:A->bool)` (UNDISCH th2)) in
   fun (v,th1) th2 ->
@@ -382,8 +392,10 @@ let SIMPLE_CHOOSE v th =
 (* Rules for \/                                                              *)
 (* ------------------------------------------------------------------------- *)
 
-let OR_DEF = new_basic_definition
+let OR_DEF' = new_basic_definition
  `(\/) = \p q. !r. (p ==> r) ==> (q ==> r) ==> r`;;
+
+export_namedthm OR_DEF' "OR_DEF'";;
 
 let mk_disj = mk_binary "\\/";;
 let list_mk_disj = end_itlist (curry mk_disj);;
@@ -391,7 +403,7 @@ let list_mk_disj = end_itlist (curry mk_disj);;
 let DISJ1 =
   let P = `P:bool` and Q = `Q:bool` in
   let pth =
-    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM OR_DEF `P:bool`) in
+    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM OR_DEF' `P:bool`) in
     let th2 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM th1 `Q:bool`) in
     let th3 = MP (ASSUME `P ==> t`) (ASSUME `P:bool`) in
     let th4 = GEN `t:bool` (DISCH `P ==> t` (DISCH `Q ==> t` th3)) in
@@ -406,7 +418,7 @@ let DISJ1 =
 let DISJ2 =
   let P = `P:bool` and Q = `Q:bool` in
   let pth =
-    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM OR_DEF `P:bool`) in
+    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM OR_DEF' `P:bool`) in
     let th2 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM th1 `Q:bool`) in
     let th3 = MP (ASSUME `Q ==> t`) (ASSUME `Q:bool`) in
     let th4 = GEN `t:bool` (DISCH `P ==> t` (DISCH `Q ==> t` th3)) in
@@ -421,7 +433,7 @@ let DISJ2 =
 let DISJ_CASES =
   let P = `P:bool` and Q = `Q:bool` and R = `R:bool` in
   let pth =
-    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM OR_DEF `P:bool`) in
+    let th1 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM OR_DEF' `P:bool`) in
     let th2 = CONV_RULE (RAND_CONV BETA_CONV) (AP_THM th1 `Q:bool`) in
     let th3 = SPEC `R:bool` (EQ_MP th2 (ASSUME `P \/ Q`)) in
     UNDISCH (UNDISCH th3) in
@@ -442,8 +454,10 @@ let SIMPLE_DISJ_CASES th1 th2 =
 (* Rules for negation and falsity.                                           *)
 (* ------------------------------------------------------------------------- *)
 
-let F_DEF = new_basic_definition
+let F_DEF' = new_basic_definition
  `F = !p:bool. p`;;
+
+export_namedthm F_DEF' "F_DEF'";;
 
 let NOT_DEF = new_basic_definition
  `(~) = \p. p ==> F`;;
@@ -471,7 +485,7 @@ let NOT_INTRO =
 
 let CONTR =
   let P = `P:bool` and f_tm = `F` in
-  let pth = SPEC P (EQ_MP F_DEF (ASSUME `F`)) in
+  let pth = SPEC P (EQ_MP F_DEF' (ASSUME `F`)) in
   fun tm th -> 
     if concl th <> f_tm then failwith "CONTR"
     else
@@ -522,5 +536,3 @@ let EXISTENCE =
         let ty = snd(dest_var(bndvar abs)) in
         MP (PINST [ty,aty] [abs,P] pth) th
     with Failure _ -> failwith "EXISTENCE";;
-
-export_theory "dummy";;

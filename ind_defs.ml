@@ -34,20 +34,29 @@ let RIGHT_BETAS =
 (* ------------------------------------------------------------------------- *)
 
 let EXISTS_EQUATION =
+	(*
   let pth = prove
    (`!P t. (!x:A. (x = t) ==> P x) ==> (?) P`,
-    REWRITE_TAC[EXISTS_DEF] THEN BETA_TAC THEN
+    REWRITE_TAC[EXISTS_DEF'] THEN BETA_TAC THEN
     REPEAT STRIP_TAC THEN FIRST_ASSUM MATCH_MP_TAC THEN
     EXISTS_TAC `t:A` THEN FIRST_ASSUM MATCH_MP_TAC THEN
-    REFL_TAC) in
+    REFL_TAC) in*)
+    
   fun tm th ->
     let l,r = dest_eq tm in
-    let P = mk_abs(l,concl th) in
-    let th1 = BETA_CONV(mk_comb(P,l)) in
-    let th2 = ISPECL [P; r] pth in
+    let p = concl th in
+    let abs = mk_abs(l,p) in
+    
+    let concl1 = mk_forall (l,mk_imp(mk_eq(l,r),mk_comb(abs,l))) in
+    let pth1 = SPEC r (ASSUME concl1) in
+    let pth2 = CONV_RULE BETA_CONV (MP pth1 (REFL r)) in
+    let pth3 = EXISTS (mk_exists(l,p),r) pth2 in
+    let pth = DISCH concl1 pth3 in
+    
+    let th1 = BETA_CONV(mk_comb(abs,l)) in
     let th3 = EQ_MP (SYM th1) th in
     let th4 = GEN l (DISCH tm th3) in
-    MP th2 th4;;
+    MP pth th4;;
 
 (* ========================================================================= *)
 (* Part 1: The main part of the inductive definitions package.               *)

@@ -1,3 +1,4 @@
+
 (* ========================================================================= *)
 (* Additional theorems, mainly about quantifiers, and additional tactics.    *)
 (*                                                                           *)
@@ -14,25 +15,37 @@ needs "simp.ml";;
 (* More stuff about equality.                                                *)
 (* ------------------------------------------------------------------------- *)
 
-let EQ_REFL = prove
+export_theory "eq-thm";;
+
+let EQ_REFL = prove 
  (`!x:A. x = x`,
   GEN_TAC THEN REFL_TAC);;
 
-let REFL_CLAUSE = prove
+export_namedthm EQ_REFL "EQ_REFL";;
+
+let REFL_CLAUSE = prove 
  (`!x:A. (x = x) <=> T`,
   GEN_TAC THEN MATCH_ACCEPT_TAC(EQT_INTRO(SPEC_ALL EQ_REFL)));;
 
-let EQ_SYM = prove
+export_namedthm REFL_CLAUSE "REFL_CLAUSE";;
+
+let EQ_SYM = prove 
  (`!(x:A) y. (x = y) ==> (y = x)`,
   REPEAT GEN_TAC THEN DISCH_THEN(ACCEPT_TAC o SYM));;
 
-let EQ_SYM_EQ = prove
+export_namedthm EQ_SYM "EQ_SYM";;
+
+let EQ_SYM_EQ = prove 
  (`!(x:A) y. (x = y) <=> (y = x)`,
   REPEAT GEN_TAC THEN EQ_TAC THEN MATCH_ACCEPT_TAC EQ_SYM);;
 
-let EQ_TRANS = prove
+export_namedthm EQ_SYM_EQ "EQ_SYM_EQ";;
+
+let EQ_TRANS = prove 
  (`!(x:A) y z. (x = y) /\ (y = z) ==> (x = z)`,
   REPEAT STRIP_TAC THEN PURE_ASM_REWRITE_TAC[] THEN REFL_TAC);;
+
+export_namedthm EQ_TRANS "EQ_TRANS";;
 
 (* ------------------------------------------------------------------------- *)
 (* The following is a common special case of ordered rewriting.              *)
@@ -44,27 +57,39 @@ let AC acsuite = EQT_ELIM o PURE_REWRITE_CONV[acsuite; REFL_CLAUSE];;
 (* A couple of theorems about beta reduction.                                *)
 (* ------------------------------------------------------------------------- *)
 
-let BETA_THM = prove
+export_theory "beta-red-thm";;
+
+let BETA_THM = prove 
  (`!(f:A->B) y. (\x. (f:A->B) x) y = f y`,
   REPEAT GEN_TAC THEN BETA_TAC THEN REFL_TAC);;
 
-let ABS_SIMP = prove
+export_namedthm BETA_THM "BETA_THM";;
+
+let ABS_SIMP = prove 
  (`!(t1:A) (t2:B). (\x. t1) t2 = t1`,
   REPEAT GEN_TAC THEN REWRITE_TAC[BETA_THM; REFL_CLAUSE]);;
+
+export_namedthm ABS_SIMP "ABS_SIMP";;
 
 (* ------------------------------------------------------------------------- *)
 (* A few "big name" intuitionistic tautologies.                              *)
 (* ------------------------------------------------------------------------- *)
 
-let CONJ_ASSOC = prove
+export_theory "bool-int";;
+
+let CONJ_ASSOC = prove 
  (`!t1 t2 t3. t1 /\ t2 /\ t3 <=> (t1 /\ t2) /\ t3`,
   ITAUT_TAC);;
 
-let CONJ_SYM = prove
+export_namedthm CONJ_ASSOC "CONJ_ASSOC";;
+
+let CONJ_SYM = prove 
  (`!t1 t2. t1 /\ t2 <=> t2 /\ t1`,
   ITAUT_TAC);;
 
-let CONJ_ACI = prove
+export_namedthm CONJ_SYM "CONJ_SYM";;
+
+let CONJ_ACI = prove 
  (`(p /\ q <=> q /\ p) /\
    ((p /\ q) /\ r <=> p /\ (q /\ r)) /\
    (p /\ (q /\ r) <=> q /\ (p /\ r)) /\
@@ -72,15 +97,21 @@ let CONJ_ACI = prove
    (p /\ (p /\ q) <=> p /\ q)`,
   ITAUT_TAC);;
 
-let DISJ_ASSOC = prove
+export_namedthm CONJ_ACI "CONJ_ACI";;
+
+let DISJ_ASSOC = prove 
  (`!t1 t2 t3. t1 \/ t2 \/ t3 <=> (t1 \/ t2) \/ t3`,
   ITAUT_TAC);;
 
-let DISJ_SYM = prove
+export_namedthm DISJ_ASSOC "DISJ_ASSOC";;
+
+let DISJ_SYM = prove 
  (`!t1 t2. t1 \/ t2 <=> t2 \/ t1`,
   ITAUT_TAC);;
 
-let DISJ_ACI = prove
+export_namedthm DISJ_SYM "DISJ_SYM";;
+
+let DISJ_ACI = prove 
  (`(p \/ q <=> q \/ p) /\
    ((p \/ q) \/ r <=> p \/ (q \/ r)) /\
    (p \/ (q \/ r) <=> q \/ (p \/ r)) /\
@@ -88,39 +119,53 @@ let DISJ_ACI = prove
    (p \/ (p \/ q) <=> p \/ q)`,
   ITAUT_TAC);;
 
-let IMP_CONJ = prove
+export_namedthm DISJ_ACI "DISJ_ACI";;
+
+let IMP_CONJ = prove 
  (`p /\ q ==> r <=> p ==> q ==> r`,
   ITAUT_TAC);;
 
+export_namedthm IMP_CONJ "IMP_CONJ";;
+
 let IMP_IMP = GSYM IMP_CONJ;;
 
-let IMP_CONJ_ALT = prove
+let IMP_CONJ_ALT = prove 
  (`p /\ q ==> r <=> q ==> p ==> r`,
   ITAUT_TAC);;
+
+export_namedthm IMP_CONJ_ALT "IMP_CONJ_ALT";;
 
 (* ------------------------------------------------------------------------- *)
 (* A couple of "distribution" tautologies are useful.                        *)
 (* ------------------------------------------------------------------------- *)
 
-let LEFT_OR_DISTRIB = prove
+let LEFT_OR_DISTRIB = prove 
  (`!p q r. p /\ (q \/ r) <=> p /\ q \/ p /\ r`,
   ITAUT_TAC);;
 
-let RIGHT_OR_DISTRIB = prove
+export_namedthm LEFT_OR_DISTRIB "LEFT_OR_DISTRIB";;
+
+let RIGHT_OR_DISTRIB = prove 
  (`!p q r. (p \/ q) /\ r <=> p /\ r \/ q /\ r`,
   ITAUT_TAC);;
+
+export_namedthm RIGHT_OR_DISTRIB "RIGHT_OR_DISTRIB";;
 
 (* ------------------------------------------------------------------------- *)
 (* Degenerate cases of quantifiers.                                          *)
 (* ------------------------------------------------------------------------- *)
 
-let FORALL_SIMP = prove
+let FORALL_SIMP = prove 
  (`!t. (!x:A. t) = t`,
   ITAUT_TAC);;
 
-let EXISTS_SIMP = prove
+export_namedthm FORALL_SIMP "FORALL_SIMP";;
+
+let EXISTS_SIMP = prove 
  (`!t. (?x:A. t) = t`,
   ITAUT_TAC);;
+
+export_namedthm EXISTS_SIMP "EXISTS_SIMP";;
 
 (* ------------------------------------------------------------------------- *)
 (* I also use this a lot (as a prelude to congruence reasoning).             *)
@@ -128,33 +173,45 @@ let EXISTS_SIMP = prove
 
 let EQ_IMP = ITAUT `(a <=> b) ==> a ==> b`;;
 
+export_namedthm EQ_IMP "EQ_IMP";;
+
 (* ------------------------------------------------------------------------- *)
 (* Start building up the basic rewrites; we add a few more later.            *)
 (* ------------------------------------------------------------------------- *)
 
-let EQ_CLAUSES = prove
+let EQ_CLAUSES = prove 
  (`!t. ((T <=> t) <=> t) /\ ((t <=> T) <=> t) /\
        ((F <=> t) <=> ~t) /\ ((t <=> F) <=> ~t)`,
   ITAUT_TAC);;
 
-let NOT_CLAUSES_WEAK = prove
+export_namedthm EQ_CLAUSES "EQ_CLAUSES";;
+
+let NOT_CLAUSES_WEAK = prove 
  (`(~T <=> F) /\ (~F <=> T)`,
   ITAUT_TAC);;
 
-let AND_CLAUSES = prove
+export_namedthm NOT_CLAUSES_WEAK "NOT_CLAUSES_WEAK";;
+
+let AND_CLAUSES = prove 
  (`!t. (T /\ t <=> t) /\ (t /\ T <=> t) /\ (F /\ t <=> F) /\
        (t /\ F <=> F) /\ (t /\ t <=> t)`,
   ITAUT_TAC);;
 
-let OR_CLAUSES = prove
+export_namedthm AND_CLAUSES "AND_CLAUSES";;
+
+let OR_CLAUSES = prove 
  (`!t. (T \/ t <=> T) /\ (t \/ T <=> T) /\ (F \/ t <=> t) /\
        (t \/ F <=> t) /\ (t \/ t <=> t)`,
   ITAUT_TAC);;
 
-let IMP_CLAUSES = prove
+export_namedthm OR_CLAUSES "OR_CLAUSES";;
+
+let IMP_CLAUSES = prove 
  (`!t. (T ==> t <=> t) /\ (t ==> T <=> T) /\ (F ==> t <=> T) /\
        (t ==> t <=> T) /\ (t ==> F <=> ~t)`,
   ITAUT_TAC);;
+
+export_namedthm IMP_CLAUSES "IMP_CLAUSES";;
 
 extend_basic_rewrites
   [REFL_CLAUSE;
@@ -178,30 +235,36 @@ extend_basic_congs
 (* Rewrite rule for unique existence.                                        *)
 (* ------------------------------------------------------------------------- *)
 
-let EXISTS_UNIQUE_THM = prove
+let EXISTS_UNIQUE_THM = prove 
  (`!P. (?!x:A. P x) <=> (?x. P x) /\ (!x x'. P x /\ P x' ==> (x = x'))`,
   GEN_TAC THEN REWRITE_TAC[EXISTS_UNIQUE_DEF]);;
+
+export_namedthm EXISTS_UNIQUE_THM "EXISTS_UNIQUE_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Trivial instances of existence.                                           *)
 (* ------------------------------------------------------------------------- *)
 
-let EXISTS_REFL = prove
+let EXISTS_REFL = prove 
  (`!a:A. ?x. x = a`,
   GEN_TAC THEN EXISTS_TAC `a:A` THEN REFL_TAC);;
 
-let EXISTS_UNIQUE_REFL = prove
+export_namedthm EXISTS_REFL "EXISTS_REFL";;
+
+let EXISTS_UNIQUE_REFL = prove 
  (`!a:A. ?!x. x = a`,
   GEN_TAC THEN REWRITE_TAC[EXISTS_UNIQUE_THM] THEN
   REPEAT(EQ_TAC ORELSE STRIP_TAC) THENL
    [EXISTS_TAC `a:A`; ASM_REWRITE_TAC[]] THEN
   REFL_TAC);;
 
+export_namedthm EXISTS_UNIQUE_REFL "EXISTS_UNIQUE_REFL";;
+
 (* ------------------------------------------------------------------------- *)
 (* Unwinding.                                                                *)
 (* ------------------------------------------------------------------------- *)
 
-let UNWIND_THM1 = prove
+let UNWIND_THM1 = prove 
  (`!P (a:A). (?x. a = x /\ P x) <=> P a`,
   REPEAT GEN_TAC THEN EQ_TAC THENL
    [DISCH_THEN(CHOOSE_THEN (CONJUNCTS_THEN2 SUBST1_TAC ACCEPT_TAC));
@@ -209,142 +272,198 @@ let UNWIND_THM1 = prove
     CONJ_TAC THEN TRY(FIRST_ASSUM MATCH_ACCEPT_TAC) THEN
     REFL_TAC]);;
 
-let UNWIND_THM2 = prove
+export_namedthm UNWIND_THM1 "UNWIND_THM1";;
+
+let UNWIND_THM2 = prove 
  (`!P (a:A). (?x. x = a /\ P x) <=> P a`,
   REPEAT GEN_TAC THEN CONV_TAC(LAND_CONV(ONCE_DEPTH_CONV SYM_CONV)) THEN
   MATCH_ACCEPT_TAC UNWIND_THM1);;
 
-let FORALL_UNWIND_THM2 = prove
+export_namedthm UNWIND_THM2 "UNWIND_THM2";;
+
+let FORALL_UNWIND_THM2 = prove 
  (`!P (a:A). (!x. x = a ==> P x) <=> P a`,
   REPEAT GEN_TAC THEN EQ_TAC THENL
    [DISCH_THEN(MP_TAC o SPEC `a:A`) THEN REWRITE_TAC[];
     DISCH_TAC THEN GEN_TAC THEN DISCH_THEN SUBST1_TAC THEN
     ASM_REWRITE_TAC[]]);;
 
-let FORALL_UNWIND_THM1 = prove
+export_namedthm FORALL_UNWIND_THM2 "FORALL_UNWIND_THM2";;
+
+let FORALL_UNWIND_THM1 = prove 
  (`!P a. (!x. a = x ==> P x) <=> P a`,
   REPEAT GEN_TAC THEN CONV_TAC(LAND_CONV(ONCE_DEPTH_CONV SYM_CONV)) THEN
   MATCH_ACCEPT_TAC FORALL_UNWIND_THM2);;
+
+export_namedthm FORALL_UNWIND_THM1 "FORALL_UNWIND_THM1";;
 
 (* ------------------------------------------------------------------------- *)
 (* Permuting quantifiers.                                                    *)
 (* ------------------------------------------------------------------------- *)
 
-let SWAP_FORALL_THM = prove
+let SWAP_FORALL_THM = prove 
  (`!P:A->B->bool. (!x y. P x y) <=> (!y x. P x y)`,
   ITAUT_TAC);;
 
-let SWAP_EXISTS_THM = prove
+export_namedthm SWAP_FORALL_THM "SWAP_FORALL_THM";;
+
+let SWAP_EXISTS_THM = prove 
  (`!P:A->B->bool. (?x y. P x y) <=> (?y x. P x y)`,
   ITAUT_TAC);;
+
+export_namedthm SWAP_EXISTS_THM "SWAP_EXISTS_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Universal quantifier and conjunction.                                     *)
 (* ------------------------------------------------------------------------- *)
 
-let FORALL_AND_THM = prove
+let FORALL_AND_THM = prove 
  (`!P Q. (!x:A. P x /\ Q x) <=> (!x. P x) /\ (!x. Q x)`,
   ITAUT_TAC);;
 
-let AND_FORALL_THM = prove
+export_namedthm FORALL_AND_THM "FORALL_AND_THM";;
+
+let AND_FORALL_THM = prove 
  (`!P Q. (!x. P x) /\ (!x. Q x) <=> (!x:A. P x /\ Q x)`,
   ITAUT_TAC);;
 
-let LEFT_AND_FORALL_THM = prove
+export_namedthm AND_FORALL_THM "AND_FORALL_THM";;
+
+let LEFT_AND_FORALL_THM = prove 
  (`!P Q. (!x:A. P x) /\ Q <=> (!x:A. P x /\ Q)`,
   ITAUT_TAC);;
 
-let RIGHT_AND_FORALL_THM = prove
+export_namedthm LEFT_AND_FORALL_THM "LEFT_AND_FORALL_THM";;
+
+let RIGHT_AND_FORALL_THM = prove 
  (`!P Q. P /\ (!x:A. Q x) <=> (!x. P /\ Q x)`,
   ITAUT_TAC);;
+
+export_namedthm RIGHT_AND_FORALL_THM "RIGHT_AND_FORALL_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Existential quantifier and disjunction.                                   *)
 (* ------------------------------------------------------------------------- *)
 
-let EXISTS_OR_THM = prove
+let EXISTS_OR_THM = prove 
  (`!P Q. (?x:A. P x \/ Q x) <=> (?x. P x) \/ (?x. Q x)`,
   ITAUT_TAC);;
 
-let OR_EXISTS_THM = prove
+export_namedthm EXISTS_OR_THM "EXISTS_OR_THM";;
+
+let OR_EXISTS_THM = prove 
  (`!P Q. (?x. P x) \/ (?x. Q x) <=> (?x:A. P x \/ Q x)`,
   ITAUT_TAC);;
 
-let LEFT_OR_EXISTS_THM = prove
+export_namedthm OR_EXISTS_THM "OR_EXISTS_THM";;
+
+let LEFT_OR_EXISTS_THM = prove 
  (`!P Q. (?x. P x) \/ Q <=> (?x:A. P x \/ Q)`,
   ITAUT_TAC);;
 
-let RIGHT_OR_EXISTS_THM = prove
+export_namedthm LEFT_OR_EXISTS_THM "LEFT_OR_EXISTS_THM";;
+
+let RIGHT_OR_EXISTS_THM = prove 
  (`!P Q. P \/ (?x. Q x) <=> (?x:A. P \/ Q x)`,
   ITAUT_TAC);;
+
+export_namedthm RIGHT_OR_EXISTS_THM "RIGHT_OR_EXISTS_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Existential quantifier and conjunction.                                   *)
 (* ------------------------------------------------------------------------- *)
 
-let LEFT_EXISTS_AND_THM = prove
+let LEFT_EXISTS_AND_THM = prove 
  (`!P Q. (?x:A. P x /\ Q) <=> (?x:A. P x) /\ Q`,
   ITAUT_TAC);;
 
-let RIGHT_EXISTS_AND_THM = prove
+export_namedthm LEFT_EXISTS_AND_THM "LEFT_EXISTS_AND_THM";;
+
+let RIGHT_EXISTS_AND_THM = prove 
  (`!P Q. (?x:A. P /\ Q x) <=> P /\ (?x:A. Q x)`,
   ITAUT_TAC);;
 
-let TRIV_EXISTS_AND_THM = prove
+export_namedthm RIGHT_EXISTS_AND_THM "RIGHT_EXISTS_AND_THM";;
+
+let TRIV_EXISTS_AND_THM = prove 
  (`!P Q. (?x:A. P /\ Q) <=> (?x:A. P) /\ (?x:A. Q)`,
   ITAUT_TAC);;
 
-let LEFT_AND_EXISTS_THM = prove
+export_namedthm TRIV_EXISTS_AND_THM "TRIV_EXISTS_AND_THM";;
+
+let LEFT_AND_EXISTS_THM = prove 
  (`!P Q. (?x:A. P x) /\ Q <=> (?x:A. P x /\ Q)`,
   ITAUT_TAC);;
 
-let RIGHT_AND_EXISTS_THM = prove
+export_namedthm LEFT_AND_EXISTS_THM "LEFT_AND_EXISTS_THM";;
+
+let RIGHT_AND_EXISTS_THM = prove 
  (`!P Q. P /\ (?x:A. Q x) <=> (?x:A. P /\ Q x)`,
   ITAUT_TAC);;
 
-let TRIV_AND_EXISTS_THM = prove
+export_namedthm RIGHT_AND_EXISTS_THM "RIGHT_AND_EXISTS_THM";;
+
+let TRIV_AND_EXISTS_THM = prove 
  (`!P Q. (?x:A. P) /\ (?x:A. Q) <=> (?x:A. P /\ Q)`,
   ITAUT_TAC);;
+
+export_namedthm TRIV_AND_EXISTS_THM "TRIV_AND_EXISTS_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Only trivial instances of universal quantifier and disjunction.           *)
 (* ------------------------------------------------------------------------- *)
 
-let TRIV_FORALL_OR_THM = prove
+let TRIV_FORALL_OR_THM = prove 
  (`!P Q. (!x:A. P \/ Q) <=> (!x:A. P) \/ (!x:A. Q)`,
   ITAUT_TAC);;
 
-let TRIV_OR_FORALL_THM = prove
+export_namedthm TRIV_FORALL_OR_THM "TRIV_FORALL_OR_THM";;
+
+let TRIV_OR_FORALL_THM = prove 
  (`!P Q. (!x:A. P) \/ (!x:A. Q) <=> (!x:A. P \/ Q)`,
   ITAUT_TAC);;
+
+export_namedthm TRIV_OR_FORALL_THM "TRIV_OR_FORALL_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Implication and quantifiers.                                              *)
 (* ------------------------------------------------------------------------- *)
 
-let RIGHT_IMP_FORALL_THM = prove
+let RIGHT_IMP_FORALL_THM = prove 
  (`!P Q. (P ==> !x:A. Q x) <=> (!x. P ==> Q x)`,
   ITAUT_TAC);;
 
-let RIGHT_FORALL_IMP_THM = prove
+export_namedthm RIGHT_IMP_FORALL_THM "RIGHT_IMP_FORALL_THM";;
+
+let RIGHT_FORALL_IMP_THM = prove 
  (`!P Q. (!x. P ==> Q x) <=> (P ==> !x:A. Q x)`,
   ITAUT_TAC);;
 
-let LEFT_IMP_EXISTS_THM = prove
+export_namedthm RIGHT_FORALL_IMP_THM "RIGHT_FORALL_IMP_THM";;
+
+let LEFT_IMP_EXISTS_THM = prove 
  (`!P Q. ((?x:A. P x) ==> Q) <=> (!x. P x ==> Q)`,
   ITAUT_TAC);;
 
-let LEFT_FORALL_IMP_THM = prove
+export_namedthm LEFT_IMP_EXISTS_THM "LEFT_IMP_EXISTS_THM";;
+
+let LEFT_FORALL_IMP_THM = prove 
  (`!P Q. (!x. P x ==> Q) <=> ((?x:A. P x) ==> Q)`,
   ITAUT_TAC);;
 
-let TRIV_FORALL_IMP_THM = prove
+export_namedthm LEFT_FORALL_IMP_THM "LEFT_FORALL_IMP_THM";;
+
+let TRIV_FORALL_IMP_THM = prove 
  (`!P Q. (!x:A. P ==> Q) <=> ((?x:A. P) ==> (!x:A. Q))`,
   ITAUT_TAC);;
 
-let TRIV_EXISTS_IMP_THM = prove
+export_namedthm TRIV_FORALL_IMP_THM "TRIV_FORALL_IMP_THM";;
+
+let TRIV_EXISTS_IMP_THM = prove 
  (`!P Q. (?x:A. P ==> Q) <=> ((!x:A. P) ==> (?x:A. Q))`,
   ITAUT_TAC);;
+
+export_namedthm TRIV_EXISTS_IMP_THM "TRIV_EXISTS_IMP_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Monotonicity theorems for logical operations w.r.t. implication.          *)
@@ -358,22 +477,26 @@ let MONO_IMP = ITAUT `(B ==> A) /\ (C ==> D) ==> ((A ==> C) ==> (B ==> D))`;;
 
 let MONO_NOT = ITAUT `(B ==> A) ==> (~A ==> ~B)`;;
 
-let MONO_FORALL = prove
+let MONO_FORALL = prove 
  (`(!x:A. P x ==> Q x) ==> ((!x. P x) ==> (!x. Q x))`,
   REPEAT STRIP_TAC THEN FIRST_ASSUM MATCH_MP_TAC THEN
   ASM_REWRITE_TAC[]);;
 
-let MONO_EXISTS = prove
+export_namedthm MONO_FORALL "MONO_FORALL";;
+
+let MONO_EXISTS = prove 
  (`(!x:A. P x ==> Q x) ==> ((?x. P x) ==> (?x. Q x))`,
   DISCH_TAC THEN DISCH_THEN(X_CHOOSE_TAC `x:A`) THEN
   EXISTS_TAC `x:A` THEN FIRST_ASSUM MATCH_MP_TAC THEN
   ASM_REWRITE_TAC[]);;
 
+export_namedthm MONO_EXISTS "MONO_EXISTS";;
+
 (* ------------------------------------------------------------------------- *)
 (* A generic "without loss of generality" lemma for symmetry.                *)
 (* ------------------------------------------------------------------------- *)
 
-let WLOG_RELATION = prove
+let WLOG_RELATION = prove 
  (`!R P. (!x y. P x y ==> P y x) /\
          (!x y. R x y \/ R y x) /\
          (!x y. R x y ==> P x y)
@@ -383,11 +506,13 @@ let WLOG_RELATION = prove
   REPEAT(MATCH_MP_TAC MONO_FORALL THEN GEN_TAC) THEN
   STRIP_TAC THEN ASM_SIMP_TAC[]);;
 
+export_namedthm WLOG_RELATION "WLOG_RELATION";;
+
 (* ------------------------------------------------------------------------- *)
 (* Alternative versions of unique existence.                                 *)
 (* ------------------------------------------------------------------------- *)
 
-let EXISTS_UNIQUE_ALT = prove
+let EXISTS_UNIQUE_ALT = prove 
  (`!P:A->bool. (?!x. P x) <=> (?x. !y. P y <=> (x = y))`,
   GEN_TAC THEN REWRITE_TAC[EXISTS_UNIQUE_THM] THEN EQ_TAC THENL
    [DISCH_THEN(CONJUNCTS_THEN2 (X_CHOOSE_TAC `x:A`) ASSUME_TAC) THEN
@@ -398,7 +523,9 @@ let EXISTS_UNIQUE_ALT = prove
     ASM_REWRITE_TAC[GSYM EXISTS_REFL] THEN REPEAT GEN_TAC THEN
     DISCH_THEN(CONJUNCTS_THEN (SUBST1_TAC o SYM)) THEN REFL_TAC]);;
 
-let EXISTS_UNIQUE = prove
+export_namedthm EXISTS_UNIQUE_ALT "EXISTS_UNIQUE_ALT";;
+
+let EXISTS_UNIQUE = prove 
  (`!P:A->bool. (?!x. P x) <=> (?x. P x /\ !y. P y ==> (y = x))`,
   GEN_TAC THEN REWRITE_TAC[EXISTS_UNIQUE_ALT] THEN
   AP_TERM_TAC THEN ABS_TAC THEN
@@ -408,6 +535,8 @@ let EXISTS_UNIQUE = prove
   REWRITE_TAC[FORALL_AND_THM] THEN SIMP_TAC[] THEN
   REWRITE_TAC[LEFT_FORALL_IMP_THM; EXISTS_REFL] THEN
   REWRITE_TAC[CONJ_ACI]);;
+
+export_namedthm EXISTS_UNIQUE "EXISTS_UNIQUE";;
 
 (* ------------------------------------------------------------------------- *)
 (* DESTRUCT_TAC, FIX_TAC, INTRO_TAC and HYP_TAC, giving more brief and       *)
@@ -543,3 +672,5 @@ let DESTRUCT_TAC,FIX_TAC,INTRO_TAC,HYP_TAC =
   DESTRUCT_TAC,FIX_TAC,INTRO_TAC,HYP_TAC;;
 
 let CLAIM_TAC s tm = SUBGOAL_THEN tm (DESTRUCT_TAC s);;
+
+export_theory "dummy";;
