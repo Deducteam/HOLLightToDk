@@ -1,0 +1,40 @@
+###############################################################################
+# HOL Light interpretation for unicode characters
+###############################################################################
+
+# Data
+
+# Data.Char
+
+type "Data.Char.char" as "HOLLight.unicode"
+
+const "Data.Char.dest" as "HOLLight.dest_unicode"
+const "Data.Char.destPlane" as "HOLLight.dest_plane_unicode"
+const "Data.Char.destPosition" as "HOLLight.dest_position_unicode"
+const "Data.Char.random" as "HOLLight.random_unicode"
+const "Data.Char.invariant" as "HOLLight.is_unicode"
+const "Data.Char.mk" as "HOLLight.mk_unicode"
+const "Data.Char.plane" as "HOLLight.plane_unicode"
+const "Data.Char.position" as "HOLLight.position_unicode"
+
+# Data.Char.UTF8
+
+const "Data.Char.UTF8.decode" as "HOLLight.decode_utf8"
+const "Data.Char.UTF8.encode" as "HOLLight.encode_utf8"
+const "Data.Char.UTF8.encodeAscii" as "HOLLight.encode_ascii_utf8"
+const "Data.Char.UTF8.encodeChar" as "HOLLight.encode_unicode_utf8"
+const "Data.Char.UTF8.encodeChar.encode2" as "HOLLight.encode_two_byte_utf8"
+const "Data.Char.UTF8.encodeChar.encode3" as "HOLLight.encode_three_byte_utf8"
+const "Data.Char.UTF8.encodeChar.encode4" as "HOLLight.encode_four_byte_utf8"
+const "Data.Char.UTF8.isContinuationByte" as "HOLLight.is_continuation_utf8"
+const "Data.Char.UTF8.parseAscii" as "HOLLight.parser_ascii_utf8"
+const "Data.Char.UTF8.parseMultibyte" as "HOLLight.parser_multibyte_utf8"
+const "Data.Char.UTF8.parseMultibyte.addContinuationByte" as "HOLLight.add_continuation_utf8"
+const "Data.Char.UTF8.parseMultibyte.parse2" as "HOLLight.parser_two_byte_utf8"
+const "Data.Char.UTF8.parseMultibyte.parse3" as "HOLLight.parser_three_byte_utf8"
+const "Data.Char.UTF8.parseMultibyte.parse4" as "HOLLight.parser_four_byte_utf8"
+const "Data.Char.UTF8.parseNatural" as "HOLLight.parser_num_utf8"
+const "Data.Char.UTF8.parseChar" as "HOLLight.parser_unicode_utf8"
+const "Data.Char.UTF8.parse" as "HOLLight.parser_utf8"
+const "Data.Char.UTF8.reencode" as "HOLLight.reencode_utf8"
+const "Data.Char.UTF8.reencodeChar" as "HOLLight.reencode_unicode_utf8"

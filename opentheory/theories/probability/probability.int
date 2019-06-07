@@ -1,0 +1,34 @@
+###############################################################################
+# HOL Light interpretation for probability
+###############################################################################
+
+# Data
+
+# Data.List
+
+const "Data.List.random" as "HOLLight.random_vector"
+
+# Data.List.Geometric
+
+const "Data.List.Geometric.random" as "HOLLight.random_geometric_list"
+
+# Number
+
+# Number.Natural
+
+# Number.Natural.Geometric
+
+const "Number.Natural.Geometric.random" as "HOLLight.random_geometric"
+const "Number.Natural.Geometric.random.loop" as "HOLLight.random_geometric_loop"
+
+# Probability
+
+# Probability.Random
+
+type "Probability.Random.random" as "HOLLight.random"
+
+const "Probability.Random.bit" as "HOLLight.random_bit"
+const "Probability.Random.bits" as "HOLLight.random_bits"
+const "Probability.Random.fromStream" as "HOLLight.mk_random"
+const "Probability.Random.split" as "HOLLight.split_random"
+const "Probability.Random.toStream" as "HOLLight.dest_random"

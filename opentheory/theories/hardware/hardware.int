@@ -1,0 +1,72 @@
+###############################################################################
+# HOL Light interpretation for hardware devices
+###############################################################################
+
+# Hardware
+
+type "Hardware.bus" as "HOLLight.bus"
+type "Hardware.wire" as "HOLLight.wire"
+
+const "Hardware.adder2" as "HOLLight.adder2"
+const "Hardware.adder3" as "HOLLight.adder3"
+const "Hardware.and2" as "HOLLight.and2"
+const "Hardware.and3" as "HOLLight.and3"
+const "Hardware.bus" as "HOLLight.mk_bus"
+const "Hardware.case1" as "HOLLight.case1"
+const "Hardware.connect" as "HOLLight.connect"
+const "Hardware.counter" as "HOLLight.counter"
+const "Hardware.counterPulse" as "HOLLight.counter_pulse"
+const "Hardware.delay" as "HOLLight.delay"
+const "Hardware.eventCounter" as "HOLLight.event_counter"
+const "Hardware.ground" as "HOLLight.ground"
+const "Hardware.majority3" as "HOLLight.majority3"
+const "Hardware.nor2" as "HOLLight.nor2"
+const "Hardware.not" as "HOLLight.not"
+const "Hardware.or2" as "HOLLight.or2"
+const "Hardware.or3" as "HOLLight.or3"
+const "Hardware.pipe" as "HOLLight.pipe"
+const "Hardware.power" as "HOLLight.power"
+const "Hardware.pulse" as "HOLLight.pulse"
+const "Hardware.signal" as "HOLLight.signal"
+const "Hardware.signals" as "HOLLight.dest_wire"
+const "Hardware.sticky" as "HOLLight.sticky"
+const "Hardware.wire" as "HOLLight.mk_wire"
+const "Hardware.xor2" as "HOLLight.xor2"
+const "Hardware.xor3" as "HOLLight.xor3"
+
+# Hardware.Bus
+
+const "Hardware.Bus.adder2" as "HOLLight.badder2"
+const "Hardware.Bus.adder3" as "HOLLight.badder3"
+const "Hardware.Bus.adder4" as "HOLLight.badder4"
+const "Hardware.Bus.and2" as "HOLLight.band2"
+const "Hardware.Bus.and3" as "HOLLight.band3"
+const "Hardware.Bus.append" as "HOLLight.bappend"
+const "Hardware.Bus.case1" as "HOLLight.bcase1"
+const "Hardware.Bus.connect" as "HOLLight.bconnect"
+const "Hardware.Bus.delay" as "HOLLight.bdelay"
+const "Hardware.Bus.ground" as "HOLLight.bground"
+const "Hardware.Bus.lift2" as "HOLLight.blift2"
+const "Hardware.Bus.lift3" as "HOLLight.blift3"
+const "Hardware.Bus.majority3" as "HOLLight.bmajority3"
+const "Hardware.Bus.multiplier" as "HOLLight.bmult"
+const "Hardware.Bus.nil" as "HOLLight.bnil"
+const "Hardware.Bus.not" as "HOLLight.bnot"
+const "Hardware.Bus.or2" as "HOLLight.bor2"
+const "Hardware.Bus.or3" as "HOLLight.bor3"
+const "Hardware.Bus.pipe" as "HOLLight.bpipe"
+const "Hardware.Bus.power" as "HOLLight.bpower"
+const "Hardware.Bus.reverse" as "HOLLight.brev"
+const "Hardware.Bus.signal" as "HOLLight.bsignal"
+const "Hardware.Bus.single" as "HOLLight.bwire"
+const "Hardware.Bus.sub" as "HOLLight.bsub"
+const "Hardware.Bus.width" as "HOLLight.width"
+const "Hardware.Bus.wire" as "HOLLight.wire"
+const "Hardware.Bus.wires" as "HOLLight.dest_bus"
+const "Hardware.Bus.xor2" as "HOLLight.bxor2"
+const "Hardware.Bus.xor3" as "HOLLight.bxor3"
+
+# Hardware.SumCarry
+
+const "Hardware.SumCarry.multiplier" as "HOLLight.scmult"
+const "Hardware.SumCarry.shiftRight" as "HOLLight.scshiftr"

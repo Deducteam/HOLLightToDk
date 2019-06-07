@@ -1,0 +1,13 @@
+###############################################################################
+# HOL Light interpretation for the divides relation on natural numbers
+###############################################################################
+
+# Number
+
+# Number.Natural
+
+const "Number.Natural.chineseRemainder" as "HOLLight.chinese"
+const "Number.Natural.divides" as "HOLLight.divides"
+const "Number.Natural.egcd" as "HOLLight.egcd"
+const "Number.Natural.gcd" as "HOLLight.gcd"
+const "Number.Natural.lcm" as "HOLLight.lcm"

@@ -1,0 +1,30 @@
+###############################################################################
+# HOL Light interpretation for prime natural numbers
+###############################################################################
+
+# Number
+
+# Number.Natural
+
+const "Number.Natural.prime" as "HOLLight.prime"
+
+# Number.Natural.Prime
+
+const "Number.Natural.Prime.all" as "HOLLight.primes"
+const "Number.Natural.Prime.below" as "HOLLight.primes_below"
+
+# Number.Natural.Prime.Sieve
+
+type "Number.Natural.Prime.Sieve.sieve" as "HOLLight.sieve"
+
+const "Number.Natural.Prime.Sieve.dest" as "HOLLight.dest_sieve"
+const "Number.Natural.Prime.Sieve.increment" as "HOLLight.inc_sieve"
+const "Number.Natural.Prime.Sieve.increment.inc" as "HOLLight.inc_counters_sieve"
+const "Number.Natural.Prime.Sieve.initial" as "HOLLight.init_sieve"
+const "Number.Natural.Prime.Sieve.invariant" as "HOLLight.is_sieve"
+const "Number.Natural.Prime.Sieve.invariant.inv" as "HOLLight.is_counters_sieve"
+const "Number.Natural.Prime.Sieve.max" as "HOLLight.max_sieve"
+const "Number.Natural.Prime.Sieve.mk" as "HOLLight.mk_sieve"
+const "Number.Natural.Prime.Sieve.next" as "HOLLight.next_sieve"
+const "Number.Natural.Prime.Sieve.primes" as "HOLLight.primes_sieve"
+

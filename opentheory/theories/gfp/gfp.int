@@ -1,0 +1,26 @@
+###############################################################################
+# HOL Light interpretation for a parametric theory of GF(p) finite fields
+###############################################################################
+
+# Number
+
+# Number.GF(p)
+
+type "Number.GF(p).gfp" as "HOLLight.gfp"
+
+const "Number.GF(p).<=" as "HOLLight.gfp_le"
+const "Number.GF(p).<" as "HOLLight.gfp_lt"
+const "Number.GF(p).~" as "HOLLight.gfp_neg"
+const "Number.GF(p).^" as "HOLLight.gfp_exp"
+const "Number.GF(p).*" as "HOLLight.gfp_mult"
+const "Number.GF(p)./" as "HOLLight.gfp_div"
+const "Number.GF(p).+" as "HOLLight.gfp_add"
+const "Number.GF(p).-" as "HOLLight.gfp_sub"
+const "Number.GF(p).divGcd" as "HOLLight.gfp_div_gcd"
+const "Number.GF(p).equivalent" as "HOLLight.gfp_equiv"
+const "Number.GF(p).expDiv" as "HOLLight.gfp_exp_div"
+const "Number.GF(p).fromNatural" as "HOLLight.num_to_gfp"
+const "Number.GF(p).inv" as "HOLLight.gfp_inv"
+const "Number.GF(p).oddprime" as "HOLLight.oddprime"
+const "Number.GF(p).random" as "HOLLight.random_gfp"
+const "Number.GF(p).toNatural" as "HOLLight.gfp_to_num"

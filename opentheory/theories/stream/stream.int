@@ -1,0 +1,24 @@
+###############################################################################
+# HOL Light interpretation for stream types
+###############################################################################
+
+# Data
+
+# Data.Stream
+
+type "Data.Stream.stream" as "HOLLight.stream"
+
+const "Data.Stream.@" as "HOLLight.sappend"
+const "Data.Stream.::" as "HOLLight.scons"
+const "Data.Stream.drop" as "HOLLight.sdrop"
+const "Data.Stream.fromFunction" as "HOLLight.stream"
+const "Data.Stream.head" as "HOLLight.shd"
+const "Data.Stream.interleave" as "HOLLight.sinterleave"
+const "Data.Stream.iterate" as "HOLLight.siterate"
+const "Data.Stream.map" as "HOLLight.smap"
+const "Data.Stream.nth" as "HOLLight.snth"
+const "Data.Stream.replicate" as "HOLLight.sreplicate"
+const "Data.Stream.split" as "HOLLight.ssplit"
+const "Data.Stream.tail" as "HOLLight.stl"
+const "Data.Stream.take" as "HOLLight.stake"
+const "Data.Stream.unfold" as "HOLLight.sunfold"

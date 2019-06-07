@@ -1,0 +1,20 @@
+###############################################################################
+# HOL Light interpretation for Montgomery multiplication
+###############################################################################
+
+# Hardware
+
+# Hardware.Montgomery
+
+const "Hardware.Montgomery.doubleExp" as "HOLLight.montgomery_double_exp"
+const "Hardware.Montgomery.multiply" as "HOLLight.montgomery_mult"
+const "Hardware.Montgomery.multiply.compress" as "HOLLight.montgomery_mult_compress"
+const "Hardware.Montgomery.multiply.reduce" as "HOLLight.montgomery_mult_reduce"
+
+# Number
+
+# Number.Natural
+
+# Number.Natural.Montgomery
+
+const "Number.Natural.Montgomery.reduce" as "HOLLight.montgomery_reduce"

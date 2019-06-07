@@ -1,0 +1,48 @@
+###############################################################################
+# HOL Light interpretation for stream parsers
+###############################################################################
+
+# Parser
+
+type "Parser.parser" as "HOLLight.parser"
+
+const "Parser.any" as "HOLLight.parser_any"
+const "Parser.apply" as "HOLLight.apply_parser"
+const "Parser.dest" as "HOLLight.dest_parser"
+const "Parser.filter" as "HOLLight.parser_filter"
+const "Parser.fold" as "HOLLight.parser_fold"
+const "Parser.fold.prs" as "HOLLight.parse_fold"
+const "Parser.foldN" as "HOLLight.parser_foldn"
+const "Parser.invariant" as "HOLLight.is_parser"
+const "Parser.inverse" as "HOLLight.parser_inverse"
+const "Parser.map" as "HOLLight.parser_map"
+const "Parser.mapPartial" as "HOLLight.parser_map_partial"
+const "Parser.mapPartial.prs" as "HOLLight.parse_map_partial"
+const "Parser.mk" as "HOLLight.mk_parser"
+const "Parser.none" as "HOLLight.parser_none"
+const "Parser.orelse" as "HOLLight.parser_orelse"
+const "Parser.orelse.prs" as "HOLLight.parse_orelse"
+const "Parser.pair" as "HOLLight.parser_pair"
+const "Parser.parse" as "HOLLight.parse"
+const "Parser.sequence" as "HOLLight.parser_sequence"
+const "Parser.sequence.prs" as "HOLLight.parse_sequence"
+const "Parser.some" as "HOLLight.parser_some"
+const "Parser.strongInverse" as "HOLLight.parser_strong_inverse"
+const "Parser.token" as "HOLLight.parser_token"
+const "Parser.token.prs" as "HOLLight.parse_token"
+
+# Parser.Stream
+
+type "Parser.Stream.stream" as "HOLLight.pstream"
+
+const "Parser.Stream.append" as "HOLLight.append_pstream"
+const "Parser.Stream.case.error.eof.cons" as "HOLLight.case_pstream"
+const "Parser.Stream.cons" as "HOLLight.ConsPstream"
+const "Parser.Stream.eof" as "HOLLight.EofPstream"
+const "Parser.Stream.error" as "HOLLight.ErrorPstream"
+const "Parser.Stream.fromList" as "HOLLight.list_to_pstream"
+const "Parser.Stream.isProperSuffix" as "HOLLight.is_proper_suffix_pstream"
+const "Parser.Stream.isSuffix" as "HOLLight.is_suffix_pstream"
+const "Parser.Stream.length" as "HOLLight.length_pstream"
+const "Parser.Stream.map" as "HOLLight.map_pstream"
+const "Parser.Stream.toList" as "HOLLight.pstream_to_list"

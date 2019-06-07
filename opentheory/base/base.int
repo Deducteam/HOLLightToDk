@@ -1,0 +1,225 @@
+###############################################################################
+# INTERPRETING THE HOL LIGHT STANDARD THEORY LIBRARY
+# Joe Leslie-Hurd
+###############################################################################
+
+# Global
+
+type "bool" as "HOLLight.bool"
+type "->" as "HOLLight.fun"
+type "ind" as "HOLLight.ind"
+
+const "=" as "HOLLight.="
+const "=" as "HOLLight.GEQ"
+const "select" as "HOLLight.@"
+const "select" as "HOLLight.GABS"
+
+# Data
+
+# Data.Bool
+
+const "Data.Bool.!" as "HOLLight.!"
+const "Data.Bool./\\" as "HOLLight./\\"
+const "Data.Bool.==>" as "HOLLight.==>"
+const "Data.Bool.?" as "HOLLight.?"
+const "Data.Bool.?!" as "HOLLight.?!"
+const "Data.Bool.\\/" as "HOLLight.\\/"
+const "Data.Bool.~" as "HOLLight.~"
+const "Data.Bool.cond" as "HOLLight.COND"
+const "Data.Bool.F" as "HOLLight.F"
+const "Data.Bool.T" as "HOLLight.T"
+
+# Data.List
+
+type "Data.List.list" as "HOLLight.list"
+
+const "Data.List.case.[].::" as "HOLLight.case_list"
+const "Data.List.::" as "HOLLight.CONS"
+const "Data.List.[]" as "HOLLight.NIL"
+const "Data.List.@" as "HOLLight.APPEND"
+const "Data.List.all" as "HOLLight.ALL"
+const "Data.List.any" as "HOLLight.EX"
+const "Data.List.concat" as "HOLLight.concat"
+const "Data.List.drop" as "HOLLight.drop"
+const "Data.List.filter" as "HOLLight.FILTER"
+const "Data.List.foldl" as "HOLLight.foldl"
+const "Data.List.foldr" as "HOLLight.foldr"
+const "Data.List.fromSet" as "HOLLight.list_of_set"
+const "Data.List.head" as "HOLLight.HD"
+const "Data.List.interval" as "HOLLight.interval"
+const "Data.List.last" as "HOLLight.LAST"
+const "Data.List.length" as "HOLLight.LENGTH"
+const "Data.List.map" as "HOLLight.MAP"
+const "Data.List.member" as "HOLLight.MEM"
+const "Data.List.nth" as "HOLLight.nth"
+const "Data.List.nub" as "HOLLight.nub"
+const "Data.List.nubReverse" as "HOLLight.setify"
+const "Data.List.null" as "HOLLight.NULL"
+const "Data.List.replicate" as "HOLLight.REPLICATE"
+const "Data.List.reverse" as "HOLLight.REVERSE"
+const "Data.List.tail" as "HOLLight.TL"
+const "Data.List.take" as "HOLLight.take"
+const "Data.List.toSet" as "HOLLight.set_of_list"
+const "Data.List.unzip" as "HOLLight.unzip"
+const "Data.List.zip" as "HOLLight.zip"
+const "Data.List.zipWith" as "HOLLight.zipwith"
+
+# Data.Option
+
+type "Data.Option.option" as "HOLLight.option"
+
+const "Data.Option.case.none.some" as "HOLLight.case_option"
+const "Data.Option.isNone" as "HOLLight.is_none"
+const "Data.Option.isSome" as "HOLLight.is_some"
+const "Data.Option.map" as "HOLLight.map_option"
+const "Data.Option.none" as "HOLLight.NONE"
+const "Data.Option.some" as "HOLLight.SOME"
+
+# Data.Pair
+
+type "Data.Pair.*" as "HOLLight.prod"
+
+const "Data.Pair.," as "HOLLight.,"
+const "Data.Pair.fst" as "HOLLight.FST"
+const "Data.Pair.snd" as "HOLLight.SND"
+
+# Data.Sum
+
+type "Data.Sum.+" as "HOLLight.sum"
+
+const "Data.Sum.case.left.right" as "HOLLight.case_sum"
+const "Data.Sum.destLeft" as "HOLLight.OUTL"
+const "Data.Sum.destRight" as "HOLLight.OUTR"
+const "Data.Sum.left" as "HOLLight.INL"
+const "Data.Sum.right" as "HOLLight.INR"
+const "Data.Sum.isLeft" as "HOLLight.ISL"
+const "Data.Sum.isRight" as "HOLLight.ISR"
+
+# Data.Unit
+
+type "Data.Unit.unit" as "HOLLight.1"
+
+const "Data.Unit.()" as "HOLLight.one"
+
+# Function
+
+const "Function.flip" as "HOLLight.C"
+const "Function.^" as "HOLLight.funpow"
+const "Function.id" as "HOLLight.I"
+const "Function.injective" as "HOLLight.ONE_ONE"
+const "Function.const" as "HOLLight.K"
+const "Function.o" as "HOLLight.o"
+const "Function.surjective" as "HOLLight.ONTO"
+
+# Function.Combinator
+
+const "Function.Combinator.s" as "HOLLight.S"
+const "Function.Combinator.w" as "HOLLight.W"
+
+# Number
+
+# Number.Natural
+
+type "Number.Natural.natural" as "HOLLight.num"
+
+const "Number.Natural.<" as "HOLLight.<"
+const "Number.Natural.<=" as "HOLLight.<="
+const "Number.Natural.>=" as "HOLLight.>="
+const "Number.Natural.>" as "HOLLight.>"
+const "Number.Natural.^" as "HOLLight.EXP"
+const "Number.Natural.*" as "HOLLight.*"
+const "Number.Natural.+" as "HOLLight.+"
+const "Number.Natural.-" as "HOLLight.-"
+const "Number.Natural.bit0" as "HOLLight.BIT0"
+const "Number.Natural.bit1" as "HOLLight.BIT1"
+const "Number.Natural.distance" as "HOLLight.dist"
+const "Number.Natural.div" as "HOLLight.DIV"
+const "Number.Natural.even" as "HOLLight.EVEN"
+const "Number.Natural.factorial" as "HOLLight.FACT"
+const "Number.Natural.isSuc" as "HOLLight.successor"
+const "Number.Natural.log" as "HOLLight.log"
+const "Number.Natural.max" as "HOLLight.MAX"
+const "Number.Natural.min" as "HOLLight.MIN"
+const "Number.Natural.minimal" as "HOLLight.minimal"
+const "Number.Natural.mod" as "HOLLight.MOD"
+const "Number.Natural.odd" as "HOLLight.ODD"
+const "Number.Natural.pre" as "HOLLight.PRE"
+const "Number.Natural.suc" as "HOLLight.SUC"
+const "Number.Natural.zero" as "HOLLight._0"
+
+# Number.Real
+
+type "Number.Real.real" as "HOLLight.real"
+
+const "Number.Real.<" as "HOLLight.real_lt"
+const "Number.Real.<=" as "HOLLight.real_le"
+const "Number.Real.>=" as "HOLLight.real_ge"
+const "Number.Real.>" as "HOLLight.real_gt"
+const "Number.Real.^" as "HOLLight.real_pow"
+const "Number.Real.*" as "HOLLight.real_mul"
+const "Number.Real./" as "HOLLight.real_div"
+const "Number.Real.+" as "HOLLight.real_add"
+const "Number.Real.-" as "HOLLight.real_sub"
+const "Number.Real.~" as "HOLLight.real_neg"
+const "Number.Real.abs" as "HOLLight.real_abs"
+const "Number.Real.fromNatural" as "HOLLight.real_of_num"
+const "Number.Real.inv" as "HOLLight.real_inv"
+const "Number.Real.max" as "HOLLight.real_max"
+const "Number.Real.min" as "HOLLight.real_min"
+const "Number.Real.sup" as "HOLLight.sup"
+
+# Relation
+
+const "Relation.bigIntersect" as "HOLLight.big_interr"
+const "Relation.bigUnion" as "HOLLight.big_unionr"
+const "Relation.empty" as "HOLLight.emptyr"
+const "Relation.fromSet" as "HOLLight.set_to_relation"
+const "Relation.intersect" as "HOLLight.interr"
+const "Relation.irreflexive" as "HOLLight.irreflexive"
+const "Relation.measure" as "HOLLight.MEASURE"
+const "Relation.reflexive" as "HOLLight.reflexive"
+const "Relation.subrelation" as "HOLLight.subrelation"
+const "Relation.toSet" as "HOLLight.relation_to_set"
+const "Relation.transitive" as "HOLLight.transitive"
+const "Relation.transitiveClosure" as "HOLLight.transitive_closure"
+const "Relation.union" as "HOLLight.unionr"
+const "Relation.universe" as "HOLLight.univr"
+const "Relation.wellFounded" as "HOLLight.WF"
+
+# Set
+
+type "Set.set" as "HOLLight.set"
+
+const "Set.{}" as "HOLLight.EMPTY"
+const "Set.bigIntersect" as "HOLLight.INTERS"
+const "Set.bigUnion" as "HOLLight.UNIONS"
+const "Set.bijections" as "HOLLight.BIJ"
+const "Set.choice" as "HOLLight.CHOICE"
+const "Set.cross" as "HOLLight.CROSS"
+const "Set.delete" as "HOLLight.DELETE"
+const "Set.difference" as "HOLLight.DIFF"
+const "Set.disjoint" as "HOLLight.DISJOINT"
+const "Set.finite" as "HOLLight.FINITE"
+const "Set.fold" as "HOLLight.ITSET"
+const "Set.fromPredicate" as "HOLLight.GSPEC"
+const "Set.hasSize" as "HOLLight.HAS_SIZE"
+const "Set.image" as "HOLLight.IMAGE"
+const "Set.infinite" as "HOLLight.INFINITE"
+const "Set.injections" as "HOLLight.INJ"
+const "Set.insert" as "HOLLight.INSERT"
+const "Set.intersect" as "HOLLight.INTER"
+const "Set.member" as "HOLLight.IN"
+const "Set.properSubset" as "HOLLight.PSUBSET"
+const "Set.rest" as "HOLLight.REST"
+const "Set.singleton" as "HOLLight.SING"
+const "Set.size" as "HOLLight.CARD"
+const "Set.subset" as "HOLLight.SUBSET"
+const "Set.surjections" as "HOLLight.SURJ"
+const "Set.union" as "HOLLight.UNION"
+const "Set.universe" as "HOLLight.UNIV"
+
+# Unwanted
+
+# const "Unwanted.id" as "HOLLight.LET"
+# const "Unwanted.id" as "HOLLight.LET_END"
+# const "Unwanted.id" as "HOLLight.NUMERAL"

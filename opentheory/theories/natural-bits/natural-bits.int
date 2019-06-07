@@ -1,0 +1,33 @@
+###############################################################################
+# HOL Light interpretation for natural number to bit-list conversions
+###############################################################################
+
+# Number
+
+# Number.Natural
+
+const "Number.Natural.fromBool" as "HOLLight.bit_to_num"
+
+# Number.Natural.Bits
+
+const "Number.Natural.Bits.and" as "HOLLight.bit_and"
+const "Number.Natural.Bits.append" as "HOLLight.bit_append"
+const "Number.Natural.Bits.bit" as "HOLLight.bit_nth"
+const "Number.Natural.Bits.bound" as "HOLLight.bit_bound"
+const "Number.Natural.Bits.compare" as "HOLLight.bit_cmp"
+const "Number.Natural.Bits.cons" as "HOLLight.bit_cons"
+const "Number.Natural.Bits.fromList" as "HOLLight.bits_to_num"
+const "Number.Natural.Bits.head" as "HOLLight.bit_hd"
+const "Number.Natural.Bits.normalList" as "HOLLight.is_bits"
+const "Number.Natural.Bits.or" as "HOLLight.bit_or"
+const "Number.Natural.Bits.shiftLeft" as "HOLLight.bit_shl"
+const "Number.Natural.Bits.shiftRight" as "HOLLight.bit_shr"
+const "Number.Natural.Bits.tail" as "HOLLight.bit_tl"
+const "Number.Natural.Bits.toList" as "HOLLight.num_to_bits"
+const "Number.Natural.Bits.toVector" as "HOLLight.num_to_bitvec"
+const "Number.Natural.Bits.width" as "HOLLight.bit_width"
+
+# Number.Natural.Uniform
+
+const "Number.Natural.Uniform.random" as "HOLLight.random_uniform"
+const "Number.Natural.Uniform.random.loop" as "HOLLight.random_uniform_loop"

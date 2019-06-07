@@ -1,0 +1,14 @@
+###############################################################################
+# HOL Light interpretation for a parametric theory of monoids
+###############################################################################
+
+# Algebra
+
+# Algebra.Monoid
+
+type "Algebra.Monoid.monoid" as "HOLLight.monoid"
+
+const "Algebra.Monoid.+" as "HOLLight.monoid_add"
+const "Algebra.Monoid.*" as "HOLLight.monoid_mult"
+const "Algebra.Monoid.0" as "HOLLight.monoid_zero"
+const "Algebra.Monoid.multAdd" as "HOLLight.monoid_mult_add"

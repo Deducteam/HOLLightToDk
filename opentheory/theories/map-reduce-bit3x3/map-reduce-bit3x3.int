@@ -1,0 +1,18 @@
+###############################################################################
+# HOL Light interpretation for the map reduce 3x3 bit matrix example
+###############################################################################
+
+# Bit
+
+const "Bit.+" as "HOLLight.bit_add"
+const "Bit.*" as "HOLLight.bit_mult"
+
+# Bit3
+
+const "Bit3.dot" as "HOLLight.bit3_dot"
+
+# Bit3x3
+
+const "Bit3x3.*" as "HOLLight.bit3x3_mult"
+const "Bit3x3.identity" as "HOLLight.bit3x3_identity"
+const "Bit3x3.product" as "HOLLight.bit3x3_product"

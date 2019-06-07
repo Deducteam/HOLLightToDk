@@ -1,0 +1,10 @@
+#!/bin/bash
+
+log=opentheory/export/log.txt
+
+echo '#use "opentheory/src/export-theories.ml";;' | OPENTHEORY_EXPORT_BASE=1 ocaml >$log 2>&1
+
+if grep '^Exception:\|^Error:\|^Error in included file\|Warning: inventing type variables' $log
+then
+    exit 1
+fi

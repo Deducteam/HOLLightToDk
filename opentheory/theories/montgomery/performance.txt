@@ -1,0 +1,4168 @@
+_____________________________________________________________
+BASELINE
+
+f9da37d Complete set of primitive gate simplifications
+
+Synthesizing 8-bit double_exp_221_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 19 seconds
+- - Interposed wires before primary outputs: 0 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 0 seconds
+- Merged identical logic: 2 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 0 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 23 seconds
+Synthesizing 16-bit double_exp_51175_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 61 seconds
+- - Interposed wires before primary outputs: 2 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 2 seconds
+- Merged identical logic: 10 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 2 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 78 seconds
+Synthesizing 24-bit double_exp_16767675_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 146 seconds
+- - Interposed wires before primary outputs: 5 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 5 seconds
+- Merged identical logic: 30 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 1 second
+- Generated verilog module: 5 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 190 seconds
+Synthesizing 32-bit double_exp_4201314911_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 302 seconds
+- - Interposed wires before primary outputs: 8 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 8 seconds
+- Merged identical logic: 80 seconds
+- Deleted dead logic: 1 second
+- Renamed wires: 1 second
+- Generated verilog module: 8 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 404 seconds
+Synthesizing 40-bit double_exp_812584906161_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 510 seconds
+- - Interposed wires before primary outputs: 17 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 17 seconds
+- Merged identical logic: 167 seconds
+- Deleted dead logic: 2 seconds
+- Renamed wires: 2 seconds
+- Generated verilog module: 13 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 715 seconds
+
+_____________________________________________________________
+SEPARATED SIMPLIFICATION FROM ELABORATION
+
+73403da Separated simplification from elaboration
+
+Synthesizing 8-bit double_exp_221_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 8 seconds
+- Simplified circuit: 11 seconds
+- - Interposed wires before primary outputs: 0 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 0 seconds
+- Merged identical logic: 2 seconds
+Warning: 1 unused wire:
+  xn
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 0 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 25 seconds
+Synthesizing 16-bit double_exp_51175_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 26 seconds
+- Simplified circuit: 78 seconds
+- - Interposed wires before primary outputs: 2 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 2 seconds
+- Merged identical logic: 11 seconds
+Warning: 1 unused wire:
+  xn
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 2 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 122 seconds
+Synthesizing 24-bit double_exp_16767675_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 57 seconds
+- Simplified circuit: 244 seconds
+- - Interposed wires before primary outputs: 4 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 4 seconds
+- Merged identical logic: 31 seconds
+Warning: 1 unused wire:
+  xn
+- Deleted dead logic: 0 seconds
+- Renamed wires: 1 second
+- Generated verilog module: 5 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 345 seconds
+Synthesizing 32-bit double_exp_4201314911_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 107 seconds
+- Simplified circuit: 550 seconds
+- - Interposed wires before primary outputs: 8 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 8 seconds
+- Merged identical logic: 82 seconds
+- Deleted dead logic: 1 second
+- Renamed wires: 1 second
+- Generated verilog module: 8 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 761 seconds
+Synthesizing 40-bit double_exp_812584906161_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 177 seconds
+- Simplified circuit: 1025 seconds
+- - Interposed wires before primary outputs: 14 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 14 seconds
+- Merged identical logic: 187 seconds
+- Deleted dead logic: 2 seconds
+- Renamed wires: 2 seconds
+- Generated verilog module: 13 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 1424 seconds
+
+_____________________________________________________________
+OPTIMIZED PROLOG ENGINE FOR NULL SUBSTITUTION CASE
+
+40c55b1 Optimized prolog engine for case when no substitution is returned
+
+Synthesizing 8-bit double_exp_221_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 7 seconds
+- Simplified circuit: 8 seconds
+- - Interposed wires before primary outputs: 0 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 0 seconds
+- Merged identical logic: 2 seconds
+Warning: 1 unused wire:
+  xn
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 0 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 20 seconds
+Synthesizing 16-bit double_exp_51175_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 23 seconds
+- Simplified circuit: 57 seconds
+- - Interposed wires before primary outputs: 2 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 2 seconds
+- Merged identical logic: 11 seconds
+Warning: 1 unused wire:
+  xn
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 2 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 97 seconds
+Synthesizing 24-bit double_exp_16767675_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 50 seconds
+- Simplified circuit: 179 seconds
+- - Interposed wires before primary outputs: 4 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 4 seconds
+- Merged identical logic: 32 seconds
+Warning: 1 unused wire:
+  xn
+- Deleted dead logic: 0 seconds
+- Renamed wires: 1 second
+- Generated verilog module: 5 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 274 seconds
+Synthesizing 32-bit double_exp_4201314911_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 97 seconds
+- Simplified circuit: 391 seconds
+- - Interposed wires before primary outputs: 8 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 8 seconds
+- Merged identical logic: 82 seconds
+- Deleted dead logic: 1 second
+- Renamed wires: 1 second
+- Generated verilog module: 8 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 592 seconds
+Synthesizing 40-bit double_exp_812584906161_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 160 seconds
+- Simplified circuit: 716 seconds
+- - Interposed wires before primary outputs: 13 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 13 seconds
+- Merged identical logic: 190 seconds
+- Deleted dead logic: 2 seconds
+- Renamed wires: 2 seconds
+- Generated verilog module: 13 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 1100 seconds
+
+_____________________________________________________________
+EFFICIENTLY SIMPLIFYING CIRCUITS USING UNION-FIND TO CONNECT
+
+2f60cf8 Efficiently simplifying circuits
+
+Synthesizing 8-bit double_exp_199_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 7 seconds
+- Simplified circuit: 0 seconds
+- - Interposed wires before primary outputs: 0 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 0 seconds
+- Merged identical logic: 2 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 0 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 12 seconds
+Synthesizing 16-bit double_exp_63999_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 23 seconds
+- Simplified circuit: 1 second
+- - Interposed wires before primary outputs: 2 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 2 seconds
+- Merged identical logic: 10 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 2 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 41 seconds
+Synthesizing 24-bit double_exp_16166651_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 50 seconds
+- Simplified circuit: 3 seconds
+- - Interposed wires before primary outputs: 5 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 5 seconds
+- Merged identical logic: 29 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 1 second
+- Generated verilog module: 5 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 95 seconds
+Synthesizing 32-bit double_exp_2596181949_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 97 seconds
+- Simplified circuit: 5 seconds
+- - Interposed wires before primary outputs: 8 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 8 seconds
+- Merged identical logic: 85 seconds
+- Deleted dead logic: 1 second
+- Renamed wires: 1 second
+- Generated verilog module: 8 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 209 seconds
+Synthesizing 40-bit double_exp_878143302713_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 157 seconds
+- Simplified circuit: 8 seconds
+- - Interposed wires before primary outputs: 18 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 18 seconds
+- Merged identical logic: 148 seconds
+- Deleted dead logic: 2 seconds
+- Renamed wires: 2 seconds
+- Generated verilog module: 13 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 353 seconds
+Synthesizing 48-bit double_exp_166842028614963_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 245 seconds
+- Simplified circuit: 16 seconds
+- - Interposed wires before primary outputs: 18 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 18 seconds
+- Merged identical logic: 302 seconds
+- Deleted dead logic: 3 seconds
+- Renamed wires: 3 seconds
+- Generated verilog module: 23 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 614 seconds
+Synthesizing 56-bit double_exp_40277943742463041_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 349 seconds
+- Simplified circuit: 16 seconds
+- - Interposed wires before primary outputs: 34 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 34 seconds
+- Merged identical logic: 488 seconds
+- Deleted dead logic: 4 seconds
+- Renamed wires: 5 seconds
+- Generated verilog module: 33 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 933 seconds
+
+_____________________________________________________________
+EFFICIENTLY MERGING IDENTICAL LOGIC USING HOPCROFT'S ALGORITHM
+
+e9eb61d Using Hopcroft's algorithm to merge identical logic
+
+Synthesizing 8-bit double_exp_221_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 7 seconds
+- Simplified circuit: 0 seconds
+- - Interposed wires before primary outputs: 0 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 0 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 0 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 1 second
+- TOTAL: 11 seconds
+Synthesizing 16-bit double_exp_51175_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 23 seconds
+- Simplified circuit: 1 second
+- - Interposed wires before primary outputs: 2 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 2 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 2 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 2 seconds
+- TOTAL: 33 seconds
+Synthesizing 24-bit double_exp_16767675_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 49 seconds
+- Simplified circuit: 3 seconds
+- - Interposed wires before primary outputs: 4 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 5 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 1 second
+- Generated verilog module: 4 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 6 seconds
+- TOTAL: 71 seconds
+Synthesizing 32-bit double_exp_4201314911_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 98 seconds
+- Simplified circuit: 5 seconds
+- - Interposed wires before primary outputs: 8 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 8 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 1 second
+- Renamed wires: 1 second
+- Generated verilog module: 8 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 9 seconds
+- TOTAL: 134 seconds
+Synthesizing 40-bit double_exp_812584906161_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 158 seconds
+- Simplified circuit: 9 seconds
+- - Interposed wires before primary outputs: 18 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 18 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 2 seconds
+- Renamed wires: 2 seconds
+- Generated verilog module: 12 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 13 seconds
+- TOTAL: 219 seconds
+Synthesizing 48-bit double_exp_202718022952341_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 248 seconds
+- Simplified circuit: 15 seconds
+- - Interposed wires before primary outputs: 18 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 19 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 3 seconds
+- Renamed wires: 3 seconds
+- Generated verilog module: 22 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 17 seconds
+- TOTAL: 333 seconds
+Synthesizing 56-bit double_exp_50168938772051441_1000:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 352 seconds
+- Simplified circuit: 16 seconds
+- - Interposed wires before primary outputs: 34 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 34 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 4 seconds
+- Renamed wires: 5 seconds
+- Generated verilog module: 34 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 24 seconds
+- TOTAL: 475 seconds
+Synthesizing 64-bit double_exp_13962236505266237245_1000:
+- Instantiated parameters: 1 second
+- Elaborated modules: 482 seconds
+- Simplified circuit: 21 seconds
+- - Interposed wires before primary outputs: 47 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 47 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 5 seconds
+- Renamed wires: 7 seconds
+- Generated verilog module: 46 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 33 seconds
+- TOTAL: 647 seconds
+
+_____________________________________________________________
+DON'T ADD BUS WIRES TO THE GENERATED VAR LIST
+
+f898383 Don't add bus wires to the generated var list
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 5 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 0 seconds
+- - Interposed wires before primary outputs: 0 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 0 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 0 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 1 second
+- TOTAL: 9 seconds
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 15 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 1 second
+- - Interposed wires before primary outputs: 2 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 2 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 2 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 2 seconds
+- TOTAL: 25 seconds
+Synthesizing double_exp_24:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 31 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 3 seconds
+- - Interposed wires before primary outputs: 4 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 5 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 1 second
+- Generated verilog module: 4 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 5 seconds
+- TOTAL: 52 seconds
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 56 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 2 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 5 seconds
+- - Interposed wires before primary outputs: 8 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 8 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 1 second
+- Renamed wires: 1 second
+- Generated verilog module: 8 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 8 seconds
+- TOTAL: 92 seconds
+Synthesizing double_exp_40:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 97 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 4 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 8 seconds
+- - Interposed wires before primary outputs: 18 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 18 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 2 seconds
+- Renamed wires: 2 seconds
+- Generated verilog module: 12 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 13 seconds
+- TOTAL: 158 seconds
+Synthesizing double_exp_48:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 158 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 10 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 15 seconds
+- - Interposed wires before primary outputs: 18 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 18 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 3 seconds
+- Renamed wires: 4 seconds
+- Generated verilog module: 22 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 18 seconds
+- TOTAL: 243 seconds
+Synthesizing double_exp_56:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 236 seconds
+- - Connected wires: 1 second
+- - Propagated constant wires: 8 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 2 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 15 seconds
+- - Interposed wires before primary outputs: 35 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 35 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 4 seconds
+- Renamed wires: 5 seconds
+- Generated verilog module: 34 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 23 seconds
+- TOTAL: 357 seconds
+Synthesizing double_exp_64:
+- Instantiated parameters: 1 second
+- Elaborated modules: 337 seconds
+- - Connected wires: 1 second
+- - Propagated constant wires: 11 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 2 seconds
+- - Connected wires: 1 second
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 20 seconds
+- - Interposed wires before primary outputs: 47 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 47 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 5 seconds
+- Renamed wires: 7 seconds
+- Generated verilog module: 46 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 33 seconds
+- TOTAL: 502 seconds
+
+_____________________________________________________________
+STORE GENERATED VARIABLES IN SETS RATHER THAN LISTS
+
+71432fd Store generated variables in sets rather than lists
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 3 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 0 seconds
+- - Interposed wires before primary outputs: 0 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 0 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 0 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 0 seconds
+- TOTAL: 7 seconds
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 9 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 1 second
+- - Interposed wires before primary outputs: 2 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 2 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 0 seconds
+- Generated verilog module: 2 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 2 seconds
+- TOTAL: 20 seconds
+Synthesizing double_exp_24:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 19 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 3 seconds
+- - Interposed wires before primary outputs: 5 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 5 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 0 seconds
+- Renamed wires: 1 second
+- Generated verilog module: 4 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 5 seconds
+- TOTAL: 40 seconds
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 31 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 2 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 4 seconds
+- - Interposed wires before primary outputs: 8 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 8 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 1 second
+- Renamed wires: 1 second
+- Generated verilog module: 8 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 8 seconds
+- TOTAL: 67 seconds
+Synthesizing double_exp_40:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 49 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 4 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 8 seconds
+- - Interposed wires before primary outputs: 18 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 18 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 2 seconds
+- Renamed wires: 2 seconds
+- Generated verilog module: 12 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 13 seconds
+- TOTAL: 109 seconds
+Synthesizing double_exp_48:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 69 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 8 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 14 seconds
+- - Interposed wires before primary outputs: 18 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 18 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 3 seconds
+- Renamed wires: 4 seconds
+- Generated verilog module: 22 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 18 seconds
+- TOTAL: 152 seconds
+Synthesizing double_exp_56:
+- Instantiated parameters: 0 seconds
+- Elaborated modules: 94 seconds
+- - Connected wires: 1 second
+- - Propagated constant wires: 6 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 14 seconds
+- - Interposed wires before primary outputs: 34 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 34 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 4 seconds
+- Renamed wires: 5 seconds
+- Generated verilog module: 34 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 23 seconds
+- TOTAL: 212 seconds
+Synthesizing double_exp_64:
+- Instantiated parameters: 1 second
+- Elaborated modules: 123 seconds
+- - Connected wires: 1 second
+- - Propagated constant wires: 8 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 2 seconds
+- - Connected wires: 1 second
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 18 seconds
+- - Interposed wires before primary outputs: 45 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 45 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 5 seconds
+- Renamed wires: 7 seconds
+- Generated verilog module: 46 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 32 seconds
+- TOTAL: 281 seconds
+Synthesizing double_exp_72:
+- Instantiated parameters: 1 second
+- Elaborated modules: 158 seconds
+- - Connected wires: 1 second
+- - Propagated constant wires: 11 seconds
+- - Connected wires: 1 second
+- - Propagated constant wires: 3 seconds
+- - Connected wires: 1 second
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 23 seconds
+- - Interposed wires before primary outputs: 54 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 54 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 6 seconds
+- Renamed wires: 8 seconds
+- Generated verilog module: 60 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 38 seconds
+- TOTAL: 355 seconds
+Synthesizing double_exp_80:
+- Instantiated parameters: 1 second
+- Elaborated modules: 200 seconds
+- - Connected wires: 2 seconds
+- - Propagated constant wires: 14 seconds
+- - Connected wires: 1 second
+- - Propagated constant wires: 4 seconds
+- - Connected wires: 1 second
+- - Propagated constant wires: 2 seconds
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 1 second
+- - Connected wires: 0 seconds
+- - Propagated constant wires: 0 seconds
+- - Connected wires: 0 seconds
+- Simplified circuit: 29 seconds
+- - Interposed wires before primary outputs: 73 seconds
+- - Cleaned up: 0 seconds
+- Rescued primary outputs: 73 seconds
+- Merged identical logic: 0 seconds
+- Deleted dead logic: 8 seconds
+- Renamed wires: 11 seconds
+- Generated verilog module: 73 seconds
+- Generated verilog testbench: 0 seconds
+- Passed a random test: 57 seconds
+- TOTAL: 456 seconds
+
+_____________________________________________________________
+PROFILE LIVE HEAP SIZE IN ADDITION TO TIME
+
+0474d77 Trace memory footprint in Mb
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (265Mb)
+- Elaborated modules: 3 seconds (301Mb)
+- - Connected wires: 0 seconds (301Mb)
+- - Propagated constant wires: 0 seconds (305Mb)
+- - Connected wires: 0 seconds (305Mb)
+- - Propagated constant wires: 0 seconds (306Mb)
+- - Connected wires: 0 seconds (306Mb)
+- - Propagated constant wires: 0 seconds (307Mb)
+- - Connected wires: 0 seconds (307Mb)
+- - Propagated constant wires: 0 seconds (307Mb)
+- - Connected wires: 0 seconds (307Mb)
+- - Propagated constant wires: 0 seconds (307Mb)
+- - Connected wires: 0 seconds (307Mb)
+- Simplified circuit: 33 seconds (307Mb)
+- - Interposed wires before primary outputs: 0 seconds (326Mb)
+- - Cleaned up: 0 seconds (326Mb)
+- Rescued primary outputs: 6 seconds (326Mb)
+- Merged identical logic: 0 seconds (326Mb)
+- Deleted dead logic: 0 seconds (326Mb)
+- Renamed wires: 0 seconds (326Mb)
+- Generated verilog module: 0 seconds (326Mb)
+- Generated verilog testbench: 0 seconds (326Mb)
+- Passed a random test: 1 second (326Mb)
+- TOTAL: 76 seconds (263Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (267Mb)
+- Elaborated modules: 9 seconds (325Mb)
+- - Connected wires: 0 seconds (326Mb)
+- - Propagated constant wires: 0 seconds (339Mb)
+- - Connected wires: 0 seconds (339Mb)
+- - Propagated constant wires: 0 seconds (343Mb)
+- - Connected wires: 0 seconds (343Mb)
+- - Propagated constant wires: 0 seconds (345Mb)
+- - Connected wires: 0 seconds (345Mb)
+- - Propagated constant wires: 0 seconds (346Mb)
+- - Connected wires: 0 seconds (346Mb)
+- - Propagated constant wires: 0 seconds (346Mb)
+- - Connected wires: 0 seconds (346Mb)
+- Simplified circuit: 37 seconds (346Mb)
+- - Interposed wires before primary outputs: 2 seconds (407Mb)
+- - Cleaned up: 0 seconds (407Mb)
+- Rescued primary outputs: 9 seconds (407Mb)
+- Merged identical logic: 0 seconds (407Mb)
+- Deleted dead logic: 0 seconds (407Mb)
+- Renamed wires: 0 seconds (407Mb)
+- Generated verilog module: 2 seconds (407Mb)
+- Generated verilog testbench: 0 seconds (407Mb)
+- Passed a random test: 2 seconds (407Mb)
+- TOTAL: 98 seconds (263Mb)
+Synthesizing double_exp_24:
+- Instantiated parameters: 0 seconds (269Mb)
+- Elaborated modules: 18 seconds (350Mb)
+- - Connected wires: 0 seconds (350Mb)
+- - Propagated constant wires: 1 second (378Mb)
+- - Connected wires: 0 seconds (378Mb)
+- - Propagated constant wires: 0 seconds (385Mb)
+- - Connected wires: 0 seconds (385Mb)
+- - Propagated constant wires: 0 seconds (389Mb)
+- - Connected wires: 0 seconds (389Mb)
+- - Propagated constant wires: 0 seconds (391Mb)
+- - Connected wires: 0 seconds (391Mb)
+- - Propagated constant wires: 0 seconds (392Mb)
+- - Connected wires: 0 seconds (392Mb)
+- Simplified circuit: 42 seconds (391Mb)
+- - Interposed wires before primary outputs: 4 seconds (517Mb)
+- - Cleaned up: 0 seconds (517Mb)
+- Rescued primary outputs: 13 seconds (517Mb)
+- Merged identical logic: 0 seconds (517Mb)
+- Deleted dead logic: 0 seconds (517Mb)
+- Renamed wires: 1 second (517Mb)
+- Generated verilog module: 4 seconds (517Mb)
+- Generated verilog testbench: 0 seconds (517Mb)
+- Passed a random test: 5 seconds (517Mb)
+- TOTAL: 131 seconds (263Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (271Mb)
+- Elaborated modules: 31 seconds (376Mb)
+- - Connected wires: 0 seconds (376Mb)
+- - Propagated constant wires: 2 seconds (424Mb)
+- - Connected wires: 0 seconds (424Mb)
+- - Propagated constant wires: 0 seconds (437Mb)
+- - Connected wires: 0 seconds (437Mb)
+- - Propagated constant wires: 0 seconds (444Mb)
+- - Connected wires: 0 seconds (444Mb)
+- - Propagated constant wires: 0 seconds (448Mb)
+- - Connected wires: 0 seconds (448Mb)
+- - Propagated constant wires: 0 seconds (448Mb)
+- - Connected wires: 0 seconds (448Mb)
+- Simplified circuit: 49 seconds (448Mb)
+- - Interposed wires before primary outputs: 8 seconds (664Mb)
+- - Cleaned up: 0 seconds (664Mb)
+- Rescued primary outputs: 20 seconds (664Mb)
+- Merged identical logic: 0 seconds (664Mb)
+- Deleted dead logic: 1 second (664Mb)
+- Renamed wires: 1 second (664Mb)
+- Generated verilog module: 8 seconds (664Mb)
+- Generated verilog testbench: 0 seconds (664Mb)
+- Passed a random test: 9 seconds (664Mb)
+- TOTAL: 177 seconds (263Mb)
+Synthesizing double_exp_40:
+- Instantiated parameters: 0 seconds (273Mb)
+- Elaborated modules: 47 seconds (401Mb)
+- - Connected wires: 0 seconds (402Mb)
+- - Propagated constant wires: 3 seconds (474Mb)
+- - Connected wires: 0 seconds (474Mb)
+- - Propagated constant wires: 1 second (495Mb)
+- - Connected wires: 0 seconds (495Mb)
+- - Propagated constant wires: 0 seconds (505Mb)
+- - Connected wires: 0 seconds (505Mb)
+- - Propagated constant wires: 0 seconds (510Mb)
+- - Connected wires: 0 seconds (510Mb)
+- - Propagated constant wires: 0 seconds (510Mb)
+- - Connected wires: 0 seconds (510Mb)
+- Simplified circuit: 57 seconds (510Mb)
+- - Interposed wires before primary outputs: 13 seconds (850Mb)
+- - Cleaned up: 0 seconds (850Mb)
+- Rescued primary outputs: 29 seconds (850Mb)
+- Merged identical logic: 0 seconds (850Mb)
+- Deleted dead logic: 2 seconds (850Mb)
+- Renamed wires: 2 seconds (850Mb)
+- Generated verilog module: 12 seconds (850Mb)
+- Generated verilog testbench: 0 seconds (850Mb)
+- Passed a random test: 13 seconds (850Mb)
+- TOTAL: 236 seconds (263Mb)
+Synthesizing double_exp_48:
+- Instantiated parameters: 0 seconds (275Mb)
+- Elaborated modules: 68 seconds (427Mb)
+- - Connected wires: 0 seconds (427Mb)
+- - Propagated constant wires: 4 seconds (529Mb)
+- - Connected wires: 0 seconds (530Mb)
+- - Propagated constant wires: 1 second (559Mb)
+- - Connected wires: 0 seconds (559Mb)
+- - Propagated constant wires: 0 seconds (574Mb)
+- - Connected wires: 0 seconds (574Mb)
+- - Propagated constant wires: 0 seconds (582Mb)
+- - Connected wires: 0 seconds (582Mb)
+- - Propagated constant wires: 0 seconds (582Mb)
+- - Connected wires: 0 seconds (582Mb)
+- Simplified circuit: 66 seconds (582Mb)
+- - Interposed wires before primary outputs: 19 seconds (1053Mb)
+- - Cleaned up: 0 seconds (1053Mb)
+- Rescued primary outputs: 40 seconds (1053Mb)
+- Merged identical logic: 0 seconds (1053Mb)
+- Deleted dead logic: 2 seconds (1053Mb)
+- Renamed wires: 4 seconds (1053Mb)
+- Generated verilog module: 22 seconds (1053Mb)
+- Generated verilog testbench: 0 seconds (1053Mb)
+- Passed a random test: 17 seconds (1053Mb)
+- TOTAL: 315 seconds (263Mb)
+Synthesizing double_exp_56:
+- Instantiated parameters: 0 seconds (278Mb)
+- Elaborated modules: 92 seconds (453Mb)
+- - Connected wires: 1 second (453Mb)
+- - Propagated constant wires: 6 seconds (590Mb)
+- - Connected wires: 0 seconds (591Mb)
+- - Propagated constant wires: 1 second (630Mb)
+- - Connected wires: 0 seconds (630Mb)
+- - Propagated constant wires: 1 second (649Mb)
+- - Connected wires: 0 seconds (649Mb)
+- - Propagated constant wires: 0 seconds (658Mb)
+- - Connected wires: 0 seconds (658Mb)
+- - Propagated constant wires: 0 seconds (658Mb)
+- - Connected wires: 0 seconds (658Mb)
+- Simplified circuit: 76 seconds (658Mb)
+- - Interposed wires before primary outputs: 26 seconds (1297Mb)
+- - Cleaned up: 0 seconds (1297Mb)
+- Rescued primary outputs: 57 seconds (1296Mb)
+- Merged identical logic: 0 seconds (1296Mb)
+- Deleted dead logic: 4 seconds (1297Mb)
+- Renamed wires: 5 seconds (1297Mb)
+- Generated verilog module: 34 seconds (1297Mb)
+- Generated verilog testbench: 0 seconds (1297Mb)
+- Passed a random test: 24 seconds (1297Mb)
+- TOTAL: 417 seconds (263Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 1 second (281Mb)
+- Elaborated modules: 121 seconds (481Mb)
+- - Connected wires: 1 second (481Mb)
+- - Propagated constant wires: 8 seconds (659Mb)
+- - Connected wires: 0 seconds (659Mb)
+- - Propagated constant wires: 2 seconds (711Mb)
+- - Connected wires: 1 second (711Mb)
+- - Propagated constant wires: 1 second (735Mb)
+- - Connected wires: 0 seconds (735Mb)
+- - Propagated constant wires: 0 seconds (747Mb)
+- - Connected wires: 0 seconds (747Mb)
+- - Propagated constant wires: 0 seconds (747Mb)
+- - Connected wires: 0 seconds (747Mb)
+- Simplified circuit: 89 seconds (747Mb)
+- - Interposed wires before primary outputs: 37 seconds (1575Mb)
+- - Cleaned up: 0 seconds (1575Mb)
+- Rescued primary outputs: 76 seconds (1575Mb)
+- Merged identical logic: 0 seconds (1575Mb)
+- Deleted dead logic: 5 seconds (1575Mb)
+- Renamed wires: 7 seconds (1576Mb)
+- Generated verilog module: 46 seconds (1576Mb)
+- Generated verilog testbench: 0 seconds (1576Mb)
+- Passed a random test: 31 seconds (1576Mb)
+- TOTAL: 539 seconds (263Mb)
+Synthesizing double_exp_72:
+- Instantiated parameters: 1 second (283Mb)
+- Elaborated modules: 156 seconds (506Mb)
+- - Connected wires: 1 second (507Mb)
+- - Propagated constant wires: 11 seconds (730Mb)
+- - Connected wires: 1 second (730Mb)
+- - Propagated constant wires: 3 seconds (799Mb)
+- - Connected wires: 1 second (799Mb)
+- - Propagated constant wires: 1 second (831Mb)
+- - Connected wires: 0 seconds (831Mb)
+- - Propagated constant wires: 0 seconds (845Mb)
+- - Connected wires: 0 seconds (845Mb)
+- - Propagated constant wires: 0 seconds (846Mb)
+- - Connected wires: 0 seconds (846Mb)
+- Simplified circuit: 103 seconds (845Mb)
+- - Interposed wires before primary outputs: 46 seconds (1874Mb)
+- - Cleaned up: 0 seconds (1874Mb)
+- Rescued primary outputs: 97 seconds (1874Mb)
+- Merged identical logic: 0 seconds (1874Mb)
+- Deleted dead logic: 6 seconds (1874Mb)
+- Renamed wires: 8 seconds (1875Mb)
+- Generated verilog module: 59 seconds (1875Mb)
+- Generated verilog testbench: 0 seconds (1875Mb)
+- Passed a random test: 39 seconds (1875Mb)
+- TOTAL: 672 seconds (263Mb)
+Synthesizing double_exp_80:
+- Instantiated parameters: 1 second (286Mb)
+- Elaborated modules: 198 seconds (533Mb)
+- - Connected wires: 2 seconds (534Mb)
+- - Propagated constant wires: 13 seconds (808Mb)
+- - Connected wires: 1 second (808Mb)
+- - Propagated constant wires: 3 seconds (889Mb)
+- - Connected wires: 1 second (889Mb)
+- - Propagated constant wires: 2 seconds (928Mb)
+- - Connected wires: 0 seconds (928Mb)
+- - Propagated constant wires: 1 second (949Mb)
+- - Connected wires: 0 seconds (949Mb)
+- - Propagated constant wires: 0 seconds (949Mb)
+- - Connected wires: 0 seconds (949Mb)
+- Simplified circuit: 118 seconds (949Mb)
+- - Interposed wires before primary outputs: 59 seconds (2212Mb)
+- - Cleaned up: 0 seconds (2212Mb)
+- Rescued primary outputs: 122 seconds (2211Mb)
+- Merged identical logic: 0 seconds (2211Mb)
+- Deleted dead logic: 8 seconds (2212Mb)
+- Renamed wires: 11 seconds (2212Mb)
+- Generated verilog module: 72 seconds (2212Mb)
+- Generated verilog testbench: 0 seconds (2212Mb)
+- Passed a random test: 52 seconds (2212Mb)
+- TOTAL: 834 seconds (263Mb)
+
+_____________________________________________________________
+BOULTONIZE CONVERSIONS USED AS PROLOG RULES
+
+4840067 Improving for memory efficiency
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (265Mb)
+- Elaborated modules: 3 seconds (300Mb)
+- - Connected wires: 0 seconds (300Mb)
+- - Propagated constant wires: 0 seconds (304Mb)
+- - Connected wires: 0 seconds (304Mb)
+- - Propagated constant wires: 0 seconds (305Mb)
+- - Connected wires: 0 seconds (305Mb)
+- - Propagated constant wires: 0 seconds (306Mb)
+- - Connected wires: 0 seconds (306Mb)
+- - Propagated constant wires: 0 seconds (306Mb)
+- - Connected wires: 0 seconds (306Mb)
+- - Propagated constant wires: 0 seconds (306Mb)
+- - Connected wires: 0 seconds (306Mb)
+- Simplified circuit: 32 seconds (306Mb)
+- - Interposed wires before primary outputs: 0 seconds (308Mb)
+- - Cleaned up: 0 seconds (308Mb)
+- Rescued primary outputs: 6 seconds (308Mb)
+- Merged identical logic: 0 seconds (308Mb)
+- Deleted dead logic: 0 seconds (308Mb)
+- Renamed wires: 0 seconds (308Mb)
+- Generated verilog module: 0 seconds (308Mb)
+- Generated verilog testbench: 0 seconds (308Mb)
+- Passed a random test: 0 seconds (308Mb)
+- TOTAL: 73 seconds (263Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (267Mb)
+- Elaborated modules: 9 seconds (324Mb)
+- - Connected wires: 0 seconds (324Mb)
+- - Propagated constant wires: 0 seconds (338Mb)
+- - Connected wires: 0 seconds (338Mb)
+- - Propagated constant wires: 0 seconds (342Mb)
+- - Connected wires: 0 seconds (342Mb)
+- - Propagated constant wires: 0 seconds (344Mb)
+- - Connected wires: 0 seconds (344Mb)
+- - Propagated constant wires: 0 seconds (345Mb)
+- - Connected wires: 0 seconds (345Mb)
+- - Propagated constant wires: 0 seconds (345Mb)
+- - Connected wires: 0 seconds (345Mb)
+- Simplified circuit: 37 seconds (345Mb)
+- - Interposed wires before primary outputs: 0 seconds (351Mb)
+- - Cleaned up: 0 seconds (351Mb)
+- Rescued primary outputs: 7 seconds (351Mb)
+- Merged identical logic: 0 seconds (351Mb)
+- Deleted dead logic: 0 seconds (351Mb)
+- Renamed wires: 0 seconds (352Mb)
+- Generated verilog module: 2 seconds (352Mb)
+- Generated verilog testbench: 0 seconds (352Mb)
+- Passed a random test: 2 seconds (352Mb)
+- TOTAL: 92 seconds (263Mb)
+Synthesizing double_exp_24:
+- Instantiated parameters: 0 seconds (269Mb)
+- Elaborated modules: 18 seconds (348Mb)
+- - Connected wires: 0 seconds (349Mb)
+- - Propagated constant wires: 1 second (376Mb)
+- - Connected wires: 0 seconds (377Mb)
+- - Propagated constant wires: 0 seconds (384Mb)
+- - Connected wires: 0 seconds (384Mb)
+- - Propagated constant wires: 0 seconds (388Mb)
+- - Connected wires: 0 seconds (388Mb)
+- - Propagated constant wires: 0 seconds (390Mb)
+- - Connected wires: 0 seconds (390Mb)
+- - Propagated constant wires: 0 seconds (390Mb)
+- - Connected wires: 0 seconds (390Mb)
+- Simplified circuit: 42 seconds (390Mb)
+- - Interposed wires before primary outputs: 0 seconds (404Mb)
+- - Cleaned up: 0 seconds (404Mb)
+- Rescued primary outputs: 8 seconds (404Mb)
+- Merged identical logic: 0 seconds (404Mb)
+- Deleted dead logic: 0 seconds (404Mb)
+- Renamed wires: 1 second (405Mb)
+- Generated verilog module: 4 seconds (404Mb)
+- Generated verilog testbench: 0 seconds (404Mb)
+- Passed a random test: 5 seconds (404Mb)
+- TOTAL: 118 seconds (263Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (271Mb)
+- Elaborated modules: 31 seconds (374Mb)
+- - Connected wires: 0 seconds (375Mb)
+- - Propagated constant wires: 2 seconds (422Mb)
+- - Connected wires: 0 seconds (423Mb)
+- - Propagated constant wires: 0 seconds (436Mb)
+- - Connected wires: 0 seconds (436Mb)
+- - Propagated constant wires: 0 seconds (443Mb)
+- - Connected wires: 0 seconds (443Mb)
+- - Propagated constant wires: 0 seconds (446Mb)
+- - Connected wires: 0 seconds (446Mb)
+- - Propagated constant wires: 0 seconds (446Mb)
+- - Connected wires: 0 seconds (446Mb)
+- Simplified circuit: 49 seconds (446Mb)
+- - Interposed wires before primary outputs: 1 second (471Mb)
+- - Cleaned up: 0 seconds (471Mb)
+- Rescued primary outputs: 9 seconds (471Mb)
+- Merged identical logic: 0 seconds (471Mb)
+- Deleted dead logic: 1 second (471Mb)
+- Renamed wires: 1 second (471Mb)
+- Generated verilog module: 8 seconds (471Mb)
+- Generated verilog testbench: 0 seconds (471Mb)
+- Passed a random test: 8 seconds (471Mb)
+- TOTAL: 153 seconds (263Mb)
+Synthesizing double_exp_40:
+- Instantiated parameters: 0 seconds (273Mb)
+- Elaborated modules: 47 seconds (399Mb)
+- - Connected wires: 0 seconds (400Mb)
+- - Propagated constant wires: 3 seconds (472Mb)
+- - Connected wires: 0 seconds (472Mb)
+- - Propagated constant wires: 1 second (493Mb)
+- - Connected wires: 0 seconds (493Mb)
+- - Propagated constant wires: 0 seconds (503Mb)
+- - Connected wires: 0 seconds (503Mb)
+- - Propagated constant wires: 0 seconds (508Mb)
+- - Connected wires: 0 seconds (508Mb)
+- - Propagated constant wires: 0 seconds (508Mb)
+- - Connected wires: 0 seconds (508Mb)
+- Simplified circuit: 57 seconds (508Mb)
+- - Interposed wires before primary outputs: 1 second (546Mb)
+- - Cleaned up: 0 seconds (546Mb)
+- Rescued primary outputs: 11 seconds (546Mb)
+- Merged identical logic: 0 seconds (546Mb)
+- Deleted dead logic: 2 seconds (546Mb)
+- Renamed wires: 2 seconds (546Mb)
+- Generated verilog module: 12 seconds (546Mb)
+- Generated verilog testbench: 0 seconds (546Mb)
+- Passed a random test: 12 seconds (546Mb)
+- TOTAL: 195 seconds (263Mb)
+Synthesizing double_exp_48:
+- Instantiated parameters: 0 seconds (275Mb)
+- Elaborated modules: 67 seconds (424Mb)
+- - Connected wires: 0 seconds (425Mb)
+- - Propagated constant wires: 4 seconds (527Mb)
+- - Connected wires: 0 seconds (527Mb)
+- - Propagated constant wires: 1 second (557Mb)
+- - Connected wires: 0 seconds (557Mb)
+- - Propagated constant wires: 0 seconds (571Mb)
+- - Connected wires: 0 seconds (572Mb)
+- - Propagated constant wires: 0 seconds (579Mb)
+- - Connected wires: 0 seconds (579Mb)
+- - Propagated constant wires: 0 seconds (579Mb)
+- - Connected wires: 0 seconds (579Mb)
+- Simplified circuit: 66 seconds (579Mb)
+- - Interposed wires before primary outputs: 2 seconds (633Mb)
+- - Cleaned up: 0 seconds (633Mb)
+- Rescued primary outputs: 14 seconds (632Mb)
+- Merged identical logic: 0 seconds (632Mb)
+- Deleted dead logic: 3 seconds (633Mb)
+- Renamed wires: 3 seconds (633Mb)
+- Generated verilog module: 22 seconds (633Mb)
+- Generated verilog testbench: 0 seconds (633Mb)
+- Passed a random test: 18 seconds (633Mb)
+- TOTAL: 250 seconds (263Mb)
+Synthesizing double_exp_56:
+- Instantiated parameters: 0 seconds (278Mb)
+- Elaborated modules: 92 seconds (450Mb)
+- - Connected wires: 1 second (450Mb)
+- - Propagated constant wires: 6 seconds (587Mb)
+- - Connected wires: 0 seconds (588Mb)
+- - Propagated constant wires: 1 second (627Mb)
+- - Connected wires: 0 seconds (627Mb)
+- - Propagated constant wires: 1 second (646Mb)
+- - Connected wires: 0 seconds (646Mb)
+- - Propagated constant wires: 0 seconds (655Mb)
+- - Connected wires: 0 seconds (655Mb)
+- - Propagated constant wires: 0 seconds (656Mb)
+- - Connected wires: 0 seconds (656Mb)
+- Simplified circuit: 76 seconds (655Mb)
+- - Interposed wires before primary outputs: 3 seconds (727Mb)
+- - Cleaned up: 0 seconds (728Mb)
+- Rescued primary outputs: 16 seconds (727Mb)
+- Merged identical logic: 0 seconds (727Mb)
+- Deleted dead logic: 4 seconds (727Mb)
+- Renamed wires: 5 seconds (728Mb)
+- Generated verilog module: 34 seconds (728Mb)
+- Generated verilog testbench: 0 seconds (728Mb)
+- Passed a random test: 24 seconds (728Mb)
+- TOTAL: 317 seconds (263Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 1 second (281Mb)
+- Elaborated modules: 122 seconds (477Mb)
+- - Connected wires: 1 second (477Mb)
+- - Propagated constant wires: 8 seconds (655Mb)
+- - Connected wires: 0 seconds (656Mb)
+- - Propagated constant wires: 2 seconds (707Mb)
+- - Connected wires: 1 second (707Mb)
+- - Propagated constant wires: 1 second (731Mb)
+- - Connected wires: 0 seconds (732Mb)
+- - Propagated constant wires: 0 seconds (744Mb)
+- - Connected wires: 0 seconds (744Mb)
+- - Propagated constant wires: 0 seconds (744Mb)
+- - Connected wires: 0 seconds (744Mb)
+- Simplified circuit: 88 seconds (744Mb)
+- - Interposed wires before primary outputs: 5 seconds (837Mb)
+- - Cleaned up: 0 seconds (837Mb)
+- Rescued primary outputs: 20 seconds (837Mb)
+- Merged identical logic: 0 seconds (837Mb)
+- Deleted dead logic: 5 seconds (837Mb)
+- Renamed wires: 7 seconds (838Mb)
+- Generated verilog module: 46 seconds (838Mb)
+- Generated verilog testbench: 0 seconds (838Mb)
+- Passed a random test: 32 seconds (838Mb)
+- TOTAL: 396 seconds (263Mb)
+Synthesizing double_exp_72:
+- Instantiated parameters: 1 second (283Mb)
+- Elaborated modules: 157 seconds (502Mb)
+- - Connected wires: 1 second (503Mb)
+- - Propagated constant wires: 11 seconds (726Mb)
+- - Connected wires: 1 second (726Mb)
+- - Propagated constant wires: 3 seconds (794Mb)
+- - Connected wires: 1 second (795Mb)
+- - Propagated constant wires: 1 second (827Mb)
+- - Connected wires: 0 seconds (827Mb)
+- - Propagated constant wires: 0 seconds (841Mb)
+- - Connected wires: 0 seconds (841Mb)
+- - Propagated constant wires: 0 seconds (841Mb)
+- - Connected wires: 0 seconds (841Mb)
+- Simplified circuit: 102 seconds (841Mb)
+- - Interposed wires before primary outputs: 6 seconds (958Mb)
+- - Cleaned up: 0 seconds (958Mb)
+- Rescued primary outputs: 23 seconds (958Mb)
+- Merged identical logic: 0 seconds (958Mb)
+- Deleted dead logic: 6 seconds (958Mb)
+- Renamed wires: 8 seconds (959Mb)
+- Generated verilog module: 60 seconds (959Mb)
+- Generated verilog testbench: 0 seconds (959Mb)
+- Passed a random test: 43 seconds (959Mb)
+- TOTAL: 484 seconds (263Mb)
+Synthesizing double_exp_80:
+- Instantiated parameters: 1 second (286Mb)
+- Elaborated modules: 198 seconds (529Mb)
+- - Connected wires: 2 seconds (529Mb)
+- - Propagated constant wires: 14 seconds (803Mb)
+- - Connected wires: 1 second (803Mb)
+- - Propagated constant wires: 3 seconds (884Mb)
+- - Connected wires: 1 second (884Mb)
+- - Propagated constant wires: 2 seconds (923Mb)
+- - Connected wires: 0 seconds (924Mb)
+- - Propagated constant wires: 1 second (944Mb)
+- - Connected wires: 0 seconds (944Mb)
+- - Propagated constant wires: 0 seconds (944Mb)
+- - Connected wires: 0 seconds (944Mb)
+- Simplified circuit: 117 seconds (944Mb)
+- - Interposed wires before primary outputs: 8 seconds (1087Mb)
+- - Cleaned up: 0 seconds (1088Mb)
+- Rescued primary outputs: 27 seconds (1087Mb)
+- Merged identical logic: 0 seconds (1087Mb)
+- Deleted dead logic: 8 seconds (1087Mb)
+- Renamed wires: 11 seconds (1088Mb)
+- Generated verilog module: 73 seconds (1088Mb)
+- Generated verilog testbench: 0 seconds (1088Mb)
+- Passed a random test: 53 seconds (1088Mb)
+- TOTAL: 584 seconds (263Mb)
+Synthesizing double_exp_88:
+- Instantiated parameters: 1 second (288Mb)
+- Elaborated modules: 245 seconds (555Mb)
+- - Connected wires: 2 seconds (555Mb)
+- - Propagated constant wires: 17 seconds (884Mb)
+- - Connected wires: 1 second (885Mb)
+- - Propagated constant wires: 4 seconds (985Mb)
+- - Connected wires: 2 seconds (985Mb)
+- - Propagated constant wires: 2 seconds (1034Mb)
+- - Connected wires: 1 second (1034Mb)
+- - Propagated constant wires: 1 second (1058Mb)
+- - Connected wires: 0 seconds (1058Mb)
+- - Propagated constant wires: 0 seconds (1058Mb)
+- - Connected wires: 0 seconds (1058Mb)
+- Simplified circuit: 138 seconds (1058Mb)
+- - Interposed wires before primary outputs: 10 seconds (1230Mb)
+- - Cleaned up: 0 seconds (1230Mb)
+- Rescued primary outputs: 33 seconds (1230Mb)
+- Merged identical logic: 0 seconds (1230Mb)
+- Deleted dead logic: 10 seconds (1230Mb)
+- Renamed wires: 13 seconds (1231Mb)
+- Generated verilog module: 92 seconds (1230Mb)
+- Generated verilog testbench: 0 seconds (1230Mb)
+- Passed a random test: 65 seconds (1230Mb)
+- TOTAL: 709 seconds (263Mb)
+Synthesizing double_exp_96:
+- Instantiated parameters: 1 second (291Mb)
+- Elaborated modules: 299 seconds (582Mb)
+- - Connected wires: 2 seconds (583Mb)
+- - Propagated constant wires: 20 seconds (972Mb)
+- - Connected wires: 2 seconds (973Mb)
+- - Propagated constant wires: 5 seconds (1094Mb)
+- - Connected wires: 2 seconds (1094Mb)
+- - Propagated constant wires: 3 seconds (1154Mb)
+- - Connected wires: 1 second (1155Mb)
+- - Propagated constant wires: 1 second (1183Mb)
+- - Connected wires: 0 seconds (1183Mb)
+- - Propagated constant wires: 0 seconds (1183Mb)
+- - Connected wires: 0 seconds (1183Mb)
+- Simplified circuit: 156 seconds (1183Mb)
+- - Interposed wires before primary outputs: 12 seconds (1386Mb)
+- - Cleaned up: 0 seconds (1386Mb)
+- Rescued primary outputs: 38 seconds (1386Mb)
+- Merged identical logic: 0 seconds (1386Mb)
+- Deleted dead logic: 12 seconds (1386Mb)
+- Renamed wires: 15 seconds (1387Mb)
+- Generated verilog module: 106 seconds (1387Mb)
+- Generated verilog testbench: 0 seconds (1387Mb)
+- Passed a random test: 79 seconds (1387Mb)
+- TOTAL: 834 seconds (263Mb)
+Synthesizing double_exp_104:
+- Instantiated parameters: 2 seconds (292Mb)
+- Elaborated modules: 360 seconds (608Mb)
+- - Connected wires: 3 seconds (609Mb)
+- - Propagated constant wires: 24 seconds (1064Mb)
+- - Connected wires: 2 seconds (1065Mb)
+- - Propagated constant wires: 6 seconds (1205Mb)
+- - Connected wires: 3 seconds (1205Mb)
+- - Propagated constant wires: 3 seconds (1276Mb)
+- - Connected wires: 1 second (1276Mb)
+- - Propagated constant wires: 1 second (1309Mb)
+- - Connected wires: 0 seconds (1309Mb)
+- - Propagated constant wires: 0 seconds (1309Mb)
+- - Connected wires: 0 seconds (1309Mb)
+- Simplified circuit: 181 seconds (1309Mb)
+- - Interposed wires before primary outputs: 14 seconds (1547Mb)
+- - Cleaned up: 0 seconds (1547Mb)
+- Rescued primary outputs: 46 seconds (1546Mb)
+- Merged identical logic: 0 seconds (1546Mb)
+- Deleted dead logic: 14 seconds (1547Mb)
+- Renamed wires: 18 seconds (1548Mb)
+- Generated verilog module: 120 seconds (1547Mb)
+- Generated verilog testbench: 0 seconds (1547Mb)
+- Passed a random test: 101 seconds (1547Mb)
+- TOTAL: 991 seconds (263Mb)
+Synthesizing double_exp_112:
+- Instantiated parameters: 2 seconds (296Mb)
+- Elaborated modules: 430 seconds (638Mb)
+- - Connected wires: 3 seconds (639Mb)
+- - Propagated constant wires: 28 seconds (1165Mb)
+- - Connected wires: 2 seconds (1166Mb)
+- - Propagated constant wires: 7 seconds (1329Mb)
+- - Connected wires: 3 seconds (1329Mb)
+- - Propagated constant wires: 4 seconds (1409Mb)
+- - Connected wires: 1 second (1410Mb)
+- - Propagated constant wires: 2 seconds (1447Mb)
+- - Connected wires: 0 seconds (1447Mb)
+- - Propagated constant wires: 0 seconds (1447Mb)
+- - Connected wires: 0 seconds (1447Mb)
+- Simplified circuit: 211 seconds (1447Mb)
+- - Interposed wires before primary outputs: 17 seconds (1722Mb)
+- - Cleaned up: 0 seconds (1722Mb)
+- Rescued primary outputs: 54 seconds (1722Mb)
+- Merged identical logic: 0 seconds (1722Mb)
+- Deleted dead logic: 16 seconds (1722Mb)
+- Renamed wires: 21 seconds (1723Mb)
+- Generated verilog module: 160 seconds (1723Mb)
+- Generated verilog testbench: 0 seconds (1723Mb)
+- Passed a random test: 124 seconds (1723Mb)
+- TOTAL: 1196 seconds (263Mb)
+
+_____________________________________________________________
+COMPLETELY DISABLE PROOF LOGGING DURING SYNTHESIS
+
+c5d9e29 Completely disable proof logging during synthesis
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (263Mb)
+- Elaborated modules: 3 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- Simplified circuit: 29 seconds (263Mb)
+- - Interposed wires before primary outputs: 0 seconds (263Mb)
+- - Cleaned up: 0 seconds (263Mb)
+- Rescued primary outputs: 5 seconds (263Mb)
+- Merged identical logic: 0 seconds (263Mb)
+- Deleted dead logic: 0 seconds (263Mb)
+- Renamed wires: 0 seconds (263Mb)
+- Generated verilog module: 0 seconds (263Mb)
+- Generated verilog testbench: 0 seconds (263Mb)
+- Passed a random test: 1 second (263Mb)
+- TOTAL: 66 seconds (263Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (263Mb)
+- Elaborated modules: 8 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- Simplified circuit: 30 seconds (263Mb)
+- - Interposed wires before primary outputs: 0 seconds (263Mb)
+- - Cleaned up: 0 seconds (263Mb)
+- Rescued primary outputs: 5 seconds (263Mb)
+- Merged identical logic: 0 seconds (263Mb)
+- Deleted dead logic: 0 seconds (263Mb)
+- Renamed wires: 0 seconds (263Mb)
+- Generated verilog module: 2 seconds (263Mb)
+- Generated verilog testbench: 0 seconds (263Mb)
+- Passed a random test: 2 seconds (263Mb)
+- TOTAL: 77 seconds (263Mb)
+Synthesizing double_exp_24:
+- Instantiated parameters: 0 seconds (263Mb)
+- Elaborated modules: 17 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 1 second (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- Simplified circuit: 31 seconds (263Mb)
+- - Interposed wires before primary outputs: 0 seconds (263Mb)
+- - Cleaned up: 0 seconds (263Mb)
+- Rescued primary outputs: 5 seconds (263Mb)
+- Merged identical logic: 0 seconds (263Mb)
+- Deleted dead logic: 0 seconds (263Mb)
+- Renamed wires: 1 second (263Mb)
+- Generated verilog module: 4 seconds (263Mb)
+- Generated verilog testbench: 0 seconds (263Mb)
+- Passed a random test: 5 seconds (263Mb)
+- TOTAL: 93 seconds (263Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (263Mb)
+- Elaborated modules: 29 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 1 second (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- Simplified circuit: 33 seconds (263Mb)
+- - Interposed wires before primary outputs: 0 seconds (263Mb)
+- - Cleaned up: 0 seconds (263Mb)
+- Rescued primary outputs: 6 seconds (263Mb)
+- Merged identical logic: 0 seconds (263Mb)
+- Deleted dead logic: 1 second (264Mb)
+- Renamed wires: 1 second (264Mb)
+- Generated verilog module: 8 seconds (263Mb)
+- Generated verilog testbench: 0 seconds (263Mb)
+- Passed a random test: 8 seconds (263Mb)
+- TOTAL: 116 seconds (263Mb)
+Synthesizing double_exp_40:
+- Instantiated parameters: 0 seconds (263Mb)
+- Elaborated modules: 45 seconds (263Mb)
+- - Connected wires: 0 seconds (263Mb)
+- - Propagated constant wires: 3 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- Simplified circuit: 35 seconds (264Mb)
+- - Interposed wires before primary outputs: 1 second (264Mb)
+- - Cleaned up: 0 seconds (264Mb)
+- Rescued primary outputs: 6 seconds (264Mb)
+- Merged identical logic: 0 seconds (264Mb)
+- Deleted dead logic: 2 seconds (264Mb)
+- Renamed wires: 2 seconds (264Mb)
+- Generated verilog module: 12 seconds (263Mb)
+- Generated verilog testbench: 0 seconds (263Mb)
+- Passed a random test: 13 seconds (263Mb)
+- TOTAL: 145 seconds (263Mb)
+Synthesizing double_exp_48:
+- Instantiated parameters: 0 seconds (263Mb)
+- Elaborated modules: 64 seconds (263Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 4 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 1 second (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- Simplified circuit: 37 seconds (264Mb)
+- - Interposed wires before primary outputs: 2 seconds (264Mb)
+- - Cleaned up: 0 seconds (264Mb)
+- Rescued primary outputs: 7 seconds (264Mb)
+- Merged identical logic: 0 seconds (264Mb)
+- Deleted dead logic: 2 seconds (264Mb)
+- Renamed wires: 3 seconds (264Mb)
+- Generated verilog module: 22 seconds (263Mb)
+- Generated verilog testbench: 0 seconds (263Mb)
+- Passed a random test: 18 seconds (263Mb)
+- TOTAL: 185 seconds (263Mb)
+Synthesizing double_exp_56:
+- Instantiated parameters: 0 seconds (263Mb)
+- Elaborated modules: 88 seconds (264Mb)
+- - Connected wires: 1 second (264Mb)
+- - Propagated constant wires: 5 seconds (264Mb)
+- - Connected wires: 0 seconds (265Mb)
+- - Propagated constant wires: 1 second (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- Simplified circuit: 40 seconds (264Mb)
+- - Interposed wires before primary outputs: 2 seconds (264Mb)
+- - Cleaned up: 0 seconds (264Mb)
+- Rescued primary outputs: 7 seconds (264Mb)
+- Merged identical logic: 0 seconds (264Mb)
+- Deleted dead logic: 4 seconds (264Mb)
+- Renamed wires: 5 seconds (265Mb)
+- Generated verilog module: 34 seconds (263Mb)
+- Generated verilog testbench: 0 seconds (263Mb)
+- Passed a random test: 24 seconds (263Mb)
+- TOTAL: 233 seconds (263Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (263Mb)
+- Elaborated modules: 117 seconds (264Mb)
+- - Connected wires: 1 second (264Mb)
+- - Propagated constant wires: 7 seconds (265Mb)
+- - Connected wires: 0 seconds (265Mb)
+- - Propagated constant wires: 2 seconds (265Mb)
+- - Connected wires: 1 second (265Mb)
+- - Propagated constant wires: 1 second (264Mb)
+- - Connected wires: 0 seconds (265Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- - Propagated constant wires: 0 seconds (264Mb)
+- - Connected wires: 0 seconds (264Mb)
+- Simplified circuit: 44 seconds (264Mb)
+- - Interposed wires before primary outputs: 3 seconds (264Mb)
+- - Cleaned up: 0 seconds (264Mb)
+- Rescued primary outputs: 8 seconds (264Mb)
+- Merged identical logic: 0 seconds (264Mb)
+- Deleted dead logic: 5 seconds (264Mb)
+- Renamed wires: 7 seconds (265Mb)
+- Generated verilog module: 46 seconds (263Mb)
+- Generated verilog testbench: 0 seconds (263Mb)
+- Passed a random test: 34 seconds (263Mb)
+- TOTAL: 292 seconds (263Mb)
+
+_____________________________________________________________
+PROFILE MAX MEMORY USED AS WELL AS CURRENT MEMORY USED
+
+4ba3374 Profile max memory used as well as current memory used to reveal large functions
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (263-847Mb)
+- Elaborated modules: 3 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- Simplified circuit: 11 seconds (263-847Mb)
+- - Interposed wires before primary outputs: 0 seconds (263-847Mb)
+- - Cleaned up: 0 seconds (263-847Mb)
+- Rescued primary outputs: 2 seconds (263-847Mb)
+- Merged identical logic: 0 seconds (263-847Mb)
+- Deleted dead logic: 0 seconds (263-847Mb)
+- Renamed wires: 0 seconds (263-847Mb)
+- Generated verilog module: 0 seconds (263-847Mb)
+- Generated verilog testbench: 0 seconds (263-847Mb)
+- Passed a random test: 1 second (263-847Mb)
+- TOTAL: 29 seconds (263-847Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (263-847Mb)
+- Elaborated modules: 8 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- Simplified circuit: 12 seconds (263-847Mb)
+- - Interposed wires before primary outputs: 0 seconds (263-847Mb)
+- - Cleaned up: 0 seconds (263-847Mb)
+- Rescued primary outputs: 2 seconds (263-847Mb)
+- Merged identical logic: 0 seconds (263-847Mb)
+- Deleted dead logic: 0 seconds (263-847Mb)
+- Renamed wires: 0 seconds (263-847Mb)
+- Generated verilog module: 2 seconds (263-847Mb)
+- Generated verilog testbench: 0 seconds (263-847Mb)
+- Passed a random test: 2 seconds (263-847Mb)
+- TOTAL: 39 seconds (263-847Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (263-847Mb)
+- Elaborated modules: 29 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- - Propagated constant wires: 2 seconds (264-847Mb)
+- - Connected wires: 0 seconds (264-847Mb)
+- - Propagated constant wires: 0 seconds (264-847Mb)
+- - Connected wires: 0 seconds (264-847Mb)
+- - Propagated constant wires: 0 seconds (264-847Mb)
+- - Connected wires: 0 seconds (264-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (264-847Mb)
+- - Propagated constant wires: 0 seconds (263-847Mb)
+- - Connected wires: 0 seconds (263-847Mb)
+- Simplified circuit: 15 seconds (263-847Mb)
+- - Interposed wires before primary outputs: 0 seconds (264-847Mb)
+- - Cleaned up: 0 seconds (264-847Mb)
+- Rescued primary outputs: 2 seconds (263-847Mb)
+- Merged identical logic: 0 seconds (263-847Mb)
+- Deleted dead logic: 1 second (264-847Mb)
+- Renamed wires: 1 second (264-847Mb)
+- Generated verilog module: 8 seconds (263-847Mb)
+- Generated verilog testbench: 0 seconds (263-847Mb)
+- Passed a random test: 9 seconds (263-847Mb)
+- TOTAL: 79 seconds (263-847Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (263-847Mb)
+- Elaborated modules: 117 seconds (264-847Mb)
+- - Connected wires: 1 second (264-847Mb)
+- - Propagated constant wires: 8 seconds (265-847Mb)
+- - Connected wires: 0 seconds (265-847Mb)
+- - Propagated constant wires: 2 seconds (265-847Mb)
+- - Connected wires: 1 second (265-847Mb)
+- - Propagated constant wires: 1 second (264-847Mb)
+- - Connected wires: 0 seconds (265-847Mb)
+- - Propagated constant wires: 0 seconds (264-847Mb)
+- - Connected wires: 0 seconds (264-847Mb)
+- - Propagated constant wires: 0 seconds (264-847Mb)
+- - Connected wires: 0 seconds (264-847Mb)
+- Simplified circuit: 28 seconds (264-847Mb)
+- - Interposed wires before primary outputs: 4 seconds (264-847Mb)
+- - Cleaned up: 0 seconds (264-847Mb)
+- Rescued primary outputs: 6 seconds (264-847Mb)
+- Merged identical logic: 0 seconds (264-847Mb)
+- Deleted dead logic: 5 seconds (264-847Mb)
+- Renamed wires: 7 seconds (265-847Mb)
+- Generated verilog module: 44 seconds (263-847Mb)
+- Generated verilog testbench: 0 seconds (263-847Mb)
+- Passed a random test: 32 seconds (263-847Mb)
+- TOTAL: 255 seconds (263-847Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (263-847Mb)
+- Elaborated modules: 565 seconds (265-847Mb)
+- - Connected wires: 5 seconds (265-847Mb)
+- - Propagated constant wires: 38 seconds (267-847Mb)
+- - Connected wires: 3 seconds (267-847Mb)
+- - Propagated constant wires: 9 seconds (267-847Mb)
+- - Connected wires: 4 seconds (267-847Mb)
+- - Propagated constant wires: 5 seconds (266-847Mb)
+- - Connected wires: 2 seconds (267-847Mb)
+- - Propagated constant wires: 2 seconds (266-847Mb)
+- - Connected wires: 1 second (266-847Mb)
+- - Propagated constant wires: 0 seconds (266-847Mb)
+- - Connected wires: 0 seconds (266-847Mb)
+- Simplified circuit: 84 seconds (266-847Mb)
+- - Interposed wires before primary outputs: 19 seconds (267-847Mb)
+- - Cleaned up: 0 seconds (267-847Mb)
+- Rescued primary outputs: 21 seconds (266-847Mb)
+- Merged identical logic: 0 seconds (266-847Mb)
+- Deleted dead logic: 24 seconds (267-847Mb)
+- Renamed wires: 28 seconds (267-847Mb)
+- Generated verilog module: 198 seconds (264-847Mb)
+- Generated verilog testbench: 0 seconds (264-847Mb)
+- Passed a random test: 179 seconds (264-847Mb)
+- TOTAL: 1120 seconds (263-847Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 8 seconds (263-847Mb)
+- Elaborated modules: 4346 seconds (267-847Mb)
+- - Connected wires: 19 seconds (268-847Mb)
+- - Propagated constant wires: 168 seconds (271-847Mb)
+- - Connected wires: 14 seconds (272-847Mb)
+- - Propagated constant wires: 40 seconds (271-847Mb)
+- - Connected wires: 19 seconds (272-847Mb)
+- - Propagated constant wires: 21 seconds (271-847Mb)
+- - Connected wires: 9 seconds (271-847Mb)
+- - Propagated constant wires: 10 seconds (271-847Mb)
+- - Connected wires: 4 seconds (271-847Mb)
+- - Propagated constant wires: 1 second (270-847Mb)
+- - Connected wires: 0 seconds (270-847Mb)
+- Simplified circuit: 319 seconds (270-847Mb)
+- - Interposed wires before primary outputs: 86 seconds (271-847Mb)
+- - Cleaned up: 0 seconds (271-847Mb)
+- Rescued primary outputs: 88 seconds (270-847Mb)
+- Merged identical logic: 0 seconds (270-847Mb)
+- Deleted dead logic: 102 seconds (271-847Mb)
+- Renamed wires: 130 seconds (273-847Mb)
+- Generated verilog module: 1348 seconds (266-847Mb)
+- Generated verilog testbench: 0 seconds (266-847Mb)
+- Passed a random test: 888 seconds (266-847Mb)
+- TOTAL: 7274 seconds (263-847Mb)
+
+_____________________________________________________________
+MERGE WITH LATEST VERSION OF HOL LIGHT
+
+eff2399 Merged with latest version of HOL Light
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (346-822Mb)
+- Elaborated modules: 3 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- Simplified circuit: 15 seconds (346-822Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-822Mb)
+- - Cleaned up: 0 seconds (346-822Mb)
+- Rescued primary outputs: 2 seconds (346-822Mb)
+- Merged identical logic: 0 seconds (346-822Mb)
+- Deleted dead logic: 0 seconds (346-822Mb)
+- Renamed wires: 0 seconds (346-822Mb)
+- Generated verilog module: 0 seconds (346-822Mb)
+- Generated verilog testbench: 0 seconds (346-822Mb)
+- Passed a random test: 1 second (346-822Mb)
+- TOTAL: 36 seconds (346-822Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (346-822Mb)
+- Elaborated modules: 8 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- Simplified circuit: 15 seconds (346-822Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-822Mb)
+- - Cleaned up: 0 seconds (346-822Mb)
+- Rescued primary outputs: 2 seconds (346-822Mb)
+- Merged identical logic: 0 seconds (346-822Mb)
+- Deleted dead logic: 0 seconds (346-822Mb)
+- Renamed wires: 0 seconds (346-822Mb)
+- Generated verilog module: 2 seconds (346-822Mb)
+- Generated verilog testbench: 0 seconds (346-822Mb)
+- Passed a random test: 3 seconds (346-822Mb)
+- TOTAL: 47 seconds (346-822Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (346-822Mb)
+- Elaborated modules: 28 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 2 seconds (347-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- - Propagated constant wires: 0 seconds (347-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- - Propagated constant wires: 0 seconds (347-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- - Propagated constant wires: 0 seconds (347-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- Simplified circuit: 19 seconds (346-822Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-822Mb)
+- - Cleaned up: 0 seconds (347-822Mb)
+- Rescued primary outputs: 3 seconds (346-822Mb)
+- Merged identical logic: 0 seconds (346-822Mb)
+- Deleted dead logic: 1 second (347-822Mb)
+- Renamed wires: 1 second (347-822Mb)
+- Generated verilog module: 8 seconds (346-822Mb)
+- Generated verilog testbench: 0 seconds (346-822Mb)
+- Passed a random test: 9 seconds (346-822Mb)
+- TOTAL: 85 seconds (346-822Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (346-822Mb)
+- Elaborated modules: 113 seconds (347-822Mb)
+- - Connected wires: 1 second (347-822Mb)
+- - Propagated constant wires: 8 seconds (348-822Mb)
+- - Connected wires: 0 seconds (348-822Mb)
+- - Propagated constant wires: 2 seconds (348-822Mb)
+- - Connected wires: 1 second (348-822Mb)
+- - Propagated constant wires: 1 second (347-822Mb)
+- - Connected wires: 0 seconds (348-822Mb)
+- - Propagated constant wires: 0 seconds (347-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- - Propagated constant wires: 0 seconds (347-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- Simplified circuit: 31 seconds (347-822Mb)
+- - Interposed wires before primary outputs: 4 seconds (348-822Mb)
+- - Cleaned up: 0 seconds (348-822Mb)
+- Rescued primary outputs: 6 seconds (347-822Mb)
+- Merged identical logic: 0 seconds (347-822Mb)
+- Deleted dead logic: 5 seconds (348-822Mb)
+- Renamed wires: 7 seconds (348-822Mb)
+- Generated verilog module: 44 seconds (346-822Mb)
+- Generated verilog testbench: 0 seconds (346-822Mb)
+- Passed a random test: 31 seconds (346-822Mb)
+- TOTAL: 255 seconds (346-822Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (346-822Mb)
+- Elaborated modules: 547 seconds (348-822Mb)
+- - Connected wires: 5 seconds (348-822Mb)
+- - Propagated constant wires: 38 seconds (350-822Mb)
+- - Connected wires: 3 seconds (350-822Mb)
+- - Propagated constant wires: 9 seconds (350-822Mb)
+- - Connected wires: 4 seconds (350-822Mb)
+- - Propagated constant wires: 5 seconds (350-822Mb)
+- - Connected wires: 2 seconds (350-822Mb)
+- - Propagated constant wires: 2 seconds (349-822Mb)
+- - Connected wires: 1 second (350-822Mb)
+- - Propagated constant wires: 0 seconds (349-822Mb)
+- - Connected wires: 0 seconds (349-822Mb)
+- Simplified circuit: 86 seconds (349-822Mb)
+- - Interposed wires before primary outputs: 19 seconds (350-822Mb)
+- - Cleaned up: 0 seconds (350-822Mb)
+- Rescued primary outputs: 22 seconds (349-822Mb)
+- Merged identical logic: 0 seconds (349-822Mb)
+- Deleted dead logic: 23 seconds (350-822Mb)
+- Renamed wires: 28 seconds (350-822Mb)
+- Generated verilog module: 199 seconds (347-839Mb)
+- Generated verilog testbench: 0 seconds (347-839Mb)
+- Passed a random test: 177 seconds (347-839Mb)
+- TOTAL: 1106 seconds (346-839Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 7 seconds (346-839Mb)
+- Elaborated modules: 4158 seconds (350-839Mb)
+- - Connected wires: 19 seconds (351-839Mb)
+- - Propagated constant wires: 166 seconds (355-839Mb)
+- - Connected wires: 14 seconds (355-839Mb)
+- - Propagated constant wires: 40 seconds (354-839Mb)
+- - Connected wires: 19 seconds (355-839Mb)
+- - Propagated constant wires: 20 seconds (354-839Mb)
+- - Connected wires: 9 seconds (354-839Mb)
+- - Propagated constant wires: 10 seconds (354-839Mb)
+- - Connected wires: 4 seconds (354-839Mb)
+- - Propagated constant wires: 1 second (353-839Mb)
+- - Connected wires: 0 seconds (353-839Mb)
+- Simplified circuit: 318 seconds (353-839Mb)
+- - Interposed wires before primary outputs: 84 seconds (354-839Mb)
+- - Cleaned up: 0 seconds (354-839Mb)
+- Rescued primary outputs: 87 seconds (353-839Mb)
+- Merged identical logic: 0 seconds (353-839Mb)
+- Deleted dead logic: 101 seconds (354-839Mb)
+- Renamed wires: 123 seconds (356-839Mb)
+- Generated verilog module: 1337 seconds (349-874Mb)
+- Generated verilog testbench: 0 seconds (349-874Mb)
+- Passed a random test: 891 seconds (349-874Mb)
+- TOTAL: 7069 seconds (346-874Mb)
+
+_____________________________________________________________
+DELETE SYNTHESIZABLE ELEMENTS AS SOON AS THEY ARE ELABORATED
+
+391973a Breaking down the time to test the verilog module
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (346-820Mb)
+- Elaborated modules: 2 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- - Propagated constant wires: 0 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- - Propagated constant wires: 0 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- - Propagated constant wires: 0 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- - Propagated constant wires: 0 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- - Propagated constant wires: 0 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- Simplified circuit: 14 seconds (346-820Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-820Mb)
+- - Cleaned up: 0 seconds (346-820Mb)
+- Rescued primary outputs: 2 seconds (346-820Mb)
+- Merged identical logic: 0 seconds (346-820Mb)
+- Deleted dead logic: 0 seconds (346-820Mb)
+- Renamed wires: 0 seconds (346-820Mb)
+- Generated verilog module: 0 seconds (346-820Mb)
+- - Generated verilog testbench: 0 seconds (346-820Mb)
+- - Ran a random test: 0 seconds (346-820Mb)
+- - Checked the test result: 0 seconds (346-820Mb)
+- Tested the verilog module: 5 seconds (346-820Mb)
+- TOTAL: 38 seconds (346-820Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (346-820Mb)
+- Elaborated modules: 7 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- - Propagated constant wires: 0 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- - Propagated constant wires: 0 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- - Propagated constant wires: 0 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- - Propagated constant wires: 0 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- - Propagated constant wires: 0 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- Simplified circuit: 15 seconds (346-820Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-820Mb)
+- - Cleaned up: 0 seconds (346-820Mb)
+- Rescued primary outputs: 2 seconds (346-820Mb)
+- Merged identical logic: 0 seconds (346-820Mb)
+- Deleted dead logic: 0 seconds (346-820Mb)
+- Renamed wires: 0 seconds (346-820Mb)
+- Generated verilog module: 2 seconds (346-820Mb)
+- - Generated verilog testbench: 0 seconds (346-820Mb)
+- - Ran a random test: 2 seconds (346-820Mb)
+- - Checked the test result: 0 seconds (346-820Mb)
+- Tested the verilog module: 6 seconds (346-820Mb)
+- TOTAL: 48 seconds (346-820Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (346-820Mb)
+- Elaborated modules: 24 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- - Propagated constant wires: 2 seconds (347-820Mb)
+- - Connected wires: 0 seconds (347-820Mb)
+- - Propagated constant wires: 0 seconds (347-820Mb)
+- - Connected wires: 0 seconds (347-820Mb)
+- - Propagated constant wires: 0 seconds (347-820Mb)
+- - Connected wires: 0 seconds (347-820Mb)
+- - Propagated constant wires: 0 seconds (347-820Mb)
+- - Connected wires: 0 seconds (347-820Mb)
+- - Propagated constant wires: 0 seconds (346-820Mb)
+- - Connected wires: 0 seconds (346-820Mb)
+- Simplified circuit: 19 seconds (346-820Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-820Mb)
+- - Cleaned up: 0 seconds (347-820Mb)
+- Rescued primary outputs: 3 seconds (346-820Mb)
+- Merged identical logic: 0 seconds (346-820Mb)
+- Deleted dead logic: 1 second (347-820Mb)
+- Renamed wires: 1 second (347-820Mb)
+- Generated verilog module: 8 seconds (346-820Mb)
+- - Generated verilog testbench: 0 seconds (346-820Mb)
+- - Ran a random test: 9 seconds (346-820Mb)
+- - Checked the test result: 0 seconds (346-820Mb)
+- Tested the verilog module: 13 seconds (346-820Mb)
+- TOTAL: 84 seconds (346-820Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (346-820Mb)
+- Elaborated modules: 100 seconds (347-820Mb)
+- - Connected wires: 1 second (347-820Mb)
+- - Propagated constant wires: 8 seconds (348-820Mb)
+- - Connected wires: 0 seconds (348-820Mb)
+- - Propagated constant wires: 2 seconds (348-820Mb)
+- - Connected wires: 1 second (348-820Mb)
+- - Propagated constant wires: 1 second (347-820Mb)
+- - Connected wires: 0 seconds (348-820Mb)
+- - Propagated constant wires: 0 seconds (347-820Mb)
+- - Connected wires: 0 seconds (348-820Mb)
+- - Propagated constant wires: 0 seconds (347-820Mb)
+- - Connected wires: 0 seconds (347-820Mb)
+- Simplified circuit: 31 seconds (347-820Mb)
+- - Interposed wires before primary outputs: 4 seconds (348-820Mb)
+- - Cleaned up: 0 seconds (348-820Mb)
+- Rescued primary outputs: 6 seconds (347-820Mb)
+- Merged identical logic: 0 seconds (347-820Mb)
+- Deleted dead logic: 5 seconds (348-820Mb)
+- Renamed wires: 7 seconds (348-820Mb)
+- Generated verilog module: 44 seconds (346-820Mb)
+- - Generated verilog testbench: 0 seconds (346-820Mb)
+- - Ran a random test: 33 seconds (346-820Mb)
+- - Checked the test result: 0 seconds (346-820Mb)
+- Tested the verilog module: 37 seconds (346-820Mb)
+- TOTAL: 247 seconds (346-820Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (346-820Mb)
+- Elaborated modules: 498 seconds (348-820Mb)
+- - Connected wires: 5 seconds (348-820Mb)
+- - Propagated constant wires: 38 seconds (350-820Mb)
+- - Connected wires: 3 seconds (350-820Mb)
+- - Propagated constant wires: 9 seconds (350-820Mb)
+- - Connected wires: 4 seconds (350-820Mb)
+- - Propagated constant wires: 5 seconds (350-820Mb)
+- - Connected wires: 2 seconds (350-820Mb)
+- - Propagated constant wires: 2 seconds (349-820Mb)
+- - Connected wires: 1 second (350-820Mb)
+- - Propagated constant wires: 0 seconds (349-820Mb)
+- - Connected wires: 0 seconds (349-820Mb)
+- Simplified circuit: 86 seconds (349-820Mb)
+- - Interposed wires before primary outputs: 19 seconds (350-820Mb)
+- - Cleaned up: 0 seconds (350-820Mb)
+- Rescued primary outputs: 22 seconds (349-820Mb)
+- Merged identical logic: 0 seconds (349-820Mb)
+- Deleted dead logic: 22 seconds (350-820Mb)
+- Renamed wires: 27 seconds (350-820Mb)
+- Generated verilog module: 204 seconds (347-837Mb)
+- - Generated verilog testbench: 0 seconds (347-837Mb)
+- - Ran a random test: 178 seconds (347-837Mb)
+- - Checked the test result: 0 seconds (347-837Mb)
+- Tested the verilog module: 182 seconds (347-837Mb)
+- TOTAL: 1065 seconds (346-837Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 7 seconds (346-837Mb)
+- Elaborated modules: 4061 seconds (350-837Mb)
+- - Connected wires: 19 seconds (351-837Mb)
+- - Propagated constant wires: 166 seconds (355-837Mb)
+- - Connected wires: 14 seconds (355-837Mb)
+- - Propagated constant wires: 40 seconds (354-837Mb)
+- - Connected wires: 19 seconds (355-837Mb)
+- - Propagated constant wires: 20 seconds (354-837Mb)
+- - Connected wires: 9 seconds (354-837Mb)
+- - Propagated constant wires: 10 seconds (354-837Mb)
+- - Connected wires: 4 seconds (354-837Mb)
+- - Propagated constant wires: 1 second (353-837Mb)
+- - Connected wires: 0 seconds (353-837Mb)
+- Simplified circuit: 318 seconds (353-837Mb)
+- - Interposed wires before primary outputs: 84 seconds (354-837Mb)
+- - Cleaned up: 0 seconds (354-837Mb)
+- Rescued primary outputs: 87 seconds (353-837Mb)
+- Merged identical logic: 0 seconds (353-837Mb)
+- Deleted dead logic: 98 seconds (354-837Mb)
+- Renamed wires: 125 seconds (356-837Mb)
+- Generated verilog module: 1336 seconds (349-872Mb)
+- - Generated verilog testbench: 0 seconds (349-872Mb)
+- - Ran a random test: 886 seconds (349-872Mb)
+- - Checked the test result: 0 seconds (349-872Mb)
+- Tested the verilog module: 890 seconds (349-872Mb)
+- TOTAL: 6967 seconds (346-872Mb)
+
+_____________________________________________________________
+FIXED GATE SIMPLIFICATION ORDER
+
+fa665fb Changed the gate simplification order to ensure that no constants were left after a simplification pass
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (346-819Mb)
+- Elaborated modules: 2 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- - Propagated constant wires: 0 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- - Propagated constant wires: 0 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- - Propagated constant wires: 0 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- - Propagated constant wires: 0 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- - Propagated constant wires: 0 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- Simplified circuit: 15 seconds (346-819Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-819Mb)
+- - Cleaned up: 0 seconds (346-819Mb)
+- Rescued primary outputs: 2 seconds (346-819Mb)
+- Merged identical logic: 0 seconds (346-819Mb)
+- Deleted dead logic: 0 seconds (346-819Mb)
+- Renamed wires: 0 seconds (346-819Mb)
+- Generated verilog module: 0 seconds (346-819Mb)
+- - Generated verilog testbench: 0 seconds (346-819Mb)
+- - Ran a random test: 1 second (346-819Mb)
+- - Checked the test result: 0 seconds (346-819Mb)
+- Tested the verilog module: 5 seconds (346-819Mb)
+- TOTAL: 39 seconds (346-819Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (346-819Mb)
+- Elaborated modules: 7 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- - Propagated constant wires: 0 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- - Propagated constant wires: 0 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- - Propagated constant wires: 0 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- - Propagated constant wires: 0 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- - Propagated constant wires: 0 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- Simplified circuit: 16 seconds (346-819Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-819Mb)
+- - Cleaned up: 0 seconds (346-819Mb)
+- Rescued primary outputs: 2 seconds (346-819Mb)
+- Merged identical logic: 0 seconds (346-819Mb)
+- Deleted dead logic: 0 seconds (346-819Mb)
+- Renamed wires: 0 seconds (346-819Mb)
+- Generated verilog module: 2 seconds (346-819Mb)
+- - Generated verilog testbench: 0 seconds (346-819Mb)
+- - Ran a random test: 2 seconds (346-819Mb)
+- - Checked the test result: 0 seconds (346-819Mb)
+- Tested the verilog module: 6 seconds (346-819Mb)
+- TOTAL: 48 seconds (346-819Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (346-819Mb)
+- Elaborated modules: 24 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- - Propagated constant wires: 2 seconds (347-819Mb)
+- - Connected wires: 0 seconds (347-819Mb)
+- - Propagated constant wires: 0 seconds (347-819Mb)
+- - Connected wires: 0 seconds (347-819Mb)
+- - Propagated constant wires: 0 seconds (347-819Mb)
+- - Connected wires: 0 seconds (347-819Mb)
+- - Propagated constant wires: 0 seconds (347-819Mb)
+- - Connected wires: 0 seconds (347-819Mb)
+- - Propagated constant wires: 0 seconds (346-819Mb)
+- - Connected wires: 0 seconds (346-819Mb)
+- Simplified circuit: 19 seconds (346-819Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-819Mb)
+- - Cleaned up: 0 seconds (347-819Mb)
+- Rescued primary outputs: 3 seconds (346-819Mb)
+- Merged identical logic: 0 seconds (346-819Mb)
+- Deleted dead logic: 1 second (347-819Mb)
+- Renamed wires: 1 second (347-819Mb)
+- Generated verilog module: 8 seconds (346-819Mb)
+- - Generated verilog testbench: 0 seconds (346-819Mb)
+- - Ran a random test: 9 seconds (346-819Mb)
+- - Checked the test result: 0 seconds (346-819Mb)
+- Tested the verilog module: 13 seconds (346-819Mb)
+- TOTAL: 84 seconds (346-819Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (346-819Mb)
+- Elaborated modules: 100 seconds (347-819Mb)
+- - Connected wires: 1 second (347-819Mb)
+- - Propagated constant wires: 8 seconds (348-819Mb)
+- - Connected wires: 0 seconds (348-819Mb)
+- - Propagated constant wires: 2 seconds (348-819Mb)
+- - Connected wires: 1 second (348-819Mb)
+- - Propagated constant wires: 1 second (347-819Mb)
+- - Connected wires: 0 seconds (348-819Mb)
+- - Propagated constant wires: 0 seconds (347-819Mb)
+- - Connected wires: 0 seconds (348-819Mb)
+- - Propagated constant wires: 0 seconds (347-819Mb)
+- - Connected wires: 0 seconds (347-819Mb)
+- Simplified circuit: 31 seconds (347-819Mb)
+- - Interposed wires before primary outputs: 4 seconds (348-819Mb)
+- - Cleaned up: 0 seconds (348-819Mb)
+- Rescued primary outputs: 6 seconds (347-819Mb)
+- Merged identical logic: 0 seconds (347-819Mb)
+- Deleted dead logic: 5 seconds (348-819Mb)
+- Renamed wires: 7 seconds (348-819Mb)
+- Generated verilog module: 44 seconds (346-819Mb)
+- - Generated verilog testbench: 0 seconds (346-819Mb)
+- - Ran a random test: 32 seconds (346-819Mb)
+- - Checked the test result: 0 seconds (346-819Mb)
+- Tested the verilog module: 36 seconds (346-819Mb)
+- TOTAL: 247 seconds (346-819Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (346-819Mb)
+- Elaborated modules: 497 seconds (348-819Mb)
+- - Connected wires: 5 seconds (348-819Mb)
+- - Propagated constant wires: 38 seconds (350-819Mb)
+- - Connected wires: 3 seconds (350-819Mb)
+- - Propagated constant wires: 9 seconds (350-819Mb)
+- - Connected wires: 4 seconds (350-819Mb)
+- - Propagated constant wires: 5 seconds (350-819Mb)
+- - Connected wires: 2 seconds (350-819Mb)
+- - Propagated constant wires: 2 seconds (349-819Mb)
+- - Connected wires: 1 second (350-819Mb)
+- - Propagated constant wires: 0 seconds (349-819Mb)
+- - Connected wires: 0 seconds (349-819Mb)
+- Simplified circuit: 86 seconds (349-819Mb)
+- - Interposed wires before primary outputs: 19 seconds (350-819Mb)
+- - Cleaned up: 0 seconds (350-819Mb)
+- Rescued primary outputs: 22 seconds (349-819Mb)
+- Merged identical logic: 0 seconds (349-819Mb)
+- Deleted dead logic: 22 seconds (350-819Mb)
+- Renamed wires: 28 seconds (350-819Mb)
+- Generated verilog module: 199 seconds (347-836Mb)
+- - Generated verilog testbench: 0 seconds (347-836Mb)
+- - Ran a random test: 178 seconds (347-836Mb)
+- - Checked the test result: 0 seconds (347-836Mb)
+- Tested the verilog module: 182 seconds (347-836Mb)
+- TOTAL: 1061 seconds (346-836Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 7 seconds (346-836Mb)
+- Elaborated modules: 4088 seconds (350-836Mb)
+- - Connected wires: 19 seconds (351-836Mb)
+- - Propagated constant wires: 166 seconds (355-836Mb)
+- - Connected wires: 14 seconds (355-836Mb)
+- - Propagated constant wires: 40 seconds (354-836Mb)
+- - Connected wires: 19 seconds (355-836Mb)
+- - Propagated constant wires: 20 seconds (354-836Mb)
+- - Connected wires: 9 seconds (354-836Mb)
+- - Propagated constant wires: 10 seconds (354-836Mb)
+- - Connected wires: 4 seconds (354-836Mb)
+- - Propagated constant wires: 1 second (353-836Mb)
+- - Connected wires: 0 seconds (353-836Mb)
+- Simplified circuit: 320 seconds (353-836Mb)
+- - Interposed wires before primary outputs: 86 seconds (354-836Mb)
+- - Cleaned up: 0 seconds (354-836Mb)
+- Rescued primary outputs: 88 seconds (353-836Mb)
+- Merged identical logic: 0 seconds (353-836Mb)
+- Deleted dead logic: 102 seconds (354-836Mb)
+- Renamed wires: 127 seconds (356-836Mb)
+- Generated verilog module: 1363 seconds (349-871Mb)
+- - Generated verilog testbench: 0 seconds (349-871Mb)
+- - Ran a random test: 894 seconds (349-871Mb)
+- - Checked the test result: 0 seconds (349-871Mb)
+- Tested the verilog module: 898 seconds (349-871Mb)
+- TOTAL: 7038 seconds (346-871Mb)
+
+_____________________________________________________________
+REWROTE ELABORATION TO BE MORE EFFICIENT
+
+a08a277 Rewrote the primitive bus operations to be more efficient
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (346-822Mb)
+- Elaborated modules: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- Simplified circuit: 15 seconds (346-822Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-822Mb)
+- - Cleaned up: 0 seconds (346-822Mb)
+- Rescued primary outputs: 2 seconds (346-822Mb)
+- Merged identical logic: 0 seconds (346-822Mb)
+- Deleted dead logic: 0 seconds (346-822Mb)
+- Renamed wires: 0 seconds (346-822Mb)
+- Generated verilog module: 0 seconds (346-822Mb)
+- - Generated verilog testbench: 0 seconds (346-822Mb)
+- - Ran a random test: 1 second (346-822Mb)
+- - Checked the test result: 0 seconds (346-822Mb)
+- Tested the verilog module: 5 seconds (346-822Mb)
+- TOTAL: 36 seconds (346-822Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (346-822Mb)
+- Elaborated modules: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- - Propagated constant wires: 0 seconds (346-822Mb)
+- - Connected wires: 0 seconds (346-822Mb)
+- Simplified circuit: 16 seconds (346-822Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-822Mb)
+- - Cleaned up: 0 seconds (346-822Mb)
+- Rescued primary outputs: 2 seconds (346-822Mb)
+- Merged identical logic: 0 seconds (346-822Mb)
+- Deleted dead logic: 0 seconds (346-822Mb)
+- Renamed wires: 0 seconds (346-822Mb)
+- Generated verilog module: 2 seconds (346-822Mb)
+- - Generated verilog testbench: 0 seconds (346-822Mb)
+- - Ran a random test: 2 seconds (346-822Mb)
+- - Checked the test result: 0 seconds (346-822Mb)
+- Tested the verilog module: 6 seconds (346-822Mb)
+- TOTAL: 42 seconds (346-822Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (346-822Mb)
+- Elaborated modules: 1 second (346-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- - Propagated constant wires: 2 seconds (347-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- - Propagated constant wires: 0 seconds (347-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- - Propagated constant wires: 0 seconds (347-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- - Propagated constant wires: 0 seconds (347-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- - Propagated constant wires: 0 seconds (347-822Mb)
+- - Connected wires: 0 seconds (347-822Mb)
+- Simplified circuit: 19 seconds (347-822Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-822Mb)
+- - Cleaned up: 0 seconds (347-822Mb)
+- Rescued primary outputs: 3 seconds (347-822Mb)
+- Merged identical logic: 0 seconds (347-822Mb)
+- Deleted dead logic: 1 second (347-822Mb)
+- Renamed wires: 1 second (347-822Mb)
+- Generated verilog module: 8 seconds (346-822Mb)
+- - Generated verilog testbench: 0 seconds (346-822Mb)
+- - Ran a random test: 9 seconds (346-822Mb)
+- - Checked the test result: 0 seconds (346-822Mb)
+- Tested the verilog module: 13 seconds (346-822Mb)
+- TOTAL: 61 seconds (346-822Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (346-822Mb)
+- Elaborated modules: 3 seconds (347-822Mb)
+- - Connected wires: 1 second (347-822Mb)
+- - Propagated constant wires: 8 seconds (348-822Mb)
+- - Connected wires: 0 seconds (348-822Mb)
+- - Propagated constant wires: 2 seconds (348-822Mb)
+- - Connected wires: 1 second (348-822Mb)
+- - Propagated constant wires: 1 second (348-822Mb)
+- - Connected wires: 0 seconds (348-822Mb)
+- - Propagated constant wires: 0 seconds (348-822Mb)
+- - Connected wires: 0 seconds (348-822Mb)
+- - Propagated constant wires: 0 seconds (348-822Mb)
+- - Connected wires: 0 seconds (348-822Mb)
+- Simplified circuit: 31 seconds (347-822Mb)
+- - Interposed wires before primary outputs: 4 seconds (348-822Mb)
+- - Cleaned up: 0 seconds (348-822Mb)
+- Rescued primary outputs: 6 seconds (348-822Mb)
+- Merged identical logic: 0 seconds (348-822Mb)
+- Deleted dead logic: 5 seconds (348-822Mb)
+- Renamed wires: 7 seconds (348-822Mb)
+- Generated verilog module: 44 seconds (347-822Mb)
+- - Generated verilog testbench: 0 seconds (347-822Mb)
+- - Ran a random test: 32 seconds (347-822Mb)
+- - Checked the test result: 0 seconds (347-822Mb)
+- Tested the verilog module: 36 seconds (347-822Mb)
+- TOTAL: 149 seconds (346-822Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (346-822Mb)
+- Elaborated modules: 6 seconds (348-822Mb)
+- - Connected wires: 5 seconds (349-822Mb)
+- - Propagated constant wires: 35 seconds (350-822Mb)
+- - Connected wires: 3 seconds (350-822Mb)
+- - Propagated constant wires: 9 seconds (350-822Mb)
+- - Connected wires: 4 seconds (350-822Mb)
+- - Propagated constant wires: 5 seconds (350-822Mb)
+- - Connected wires: 2 seconds (350-822Mb)
+- - Propagated constant wires: 2 seconds (350-822Mb)
+- - Connected wires: 1 second (350-822Mb)
+- - Propagated constant wires: 0 seconds (349-822Mb)
+- - Connected wires: 0 seconds (349-822Mb)
+- Simplified circuit: 82 seconds (349-822Mb)
+- - Interposed wires before primary outputs: 18 seconds (350-822Mb)
+- - Cleaned up: 0 seconds (350-822Mb)
+- Rescued primary outputs: 20 seconds (349-822Mb)
+- Merged identical logic: 0 seconds (349-822Mb)
+- Deleted dead logic: 23 seconds (350-822Mb)
+- Renamed wires: 27 seconds (351-822Mb)
+- Generated verilog module: 199 seconds (347-839Mb)
+- - Generated verilog testbench: 0 seconds (347-839Mb)
+- - Ran a random test: 179 seconds (347-839Mb)
+- - Checked the test result: 0 seconds (347-839Mb)
+- Tested the verilog module: 183 seconds (347-839Mb)
+- TOTAL: 564 seconds (346-839Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 7 seconds (346-839Mb)
+- Elaborated modules: 13 seconds (351-839Mb)
+- - Connected wires: 19 seconds (352-839Mb)
+- - Propagated constant wires: 153 seconds (355-839Mb)
+- - Connected wires: 13 seconds (356-839Mb)
+- - Propagated constant wires: 37 seconds (354-839Mb)
+- - Connected wires: 18 seconds (355-839Mb)
+- - Propagated constant wires: 19 seconds (354-839Mb)
+- - Connected wires: 9 seconds (355-839Mb)
+- - Propagated constant wires: 9 seconds (354-839Mb)
+- - Connected wires: 4 seconds (354-839Mb)
+- - Propagated constant wires: 1 second (353-839Mb)
+- - Connected wires: 0 seconds (353-839Mb)
+- Simplified circuit: 300 seconds (353-839Mb)
+- - Interposed wires before primary outputs: 78 seconds (354-839Mb)
+- - Cleaned up: 0 seconds (354-839Mb)
+- Rescued primary outputs: 81 seconds (354-839Mb)
+- Merged identical logic: 0 seconds (354-839Mb)
+- Deleted dead logic: 103 seconds (354-839Mb)
+- Renamed wires: 122 seconds (356-839Mb)
+- Generated verilog module: 1328 seconds (349-873Mb)
+- - Generated verilog testbench: 0 seconds (349-873Mb)
+- - Ran a random test: 893 seconds (349-873Mb)
+- - Checked the test result: 0 seconds (349-873Mb)
+- Tested the verilog module: 897 seconds (349-873Mb)
+- TOTAL: 2897 seconds (346-873Mb)
+
+_____________________________________________________________
+CACHE SUC CALCULATIONS DURING ELABORATION
+
+234b214 Added new performance statistics
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (346-825Mb)
+- Elaborated modules: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- - Propagated constant wires: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- - Propagated constant wires: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- - Propagated constant wires: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- - Propagated constant wires: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- - Propagated constant wires: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- Simplified circuit: 15 seconds (346-825Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-825Mb)
+- - Cleaned up: 0 seconds (346-825Mb)
+- Rescued primary outputs: 2 seconds (346-825Mb)
+- Merged identical logic: 0 seconds (346-825Mb)
+- Deleted dead logic: 0 seconds (346-825Mb)
+- Renamed wires: 0 seconds (346-825Mb)
+- - Renamed wires: 0 seconds (346-825Mb)
+- - Generated spec: 0 seconds (346-825Mb)
+- - Generated module: 0 seconds (346-825Mb)
+- - Generated profile: 0 seconds (346-825Mb)
+- Generated verilog module: 5 seconds (346-825Mb)
+- - Generated verilog testbench: 0 seconds (346-825Mb)
+- - Ran a random test: 1 second (346-825Mb)
+- - Checked the test result: 0 seconds (346-825Mb)
+- Tested the verilog module: 5 seconds (346-825Mb)
+- TOTAL: 41 seconds (346-825Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (346-825Mb)
+- Elaborated modules: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- - Propagated constant wires: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- - Propagated constant wires: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- - Propagated constant wires: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- - Propagated constant wires: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- - Propagated constant wires: 0 seconds (346-825Mb)
+- - Connected wires: 0 seconds (346-825Mb)
+- Simplified circuit: 15 seconds (346-825Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-825Mb)
+- - Cleaned up: 0 seconds (346-825Mb)
+- Rescued primary outputs: 2 seconds (346-825Mb)
+- Merged identical logic: 0 seconds (346-825Mb)
+- Deleted dead logic: 0 seconds (346-825Mb)
+- Renamed wires: 0 seconds (346-825Mb)
+- - Renamed wires: 0 seconds (346-825Mb)
+- - Generated spec: 0 seconds (346-825Mb)
+- - Generated module: 0 seconds (346-825Mb)
+- - Generated profile: 1 second (346-825Mb)
+- Generated verilog module: 7 seconds (346-825Mb)
+- - Generated verilog testbench: 0 seconds (346-825Mb)
+- - Ran a random test: 2 seconds (346-825Mb)
+- - Checked the test result: 0 seconds (346-825Mb)
+- Tested the verilog module: 6 seconds (346-825Mb)
+- TOTAL: 47 seconds (346-825Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (346-825Mb)
+- Elaborated modules: 1 second (346-825Mb)
+- - Connected wires: 0 seconds (347-825Mb)
+- - Propagated constant wires: 2 seconds (347-825Mb)
+- - Connected wires: 0 seconds (347-825Mb)
+- - Propagated constant wires: 0 seconds (347-825Mb)
+- - Connected wires: 0 seconds (347-825Mb)
+- - Propagated constant wires: 0 seconds (347-825Mb)
+- - Connected wires: 0 seconds (347-825Mb)
+- - Propagated constant wires: 0 seconds (347-825Mb)
+- - Connected wires: 0 seconds (347-825Mb)
+- - Propagated constant wires: 0 seconds (347-825Mb)
+- - Connected wires: 0 seconds (347-825Mb)
+- Simplified circuit: 19 seconds (347-825Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-825Mb)
+- - Cleaned up: 0 seconds (347-825Mb)
+- Rescued primary outputs: 3 seconds (347-825Mb)
+- Merged identical logic: 0 seconds (347-825Mb)
+- Deleted dead logic: 1 second (347-825Mb)
+- Renamed wires: 1 second (347-825Mb)
+- - Renamed wires: 2 seconds (347-825Mb)
+- - Generated spec: 0 seconds (347-825Mb)
+- - Generated module: 0 seconds (347-825Mb)
+- - Generated profile: 5 seconds (347-825Mb)
+- Generated verilog module: 13 seconds (346-825Mb)
+- - Generated verilog testbench: 0 seconds (346-825Mb)
+- - Ran a random test: 9 seconds (346-825Mb)
+- - Checked the test result: 0 seconds (346-825Mb)
+- Tested the verilog module: 13 seconds (346-825Mb)
+- TOTAL: 67 seconds (346-825Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (346-825Mb)
+- Elaborated modules: 2 seconds (347-825Mb)
+- - Connected wires: 1 second (347-825Mb)
+- - Propagated constant wires: 8 seconds (348-825Mb)
+- - Connected wires: 0 seconds (348-825Mb)
+- - Propagated constant wires: 2 seconds (348-825Mb)
+- - Connected wires: 1 second (348-825Mb)
+- - Propagated constant wires: 1 second (348-825Mb)
+- - Connected wires: 0 seconds (348-825Mb)
+- - Propagated constant wires: 0 seconds (348-825Mb)
+- - Connected wires: 0 seconds (348-825Mb)
+- - Propagated constant wires: 0 seconds (348-825Mb)
+- - Connected wires: 0 seconds (348-825Mb)
+- Simplified circuit: 30 seconds (347-825Mb)
+- - Interposed wires before primary outputs: 4 seconds (348-825Mb)
+- - Cleaned up: 0 seconds (348-825Mb)
+- Rescued primary outputs: 6 seconds (348-825Mb)
+- Merged identical logic: 0 seconds (348-825Mb)
+- Deleted dead logic: 5 seconds (348-825Mb)
+- Renamed wires: 7 seconds (348-825Mb)
+- - Renamed wires: 8 seconds (347-825Mb)
+- - Generated spec: 0 seconds (347-825Mb)
+- - Generated module: 2 seconds (348-825Mb)
+- - Generated profile: 33 seconds (348-825Mb)
+- Generated verilog module: 49 seconds (347-825Mb)
+- - Generated verilog testbench: 0 seconds (347-825Mb)
+- - Ran a random test: 33 seconds (347-825Mb)
+- - Checked the test result: 0 seconds (347-825Mb)
+- Tested the verilog module: 37 seconds (347-825Mb)
+- TOTAL: 154 seconds (346-825Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (346-825Mb)
+- Elaborated modules: 6 seconds (348-825Mb)
+- - Connected wires: 5 seconds (349-825Mb)
+- - Propagated constant wires: 35 seconds (350-825Mb)
+- - Connected wires: 3 seconds (350-825Mb)
+- - Propagated constant wires: 8 seconds (350-825Mb)
+- - Connected wires: 4 seconds (350-825Mb)
+- - Propagated constant wires: 5 seconds (350-825Mb)
+- - Connected wires: 2 seconds (350-825Mb)
+- - Propagated constant wires: 2 seconds (350-825Mb)
+- - Connected wires: 1 second (350-825Mb)
+- - Propagated constant wires: 0 seconds (349-825Mb)
+- - Connected wires: 0 seconds (349-825Mb)
+- Simplified circuit: 82 seconds (349-825Mb)
+- - Interposed wires before primary outputs: 18 seconds (350-825Mb)
+- - Cleaned up: 0 seconds (350-825Mb)
+- Rescued primary outputs: 20 seconds (350-825Mb)
+- Merged identical logic: 0 seconds (350-825Mb)
+- Deleted dead logic: 22 seconds (350-825Mb)
+- Renamed wires: 28 seconds (351-825Mb)
+- - Renamed wires: 31 seconds (349-825Mb)
+- - Generated spec: 0 seconds (349-825Mb)
+- - Generated module: 11 seconds (350-835Mb)
+- - Generated profile: 156 seconds (350-835Mb)
+- Generated verilog module: 204 seconds (347-835Mb)
+- - Generated verilog testbench: 0 seconds (347-835Mb)
+- - Ran a random test: 179 seconds (347-835Mb)
+- - Checked the test result: 0 seconds (347-835Mb)
+- Tested the verilog module: 183 seconds (347-835Mb)
+- TOTAL: 568 seconds (346-835Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 7 seconds (346-835Mb)
+- Elaborated modules: 13 seconds (351-835Mb)
+- - Connected wires: 19 seconds (352-835Mb)
+- - Propagated constant wires: 152 seconds (355-835Mb)
+- - Connected wires: 14 seconds (356-835Mb)
+- - Propagated constant wires: 37 seconds (355-835Mb)
+- - Connected wires: 19 seconds (355-835Mb)
+- - Propagated constant wires: 19 seconds (354-835Mb)
+- - Connected wires: 9 seconds (355-835Mb)
+- - Propagated constant wires: 9 seconds (354-835Mb)
+- - Connected wires: 4 seconds (354-835Mb)
+- - Propagated constant wires: 1 second (354-835Mb)
+- - Connected wires: 0 seconds (354-835Mb)
+- Simplified circuit: 299 seconds (353-835Mb)
+- - Interposed wires before primary outputs: 78 seconds (354-835Mb)
+- - Cleaned up: 0 seconds (354-835Mb)
+- Rescued primary outputs: 81 seconds (354-835Mb)
+- Merged identical logic: 0 seconds (354-835Mb)
+- Deleted dead logic: 102 seconds (354-835Mb)
+- Renamed wires: 124 seconds (356-835Mb)
+- - Renamed wires: 131 seconds (352-835Mb)
+- - Generated spec: 0 seconds (352-835Mb)
+- - Generated module: 47 seconds (354-865Mb)
+- - Generated profile: 1156 seconds (354-865Mb)
+- Generated verilog module: 1341 seconds (349-865Mb)
+- - Generated verilog testbench: 0 seconds (349-865Mb)
+- - Ran a random test: 892 seconds (349-865Mb)
+- - Checked the test result: 0 seconds (349-865Mb)
+- Tested the verilog module: 896 seconds (349-865Mb)
+- TOTAL: 2907 seconds (346-865Mb)
+
+_____________________________________________________________
+WRITE VERILOG MODULES DIRECTLY TO A FILE
+
+d94f8eb Breaking down the time to profile the circuit
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- Simplified circuit: 14 seconds (346-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-966Mb)
+- - Cleaned up: 0 seconds (346-966Mb)
+- Rescued primary outputs: 2 seconds (346-966Mb)
+- Merged identical logic: 0 seconds (346-966Mb)
+- Deleted dead logic: 0 seconds (346-966Mb)
+- Renamed wires: 0 seconds (346-966Mb)
+- - Renamed wires: 0 seconds (346-966Mb)
+- - Generated spec: 0 seconds (346-966Mb)
+- - Generated module: 0 seconds (346-966Mb)
+- - - Duplicated logic: 0 seconds (346-966Mb)
+- - Generated profile: 1 second (346-966Mb)
+- Generated verilog module: 7 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Ran a random test: 0 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 4 seconds (346-966Mb)
+- TOTAL: 41 seconds (346-966Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- Simplified circuit: 15 seconds (346-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-966Mb)
+- - Cleaned up: 0 seconds (346-966Mb)
+- Rescued primary outputs: 2 seconds (346-966Mb)
+- Merged identical logic: 0 seconds (346-966Mb)
+- Deleted dead logic: 0 seconds (346-966Mb)
+- Renamed wires: 0 seconds (346-966Mb)
+- - Renamed wires: 0 seconds (346-966Mb)
+- - Generated spec: 0 seconds (346-966Mb)
+- - Generated module: 0 seconds (346-966Mb)
+- - - Duplicated logic: 0 seconds (346-966Mb)
+- - Generated profile: 2 seconds (346-966Mb)
+- Generated verilog module: 8 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Ran a random test: 2 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 6 seconds (346-966Mb)
+- TOTAL: 47 seconds (346-966Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 1 second (346-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 2 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- Simplified circuit: 18 seconds (347-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-966Mb)
+- - Cleaned up: 0 seconds (347-966Mb)
+- Rescued primary outputs: 3 seconds (347-966Mb)
+- Merged identical logic: 0 seconds (347-966Mb)
+- Deleted dead logic: 1 second (347-966Mb)
+- Renamed wires: 1 second (347-966Mb)
+- - Renamed wires: 2 seconds (347-966Mb)
+- - Generated spec: 0 seconds (347-966Mb)
+- - Generated module: 0 seconds (347-966Mb)
+- - - Duplicated logic: 1 second (347-966Mb)
+- - Generated profile: 6 seconds (347-966Mb)
+- Generated verilog module: 14 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Ran a random test: 9 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 13 seconds (346-966Mb)
+- TOTAL: 66 seconds (346-966Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 2 seconds (347-966Mb)
+- - Connected wires: 1 second (347-966Mb)
+- - Simplified gates: 8 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 2 seconds (348-966Mb)
+- - Connected wires: 1 second (348-966Mb)
+- - Simplified gates: 1 second (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 0 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 0 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- Simplified circuit: 30 seconds (347-966Mb)
+- - Interposed wires before primary outputs: 4 seconds (348-966Mb)
+- - Cleaned up: 0 seconds (348-966Mb)
+- Rescued primary outputs: 6 seconds (348-966Mb)
+- Merged identical logic: 0 seconds (348-966Mb)
+- Deleted dead logic: 5 seconds (348-966Mb)
+- Renamed wires: 7 seconds (348-966Mb)
+- - Renamed wires: 8 seconds (347-966Mb)
+- - Generated spec: 0 seconds (347-966Mb)
+- - Generated module: 0 seconds (347-966Mb)
+- - - Duplicated logic: 20 seconds (348-966Mb)
+- - Generated profile: 34 seconds (347-966Mb)
+- Generated verilog module: 48 seconds (347-966Mb)
+- - Generated verilog testbench: 0 seconds (347-966Mb)
+- - Ran a random test: 33 seconds (347-966Mb)
+- - Checked the test result: 0 seconds (347-966Mb)
+- Tested the verilog module: 37 seconds (347-966Mb)
+- TOTAL: 152 seconds (346-966Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (346-966Mb)
+- Elaborated modules: 6 seconds (348-966Mb)
+- - Connected wires: 5 seconds (349-966Mb)
+- - Simplified gates: 35 seconds (350-966Mb)
+- - Connected wires: 3 seconds (350-966Mb)
+- - Simplified gates: 8 seconds (350-966Mb)
+- - Connected wires: 4 seconds (350-966Mb)
+- - Simplified gates: 4 seconds (350-966Mb)
+- - Connected wires: 2 seconds (350-966Mb)
+- - Simplified gates: 2 seconds (350-966Mb)
+- - Connected wires: 1 second (350-966Mb)
+- - Simplified gates: 0 seconds (349-966Mb)
+- - Connected wires: 0 seconds (349-966Mb)
+- Simplified circuit: 82 seconds (349-966Mb)
+- - Interposed wires before primary outputs: 18 seconds (350-966Mb)
+- - Cleaned up: 0 seconds (350-966Mb)
+- Rescued primary outputs: 20 seconds (350-966Mb)
+- Merged identical logic: 0 seconds (350-966Mb)
+- Deleted dead logic: 23 seconds (350-966Mb)
+- Renamed wires: 28 seconds (351-966Mb)
+- - Renamed wires: 32 seconds (349-966Mb)
+- - Generated spec: 0 seconds (349-966Mb)
+- - Generated module: 0 seconds (349-966Mb)
+- - - Duplicated logic: 101 seconds (350-966Mb)
+- - Generated profile: 158 seconds (349-966Mb)
+- Generated verilog module: 197 seconds (347-966Mb)
+- - Generated verilog testbench: 0 seconds (347-966Mb)
+- - Ran a random test: 183 seconds (347-966Mb)
+- - Checked the test result: 0 seconds (347-966Mb)
+- Tested the verilog module: 187 seconds (347-966Mb)
+- TOTAL: 565 seconds (346-966Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 7 seconds (346-966Mb)
+- Elaborated modules: 13 seconds (351-966Mb)
+- - Connected wires: 19 seconds (352-966Mb)
+- - Simplified gates: 152 seconds (355-966Mb)
+- - Connected wires: 14 seconds (356-966Mb)
+- - Simplified gates: 37 seconds (355-966Mb)
+- - Connected wires: 18 seconds (355-966Mb)
+- - Simplified gates: 19 seconds (354-966Mb)
+- - Connected wires: 9 seconds (355-966Mb)
+- - Simplified gates: 9 seconds (354-966Mb)
+- - Connected wires: 4 seconds (354-966Mb)
+- - Simplified gates: 1 second (354-966Mb)
+- - Connected wires: 0 seconds (354-966Mb)
+- Simplified circuit: 300 seconds (353-966Mb)
+- - Interposed wires before primary outputs: 79 seconds (354-966Mb)
+- - Cleaned up: 0 seconds (354-966Mb)
+- Rescued primary outputs: 81 seconds (354-966Mb)
+- Merged identical logic: 0 seconds (354-966Mb)
+- Deleted dead logic: 98 seconds (354-966Mb)
+- Renamed wires: 119 seconds (356-966Mb)
+- - Renamed wires: 131 seconds (352-966Mb)
+- - Generated spec: 0 seconds (352-966Mb)
+- - Generated module: 2 seconds (352-966Mb)
+- - - Duplicated logic: 927 seconds (355-966Mb)
+- - Generated profile: 1162 seconds (352-966Mb)
+- Generated verilog module: 1300 seconds (349-966Mb)
+- - Generated verilog testbench: 0 seconds (349-966Mb)
+- - Ran a random test: 918 seconds (349-966Mb)
+- - Checked the test result: 0 seconds (349-966Mb)
+- Tested the verilog module: 922 seconds (349-966Mb)
+- TOTAL: 2887 seconds (346-966Mb)
+
+_____________________________________________________________
+REWROTE CIRCUIT PROFILING
+
+6c47d12 Rewrote circuit profiling to make it more efficient
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (346-965Mb)
+- Elaborated modules: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- - Simplified gates: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- - Simplified gates: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- - Simplified gates: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- - Simplified gates: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- - Simplified gates: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- Simplified circuit: 14 seconds (346-965Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-965Mb)
+- - Cleaned up: 0 seconds (346-965Mb)
+- Rescued primary outputs: 2 seconds (346-965Mb)
+- Merged identical logic: 0 seconds (346-965Mb)
+- Deleted dead logic: 0 seconds (346-965Mb)
+- Renamed wires: 0 seconds (346-965Mb)
+- - Renamed wires: 0 seconds (346-965Mb)
+- - Generated spec: 0 seconds (346-965Mb)
+- - Generated module: 0 seconds (346-965Mb)
+- - - Duplicated logic: 0 seconds (346-965Mb)
+- - Generated profile: 1 second (346-965Mb)
+- Generated verilog module: 6 seconds (346-965Mb)
+- - Generated verilog testbench: 0 seconds (346-965Mb)
+- - Ran a random test: 0 seconds (346-965Mb)
+- - Checked the test result: 0 seconds (346-965Mb)
+- Tested the verilog module: 4 seconds (346-965Mb)
+- TOTAL: 41 seconds (346-965Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (346-965Mb)
+- Elaborated modules: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- - Simplified gates: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- - Simplified gates: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- - Simplified gates: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- - Simplified gates: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- - Simplified gates: 0 seconds (346-965Mb)
+- - Connected wires: 0 seconds (346-965Mb)
+- Simplified circuit: 15 seconds (346-965Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-965Mb)
+- - Cleaned up: 0 seconds (346-965Mb)
+- Rescued primary outputs: 2 seconds (346-965Mb)
+- Merged identical logic: 0 seconds (346-965Mb)
+- Deleted dead logic: 0 seconds (346-965Mb)
+- Renamed wires: 0 seconds (346-965Mb)
+- - Renamed wires: 0 seconds (346-965Mb)
+- - Generated spec: 0 seconds (346-965Mb)
+- - Generated module: 0 seconds (346-965Mb)
+- - - Duplicated logic: 0 seconds (347-965Mb)
+- - Generated profile: 1 second (346-965Mb)
+- Generated verilog module: 7 seconds (346-965Mb)
+- - Generated verilog testbench: 0 seconds (346-965Mb)
+- - Ran a random test: 2 seconds (346-965Mb)
+- - Checked the test result: 0 seconds (346-965Mb)
+- Tested the verilog module: 6 seconds (346-965Mb)
+- TOTAL: 46 seconds (346-965Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (346-965Mb)
+- Elaborated modules: 1 second (347-965Mb)
+- - Connected wires: 0 seconds (347-965Mb)
+- - Simplified gates: 2 seconds (347-965Mb)
+- - Connected wires: 0 seconds (347-965Mb)
+- - Simplified gates: 0 seconds (347-965Mb)
+- - Connected wires: 0 seconds (347-965Mb)
+- - Simplified gates: 0 seconds (347-965Mb)
+- - Connected wires: 0 seconds (347-965Mb)
+- - Simplified gates: 0 seconds (347-965Mb)
+- - Connected wires: 0 seconds (347-965Mb)
+- - Simplified gates: 0 seconds (347-965Mb)
+- - Connected wires: 0 seconds (347-965Mb)
+- Simplified circuit: 18 seconds (347-965Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-965Mb)
+- - Cleaned up: 0 seconds (347-965Mb)
+- Rescued primary outputs: 3 seconds (347-965Mb)
+- Merged identical logic: 0 seconds (347-965Mb)
+- Deleted dead logic: 1 second (347-965Mb)
+- Renamed wires: 1 second (347-965Mb)
+- - Renamed wires: 2 seconds (347-965Mb)
+- - Generated spec: 0 seconds (347-965Mb)
+- - Generated module: 0 seconds (347-965Mb)
+- - - Duplicated logic: 1 second (347-965Mb)
+- - Generated profile: 2 seconds (347-965Mb)
+- Generated verilog module: 10 seconds (346-965Mb)
+- - Generated verilog testbench: 0 seconds (346-965Mb)
+- - Ran a random test: 9 seconds (346-965Mb)
+- - Checked the test result: 0 seconds (346-965Mb)
+- Tested the verilog module: 13 seconds (346-965Mb)
+- TOTAL: 62 seconds (346-965Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (346-965Mb)
+- Elaborated modules: 2 seconds (347-965Mb)
+- - Connected wires: 1 second (347-965Mb)
+- - Simplified gates: 8 seconds (348-965Mb)
+- - Connected wires: 0 seconds (348-965Mb)
+- - Simplified gates: 2 seconds (348-965Mb)
+- - Connected wires: 1 second (348-965Mb)
+- - Simplified gates: 1 second (348-965Mb)
+- - Connected wires: 0 seconds (348-965Mb)
+- - Simplified gates: 0 seconds (348-965Mb)
+- - Connected wires: 0 seconds (348-965Mb)
+- - Simplified gates: 0 seconds (348-965Mb)
+- - Connected wires: 0 seconds (348-965Mb)
+- Simplified circuit: 30 seconds (348-965Mb)
+- - Interposed wires before primary outputs: 4 seconds (348-965Mb)
+- - Cleaned up: 0 seconds (348-965Mb)
+- Rescued primary outputs: 6 seconds (348-965Mb)
+- Merged identical logic: 0 seconds (348-965Mb)
+- Deleted dead logic: 5 seconds (348-965Mb)
+- Renamed wires: 7 seconds (348-965Mb)
+- - Renamed wires: 8 seconds (347-965Mb)
+- - Generated spec: 0 seconds (347-965Mb)
+- - Generated module: 0 seconds (347-965Mb)
+- - - Duplicated logic: 15 seconds (349-965Mb)
+- - Generated profile: 16 seconds (347-965Mb)
+- Generated verilog module: 30 seconds (347-965Mb)
+- - Generated verilog testbench: 0 seconds (347-965Mb)
+- - Ran a random test: 33 seconds (347-965Mb)
+- - Checked the test result: 0 seconds (347-965Mb)
+- Tested the verilog module: 37 seconds (347-965Mb)
+- TOTAL: 134 seconds (346-965Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (346-965Mb)
+- Elaborated modules: 6 seconds (348-965Mb)
+- - Connected wires: 5 seconds (349-965Mb)
+- - Simplified gates: 35 seconds (350-965Mb)
+- - Connected wires: 3 seconds (351-965Mb)
+- - Simplified gates: 8 seconds (350-965Mb)
+- - Connected wires: 4 seconds (350-965Mb)
+- - Simplified gates: 4 seconds (350-965Mb)
+- - Connected wires: 2 seconds (350-965Mb)
+- - Simplified gates: 2 seconds (350-965Mb)
+- - Connected wires: 1 second (350-965Mb)
+- - Simplified gates: 0 seconds (350-965Mb)
+- - Connected wires: 0 seconds (350-965Mb)
+- Simplified circuit: 82 seconds (349-965Mb)
+- - Interposed wires before primary outputs: 18 seconds (350-965Mb)
+- - Cleaned up: 0 seconds (350-965Mb)
+- Rescued primary outputs: 20 seconds (350-965Mb)
+- Merged identical logic: 0 seconds (350-965Mb)
+- Deleted dead logic: 22 seconds (350-965Mb)
+- Renamed wires: 27 seconds (351-965Mb)
+- - Renamed wires: 31 seconds (349-965Mb)
+- - Generated spec: 0 seconds (349-965Mb)
+- - Generated module: 0 seconds (349-965Mb)
+- - - Duplicated logic: 77 seconds (352-965Mb)
+- - Generated profile: 78 seconds (349-965Mb)
+- Generated verilog module: 116 seconds (348-965Mb)
+- - Generated verilog testbench: 0 seconds (348-965Mb)
+- - Ran a random test: 180 seconds (348-965Mb)
+- - Checked the test result: 0 seconds (348-965Mb)
+- Tested the verilog module: 184 seconds (348-965Mb)
+- TOTAL: 481 seconds (346-965Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 7 seconds (346-965Mb)
+- Elaborated modules: 13 seconds (351-965Mb)
+- - Connected wires: 19 seconds (352-965Mb)
+- - Simplified gates: 152 seconds (355-965Mb)
+- - Connected wires: 14 seconds (356-965Mb)
+- - Simplified gates: 37 seconds (355-965Mb)
+- - Connected wires: 18 seconds (355-965Mb)
+- - Simplified gates: 19 seconds (354-965Mb)
+- - Connected wires: 9 seconds (355-965Mb)
+- - Simplified gates: 9 seconds (354-965Mb)
+- - Connected wires: 4 seconds (354-965Mb)
+- - Simplified gates: 1 second (354-965Mb)
+- - Connected wires: 0 seconds (354-965Mb)
+- Simplified circuit: 300 seconds (353-965Mb)
+- - Interposed wires before primary outputs: 79 seconds (355-965Mb)
+- - Cleaned up: 0 seconds (355-965Mb)
+- Rescued primary outputs: 81 seconds (354-965Mb)
+- Merged identical logic: 0 seconds (354-965Mb)
+- Deleted dead logic: 99 seconds (354-965Mb)
+- Renamed wires: 121 seconds (356-965Mb)
+- - Renamed wires: 131 seconds (352-965Mb)
+- - Generated spec: 0 seconds (352-965Mb)
+- - Generated module: 2 seconds (352-965Mb)
+- - - Duplicated logic: 709 seconds (358-965Mb)
+- - Generated profile: 712 seconds (352-965Mb)
+- Generated verilog module: 851 seconds (349-965Mb)
+- - Generated verilog testbench: 0 seconds (349-965Mb)
+- - Ran a random test: 904 seconds (349-965Mb)
+- - Checked the test result: 0 seconds (349-965Mb)
+- Tested the verilog module: 908 seconds (349-965Mb)
+- TOTAL: 2426 seconds (346-965Mb)
+
+_____________________________________________________________
+REWROTE VERILOG WIRE RENAMING
+
+504c951 Added constant propagation rules for delays
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- Simplified circuit: 14 seconds (346-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-966Mb)
+- - Cleaned up: 0 seconds (346-966Mb)
+- Rescued primary outputs: 2 seconds (346-966Mb)
+- Merged identical logic: 0 seconds (346-966Mb)
+- Deleted dead logic: 0 seconds (346-966Mb)
+- Renamed wires: 0 seconds (346-966Mb)
+- - Renamed wires: 0 seconds (346-966Mb)
+- - Generated spec: 0 seconds (346-966Mb)
+- - Generated module: 0 seconds (346-966Mb)
+- - - Duplicated logic: 0 seconds (346-966Mb)
+- - Generated profile: 1 second (346-966Mb)
+- Generated verilog module: 6 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Ran a random test: 0 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 4 seconds (346-966Mb)
+- TOTAL: 41 seconds (346-966Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- Simplified circuit: 15 seconds (346-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-966Mb)
+- - Cleaned up: 0 seconds (346-966Mb)
+- Rescued primary outputs: 2 seconds (346-966Mb)
+- Merged identical logic: 0 seconds (346-966Mb)
+- Deleted dead logic: 0 seconds (346-966Mb)
+- Renamed wires: 0 seconds (346-966Mb)
+- - Renamed wires: 0 seconds (346-966Mb)
+- - Generated spec: 0 seconds (346-966Mb)
+- - Generated module: 0 seconds (346-966Mb)
+- - - Duplicated logic: 0 seconds (347-966Mb)
+- - Generated profile: 1 second (346-966Mb)
+- Generated verilog module: 7 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Ran a random test: 2 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 6 seconds (346-966Mb)
+- TOTAL: 46 seconds (346-966Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 1 second (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 2 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- Simplified circuit: 18 seconds (347-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-966Mb)
+- - Cleaned up: 0 seconds (347-966Mb)
+- Rescued primary outputs: 3 seconds (347-966Mb)
+- Merged identical logic: 0 seconds (347-966Mb)
+- Deleted dead logic: 1 second (347-966Mb)
+- Renamed wires: 1 second (347-966Mb)
+- - Renamed wires: 1 second (347-966Mb)
+- - Generated spec: 0 seconds (347-966Mb)
+- - Generated module: 0 seconds (347-966Mb)
+- - - Duplicated logic: 1 second (347-966Mb)
+- - Generated profile: 2 seconds (347-966Mb)
+- Generated verilog module: 9 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Ran a random test: 9 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 13 seconds (346-966Mb)
+- TOTAL: 62 seconds (346-966Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 2 seconds (347-966Mb)
+- - Connected wires: 1 second (347-966Mb)
+- - Simplified gates: 8 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 2 seconds (348-966Mb)
+- - Connected wires: 1 second (348-966Mb)
+- - Simplified gates: 1 second (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 0 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 0 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- Simplified circuit: 30 seconds (348-966Mb)
+- - Interposed wires before primary outputs: 4 seconds (348-966Mb)
+- - Cleaned up: 0 seconds (348-966Mb)
+- Rescued primary outputs: 6 seconds (348-966Mb)
+- Merged identical logic: 0 seconds (348-966Mb)
+- Deleted dead logic: 5 seconds (348-966Mb)
+- Renamed wires: 7 seconds (348-966Mb)
+- - Renamed wires: 4 seconds (348-966Mb)
+- - Generated spec: 0 seconds (347-966Mb)
+- - Generated module: 0 seconds (347-966Mb)
+- - - Duplicated logic: 15 seconds (349-966Mb)
+- - Generated profile: 16 seconds (347-966Mb)
+- Generated verilog module: 26 seconds (347-966Mb)
+- - Generated verilog testbench: 0 seconds (347-966Mb)
+- - Ran a random test: 32 seconds (347-966Mb)
+- - Checked the test result: 0 seconds (347-966Mb)
+- Tested the verilog module: 36 seconds (347-966Mb)
+- TOTAL: 130 seconds (346-966Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (346-966Mb)
+- Elaborated modules: 6 seconds (348-966Mb)
+- - Connected wires: 5 seconds (349-966Mb)
+- - Simplified gates: 35 seconds (350-966Mb)
+- - Connected wires: 3 seconds (351-966Mb)
+- - Simplified gates: 8 seconds (350-966Mb)
+- - Connected wires: 4 seconds (350-966Mb)
+- - Simplified gates: 5 seconds (350-966Mb)
+- - Connected wires: 2 seconds (350-966Mb)
+- - Simplified gates: 2 seconds (350-966Mb)
+- - Connected wires: 1 second (350-966Mb)
+- - Simplified gates: 0 seconds (350-966Mb)
+- - Connected wires: 0 seconds (350-966Mb)
+- Simplified circuit: 82 seconds (349-966Mb)
+- - Interposed wires before primary outputs: 18 seconds (350-966Mb)
+- - Cleaned up: 0 seconds (350-966Mb)
+- Rescued primary outputs: 20 seconds (350-966Mb)
+- Merged identical logic: 0 seconds (350-966Mb)
+- Deleted dead logic: 22 seconds (350-966Mb)
+- Renamed wires: 27 seconds (351-966Mb)
+- - Renamed wires: 17 seconds (349-966Mb)
+- - Generated spec: 0 seconds (349-966Mb)
+- - Generated module: 0 seconds (349-966Mb)
+- - - Duplicated logic: 77 seconds (352-966Mb)
+- - Generated profile: 78 seconds (349-966Mb)
+- Generated verilog module: 102 seconds (348-966Mb)
+- - Generated verilog testbench: 0 seconds (348-966Mb)
+- - Ran a random test: 181 seconds (348-966Mb)
+- - Checked the test result: 0 seconds (348-966Mb)
+- Tested the verilog module: 185 seconds (348-966Mb)
+- TOTAL: 468 seconds (346-966Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 7 seconds (346-966Mb)
+- Elaborated modules: 13 seconds (351-966Mb)
+- - Connected wires: 19 seconds (352-966Mb)
+- - Simplified gates: 152 seconds (355-966Mb)
+- - Connected wires: 14 seconds (356-966Mb)
+- - Simplified gates: 37 seconds (355-966Mb)
+- - Connected wires: 19 seconds (355-966Mb)
+- - Simplified gates: 19 seconds (354-966Mb)
+- - Connected wires: 9 seconds (355-966Mb)
+- - Simplified gates: 9 seconds (354-966Mb)
+- - Connected wires: 4 seconds (354-966Mb)
+- - Simplified gates: 1 second (354-966Mb)
+- - Connected wires: 0 seconds (354-966Mb)
+- Simplified circuit: 301 seconds (353-966Mb)
+- - Interposed wires before primary outputs: 79 seconds (355-966Mb)
+- - Cleaned up: 0 seconds (355-966Mb)
+- Rescued primary outputs: 81 seconds (354-966Mb)
+- Merged identical logic: 0 seconds (354-966Mb)
+- Deleted dead logic: 100 seconds (355-966Mb)
+- Renamed wires: 120 seconds (356-966Mb)
+- - Renamed wires: 77 seconds (352-966Mb)
+- - Generated spec: 0 seconds (352-966Mb)
+- - Generated module: 2 seconds (352-966Mb)
+- - - Duplicated logic: 708 seconds (358-966Mb)
+- - Generated profile: 711 seconds (352-966Mb)
+- Generated verilog module: 796 seconds (349-966Mb)
+- - Generated verilog testbench: 0 seconds (349-966Mb)
+- - Ran a random test: 924 seconds (349-966Mb)
+- - Checked the test result: 0 seconds (349-966Mb)
+- Tested the verilog module: 928 seconds (349-966Mb)
+- TOTAL: 2391 seconds (346-966Mb)
+
+_____________________________________________________________
+REWROTE THE LOGIC DUPLICATION CODE
+
+5672e68 Fix typo
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- Simplified circuit: 14 seconds (346-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-966Mb)
+- - Cleaned up: 0 seconds (346-966Mb)
+- Rescued primary outputs: 2 seconds (346-966Mb)
+- Merged identical logic: 0 seconds (346-966Mb)
+- Deleted dead logic: 0 seconds (346-966Mb)
+- Renamed wires: 0 seconds (346-966Mb)
+- - Renamed wires: 0 seconds (346-966Mb)
+- - Generated spec: 0 seconds (346-966Mb)
+- - Generated module: 0 seconds (346-966Mb)
+- - - Duplicated logic: 0 seconds (346-966Mb)
+- - Generated profile: 1 second (346-966Mb)
+- Generated verilog module: 6 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Ran a random test: 0 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 4 seconds (346-966Mb)
+- TOTAL: 41 seconds (346-966Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- Simplified circuit: 15 seconds (346-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-966Mb)
+- - Cleaned up: 0 seconds (346-966Mb)
+- Rescued primary outputs: 2 seconds (346-966Mb)
+- Merged identical logic: 0 seconds (346-966Mb)
+- Deleted dead logic: 0 seconds (346-966Mb)
+- Renamed wires: 0 seconds (347-966Mb)
+- - Renamed wires: 0 seconds (346-966Mb)
+- - Generated spec: 0 seconds (346-966Mb)
+- - Generated module: 0 seconds (346-966Mb)
+- - - Duplicated logic: 0 seconds (347-966Mb)
+- - Generated profile: 1 second (346-966Mb)
+- Generated verilog module: 6 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Ran a random test: 2 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 6 seconds (346-966Mb)
+- TOTAL: 45 seconds (346-966Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 1 second (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 2 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- Simplified circuit: 18 seconds (347-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-966Mb)
+- - Cleaned up: 0 seconds (347-966Mb)
+- Rescued primary outputs: 3 seconds (347-966Mb)
+- Merged identical logic: 0 seconds (347-966Mb)
+- Deleted dead logic: 1 second (347-966Mb)
+- Renamed wires: 1 second (347-966Mb)
+- - Renamed wires: 1 second (347-966Mb)
+- - Generated spec: 0 seconds (347-966Mb)
+- - Generated module: 0 seconds (347-966Mb)
+- - - Duplicated logic: 0 seconds (347-966Mb)
+- - Generated profile: 1 second (347-966Mb)
+- Generated verilog module: 8 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Ran a random test: 9 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 13 seconds (346-966Mb)
+- TOTAL: 60 seconds (346-966Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 3 seconds (347-966Mb)
+- - Connected wires: 1 second (347-966Mb)
+- - Simplified gates: 8 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 2 seconds (348-966Mb)
+- - Connected wires: 1 second (348-966Mb)
+- - Simplified gates: 1 second (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 0 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 0 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- Simplified circuit: 30 seconds (348-966Mb)
+- - Interposed wires before primary outputs: 4 seconds (348-966Mb)
+- - Cleaned up: 0 seconds (348-966Mb)
+- Rescued primary outputs: 6 seconds (348-966Mb)
+- Merged identical logic: 0 seconds (348-966Mb)
+- Deleted dead logic: 5 seconds (348-966Mb)
+- Renamed wires: 7 seconds (348-966Mb)
+- - Renamed wires: 4 seconds (348-966Mb)
+- - Generated spec: 0 seconds (348-966Mb)
+- - Generated module: 0 seconds (348-966Mb)
+- - - Duplicated logic: 0 seconds (349-966Mb)
+- - Generated profile: 1 second (348-966Mb)
+- Generated verilog module: 11 seconds (347-966Mb)
+- - Generated verilog testbench: 0 seconds (347-966Mb)
+- - Ran a random test: 35 seconds (347-966Mb)
+- - Checked the test result: 0 seconds (347-966Mb)
+- Tested the verilog module: 39 seconds (347-966Mb)
+- TOTAL: 117 seconds (346-966Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (346-966Mb)
+- Elaborated modules: 6 seconds (348-966Mb)
+- - Connected wires: 5 seconds (349-966Mb)
+- - Simplified gates: 35 seconds (350-966Mb)
+- - Connected wires: 3 seconds (351-966Mb)
+- - Simplified gates: 8 seconds (350-966Mb)
+- - Connected wires: 4 seconds (350-966Mb)
+- - Simplified gates: 5 seconds (350-966Mb)
+- - Connected wires: 2 seconds (350-966Mb)
+- - Simplified gates: 2 seconds (350-966Mb)
+- - Connected wires: 1 second (350-966Mb)
+- - Simplified gates: 0 seconds (350-966Mb)
+- - Connected wires: 0 seconds (350-966Mb)
+- Simplified circuit: 83 seconds (349-966Mb)
+- - Interposed wires before primary outputs: 18 seconds (350-966Mb)
+- - Cleaned up: 0 seconds (350-966Mb)
+- Rescued primary outputs: 20 seconds (350-966Mb)
+- Merged identical logic: 0 seconds (350-966Mb)
+- Deleted dead logic: 22 seconds (350-966Mb)
+- Renamed wires: 28 seconds (351-966Mb)
+- - Renamed wires: 18 seconds (349-966Mb)
+- - Generated spec: 0 seconds (349-966Mb)
+- - Generated module: 0 seconds (349-966Mb)
+- - - Duplicated logic: 0 seconds (352-966Mb)
+- - Generated profile: 2 seconds (349-966Mb)
+- Generated verilog module: 27 seconds (348-966Mb)
+- - Generated verilog testbench: 0 seconds (348-966Mb)
+- - Ran a random test: 182 seconds (348-966Mb)
+- - Checked the test result: 0 seconds (348-966Mb)
+- Tested the verilog module: 186 seconds (348-966Mb)
+- TOTAL: 396 seconds (346-966Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 7 seconds (346-966Mb)
+- Elaborated modules: 13 seconds (351-966Mb)
+- - Connected wires: 19 seconds (352-966Mb)
+- - Simplified gates: 154 seconds (355-966Mb)
+- - Connected wires: 14 seconds (356-966Mb)
+- - Simplified gates: 37 seconds (355-966Mb)
+- - Connected wires: 19 seconds (355-966Mb)
+- - Simplified gates: 19 seconds (354-966Mb)
+- - Connected wires: 9 seconds (355-966Mb)
+- - Simplified gates: 9 seconds (354-966Mb)
+- - Connected wires: 4 seconds (354-966Mb)
+- - Simplified gates: 1 second (354-966Mb)
+- - Connected wires: 0 seconds (354-966Mb)
+- Simplified circuit: 305 seconds (353-966Mb)
+- - Interposed wires before primary outputs: 80 seconds (355-966Mb)
+- - Cleaned up: 0 seconds (355-966Mb)
+- Rescued primary outputs: 82 seconds (354-966Mb)
+- Merged identical logic: 0 seconds (354-966Mb)
+- Deleted dead logic: 99 seconds (355-966Mb)
+- Renamed wires: 121 seconds (356-966Mb)
+- - Renamed wires: 79 seconds (352-966Mb)
+- - Generated spec: 0 seconds (352-966Mb)
+- - Generated module: 2 seconds (352-966Mb)
+- - - Duplicated logic: 2 seconds (358-966Mb)
+- - Generated profile: 4 seconds (352-966Mb)
+- Generated verilog module: 91 seconds (349-966Mb)
+- - Generated verilog testbench: 0 seconds (349-966Mb)
+- - Ran a random test: 907 seconds (349-966Mb)
+- - Checked the test result: 0 seconds (349-966Mb)
+- Tested the verilog module: 911 seconds (349-966Mb)
+- TOTAL: 1676 seconds (346-966Mb)
+Synthesizing double_exp_512:
+- Instantiated parameters: 26 seconds (346-966Mb)
+- Elaborated modules: 29 seconds (356-966Mb)
+- - Connected wires: 78 seconds (358-966Mb)
+- - Simplified gates: 726 seconds (366-966Mb)
+- - Connected wires: 60 seconds (368-966Mb)
+- - Simplified gates: 170 seconds (366-966Mb)
+- - Connected wires: 78 seconds (367-966Mb)
+- - Simplified gates: 78 seconds (365-966Mb)
+- - Connected wires: 36 seconds (366-966Mb)
+- - Simplified gates: 36 seconds (365-966Mb)
+- - Connected wires: 16 seconds (365-966Mb)
+- - Simplified gates: 2 seconds (364-966Mb)
+- - Connected wires: 0 seconds (364-966Mb)
+- Simplified circuit: 1299 seconds (363-966Mb)
+- - Interposed wires before primary outputs: 354 seconds (366-966Mb)
+- - Cleaned up: 0 seconds (366-966Mb)
+- Rescued primary outputs: 357 seconds (364-966Mb)
+- Merged identical logic: 0 seconds (364-966Mb)
+- Deleted dead logic: 410 seconds (366-966Mb)
+- Renamed wires: 559 seconds (369-966Mb)
+- - Renamed wires: 319 seconds (359-966Mb)
+- - Generated spec: 0 seconds (359-966Mb)
+- - Generated module: 8 seconds (359-966Mb)
+- - - Duplicated logic: 4 seconds (370-966Mb)
+- - Generated profile: 9 seconds (359-966Mb)
+- Generated verilog module: 342 seconds (353-966Mb)
+- - Generated verilog testbench: 0 seconds (353-966Mb)
+- - Ran a random test: 4453 seconds (353-966Mb)
+- - Checked the test result: 0 seconds (353-966Mb)
+- Tested the verilog module: 4457 seconds (353-966Mb)
+- TOTAL: 7692 seconds (346-966Mb)
+
+_____________________________________________________________
+SKIP RANDOM TEST IF RUN TIME ESTIMATE IS TOO HIGH
+
+fb35afa Account time more accurately
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- Simplified circuit: 14 seconds (346-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-966Mb)
+- - Cleaned up: 0 seconds (346-966Mb)
+- Rescued primary outputs: 2 seconds (346-966Mb)
+- Merged identical logic: 0 seconds (346-966Mb)
+- Deleted dead logic: 0 seconds (346-966Mb)
+- Renamed wires: 0 seconds (346-966Mb)
+- - Renamed wires: 0 seconds (346-966Mb)
+- - Generated spec: 0 seconds (346-966Mb)
+- - Generated module: 0 seconds (346-966Mb)
+- - - Duplicated logic: 0 seconds (346-966Mb)
+- - Generated profile: 1 second (346-966Mb)
+- Generated verilog module: 6 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Estimate random test run will take 78 seconds (continuing)
+- - Ran a random test: 0 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 4 seconds (346-966Mb)
+- TOTAL: 41 seconds (346-966Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- - Simplified gates: 0 seconds (346-966Mb)
+- - Connected wires: 0 seconds (346-966Mb)
+- Simplified circuit: 15 seconds (346-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-966Mb)
+- - Cleaned up: 0 seconds (346-966Mb)
+- Rescued primary outputs: 2 seconds (346-966Mb)
+- Merged identical logic: 0 seconds (346-966Mb)
+- Deleted dead logic: 0 seconds (346-966Mb)
+- Renamed wires: 0 seconds (347-966Mb)
+- - Renamed wires: 0 seconds (346-966Mb)
+- - Generated spec: 0 seconds (346-966Mb)
+- - Generated module: 0 seconds (346-966Mb)
+- - - Duplicated logic: 0 seconds (347-966Mb)
+- - Generated profile: 1 second (346-966Mb)
+- Generated verilog module: 6 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Estimate random test run will take 65 seconds (continuing)
+- - Ran a random test: 2 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 6 seconds (346-966Mb)
+- TOTAL: 45 seconds (346-966Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 1 second (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 2 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- - Simplified gates: 0 seconds (347-966Mb)
+- - Connected wires: 0 seconds (347-966Mb)
+- Simplified circuit: 18 seconds (347-966Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-966Mb)
+- - Cleaned up: 0 seconds (347-966Mb)
+- Rescued primary outputs: 3 seconds (347-966Mb)
+- Merged identical logic: 0 seconds (347-966Mb)
+- Deleted dead logic: 1 second (347-966Mb)
+- Renamed wires: 1 second (347-966Mb)
+- - Renamed wires: 1 second (347-966Mb)
+- - Generated spec: 0 seconds (347-966Mb)
+- - Generated module: 0 seconds (347-966Mb)
+- - - Duplicated logic: 0 seconds (347-966Mb)
+- - Generated profile: 1 second (347-966Mb)
+- Generated verilog module: 7 seconds (346-966Mb)
+- - Generated verilog testbench: 0 seconds (346-966Mb)
+- - Estimate random test run will take 47 seconds (continuing)
+- - Ran a random test: 9 seconds (346-966Mb)
+- - Checked the test result: 0 seconds (346-966Mb)
+- Tested the verilog module: 13 seconds (346-966Mb)
+- TOTAL: 60 seconds (346-966Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (346-966Mb)
+- Elaborated modules: 3 seconds (347-966Mb)
+- - Connected wires: 1 second (347-966Mb)
+- - Simplified gates: 8 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 2 seconds (348-966Mb)
+- - Connected wires: 1 second (348-966Mb)
+- - Simplified gates: 1 second (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 0 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- - Simplified gates: 0 seconds (348-966Mb)
+- - Connected wires: 0 seconds (348-966Mb)
+- Simplified circuit: 30 seconds (348-966Mb)
+- - Interposed wires before primary outputs: 4 seconds (348-966Mb)
+- - Cleaned up: 0 seconds (348-966Mb)
+- Rescued primary outputs: 6 seconds (348-966Mb)
+- Merged identical logic: 0 seconds (348-966Mb)
+- Deleted dead logic: 5 seconds (348-966Mb)
+- Renamed wires: 7 seconds (348-966Mb)
+- - Renamed wires: 4 seconds (348-966Mb)
+- - Generated spec: 0 seconds (348-966Mb)
+- - Generated module: 0 seconds (348-966Mb)
+- - - Duplicated logic: 0 seconds (349-966Mb)
+- - Generated profile: 1 second (348-966Mb)
+- Generated verilog module: 11 seconds (347-966Mb)
+- - Generated verilog testbench: 0 seconds (347-966Mb)
+- - Estimate random test run will take 44 seconds (continuing)
+- - Ran a random test: 32 seconds (347-966Mb)
+- - Checked the test result: 0 seconds (347-966Mb)
+- Tested the verilog module: 36 seconds (347-966Mb)
+- TOTAL: 114 seconds (346-966Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (346-966Mb)
+- Elaborated modules: 6 seconds (348-966Mb)
+- - Connected wires: 5 seconds (349-966Mb)
+- - Simplified gates: 35 seconds (350-966Mb)
+- - Connected wires: 3 seconds (351-966Mb)
+- - Simplified gates: 8 seconds (350-966Mb)
+- - Connected wires: 4 seconds (350-966Mb)
+- - Simplified gates: 5 seconds (350-966Mb)
+- - Connected wires: 2 seconds (350-966Mb)
+- - Simplified gates: 2 seconds (350-966Mb)
+- - Connected wires: 1 second (350-966Mb)
+- - Simplified gates: 0 seconds (350-966Mb)
+- - Connected wires: 0 seconds (350-966Mb)
+- Simplified circuit: 83 seconds (349-966Mb)
+- - Interposed wires before primary outputs: 18 seconds (350-966Mb)
+- - Cleaned up: 0 seconds (350-966Mb)
+- Rescued primary outputs: 20 seconds (350-966Mb)
+- Merged identical logic: 0 seconds (350-966Mb)
+- Deleted dead logic: 22 seconds (350-966Mb)
+- Renamed wires: 27 seconds (351-966Mb)
+- - Renamed wires: 17 seconds (349-966Mb)
+- - Generated spec: 0 seconds (349-966Mb)
+- - Generated module: 0 seconds (349-966Mb)
+- - - Duplicated logic: 0 seconds (352-966Mb)
+- - Generated profile: 2 seconds (349-966Mb)
+- Generated verilog module: 26 seconds (348-966Mb)
+- - Generated verilog testbench: 0 seconds (348-966Mb)
+- - Estimate random test run will take 165 seconds (continuing)
+- - Ran a random test: 180 seconds (348-966Mb)
+- - Checked the test result: 0 seconds (348-966Mb)
+- Tested the verilog module: 184 seconds (348-966Mb)
+- TOTAL: 392 seconds (346-966Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 7 seconds (346-966Mb)
+- Elaborated modules: 13 seconds (351-966Mb)
+- - Connected wires: 19 seconds (352-966Mb)
+- - Simplified gates: 153 seconds (355-966Mb)
+- - Connected wires: 14 seconds (356-966Mb)
+- - Simplified gates: 37 seconds (355-966Mb)
+- - Connected wires: 18 seconds (355-966Mb)
+- - Simplified gates: 19 seconds (354-966Mb)
+- - Connected wires: 8 seconds (355-966Mb)
+- - Simplified gates: 9 seconds (354-966Mb)
+- - Connected wires: 4 seconds (354-966Mb)
+- - Simplified gates: 1 second (354-966Mb)
+- - Connected wires: 0 seconds (354-966Mb)
+- Simplified circuit: 302 seconds (353-966Mb)
+- - Interposed wires before primary outputs: 79 seconds (355-966Mb)
+- - Cleaned up: 0 seconds (355-966Mb)
+- Rescued primary outputs: 81 seconds (354-966Mb)
+- Merged identical logic: 0 seconds (354-966Mb)
+- Deleted dead logic: 101 seconds (355-966Mb)
+- Renamed wires: 123 seconds (356-966Mb)
+- - Renamed wires: 79 seconds (352-966Mb)
+- - Generated spec: 0 seconds (352-966Mb)
+- - Generated module: 2 seconds (352-966Mb)
+- - - Duplicated logic: 2 seconds (358-966Mb)
+- - Generated profile: 4 seconds (352-966Mb)
+- Generated verilog module: 92 seconds (349-966Mb)
+- - Generated verilog testbench: 0 seconds (349-966Mb)
+- - Estimate random test run will take 915 seconds (continuing)
+- - Ran a random test: 924 seconds (349-966Mb)
+- - Checked the test result: 0 seconds (349-966Mb)
+- Tested the verilog module: 928 seconds (349-966Mb)
+- TOTAL: 1693 seconds (346-966Mb)
+Synthesizing double_exp_512:
+- Instantiated parameters: 26 seconds (346-966Mb)
+- Elaborated modules: 29 seconds (356-966Mb)
+- - Connected wires: 77 seconds (358-966Mb)
+- - Simplified gates: 718 seconds (366-966Mb)
+- - Connected wires: 57 seconds (368-966Mb)
+- - Simplified gates: 169 seconds (366-966Mb)
+- - Connected wires: 77 seconds (367-966Mb)
+- - Simplified gates: 78 seconds (365-966Mb)
+- - Connected wires: 35 seconds (366-966Mb)
+- - Simplified gates: 36 seconds (365-966Mb)
+- - Connected wires: 16 seconds (365-966Mb)
+- - Simplified gates: 2 seconds (364-966Mb)
+- - Connected wires: 0 seconds (364-966Mb)
+- Simplified circuit: 1282 seconds (363-966Mb)
+- - Interposed wires before primary outputs: 348 seconds (366-966Mb)
+- - Cleaned up: 0 seconds (366-966Mb)
+- Rescued primary outputs: 350 seconds (364-966Mb)
+- Merged identical logic: 0 seconds (364-966Mb)
+- Deleted dead logic: 416 seconds (366-966Mb)
+- Renamed wires: 561 seconds (369-966Mb)
+- - Renamed wires: 328 seconds (359-966Mb)
+- - Generated spec: 0 seconds (359-966Mb)
+- - Generated module: 8 seconds (359-966Mb)
+- - - Duplicated logic: 4 seconds (370-966Mb)
+- - Generated profile: 9 seconds (359-966Mb)
+- Generated verilog module: 351 seconds (353-966Mb)
+- - Generated verilog testbench: 0 seconds (353-966Mb)
+- - Estimate random test run will take 4451 seconds (skipping)
+- Tested the verilog module: 1 second (353-966Mb)
+- TOTAL: 3224 seconds (346-966Mb)
+Synthesizing double_exp_1024:
+- Instantiated parameters: 102 seconds (347-966Mb)
+- Elaborated modules: 73 seconds (365-966Mb)
+- - Connected wires: 311 seconds (369-966Mb)
+- - Simplified gates: 3805 seconds (396-966Mb)
+- - Connected wires: 243 seconds (399-966Mb)
+- - Simplified gates: 725 seconds (395-966Mb)
+- - Connected wires: 321 seconds (397-966Mb)
+- - Simplified gates: 325 seconds (394-966Mb)
+- - Connected wires: 146 seconds (396-966Mb)
+- - Simplified gates: 155 seconds (393-966Mb)
+- - Connected wires: 68 seconds (394-966Mb)
+- - Simplified gates: 5 seconds (391-966Mb)
+- - Connected wires: 0 seconds (391-966Mb)
+- Simplified circuit: 6121 seconds (389-966Mb)
+- - Interposed wires before primary outputs: 1599 seconds (394-966Mb)
+- - Cleaned up: 0 seconds (394-966Mb)
+- Rescued primary outputs: 1603 seconds (392-966Mb)
+- Merged identical logic: 0 seconds (392-966Mb)
+- Deleted dead logic: 1702 seconds (394-966Mb)
+- Renamed wires: 2395 seconds (401-966Mb)
+- - Renamed wires: 1266 seconds (372-966Mb)
+- - Generated spec: 0 seconds (371-966Mb)
+- - Generated module: 29 seconds (371-966Mb)
+- - - Duplicated logic: 12 seconds (394-966Mb)
+- - Generated profile: 20 seconds (371-966Mb)
+- Generated verilog module: 1321 seconds (360-966Mb)
+- - Generated verilog testbench: 0 seconds (359-966Mb)
+- - Estimate random test run will take 19668 seconds (skipping)
+- Tested the verilog module: 1 second (359-966Mb)
+- TOTAL: 14205 seconds (346-966Mb)
+
+_____________________________________________________________
+SKIP RANDOM TEST IF RUN TIME ESTIMATE IS TOO HIGH
+
+100afba Introduced a circuit type for theorems representing synthesized circuits
+
+Synthesizing double_exp_8:
+- Instantiated parameters: 0 seconds (346-967Mb)
+- Elaborated modules: 0 seconds (346-967Mb)
+- - Connected wires: 0 seconds (346-967Mb)
+- - Simplified gates: 0 seconds (346-967Mb)
+- - Connected wires: 0 seconds (346-967Mb)
+- - Simplified gates: 0 seconds (346-967Mb)
+- - Connected wires: 0 seconds (346-967Mb)
+- - Simplified gates: 0 seconds (346-967Mb)
+- - Connected wires: 0 seconds (346-967Mb)
+- - Simplified gates: 0 seconds (346-967Mb)
+- - Connected wires: 0 seconds (346-967Mb)
+- - Simplified gates: 0 seconds (346-967Mb)
+- - Connected wires: 0 seconds (346-967Mb)
+- Simplified circuit: 14 seconds (346-967Mb)
+- - Interposed wires before primary outputs: 0 seconds (346-967Mb)
+- - Cleaned up: 0 seconds (346-967Mb)
+- Rescued primary outputs: 2 seconds (346-967Mb)
+- Merged identical logic: 0 seconds (346-967Mb)
+- Deleted dead logic: 0 seconds (346-967Mb)
+- Renamed wires: 0 seconds (346-967Mb)
+- - Renamed wires: 0 seconds (346-967Mb)
+- - Duplicated logic: 0 seconds (347-967Mb)
+- - Generated spec: 0 seconds (347-967Mb)
+- - Generated module: 0 seconds (347-967Mb)
+- - Generated profile: 0 seconds (347-967Mb)
+- Generated verilog module: 6 seconds (346-967Mb)
+- - Generated verilog testbench: 0 seconds (346-967Mb)
+- - Estimate random test run will take 78 seconds (continuing)
+- - Ran a random test: 0 seconds (346-967Mb)
+- - Checked the test result: 0 seconds (346-967Mb)
+- Tested the verilog module: 4 seconds (346-967Mb)
+- TOTAL: 41 seconds (346-967Mb)
+Synthesizing double_exp_16:
+- Instantiated parameters: 0 seconds (346-967Mb)
+- Elaborated modules: 0 seconds (346-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- - Simplified gates: 0 seconds (347-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- - Simplified gates: 0 seconds (347-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- - Simplified gates: 0 seconds (347-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- - Simplified gates: 0 seconds (347-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- - Simplified gates: 0 seconds (347-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- Simplified circuit: 15 seconds (347-967Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-967Mb)
+- - Cleaned up: 0 seconds (347-967Mb)
+- Rescued primary outputs: 2 seconds (347-967Mb)
+- Merged identical logic: 0 seconds (347-967Mb)
+- Deleted dead logic: 0 seconds (347-967Mb)
+- Renamed wires: 0 seconds (347-967Mb)
+- - Renamed wires: 0 seconds (347-967Mb)
+- - Duplicated logic: 0 seconds (347-967Mb)
+- - Generated spec: 0 seconds (347-967Mb)
+- - Generated module: 0 seconds (347-967Mb)
+- - Generated profile: 0 seconds (347-967Mb)
+- Generated verilog module: 6 seconds (346-967Mb)
+- - Generated verilog testbench: 0 seconds (346-967Mb)
+- - Estimate random test run will take 65 seconds (continuing)
+- - Ran a random test: 2 seconds (346-967Mb)
+- - Checked the test result: 0 seconds (346-967Mb)
+- Tested the verilog module: 6 seconds (346-967Mb)
+- TOTAL: 45 seconds (346-967Mb)
+Synthesizing double_exp_32:
+- Instantiated parameters: 0 seconds (346-967Mb)
+- Elaborated modules: 1 second (347-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- - Simplified gates: 2 seconds (347-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- - Simplified gates: 0 seconds (347-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- - Simplified gates: 0 seconds (347-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- - Simplified gates: 0 seconds (347-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- - Simplified gates: 0 seconds (347-967Mb)
+- - Connected wires: 0 seconds (347-967Mb)
+- Simplified circuit: 18 seconds (347-967Mb)
+- - Interposed wires before primary outputs: 0 seconds (347-967Mb)
+- - Cleaned up: 0 seconds (347-967Mb)
+- Rescued primary outputs: 3 seconds (347-967Mb)
+- Merged identical logic: 0 seconds (347-967Mb)
+- Deleted dead logic: 1 second (347-967Mb)
+- Renamed wires: 1 second (347-967Mb)
+- - Renamed wires: 1 second (347-967Mb)
+- - Duplicated logic: 0 seconds (348-967Mb)
+- - Generated spec: 0 seconds (348-967Mb)
+- - Generated module: 0 seconds (348-967Mb)
+- - Generated profile: 0 seconds (348-967Mb)
+- Generated verilog module: 7 seconds (347-967Mb)
+- - Generated verilog testbench: 0 seconds (347-967Mb)
+- - Estimate random test run will take 47 seconds (continuing)
+- - Ran a random test: 9 seconds (347-967Mb)
+- - Checked the test result: 0 seconds (347-967Mb)
+- Tested the verilog module: 13 seconds (347-967Mb)
+- TOTAL: 60 seconds (346-967Mb)
+Synthesizing double_exp_64:
+- Instantiated parameters: 0 seconds (346-967Mb)
+- Elaborated modules: 3 seconds (347-967Mb)
+- - Connected wires: 1 second (348-967Mb)
+- - Simplified gates: 8 seconds (348-967Mb)
+- - Connected wires: 0 seconds (348-967Mb)
+- - Simplified gates: 2 seconds (348-967Mb)
+- - Connected wires: 1 second (348-967Mb)
+- - Simplified gates: 1 second (348-967Mb)
+- - Connected wires: 0 seconds (348-967Mb)
+- - Simplified gates: 0 seconds (348-967Mb)
+- - Connected wires: 0 seconds (348-967Mb)
+- - Simplified gates: 0 seconds (348-967Mb)
+- - Connected wires: 0 seconds (348-967Mb)
+- Simplified circuit: 30 seconds (348-967Mb)
+- - Interposed wires before primary outputs: 4 seconds (348-967Mb)
+- - Cleaned up: 0 seconds (348-967Mb)
+- Rescued primary outputs: 6 seconds (348-967Mb)
+- Merged identical logic: 1 second (348-967Mb)
+- Deleted dead logic: 5 seconds (348-967Mb)
+- Renamed wires: 7 seconds (349-967Mb)
+- - Renamed wires: 4 seconds (348-967Mb)
+- - Duplicated logic: 0 seconds (349-967Mb)
+- - Generated spec: 0 seconds (349-967Mb)
+- - Generated module: 0 seconds (349-967Mb)
+- - Generated profile: 0 seconds (349-967Mb)
+- Generated verilog module: 11 seconds (347-967Mb)
+- - Generated verilog testbench: 0 seconds (347-967Mb)
+- - Estimate random test run will take 44 seconds (continuing)
+- - Ran a random test: 32 seconds (347-967Mb)
+- - Checked the test result: 0 seconds (347-967Mb)
+- Tested the verilog module: 36 seconds (347-967Mb)
+- TOTAL: 115 seconds (346-967Mb)
+Synthesizing double_exp_128:
+- Instantiated parameters: 2 seconds (346-967Mb)
+- Elaborated modules: 6 seconds (349-967Mb)
+- - Connected wires: 5 seconds (349-967Mb)
+- - Simplified gates: 35 seconds (350-967Mb)
+- - Connected wires: 3 seconds (351-967Mb)
+- - Simplified gates: 8 seconds (350-967Mb)
+- - Connected wires: 4 seconds (351-967Mb)
+- - Simplified gates: 4 seconds (350-967Mb)
+- - Connected wires: 2 seconds (350-967Mb)
+- - Simplified gates: 2 seconds (350-967Mb)
+- - Connected wires: 1 second (350-967Mb)
+- - Simplified gates: 0 seconds (350-967Mb)
+- - Connected wires: 0 seconds (350-967Mb)
+- Simplified circuit: 82 seconds (350-967Mb)
+- - Interposed wires before primary outputs: 18 seconds (350-967Mb)
+- - Cleaned up: 0 seconds (350-967Mb)
+- Rescued primary outputs: 20 seconds (350-967Mb)
+- Merged identical logic: 6 seconds (350-967Mb)
+- Deleted dead logic: 22 seconds (350-967Mb)
+- Renamed wires: 27 seconds (351-967Mb)
+- - Renamed wires: 17 seconds (349-967Mb)
+- - Duplicated logic: 0 seconds (352-967Mb)
+- - Generated spec: 0 seconds (352-967Mb)
+- - Generated module: 0 seconds (352-967Mb)
+- - Generated profile: 0 seconds (352-967Mb)
+- Generated verilog module: 26 seconds (348-967Mb)
+- - Generated verilog testbench: 0 seconds (348-967Mb)
+- - Estimate random test run will take 165 seconds (continuing)
+- - Ran a random test: 183 seconds (348-967Mb)
+- - Checked the test result: 0 seconds (348-967Mb)
+- Tested the verilog module: 187 seconds (348-967Mb)
+- TOTAL: 394 seconds (346-967Mb)
+Synthesizing double_exp_256:
+- Instantiated parameters: 7 seconds (346-967Mb)
+- Elaborated modules: 13 seconds (351-967Mb)
+- - Connected wires: 19 seconds (352-967Mb)
+- - Simplified gates: 153 seconds (355-967Mb)
+- - Connected wires: 14 seconds (356-967Mb)
+- - Simplified gates: 37 seconds (355-967Mb)
+- - Connected wires: 19 seconds (356-967Mb)
+- - Simplified gates: 19 seconds (355-967Mb)
+- - Connected wires: 9 seconds (355-967Mb)
+- - Simplified gates: 9 seconds (354-967Mb)
+- - Connected wires: 4 seconds (355-967Mb)
+- - Simplified gates: 1 second (354-967Mb)
+- - Connected wires: 0 seconds (354-967Mb)
+- Simplified circuit: 303 seconds (353-967Mb)
+- - Interposed wires before primary outputs: 79 seconds (355-967Mb)
+- - Cleaned up: 0 seconds (355-967Mb)
+- Rescued primary outputs: 82 seconds (354-967Mb)
+- Merged identical logic: 30 seconds (355-967Mb)
+- Deleted dead logic: 102 seconds (355-967Mb)
+- Renamed wires: 126 seconds (356-967Mb)
+- - Renamed wires: 83 seconds (352-967Mb)
+- - Duplicated logic: 2 seconds (358-967Mb)
+- - Generated spec: 0 seconds (358-967Mb)
+- - Generated module: 1 second (358-967Mb)
+- - Generated profile: 0 seconds (358-967Mb)
+- Generated verilog module: 94 seconds (349-967Mb)
+- - Generated verilog testbench: 0 seconds (349-967Mb)
+- - Estimate random test run will take 915 seconds (continuing)
+- - Ran a random test: 924 seconds (349-967Mb)
+- - Checked the test result: 0 seconds (349-967Mb)
+- Tested the verilog module: 928 seconds (349-967Mb)
+- TOTAL: 1700 seconds (346-967Mb)
+Synthesizing double_exp_512:
+- Instantiated parameters: 26 seconds (347-967Mb)
+- Elaborated modules: 29 seconds (356-967Mb)
+- - Connected wires: 76 seconds (358-967Mb)
+- - Simplified gates: 716 seconds (367-967Mb)
+- - Connected wires: 57 seconds (368-967Mb)
+- - Simplified gates: 169 seconds (366-967Mb)
+- - Connected wires: 77 seconds (367-967Mb)
+- - Simplified gates: 78 seconds (366-967Mb)
+- - Connected wires: 35 seconds (366-967Mb)
+- - Simplified gates: 36 seconds (365-967Mb)
+- - Connected wires: 16 seconds (366-967Mb)
+- - Simplified gates: 2 seconds (364-967Mb)
+- - Connected wires: 0 seconds (364-967Mb)
+- Simplified circuit: 1280 seconds (363-967Mb)
+- - Interposed wires before primary outputs: 347 seconds (366-967Mb)
+- - Cleaned up: 0 seconds (366-967Mb)
+- Rescued primary outputs: 349 seconds (365-967Mb)
+- Merged identical logic: 190 seconds (366-967Mb)
+- Deleted dead logic: 417 seconds (366-967Mb)
+- Renamed wires: 555 seconds (369-967Mb)
+- - Renamed wires: 324 seconds (359-967Mb)
+- - Duplicated logic: 5 seconds (370-967Mb)
+- - Generated spec: 0 seconds (370-967Mb)
+- - Generated module: 2 seconds (370-967Mb)
+- - Generated profile: 0 seconds (370-967Mb)
+- Generated verilog module: 341 seconds (353-967Mb)
+- - Generated verilog testbench: 0 seconds (353-967Mb)
+- - Estimate random test run will take 4451 seconds (skipping)
+- Tested the verilog module: 1 second (353-967Mb)
+- TOTAL: 3208 seconds (346-967Mb)
+Synthesizing double_exp_1024:
+- Instantiated parameters: 102 seconds (347-967Mb)
+- Elaborated modules: 73 seconds (366-967Mb)
+- - Connected wires: 310 seconds (370-967Mb)
+- - Simplified gates: 3807 seconds (396-967Mb)
+- - Connected wires: 241 seconds (399-967Mb)
+- - Simplified gates: 726 seconds (395-967Mb)
+- - Connected wires: 329 seconds (398-967Mb)
+- - Simplified gates: 325 seconds (394-967Mb)
+- - Connected wires: 145 seconds (396-967Mb)
+- - Simplified gates: 155 seconds (393-967Mb)
+- - Connected wires: 68 seconds (394-967Mb)
+- - Simplified gates: 5 seconds (391-967Mb)
+- - Connected wires: 0 seconds (391-967Mb)
+- Simplified circuit: 6130 seconds (389-967Mb)
+- - Interposed wires before primary outputs: 1587 seconds (395-967Mb)
+- - Cleaned up: 0 seconds (395-967Mb)
+- Rescued primary outputs: 1590 seconds (392-967Mb)
+- Merged identical logic: 848 seconds (394-967Mb)
+- Deleted dead logic: 1713 seconds (394-967Mb)
+- Renamed wires: 2454 seconds (401-967Mb)
+- - Renamed wires: 1237 seconds (371-967Mb)
+- - Duplicated logic: 12 seconds (394-967Mb)
+- - Generated spec: 0 seconds (394-967Mb)
+- - Generated module: 4 seconds (394-967Mb)
+- - Generated profile: 0 seconds (394-967Mb)
+- Generated verilog module: 1268 seconds (360-967Mb)
+- - Generated verilog testbench: 0 seconds (359-967Mb)
+- - Estimate random test run will take 19668 seconds (skipping)
+- Tested the verilog module: 1 second (359-967Mb)
+- TOTAL: 14220 seconds (347-967Mb)
+
+_____________________________________________________________
+SYNTHESIZE THE TIMELOCK CIRCUIT
+
+be8b427 Prettify numbers everywhere
+
+Synthesizing test_timelock_3:
+- - Multiplied modulus and checksum: 0 seconds (346-967Mb)
+- - Computed power of ten: 0 seconds (346-967Mb)
+- Calculated spec rewrites: 2 seconds (346-967Mb)
+- Instantiated parameters: 4 seconds (346-967Mb)
+- Elaborated modules: 9 seconds (350-967Mb)
+- - Connected wires: 10 seconds (350-967Mb)
+- - Simplified gates: 75 seconds (352-967Mb)
+- - Connected wires: 7 seconds (353-967Mb)
+- - Simplified gates: 18 seconds (352-967Mb)
+- - Connected wires: 9 seconds (353-967Mb)
+- - Simplified gates: 9 seconds (352-967Mb)
+- - Connected wires: 4 seconds (352-967Mb)
+- - Simplified gates: 5 seconds (352-967Mb)
+- - Connected wires: 2 seconds (352-967Mb)
+- - Simplified gates: 0 seconds (352-967Mb)
+- - Connected wires: 0 seconds (352-967Mb)
+- Simplified circuit: 158 seconds (351-967Mb)
+- - Interposed wires before primary outputs: 39 seconds (352-967Mb)
+- - Cleaned up: 0 seconds (352-967Mb)
+- Rescued primary outputs: 42 seconds (352-967Mb)
+- Merged identical logic: 13 seconds (352-967Mb)
+- Deleted dead logic: 49 seconds (352-967Mb)
+- Renamed wires: 59 seconds (353-967Mb)
+- - Renamed wires: 40 seconds (351-967Mb)
+- - Duplicated logic: 0 seconds (355-967Mb)
+- - Generated spec: 0 seconds (355-967Mb)
+- - Generated module: 0 seconds (355-967Mb)
+- - Generated profile: 0 seconds (355-967Mb)
+- Generated Verilog module: 49 seconds (349-967Mb)
+- TOTAL: 400 seconds (346-967Mb)
+Synthesizing timelock_9:
+- - Multiplied modulus and checksum: 1 second (346-967Mb)
+- - Computed power of ten: 0 seconds (346-967Mb)
+- Calculated spec rewrites: 4 seconds (346-967Mb)
+- Instantiated parameters: 440 seconds (348-967Mb)
+- Elaborated modules: 322 seconds (386-967Mb)
+- - Connected wires: 1,490 seconds (395-967Mb)
+- - Simplified gates: 24,996 seconds (488-1,237Mb)
+- - Connected wires: 1,163 seconds (494-1,237Mb)
+- - Simplified gates: 3,796 seconds (487-1,342Mb)
+- - Connected wires: 1,521 seconds (493-1,342Mb)
+- - Simplified gates: 1,610 seconds (485-1,342Mb)
+- - Connected wires: 720 seconds (489-1,342Mb)
+- - Simplified gates: 746 seconds (483-1,342Mb)
+- - Connected wires: 293 seconds (485-1,342Mb)
+- - Simplified gates: 11 seconds (480-1,342Mb)
+- - Connected wires: 0 seconds (480-1,342Mb)
+- Simplified circuit: 36,366 seconds (475-1,342Mb)
+- - Interposed wires before primary outputs: 8,658 seconds (486-1,342Mb)
+- - Cleaned up: 0 seconds (486-1,342Mb)
+- Rescued primary outputs: 8,661 seconds (481-1,342Mb)
+- Merged identical logic: 3,928 seconds (486-1,342Mb)
+- Deleted dead logic: 7,375 seconds (486-1,342Mb)
+- Renamed wires: 11,318 seconds (500-1,342Mb)
+- - Renamed wires: 5,143 seconds (398-1,342Mb)
+- - Duplicated logic: 59 seconds (443-1,342Mb)
+- - Generated spec: 0 seconds (443-1,342Mb)
+- - Generated module: 10 seconds (443-1,342Mb)
+- - Generated profile: 0 seconds (443-1,342Mb)
+- Generated Verilog module: 5,236 seconds (374-1,342Mb)
+- TOTAL: 73,780 seconds (347-1,342Mb)
