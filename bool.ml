@@ -69,6 +69,8 @@ let PINST tyin tmin =
 
 let PROVE_HYP = Object.PROVE_HYP;;
 
+export_theory "bool-def";;
+
 (* ------------------------------------------------------------------------- *)
 (* Rules for T                                                               *)
 (* ------------------------------------------------------------------------- *)
@@ -80,6 +82,8 @@ let TRUTH =
 	let truthth = EQ_MP (SYM T_DEF) (REFL `\p:bool. p`) in
 	let () = replace_proof truthth Truth_proof in
 	truthth;;
+
+export_namedthm TRUTH "TRUTH";;
 
 let EQT_ELIM th =
   try EQ_MP (SYM th) TRUTH
@@ -444,6 +448,8 @@ let F_DEF = new_basic_definition
 let NOT_DEF = new_basic_definition
  `(~) = \p. p ==> F`;;
 
+export_namedthm NOT_DEF "NOT_DEF";;
+
 let mk_neg =
   let neg_tm = `(~)` in
   fun tm -> try mk_comb(neg_tm,tm)
@@ -501,6 +507,8 @@ let EQF_ELIM =
 let EXISTS_UNIQUE_DEF = new_basic_definition
  `(?!) = \P:A->bool. ((?) P) /\ (!x y. P x /\ P y ==> x = y)`;;
 
+export_namedthm EXISTS_UNIQUE_DEF "EXISTS_UNIQUE_DEF";;
+
 let mk_uexists = mk_binder "?!";;
 
 let EXISTENCE =
@@ -514,3 +522,5 @@ let EXISTENCE =
         let ty = snd(dest_var(bndvar abs)) in
         MP (PINST [ty,aty] [abs,P] pth) th
     with Failure _ -> failwith "EXISTENCE";;
+
+export_theory "dummy";;
