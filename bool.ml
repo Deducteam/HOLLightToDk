@@ -55,19 +55,19 @@ let mk_iff =
 (* ------------------------------------------------------------------------- *)
 
 let PINST tyin tmin =
-  let iterm_fn = INST (map (I F_F (inst tyin)) tmin)
+  let tmin' = map (I F_F (inst tyin)) tmin in
+  let iterm_fn = INST tmin'
   and itype_fn = INST_TYPE tyin in
-  fun th -> try iterm_fn (itype_fn th)
+  fun th -> try let res = iterm_fn (itype_fn th) in
+                let () = replace_proof res (Subst_proof ((tyin,tmin'),th)) in
+                res
             with Failure _ -> failwith "PINST";;
 
 (* ------------------------------------------------------------------------- *)
 (* Useful derived deductive rule.                                            *)
 (* ------------------------------------------------------------------------- *)
 
-let PROVE_HYP ath bth =
-  if exists (aconv (concl ath)) (hyp bth)
-  then EQ_MP (DEDUCT_ANTISYM_RULE ath bth) ath
-  else bth;;
+let PROVE_HYP = Object.PROVE_HYP;;
 
 (* ------------------------------------------------------------------------- *)
 (* Rules for T                                                               *)
@@ -76,7 +76,10 @@ let PROVE_HYP ath bth =
 let T_DEF = new_basic_definition
  `T = ((\p:bool. p) = (\p:bool. p))`;;
 
-let TRUTH = EQ_MP (SYM T_DEF) (REFL `\p:bool. p`);;
+let TRUTH =
+	let truthth = EQ_MP (SYM T_DEF) (REFL `\p:bool. p`) in
+	let () = replace_proof truthth Truth_proof in
+	truthth;;
 
 let EQT_ELIM th =
   try EQ_MP (SYM th) TRUTH
@@ -119,7 +122,9 @@ let CONJ =
   let pth = DEDUCT_ANTISYM_RULE pth1 pth2 in
   fun th1 th2 ->
     let th = INST [concl th1,p; concl th2,q] pth in
-    EQ_MP (PROVE_HYP th1 th) th2;;
+    let conjth1th2 = EQ_MP (PROVE_HYP th1 th) th2 in
+    let () = replace_proof conjth1th2 (Conj_proof (th1,th2)) in
+    conjth1th2;;
 
 let CONJUNCT1 =
   let P = `P:bool` and Q = `Q:bool` in
@@ -130,7 +135,9 @@ let CONJUNCT1 =
     EQT_ELIM(BETA_RULE (AP_THM th3 `\(p:bool) (q:bool). p`)) in
   fun th ->
     try let l,r = dest_conj(concl th) in
-        PROVE_HYP th (INST [l,P; r,Q] pth)
+        let conjunct1th = PROVE_HYP th (INST [l,P; r,Q] pth) in
+        let () = replace_proof conjunct1th (Conjunct1_proof th) in
+        conjunct1th
     with Failure _ -> failwith "CONJUNCT1";;
 
 let CONJUNCT2 =
@@ -142,7 +149,9 @@ let CONJUNCT2 =
     EQT_ELIM(BETA_RULE (AP_THM th3 `\(p:bool) (q:bool). q`)) in
   fun th ->
     try let l,r = dest_conj(concl th) in
-        PROVE_HYP th (INST [l,P; r,Q] pth)
+        let conjunct2th = PROVE_HYP th (INST [l,P; r,Q] pth) in
+		let () = replace_proof conjunct2th (Conjunct2_proof th) in
+        conjunct2th
     with Failure _ -> failwith "CONJUNCT2";;
 
 let CONJ_PAIR th =
@@ -175,7 +184,9 @@ let MP =
   fun ith th ->
     let ant,con = dest_imp (concl ith) in
     if aconv ant (concl th) then
-      EQ_MP (PROVE_HYP th (INST [ant,p; con,q] rth)) ith
+      let mpth = EQ_MP (PROVE_HYP th (INST [ant,p; con,q] rth)) ith in
+	  let () = replace_proof mpth (Mp_proof (ith,th)) in
+      mpth
     else failwith "MP: theorems do not agree";;
 
 let DISCH =
@@ -187,7 +198,9 @@ let DISCH =
     let th2 = CONJUNCT1 (ASSUME (concl th1)) in
     let th3 = DEDUCT_ANTISYM_RULE th1 th2 in
     let th4 = INST [a,p; concl th,q] pth in
-    EQ_MP th4 th3;;
+    let dischth = EQ_MP th4 th3 in
+    let () = replace_proof dischth (Disch_proof (th,a)) in
+    dischth;;
 
 let rec DISCH_ALL th =
   try DISCH_ALL (DISCH (hd (hyp th)) th)
@@ -256,8 +269,10 @@ let SPEC =
     DISCH_ALL (EQT_ELIM th3) in
   fun tm th ->
     try let abs = rand(concl th) in
-        CONV_RULE BETA_CONV
-         (MP (PINST [snd(dest_var(bndvar abs)),aty] [abs,P; tm,x] pth) th)
+        let specth = CONV_RULE BETA_CONV
+         (MP (PINST [snd(dest_var(bndvar abs)),aty] [abs,P; tm,x] pth) th) in
+		let () = replace_proof specth (Spec_proof (tm,th)) in
+		specth
     with Failure _ -> failwith "SPEC";;
 
 let SPECL tms th =
@@ -297,7 +312,9 @@ let GEN =
         let th' = ABS x (EQT_INTRO th) in
         let phi = lhand(concl th') in
         let rth = INST[phi,ptm] qth in
-        EQ_MP rth th';;
+        let genth = EQ_MP rth th' in
+        let () = replace_proof genth (Gen_proof (th,x)) in
+        genth;;
 
 let GENL = itlist GEN;;
 
@@ -327,7 +344,9 @@ let EXISTS =
     try let qf,abs = dest_comb etm in
         let bth = BETA_CONV(mk_comb(abs,stm)) in
         let cth = PINST [type_of stm,aty] [abs,P; stm,x] pth in
-        PROVE_HYP (EQ_MP (SYM bth) th) cth
+        let existsth = PROVE_HYP (EQ_MP (SYM bth) th) cth in
+        let () = replace_proof existsth (Exists_proof(etm,stm,th)) in
+        existsth
     with Failure _ -> failwith "EXISTS";;
 
 let SIMPLE_EXISTS v th =
@@ -347,7 +366,9 @@ let CHOOSE =
         let th3 = CONV_RULE BETA_CONV (ASSUME cmb) in
         let th4 = GEN v (DISCH cmb (MP (DISCH pat th2) th3)) in
         let th5 = PINST [snd(dest_var v),aty] [abs,P; concl th2,Q] pth in
-        MP (MP th5 th4) th1
+        let chooseth = MP (MP th5 th4) th1 in
+        let () = replace_proof chooseth (Choose_proof (v,th1,th2)) in
+        chooseth
     with Failure _ -> failwith "CHOOSE";;
 
 let SIMPLE_CHOOSE v th =
@@ -372,7 +393,10 @@ let DISJ1 =
     let th4 = GEN `t:bool` (DISCH `P ==> t` (DISCH `Q ==> t` th3)) in
     EQ_MP (SYM th2) th4 in
   fun th tm ->
-    try PROVE_HYP th (INST [concl th,P; tm,Q] pth)
+    try
+      let disj1th = PROVE_HYP th (INST [concl th,P; tm,Q] pth) in
+      let () = replace_proof disj1th (Disj1_proof (th,tm)) in
+      disj1th
     with Failure _ -> failwith "DISJ1";;
 
 let DISJ2 =
@@ -384,7 +408,10 @@ let DISJ2 =
     let th4 = GEN `t:bool` (DISCH `P ==> t` (DISCH `Q ==> t` th3)) in
     EQ_MP (SYM th2) th4 in
   fun tm th ->
-    try PROVE_HYP th (INST [tm,P; concl th,Q] pth)
+    try
+      let disj2th = PROVE_HYP th (INST [tm,P; concl th,Q] pth) in
+      let () = replace_proof disj2th (Disj2_proof (th,tm)) in
+      disj2th
     with Failure _ -> failwith "DISJ2";;
 
 let DISJ_CASES =
@@ -399,7 +426,9 @@ let DISJ_CASES =
         if not (aconv c1 c2) then failwith "DISJ_CASES" else
         let l,r = dest_disj (concl th0) in
         let th = INST [l,P; r,Q; c1,R] pth in
-        PROVE_HYP (DISCH r th2) (PROVE_HYP (DISCH l th1) (PROVE_HYP th0 th))
+        let disjcasesth = PROVE_HYP (DISCH r th2) (PROVE_HYP (DISCH l th1) (PROVE_HYP th0 th)) in
+        let () = replace_proof disjcasesth (Disjcases_proof(th0,th1,th2)) in
+        disjcasesth
     with Failure _ -> failwith "DISJ_CASES";;
 
 let SIMPLE_DISJ_CASES th1 th2 =
@@ -434,11 +463,21 @@ let NOT_INTRO =
     try EQ_MP (INST [rand(rator(concl th)),P] pth) th
     with Failure _ -> failwith "NOT_INTRO";;
 
+let CONTR =
+  let P = `P:bool` and f_tm = `F` in
+  let pth = SPEC P (EQ_MP F_DEF (ASSUME `F`)) in
+  fun tm th -> 
+    if concl th <> f_tm then failwith "CONTR"
+    else
+		let contrth = PROVE_HYP th (INST [tm,P] pth) in
+		let () = replace_proof contrth (Contr_proof (th,tm)) in
+		contrth;;
+
 let EQF_INTRO =
   let P = `P:bool` in
   let pth =
     let th1 = NOT_ELIM (ASSUME `~ P`)
-    and th2 = DISCH `F` (SPEC P (EQ_MP F_DEF (ASSUME `F`))) in
+    and th2 = DISCH `F` (CONTR P (ASSUME `F`)) in
     DISCH_ALL (IMP_ANTISYM_RULE th1 th2) in
   fun th ->
     try MP (INST [rand(concl th),P] pth) th
@@ -448,18 +487,12 @@ let EQF_ELIM =
   let P = `P:bool` in
   let pth =
     let th1 = EQ_MP (ASSUME `P = F`) (ASSUME `P:bool`) in
-    let th2 = DISCH P (SPEC `F` (EQ_MP F_DEF th1)) in
+    let th2 = DISCH P (*(SPEC `F` (EQ_MP F_DEF*) th1 (*))*) in
     DISCH_ALL (NOT_INTRO th2) in
   fun th ->
     try MP (INST [rand(rator(concl th)),P] pth) th
     with Failure _ -> failwith "EQF_ELIM";;
 
-let CONTR =
-  let P = `P:bool` and f_tm = `F` in
-  let pth = SPEC P (EQ_MP F_DEF (ASSUME `F`)) in
-  fun tm th ->
-    if concl th <> f_tm then failwith "CONTR"
-    else PROVE_HYP th (INST [tm,P] pth);;
 
 (* ------------------------------------------------------------------------- *)
 (* Rules for unique existence.                                               *)
