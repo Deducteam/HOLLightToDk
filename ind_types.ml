@@ -1641,5 +1641,3 @@ let FORALL_UNWIND_CONV =
         CONV_RULE (RAND_CONV FORALL_UNWIND_CONV) (TRANS th3 th4)
     with Failure _ -> REFL tm in
   FORALL_UNWIND_CONV;;
-
-export_theory "dummy";;
