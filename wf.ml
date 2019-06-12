@@ -338,6 +338,8 @@ export_namedthm WF_FALSE "WF_FALSE";;
 (* Tail recursion.                                                           *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "relation-well-founded-tail-recursion";;
+
 let WF_REC_TAIL = prove 
  (`!P g h. ?f:A->B. !x. f x = if P(x) then f(g x) else h x`,
   let lemma1 = prove
@@ -459,5 +461,3 @@ let WF_INDUCT_TAC =
     let th2 = CONV_RULE(LAND_CONV qqconvs) (DISCH_ALL th1) in
     (MATCH_MP_TAC th2 THEN MAP_EVERY X_GEN_TAC fvs THEN
      CONV_TAC(LAND_CONV qqconvs) THEN DISCH_THEN ASSUME_TAC) gl;;
-
-export_theory "dummy";;

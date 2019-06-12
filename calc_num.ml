@@ -1,3 +1,4 @@
+
 (* ========================================================================= *)
 (* Calculation with naturals.                                                *)
 (*                                                                           *)
@@ -22,19 +23,25 @@ let DENUMERAL = GEN_REWRITE_RULE DEPTH_CONV [NUMERAL];;
 (* inefficient; log(n)^2 instead of log(n).                                  *)
 (* ------------------------------------------------------------------------- *)
 
-let ARITH_ZERO = prove
+export_theory "arith-misc";;
+
+let ARITH_ZERO = prove 
  (`(NUMERAL 0 = 0) /\
    (BIT0 _0 = _0)`,
   REWRITE_TAC[NUMERAL; BIT0; DENUMERAL ADD_CLAUSES]);;
 
-let ARITH_SUC = prove
+export_namedthm ARITH_ZERO "ARITH_ZERO";;
+
+let ARITH_SUC = prove 
  (`(!n. SUC(NUMERAL n) = NUMERAL(SUC n)) /\
    (SUC _0 = BIT1 _0) /\
    (!n. SUC (BIT0 n) = BIT1 n) /\
    (!n. SUC (BIT1 n) = BIT0 (SUC n))`,
   REWRITE_TAC[NUMERAL; BIT0; BIT1; DENUMERAL ADD_CLAUSES]);;
 
-let ARITH_PRE = prove
+export_namedthm ARITH_SUC "ARITH_SUC";;
+
+let ARITH_PRE = prove 
  (`(!n. PRE(NUMERAL n) = NUMERAL(PRE n)) /\
    (PRE _0 = _0) /\
    (!n. PRE(BIT0 n) = if n = _0 then _0 else BIT1 (PRE n)) /\
@@ -43,7 +50,9 @@ let ARITH_PRE = prove
   REWRITE_TAC[NUMERAL; DENUMERAL PRE; DENUMERAL ADD_CLAUSES; DENUMERAL NOT_SUC;
               ARITH_ZERO]);;
 
-let ARITH_ADD = prove
+export_namedthm ARITH_PRE "ARITH_PRE";;
+
+let ARITH_ADD = prove 
  (`(!m n. NUMERAL(m) + NUMERAL(n) = NUMERAL(m + n)) /\
    (_0 + _0 = _0) /\
    (!n. _0 + BIT0 n = BIT0 n) /\
@@ -57,7 +66,9 @@ let ARITH_ADD = prove
   PURE_REWRITE_TAC[NUMERAL; BIT0; BIT1; DENUMERAL ADD_CLAUSES; SUC_INJ] THEN
   REWRITE_TAC[ADD_AC]);;
 
-let ARITH_MULT = prove
+export_namedthm ARITH_ADD "ARITH_ADD";;
+
+let ARITH_MULT = prove 
  (`(!m n. NUMERAL(m) * NUMERAL(n) = NUMERAL(m * n)) /\
    (_0 * _0 = _0) /\
    (!n. _0 * BIT0 n = _0) /\
@@ -72,7 +83,9 @@ let ARITH_MULT = prove
                    DENUMERAL ADD_CLAUSES; SUC_INJ] THEN
   REWRITE_TAC[LEFT_ADD_DISTRIB; RIGHT_ADD_DISTRIB; ADD_AC]);;
 
-let ARITH_EXP = prove
+export_namedthm ARITH_MULT "ARITH_MULT";;
+
+let ARITH_EXP = prove 
  (`(!m n. (NUMERAL m) EXP (NUMERAL n) = NUMERAL(m EXP n)) /\
    (_0 EXP _0 = BIT1 _0) /\
    (!m. (BIT0 m) EXP _0 = BIT1 _0) /\
@@ -89,21 +102,27 @@ let ARITH_EXP = prove
   TRY(GEN_REWRITE_TAC (LAND_CONV o RAND_CONV) [BIT0; BIT1]) THEN
   REWRITE_TAC[DENUMERAL EXP; DENUMERAL MULT_CLAUSES; EXP_ADD]);;
 
-let ARITH_EVEN = prove
+export_namedthm ARITH_EXP "ARITH_EXP";;
+
+let ARITH_EVEN = prove 
  (`(!n. EVEN(NUMERAL n) <=> EVEN n) /\
    (EVEN _0 <=> T) /\
    (!n. EVEN(BIT0 n) <=> T) /\
    (!n. EVEN(BIT1 n) <=> F)`,
   REWRITE_TAC[NUMERAL; BIT1; BIT0; DENUMERAL EVEN; EVEN_ADD]);;
 
-let ARITH_ODD = prove
+export_namedthm ARITH_EVEN "ARITH_EVEN";;
+
+let ARITH_ODD = prove 
  (`(!n. ODD(NUMERAL n) <=> ODD n) /\
    (ODD _0 <=> F) /\
    (!n. ODD(BIT0 n) <=> F) /\
    (!n. ODD(BIT1 n) <=> T)`,
   REWRITE_TAC[NUMERAL; BIT1; BIT0; DENUMERAL ODD; ODD_ADD]);;
 
-let ARITH_LE = prove
+export_namedthm ARITH_ODD "ARITH_ODD";;
+
+let ARITH_LE = prove 
  (`(!m n. NUMERAL m <= NUMERAL n <=> m <= n) /\
    ((_0 <= _0) <=> T) /\
    (!n. (BIT0 n <= _0) <=> n <= _0) /\
@@ -131,7 +150,9 @@ let ARITH_LE = prove
     DISCH_THEN(MP_TAC o AP_TERM `EVEN`) THEN
     REWRITE_TAC[EVEN_MULT; EVEN_ADD; NUMERAL; BIT1; EVEN]]);;
 
-let ARITH_LT = prove
+export_namedthm ARITH_LE "ARITH_LE";;
+
+let ARITH_LT = prove 
  (`(!m n. NUMERAL m < NUMERAL n <=> m < n) /\
    ((_0 < _0) <=> F) /\
    (!n. (BIT0 n < _0) <=> F) /\
@@ -145,11 +166,13 @@ let ARITH_LT = prove
   REWRITE_TAC[NUMERAL; GSYM NOT_LE; ARITH_LE] THEN
   REWRITE_TAC[DENUMERAL LE]);;
 
+export_namedthm ARITH_LT "ARITH_LT";;
+
 let ARITH_GE = REWRITE_RULE[GSYM GE; GSYM GT] ARITH_LE;;
 
 let ARITH_GT = REWRITE_RULE[GSYM GE; GSYM GT] ARITH_LT;;
 
-let ARITH_EQ = prove
+let ARITH_EQ = prove 
  (`(!m n. (NUMERAL m = NUMERAL n) <=> (m = n)) /\
    ((_0 = _0) <=> T) /\
    (!n. (BIT0 n = _0) <=> (n = _0)) /\
@@ -163,7 +186,9 @@ let ARITH_EQ = prove
   REWRITE_TAC[NUMERAL; GSYM LE_ANTISYM; ARITH_LE] THEN
   REWRITE_TAC[LET_ANTISYM; LTE_ANTISYM; DENUMERAL LE_0]);;
 
-let ARITH_SUB = prove
+export_namedthm ARITH_EQ "ARITH_EQ";;
+
+let ARITH_SUB = prove 
  (`(!m n. NUMERAL m - NUMERAL n = NUMERAL(m - n)) /\
    (_0 - _0 = _0) /\
    (!n. _0 - BIT0 n = _0) /\
@@ -183,6 +208,8 @@ let ARITH_SUB = prove
   POP_ASSUM(CHOOSE_THEN SUBST1_TAC o REWRITE_RULE[LE_EXISTS]) THEN
   REWRITE_TAC[ADD1; LEFT_ADD_DISTRIB] THEN
   REWRITE_TAC[ADD_SUB2; GSYM ADD_ASSOC]);;
+
+export_namedthm ARITH_SUB "ARITH_SUB";;
 
 let ARITH = end_itlist CONJ
   [ARITH_ZERO; ARITH_SUC; ARITH_PRE;
@@ -1490,3 +1517,5 @@ let EXPAND_CASES_CONV =
   let rec conv tm =
     (base_CONV ORELSEC (step_CONV THENC LAND_CONV conv)) tm in
   conv THENC (REWRITE_CONV[GSYM CONJ_ASSOC]);;
+
+export_theory "dummy";;
