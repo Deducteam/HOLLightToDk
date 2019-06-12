@@ -586,5 +586,3 @@ export_namedthm bool_RECURSION "bool_RECURSION";;
 
 let inductive_type_store = ref
  ["bool",(2,bool_INDUCT,bool_RECURSION)];;
-
-export_theory "dummy";;
