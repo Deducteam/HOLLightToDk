@@ -1,3 +1,4 @@
+
 (* ========================================================================= *)
 (* Extensional, classical reasoning with AC starts now!                      *)
 (*                                                                           *)
@@ -13,8 +14,12 @@ needs "ind_defs.ml";;
 (* Eta-axiom, corresponding conversion, and extensionality.                  *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "axiom-extensionality";;
+
 let ETA_AX = new_axiom
   `!t:A->B. (\x. t x) = t`;;
+
+export_namedthm ETA_AX "ETA_AX";;
 
 let ETA_CONV =
   let t = `t:A->B` in
@@ -27,20 +32,26 @@ let ETA_CONV =
         else fail()
     with Failure _ -> failwith "ETA_CONV";;
 
-let EQ_EXT = prove
+let EQ_EXT = prove 
  (`!(f:A->B) g. (!x. f x = g x) ==> f = g`,
   REPEAT GEN_TAC THEN DISCH_THEN(MP_TAC o ABS `x:A` o SPEC `x:A`) THEN
   REWRITE_TAC[ETA_AX]);;
 
-let FUN_EQ_THM = prove
+export_namedthm EQ_EXT "EQ_EXT";;
+
+let FUN_EQ_THM = prove 
  (`!(f:A->B) g. f = g <=> (!x. f x = g x)`,
   REPEAT GEN_TAC THEN EQ_TAC THENL
    [DISCH_THEN SUBST1_TAC THEN GEN_TAC THEN REFL_TAC;
     MATCH_ACCEPT_TAC EQ_EXT]);;
 
+export_namedthm FUN_EQ_THM "FUN_EQ_THM";;
+
 (* ------------------------------------------------------------------------- *)
 (* Indefinite descriptor (giving AC).                                        *)
 (* ------------------------------------------------------------------------- *)
+
+export_theory "axiom-choice";;
 
 new_constant("@",`:(A->bool)->A`);;
 
@@ -53,17 +64,23 @@ let mk_select = mk_binder "@";;
 let SELECT_AX = new_axiom
  `!P (x:A). P x ==> P((@) P)`;;
 
+export_namedthm SELECT_AX "SELECT_AX";;
+
 (* ------------------------------------------------------------------------- *)
 (* Useful for compatibility. (The old EXISTS_DEF.)                           *)
 (* ------------------------------------------------------------------------- *)
 
-let EXISTS_THM = prove
+export_theory "select-thm";;
+
+let EXISTS_THM = prove 
  (`(?) = \P:A->bool. P ((@) P)`,
   MATCH_MP_TAC EQ_EXT THEN BETA_TAC THEN X_GEN_TAC `P:A->bool` THEN
   GEN_REWRITE_TAC (LAND_CONV o RAND_CONV) [GSYM ETA_AX] THEN
   EQ_TAC THENL
    [DISCH_THEN(CHOOSE_THEN MP_TAC) THEN MATCH_ACCEPT_TAC SELECT_AX;
     DISCH_TAC THEN EXISTS_TAC `((@) P):A` THEN POP_ASSUM ACCEPT_TAC]);;
+
+export_namedthm EXISTS_THM "EXISTS_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Rules and so on for the select operator.                                  *)
@@ -99,16 +116,20 @@ let SELECT_CONV =
 (* Some basic theorems.                                                      *)
 (* ------------------------------------------------------------------------- *)
 
-let SELECT_REFL = prove
+let SELECT_REFL = prove 
  (`!x:A. (@y. y = x) = x`,
   GEN_TAC THEN CONV_TAC SELECT_CONV THEN
   EXISTS_TAC `x:A` THEN REFL_TAC);;
 
-let SELECT_UNIQUE = prove
+export_namedthm SELECT_REFL "SELECT_REFL";;
+
+let SELECT_UNIQUE = prove 
  (`!P x. (!y:A. P y = (y = x)) ==> ((@) P = x)`,
   REPEAT STRIP_TAC THEN
   GEN_REWRITE_TAC (LAND_CONV o RAND_CONV) [GSYM ETA_AX] THEN
   ASM_REWRITE_TAC[SELECT_REFL]);;
+
+export_namedthm SELECT_UNIQUE "SELECT_UNIQUE";;
 
 extend_basic_rewrites [SELECT_REFL];;
 
@@ -137,7 +158,9 @@ let new_type_definition tyname (absname,repname) th =
 (* the original Diaconescu proof as presented in Beeson's book.              *)
 (* ------------------------------------------------------------------------- *)
 
-let EXCLUDED_MIDDLE = prove
+export_theory "excluded-middle";;
+
+let EXCLUDED_MIDDLE = prove 
  (`!t. t \/ ~t`,
   GEN_TAC THEN SUBGOAL_THEN
    `(((@x. (x <=> F) \/ t) <=> F) \/ t) /\ (((@x. (x <=> T) \/ t) <=> T) \/ t)`
@@ -151,10 +174,14 @@ let EXCLUDED_MIDDLE = prove
     PURE_ONCE_ASM_REWRITE_TAC[] THEN
     ASM_REWRITE_TAC[ITAUT `p \/ T <=> T`]]);;
 
-let BOOL_CASES_AX = prove
+export_namedthm EXCLUDED_MIDDLE "EXCLUDED_MIDDLE";;
+
+let BOOL_CASES_AX = prove 
  (`!t. (t <=> T) \/ (t <=> F)`,
   GEN_TAC THEN DISJ_CASES_TAC(SPEC `t:bool` EXCLUDED_MIDDLE) THEN
   ASM_REWRITE_TAC[]);;
+
+export_namedthm BOOL_CASES_AX "BOOL_CASES_AX";;
 
 (* ------------------------------------------------------------------------- *)
 (* Classically based tactics. (See also COND_CASES_TAC later on.)            *)
@@ -182,15 +209,25 @@ let TAUT =
 (* A few useful classical tautologies.                                       *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "class";;
+
 let DE_MORGAN_THM = TAUT
   `!t1 t2. (~(t1 /\ t2) <=> ~t1 \/ ~t2) /\ (~(t1 \/ t2) <=> ~t1 /\ ~t2)`;;
+
+export_namedthm DE_MORGAN_THM "DE_MORGAN_THM";;
 
 let NOT_CLAUSES =
   TAUT `(!t. ~ ~t <=> t) /\ (~T <=> F) /\ (~F <=> T)`;;
 
+export_namedthm NOT_CLAUSES "NOT_CLAUSES";;
+
 let NOT_IMP = TAUT `!t1 t2. ~(t1 ==> t2) <=> t1 /\ ~t2`;;
 
+export_namedthm NOT_IMP "NOT_IMP";;
+
 let CONTRAPOS_THM = TAUT `!t1 t2. (~t1 ==> ~t2) <=> (t2 ==> t1)`;;
+
+export_namedthm CONTRAPOS_THM "CONTRAPOS_THM";;
 
 extend_basic_rewrites [CONJUNCT1 NOT_CLAUSES];;
 
@@ -230,96 +267,132 @@ let REFUTE_THEN =
 (* Infinite de Morgan laws.                                                  *)
 (* ------------------------------------------------------------------------- *)
 
-let NOT_EXISTS_THM = prove
+let NOT_EXISTS_THM = prove 
  (`!P. ~(?x:A. P x) <=> (!x. ~(P x))`,
   GEN_TAC THEN EQ_TAC THEN DISCH_TAC THENL
    [GEN_TAC THEN DISCH_TAC THEN UNDISCH_TAC `~(?x:A. P x)` THEN
     REWRITE_TAC[] THEN EXISTS_TAC `x:A` THEN POP_ASSUM ACCEPT_TAC;
     DISCH_THEN(CHOOSE_THEN MP_TAC) THEN ASM_REWRITE_TAC[]]);;
 
-let EXISTS_NOT_THM = prove
+export_namedthm NOT_EXISTS_THM "NOT_EXISTS_THM";;
+
+let EXISTS_NOT_THM = prove 
  (`!P. (?x:A. ~(P x)) <=> ~(!x. P x)`,
   ONCE_REWRITE_TAC[TAUT `(a <=> ~b) <=> (~a <=> b)`] THEN
   REWRITE_TAC[NOT_EXISTS_THM]);;
 
-let NOT_FORALL_THM = prove
+export_namedthm EXISTS_NOT_THM "EXISTS_NOT_THM";;
+
+let NOT_FORALL_THM = prove 
  (`!P. ~(!x. P x) <=> (?x:A. ~(P x))`,
   MATCH_ACCEPT_TAC(GSYM EXISTS_NOT_THM));;
 
-let FORALL_NOT_THM = prove
+export_namedthm NOT_FORALL_THM "NOT_FORALL_THM";;
+
+let FORALL_NOT_THM = prove 
  (`!P. (!x. ~(P x)) <=> ~(?x:A. P x)`,
   MATCH_ACCEPT_TAC(GSYM NOT_EXISTS_THM));;
+
+export_namedthm FORALL_NOT_THM "FORALL_NOT_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Expand quantification over Booleans.                                      *)
 (* ------------------------------------------------------------------------- *)
 
-let FORALL_BOOL_THM = prove
+let FORALL_BOOL_THM = prove 
   (`(!b. P b) <=> P T /\ P F`,
    EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
    GEN_TAC THEN BOOL_CASES_TAC `b:bool` THEN ASM_REWRITE_TAC[]);;
 
-let EXISTS_BOOL_THM = prove
+export_namedthm FORALL_BOOL_THM "FORALL_BOOL_THM";;
+
+let EXISTS_BOOL_THM = prove 
  (`(?b. P b) <=> P T \/ P F`,
   MATCH_MP_TAC(TAUT `(~p <=> ~q) ==> (p <=> q)`) THEN
   REWRITE_TAC[DE_MORGAN_THM; NOT_EXISTS_THM; FORALL_BOOL_THM]);;
+
+export_namedthm EXISTS_BOOL_THM "EXISTS_BOOL_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Universal quantifier and disjunction                                      *)
 (* ------------------------------------------------------------------------- *)
 
-let LEFT_FORALL_OR_THM = prove
+let LEFT_FORALL_OR_THM = prove 
  (`!P Q. (!x:A. P x \/ Q) <=> (!x. P x) \/ Q`,
   REPEAT GEN_TAC THEN ONCE_REWRITE_TAC[TAUT `(a <=> b) <=> (~a <=> ~b)`] THEN
   REWRITE_TAC[NOT_FORALL_THM; DE_MORGAN_THM; LEFT_EXISTS_AND_THM]);;
 
-let RIGHT_FORALL_OR_THM = prove
+export_namedthm LEFT_FORALL_OR_THM "LEFT_FORALL_OR_THM";;
+
+let RIGHT_FORALL_OR_THM = prove 
  (`!P Q. (!x:A. P \/ Q x) <=> P \/ (!x. Q x)`,
   REPEAT GEN_TAC THEN ONCE_REWRITE_TAC[TAUT `(a <=> b) <=> (~a <=> ~b)`] THEN
   REWRITE_TAC[NOT_FORALL_THM; DE_MORGAN_THM; RIGHT_EXISTS_AND_THM]);;
 
-let LEFT_OR_FORALL_THM = prove
+export_namedthm RIGHT_FORALL_OR_THM "RIGHT_FORALL_OR_THM";;
+
+let LEFT_OR_FORALL_THM = prove 
  (`!P Q. (!x:A. P x) \/ Q <=> (!x. P x \/ Q)`,
   MATCH_ACCEPT_TAC(GSYM LEFT_FORALL_OR_THM));;
 
-let RIGHT_OR_FORALL_THM = prove
+export_namedthm LEFT_OR_FORALL_THM "LEFT_OR_FORALL_THM";;
+
+let RIGHT_OR_FORALL_THM = prove 
  (`!P Q. P \/ (!x:A. Q x) <=> (!x. P \/ Q x)`,
   MATCH_ACCEPT_TAC(GSYM RIGHT_FORALL_OR_THM));;
+
+export_namedthm RIGHT_OR_FORALL_THM "RIGHT_OR_FORALL_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Implication and quantifiers.                                              *)
 (* ------------------------------------------------------------------------- *)
 
-let LEFT_IMP_FORALL_THM = prove
+let LEFT_IMP_FORALL_THM = prove 
  (`!P Q. ((!x:A. P x) ==> Q) <=> (?x. P x ==> Q)`,
   REPEAT GEN_TAC THEN ONCE_REWRITE_TAC[TAUT `(a <=> b) <=> (~a <=> ~b)`] THEN
   REWRITE_TAC[NOT_EXISTS_THM; NOT_IMP; LEFT_AND_FORALL_THM]);;
 
-let LEFT_EXISTS_IMP_THM = prove
+export_namedthm LEFT_IMP_FORALL_THM "LEFT_IMP_FORALL_THM";;
+
+let LEFT_EXISTS_IMP_THM = prove 
  (`!P Q. (?x. P x ==> Q) <=> ((!x:A. P x) ==> Q)`,
   MATCH_ACCEPT_TAC(GSYM LEFT_IMP_FORALL_THM));;
 
-let RIGHT_IMP_EXISTS_THM = prove
+export_namedthm LEFT_EXISTS_IMP_THM "LEFT_EXISTS_IMP_THM";;
+
+let RIGHT_IMP_EXISTS_THM = prove 
  (`!P Q. (P ==> ?x:A. Q x) <=> (?x:A. P ==> Q x)`,
   REPEAT GEN_TAC THEN ONCE_REWRITE_TAC[TAUT `(a <=> b) <=> (~a <=> ~b)`] THEN
   REWRITE_TAC[NOT_EXISTS_THM; NOT_IMP; RIGHT_AND_FORALL_THM]);;
 
-let RIGHT_EXISTS_IMP_THM = prove
+export_namedthm RIGHT_IMP_EXISTS_THM "RIGHT_IMP_EXISTS_THM";;
+
+let RIGHT_EXISTS_IMP_THM = prove 
  (`!P Q. (?x:A. P ==> Q x) <=> (P ==> ?x:A. Q x)`,
   MATCH_ACCEPT_TAC(GSYM RIGHT_IMP_EXISTS_THM));;
+
+export_namedthm RIGHT_EXISTS_IMP_THM "RIGHT_EXISTS_IMP_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* The conditional.                                                          *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "cond-def";;
+
 let COND_DEF = new_definition
   `COND = \t t1 t2. @x:A. ((t <=> T) ==> (x = t1)) /\
                           ((t <=> F) ==> (x = t2))`;;
 
-let COND_CLAUSES = prove
+export_namedthm COND_DEF "COND_DEF";;
+
+export_theory "cond-thm";;
+
+let COND_CLAUSES = prove 
  (`!(t1:A) t2. ((if T then t1 else t2) = t1) /\
                ((if F then t1 else t2) = t2)`,
   REWRITE_TAC[COND_DEF]);;
+
+export_namedthm COND_CLAUSES "COND_CLAUSES";;
 
 let is_cond tm =
   try fst(dest_const(rator(rator (rator tm)))) = "COND"
@@ -339,30 +412,42 @@ let dest_cond tm =
 
 extend_basic_rewrites [COND_CLAUSES];;
 
-let COND_EXPAND = prove
+let COND_EXPAND = prove 
  (`!b t1 t2. (if b then t1 else t2) <=> (~b \/ t1) /\ (b \/ t2)`,
   REPEAT GEN_TAC THEN BOOL_CASES_TAC `b:bool` THEN
   REWRITE_TAC[]);;
 
-let COND_ID = prove
+export_namedthm COND_EXPAND "COND_EXPAND";;
+
+let COND_ID = prove 
  (`!b (t:A). (if b then t else t) = t`,
   REPEAT GEN_TAC THEN BOOL_CASES_TAC `b:bool` THEN REWRITE_TAC[]);;
 
-let COND_RAND = prove
+export_namedthm COND_ID "COND_ID";;
+
+let COND_RAND = prove 
  (`!b (f:A->B) x y. f (if b then x else y) = (if b then f x else f y)`,
   REPEAT GEN_TAC THEN BOOL_CASES_TAC `b:bool` THEN REWRITE_TAC[]);;
 
-let COND_RATOR = prove
+export_namedthm COND_RAND "COND_RAND";;
+
+let COND_RATOR = prove 
  (`!b (f:A->B) g x. (if b then f else g)(x) = (if b then f x else g x)`,
   REPEAT GEN_TAC THEN BOOL_CASES_TAC `b:bool` THEN REWRITE_TAC[]);;
 
-let COND_ABS = prove
+export_namedthm COND_RATOR "COND_RATOR";;
+
+let COND_ABS = prove 
  (`!b (f:A->B) g. (\x. if b then f x else g x) = (if b then f else g)`,
   REPEAT GEN_TAC THEN BOOL_CASES_TAC `b:bool` THEN REWRITE_TAC[ETA_AX]);;
 
-let COND_SWAP = prove
+export_namedthm COND_ABS "COND_ABS";;
+
+let COND_SWAP = prove 
  (`!p x y:A. (if ~p then x else y) = (if p then y else x)`,
   REPEAT GEN_TAC THEN BOOL_CASES_TAC `p:bool` THEN REWRITE_TAC[]);;
+
+export_namedthm COND_SWAP "COND_SWAP";;
 
 (* ------------------------------------------------------------------------- *)
 (* Redefine TAUT to freeze in the rewrites including COND.                   *)
@@ -382,10 +467,12 @@ let TAUT =
 (* Throw monotonicity in.                                                    *)
 (* ------------------------------------------------------------------------- *)
 
-let MONO_COND = prove
+let MONO_COND = prove 
  (`(A ==> B) /\ (C ==> D) ==> (if b then A else C) ==> (if b then B else D)`,
   STRIP_TAC THEN BOOL_CASES_TAC `b:bool` THEN
   ASM_REWRITE_TAC[]);;
+
+export_namedthm MONO_COND "MONO_COND";;
 
 monotonicity_theorems := MONO_COND::(!monotonicity_theorems);;
 
@@ -393,9 +480,11 @@ monotonicity_theorems := MONO_COND::(!monotonicity_theorems);;
 (* Tactic for splitting over an arbitrarily chosen conditional.              *)
 (* ------------------------------------------------------------------------- *)
 
-let COND_ELIM_THM = prove
+let COND_ELIM_THM = prove 
  (`(P:A->bool) (if c then x else y) <=> (c ==> P x) /\ (~c ==> P y)`,
   BOOL_CASES_TAC `c:bool` THEN REWRITE_TAC[]);;
+
+export_namedthm COND_ELIM_THM "COND_ELIM_THM";;
 
 let COND_ELIM_CONV = HIGHER_REWRITE_CONV[COND_ELIM_THM] true;;
 
@@ -412,7 +501,7 @@ let (COND_CASES_TAC :tactic) =
 (* Skolemization.                                                            *)
 (* ------------------------------------------------------------------------- *)
 
-let SKOLEM_THM = prove
+let SKOLEM_THM = prove 
  (`!P. (!x:A. ?y:B. P x y) <=> (?y. !x. P x (y x))`,
   REPEAT(STRIP_TAC ORELSE EQ_TAC) THENL
    [EXISTS_TAC `\x:A. @y:B. P x y` THEN GEN_TAC THEN
@@ -420,23 +509,29 @@ let SKOLEM_THM = prove
     EXISTS_TAC `(y:A->B) x`] THEN
   POP_ASSUM MATCH_ACCEPT_TAC);;
 
-let SKOLEM_THM_GEN = prove
+export_namedthm SKOLEM_THM "SKOLEM_THM";;
+
+let SKOLEM_THM_GEN = prove 
  (`!P s. (!x. P x ==> ?y. R x y) <=> (?f. !x. P x ==> R x (f x))`,
   REWRITE_TAC[RIGHT_IMP_EXISTS_THM; SKOLEM_THM]);;
+
+export_namedthm SKOLEM_THM_GEN "SKOLEM_THM_GEN";;
 
 (* ------------------------------------------------------------------------- *)
 (* NB: this one is true intutionistically and intensionally.                 *)
 (* ------------------------------------------------------------------------- *)
 
-let UNIQUE_SKOLEM_ALT = prove
+let UNIQUE_SKOLEM_ALT = prove 
  (`!P:A->B->bool. (!x. ?!y. P x y) <=> ?f. !x y. P x y <=> (f x = y)`,
   GEN_TAC THEN REWRITE_TAC[EXISTS_UNIQUE_ALT; SKOLEM_THM]);;
+
+export_namedthm UNIQUE_SKOLEM_ALT "UNIQUE_SKOLEM_ALT";;
 
 (* ------------------------------------------------------------------------- *)
 (* and this one intuitionistically and extensionally.                        *)
 (* ------------------------------------------------------------------------- *)
 
-let UNIQUE_SKOLEM_THM = prove
+let UNIQUE_SKOLEM_THM = prove 
  (`!P. (!x:A. ?!y:B. P x y) <=> (?!f. !x. P x (f x))`,
   GEN_TAC THEN REWRITE_TAC[EXISTS_UNIQUE_THM; SKOLEM_THM; FORALL_AND_THM] THEN
   EQ_TAC THEN DISCH_THEN(CONJUNCTS_THEN ASSUME_TAC) THEN
@@ -453,6 +548,8 @@ let UNIQUE_SKOLEM_THM = prove
       ASM_REWRITE_TAC[];
       DISCH_THEN(MP_TAC o C AP_THM `x:A`) THEN REWRITE_TAC[]]]);;
 
+export_namedthm UNIQUE_SKOLEM_THM "UNIQUE_SKOLEM_THM";;
+
 (* ------------------------------------------------------------------------- *)
 (* Extend default congruences for contextual rewriting.                      *)
 (* ------------------------------------------------------------------------- *)
@@ -464,7 +561,7 @@ let COND_CONG =
         ((if g then t else e) = (if g' then t' else e'))` in
   extend_basic_congs [COND_CONG];;
 
-let COND_EQ_CLAUSE = prove
+let COND_EQ_CLAUSE = prove 
  (`(if x = x then y else z) = y`,
   REWRITE_TAC[]) in
  extend_basic_rewrites [COND_EQ_CLAUSE];;
@@ -473,15 +570,21 @@ let COND_EQ_CLAUSE = prove
 (* We can now treat "bool" as an enumerated type for some purposes.          *)
 (* ------------------------------------------------------------------------- *)
 
-let bool_INDUCT = prove
+let bool_INDUCT = prove 
  (`!P. P F /\ P T ==> !x. P x`,
   REPEAT STRIP_TAC THEN DISJ_CASES_TAC(SPEC `x:bool` BOOL_CASES_AX) THEN
   ASM_REWRITE_TAC[]);;
 
-let bool_RECURSION = prove
+export_namedthm bool_INDUCT "bool_INDUCT";;
+
+let bool_RECURSION = prove 
  (`!a b:A. ?f. f F = a /\ f T = b`,
   REPEAT GEN_TAC THEN EXISTS_TAC `\x. if x then b:A else a` THEN
   REWRITE_TAC[]);;
 
+export_namedthm bool_RECURSION "bool_RECURSION";;
+
 let inductive_type_store = ref
  ["bool",(2,bool_INDUCT,bool_RECURSION)];;
+
+export_theory "dummy";;
