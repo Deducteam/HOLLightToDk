@@ -1,3 +1,4 @@
+
 (* ========================================================================= *)
 (* Syntax sugaring; theory of pairing, with a bit of support.                *)
 (*                                                                           *)
@@ -20,11 +21,23 @@ let LET_DEF = new_definition
 let LET_END_DEF = new_definition
  `LET_END (t:A) = t`;;
 
-let GABS_DEF = new_definition
- `GABS (P:A->bool) = (@) P`;;
+let GABS_DEF =
+  let def = new_basic_definition `GABS = ((@) : (A -> bool) -> A)` in
+  let alt = REFL (rhs (concl def)) in
+  let () = delete_const_definition ["GABS"] in
+  let () = replace_proof def (read_proof alt) in
+  prove
+  (`!(p : A -> bool). GABS p = (@) p`,
+   REWRITE_TAC [def]);;
 
-let GEQ_DEF = new_definition
- `GEQ a b = (a:A = b)`;;
+let GEQ_DEF =
+  let def = new_basic_definition `GEQ = ((=) : A -> A -> bool)` in
+  let alt = REFL (rhs (concl def)) in
+  let () = delete_const_definition ["GEQ"] in
+  let () = replace_proof def (read_proof alt) in
+  prove
+  (`!a b : A. GEQ a b <=> a = b`,
+   REWRITE_TAC [def]);;
 
 let _SEQPATTERN = new_definition
  `_SEQPATTERN = \r s x. if ?y. r x y then r x else s x`;;
@@ -45,19 +58,27 @@ let _FUNCTION = new_definition
 (* Pair type.                                                                *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "pair";;
+
 let mk_pair_def = new_definition
   `mk_pair (x:A) (y:B) = \a b. (a = x) /\ (b = y)`;;
 
-let PAIR_EXISTS_THM = prove
+export_namedthm mk_pair_def "mk_pair_def";;
+
+let PAIR_EXISTS_THM = prove 
  (`?x. ?(a:A) (b:B). x = mk_pair a b`,
   MESON_TAC[]);;
+
+export_namedthm PAIR_EXISTS_THM "PAIR_EXISTS_THM";;
 
 let prod_tybij = new_type_definition
   "prod" ("ABS_prod","REP_prod") PAIR_EXISTS_THM;;
 
-let REP_ABS_PAIR = prove
+let REP_ABS_PAIR = prove 
  (`!(x:A) (y:B). REP_prod (ABS_prod (mk_pair x y)) = mk_pair x y`,
   MESON_TAC[prod_tybij]);;
+
+export_namedthm REP_ABS_PAIR "REP_ABS_PAIR";;
 
 parse_as_infix (",",(14,"right"));;
 
@@ -70,7 +91,7 @@ let FST_DEF = new_definition
 let SND_DEF = new_definition
  `SND (p:A#B) = @y. ?x. p = x,y`;;
 
-let PAIR_EQ = prove
+let PAIR_EQ = prove 
  (`!(x:A) (y:B) a b. (x,y = a,b) <=> (x = a) /\ (y = b)`,
   REPEAT GEN_TAC THEN EQ_TAC THENL
    [REWRITE_TAC[COMMA_DEF] THEN
@@ -79,7 +100,9 @@ let PAIR_EQ = prove
     ALL_TAC] THEN
   MESON_TAC[]);;
 
-let PAIR_SURJECTIVE = prove
+export_namedthm PAIR_EQ "PAIR_EQ";;
+
+let PAIR_SURJECTIVE = prove 
  (`!p:A#B. ?x y. p = x,y`,
   GEN_TAC THEN REWRITE_TAC[COMMA_DEF] THEN
   MP_TAC(SPEC `REP_prod p :A->B->bool` (CONJUNCT2 prod_tybij)) THEN
@@ -89,7 +112,9 @@ let PAIR_SURJECTIVE = prove
   REWRITE_TAC[CONJUNCT1 prod_tybij] THEN DISCH_THEN SUBST1_TAC THEN
   MAP_EVERY EXISTS_TAC [`a:A`; `b:B`] THEN REFL_TAC);;
 
-let FST = prove
+export_namedthm PAIR_SURJECTIVE "PAIR_SURJECTIVE";;
+
+let FST = prove 
  (`!(x:A) (y:B). FST(x,y) = x`,
   REPEAT GEN_TAC THEN REWRITE_TAC[FST_DEF] THEN
   MATCH_MP_TAC SELECT_UNIQUE THEN GEN_TAC THEN BETA_TAC THEN
@@ -97,7 +122,9 @@ let FST = prove
   STRIP_TAC THEN ASM_REWRITE_TAC[] THEN
   EXISTS_TAC `y:B` THEN ASM_REWRITE_TAC[]);;
 
-let SND = prove
+export_namedthm FST "FST";;
+
+let SND = prove 
  (`!(x:A) (y:B). SND(x,y) = y`,
   REPEAT GEN_TAC THEN REWRITE_TAC[SND_DEF] THEN
   MATCH_MP_TAC SELECT_UNIQUE THEN GEN_TAC THEN BETA_TAC THEN
@@ -105,23 +132,31 @@ let SND = prove
   STRIP_TAC THEN ASM_REWRITE_TAC[] THEN
   EXISTS_TAC `x:A` THEN ASM_REWRITE_TAC[]);;
 
-let PAIR = prove
+export_namedthm SND "SND";;
+
+let PAIR = prove 
  (`!x:A#B. FST x,SND x = x`,
   GEN_TAC THEN
   (X_CHOOSE_THEN `a:A` (X_CHOOSE_THEN `b:B` SUBST1_TAC)
      (SPEC `x:A#B` PAIR_SURJECTIVE)) THEN
   REWRITE_TAC[FST; SND]);;
 
-let pair_INDUCT = prove
+export_namedthm PAIR "PAIR";;
+
+let pair_INDUCT = prove 
  (`!P. (!x y. P (x,y)) ==> !p. P p`,
   REPEAT STRIP_TAC THEN
   GEN_REWRITE_TAC RAND_CONV [GSYM PAIR] THEN
   FIRST_ASSUM MATCH_ACCEPT_TAC);;
 
-let pair_RECURSION = prove
+export_namedthm pair_INDUCT "pair_INDUCT";;
+
+let pair_RECURSION = prove 
  (`!PAIR'. ?fn:A#B->C. !a0 a1. fn (a0,a1) = PAIR' a0 a1`,
   GEN_TAC THEN EXISTS_TAC `\p. (PAIR':A->B->C) (FST p) (SND p)` THEN
   REWRITE_TAC[FST; SND]);;
+
+export_namedthm pair_RECURSION "pair_RECURSION";;
 
 (* ------------------------------------------------------------------------- *)
 (* Syntax operations.                                                        *)
@@ -148,8 +183,8 @@ extend_basic_rewrites [FST; SND; PAIR];;
 let the_definitions = ref
  [SND_DEF; FST_DEF; COMMA_DEF; mk_pair_def; GEQ_DEF; GABS_DEF;
   LET_END_DEF; LET_DEF; one_DEF; I_DEF; o_DEF; COND_DEF; _FALSITY_;
-  EXISTS_UNIQUE_DEF; NOT_DEF; F_DEF; OR_DEF; EXISTS_DEF; FORALL_DEF; IMP_DEF;
-  AND_DEF; T_DEF];;
+  EXISTS_UNIQUE_DEF; NOT_DEF; F_DEF'; OR_DEF'; EXISTS_DEF'; FORALL_DEF'; IMP_DEF';
+  AND_DEF'; T_DEF'];;
 
 let new_definition =
   let depair =
@@ -292,120 +327,168 @@ inductive_type_store :=
 (* Convenient rules to eliminate binders over pairs.                         *)
 (* ------------------------------------------------------------------------- *)
 
-let FORALL_PAIR_THM = prove
+let FORALL_PAIR_THM = prove 
  (`!P. (!p. P p) <=> (!p1 p2. P(p1,p2))`,
   MESON_TAC[PAIR]);;
 
-let EXISTS_PAIR_THM = prove
+export_namedthm FORALL_PAIR_THM "FORALL_PAIR_THM";;
+
+let EXISTS_PAIR_THM = prove 
  (`!P. (?p. P p) <=> ?p1 p2. P(p1,p2)`,
   MESON_TAC[PAIR]);;
 
-let LAMBDA_PAIR_THM = prove
+export_namedthm EXISTS_PAIR_THM "EXISTS_PAIR_THM";;
+
+let LAMBDA_PAIR_THM = prove 
  (`!t. (\p. t p) = (\(x,y). t(x,y))`,
   REWRITE_TAC[FORALL_PAIR_THM; FUN_EQ_THM]);;
 
-let LAMBDA_PAIR = prove
+export_namedthm LAMBDA_PAIR_THM "LAMBDA_PAIR_THM";;
+
+let LAMBDA_PAIR = prove 
  (`!f:A->B->C. (\(x,y). f x y) = (\p. f (FST p) (SND p))`,
   REWRITE_TAC[LAMBDA_PAIR_THM]);;
 
-let LAMBDA_TRIPLE_THM = prove
+export_namedthm LAMBDA_PAIR "LAMBDA_PAIR";;
+
+let LAMBDA_TRIPLE_THM = prove 
  (`!f:A#B#C->D. (\t. f t) = (\(x,y,z). f(x,y,z))`,
   REWRITE_TAC[FORALL_PAIR_THM; FUN_EQ_THM]);;
 
-let LAMBDA_TRIPLE = prove
+export_namedthm LAMBDA_TRIPLE_THM "LAMBDA_TRIPLE_THM";;
+
+let LAMBDA_TRIPLE = prove 
  (`!f:A->B->C->D.
    (\(x,y,z). f x y z) = (\t. f (FST t) (FST(SND t)) (SND(SND t)))`,
   REWRITE_TAC[LAMBDA_TRIPLE_THM]);;
 
-let PAIRED_ETA_THM = prove
+export_namedthm LAMBDA_TRIPLE "LAMBDA_TRIPLE";;
+
+let PAIRED_ETA_THM = prove 
  (`(!f. (\(x,y). f (x,y)) = f) /\
    (!f. (\(x,y,z). f (x,y,z)) = f) /\
    (!f. (\(w,x,y,z). f (w,x,y,z)) = f)`,
   REPEAT STRIP_TAC THEN REWRITE_TAC[FUN_EQ_THM; FORALL_PAIR_THM]);;
 
-let FORALL_UNCURRY = prove
+export_namedthm PAIRED_ETA_THM "PAIRED_ETA_THM";;
+
+let FORALL_UNCURRY = prove 
  (`!P. (!f:A->B->C. P f) <=> (!f. P (\a b. f(a,b)))`,
   GEN_TAC THEN EQ_TAC THEN SIMP_TAC[] THEN DISCH_TAC THEN
   X_GEN_TAC `f:A->B->C` THEN
   FIRST_ASSUM(MP_TAC o SPEC `\(a,b). (f:A->B->C) a b`) THEN SIMP_TAC[ETA_AX]);;
 
-let EXISTS_UNCURRY = prove
+export_namedthm FORALL_UNCURRY "FORALL_UNCURRY";;
+
+let EXISTS_UNCURRY = prove 
  (`!P. (?f:A->B->C. P f) <=> (?f. P (\a b. f(a,b)))`,
   ONCE_REWRITE_TAC[MESON[] `(?x. P x) <=> ~(!x. ~P x)`] THEN
   REWRITE_TAC[FORALL_UNCURRY]);;
 
-let EXISTS_CURRY = prove
+export_namedthm EXISTS_UNCURRY "EXISTS_UNCURRY";;
+
+let EXISTS_CURRY = prove 
  (`!P. (?f. P f) <=> (?f. P (\(a,b). f a b))`,
   REWRITE_TAC[EXISTS_UNCURRY; PAIRED_ETA_THM]);;
 
-let FORALL_CURRY = prove
+export_namedthm EXISTS_CURRY "EXISTS_CURRY";;
+
+let FORALL_CURRY = prove 
  (`!P. (!f. P f) <=> (!f. P (\(a,b). f a b))`,
   REWRITE_TAC[FORALL_UNCURRY; PAIRED_ETA_THM]);;
 
-let FORALL_UNPAIR_THM = prove
+export_namedthm FORALL_CURRY "FORALL_CURRY";;
+
+let FORALL_UNPAIR_THM = prove 
  (`!P. (!x y. P x y) <=> !z. P (FST z) (SND z)`,
   REWRITE_TAC[FORALL_PAIR_THM; FST; SND] THEN MESON_TAC[]);;
 
-let EXISTS_UNPAIR_THM = prove
+export_namedthm FORALL_UNPAIR_THM "FORALL_UNPAIR_THM";;
+
+let EXISTS_UNPAIR_THM = prove 
  (`!P. (?x y. P x y) <=> ?z. P (FST z) (SND z)`,
   REWRITE_TAC[EXISTS_PAIR_THM; FST; SND] THEN MESON_TAC[]);;
 
-let FORALL_PAIR_FUN_THM = prove
+export_namedthm EXISTS_UNPAIR_THM "EXISTS_UNPAIR_THM";;
+
+let FORALL_PAIR_FUN_THM = prove 
  (`!P. (!f:A->B#C. P f) <=> (!g h. P(\a. g a,h a))`,
   GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
   GEN_TAC THEN GEN_REWRITE_TAC RAND_CONV [GSYM ETA_AX] THEN
   GEN_REWRITE_TAC BINDER_CONV [GSYM PAIR] THEN PURE_ASM_REWRITE_TAC[]);;
 
-let EXISTS_PAIR_FUN_THM = prove
+export_namedthm FORALL_PAIR_FUN_THM "FORALL_PAIR_FUN_THM";;
+
+let EXISTS_PAIR_FUN_THM = prove 
  (`!P. (?f:A->B#C. P f) <=> (?g h. P(\a. g a,h a))`,
   REWRITE_TAC[MESON[] `(?x. P x) <=> ~(!x. ~P x)`] THEN
   REWRITE_TAC[FORALL_PAIR_FUN_THM]);;
 
-let FORALL_UNPAIR_FUN_THM = prove
+export_namedthm EXISTS_PAIR_FUN_THM "EXISTS_PAIR_FUN_THM";;
+
+let FORALL_UNPAIR_FUN_THM = prove 
  (`!P. (!f g. P f g) <=> (!h. P (FST o h) (SND o h))`,
   REWRITE_TAC[FORALL_PAIR_FUN_THM; o_DEF; ETA_AX]);;
 
-let EXISTS_UNPAIR_FUN_THM = prove
+export_namedthm FORALL_UNPAIR_FUN_THM "FORALL_UNPAIR_FUN_THM";;
+
+let EXISTS_UNPAIR_FUN_THM = prove 
  (`!P. (?f g. P f g) <=> (?h. P (FST o h) (SND o h))`,
   REWRITE_TAC[EXISTS_PAIR_FUN_THM; o_DEF; ETA_AX]);;
+
+export_namedthm EXISTS_UNPAIR_FUN_THM "EXISTS_UNPAIR_FUN_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Related theorems for explicitly paired quantifiers.                       *)
 (* ------------------------------------------------------------------------- *)
 
-let FORALL_PAIRED_THM = prove
+let FORALL_PAIRED_THM = prove 
  (`!P. (!(x,y). P x y) <=> (!x y. P x y)`,
-  GEN_TAC THEN GEN_REWRITE_TAC (LAND_CONV o RATOR_CONV) [FORALL_DEF] THEN
-  REWRITE_TAC[FUN_EQ_THM; FORALL_PAIR_THM]);;
+  (*GEN_TAC THEN GEN_REWRITE_TAC (LAND_CONV o RATOR_CONV) [FORALL_DEF] THEN
+  REWRITE_TAC[FUN_EQ_THM; FORALL_PAIR_THM]*)
+  GEN_TAC THEN MATCH_MP_TAC(TAUT `(~p <=> ~q) ==> (p <=> q)`) THEN
+  REWRITE_TAC[REWRITE_RULE[ETA_AX] NOT_FORALL_THM; EXISTS_PAIR_THM]);;
 
-let EXISTS_PAIRED_THM = prove
+export_namedthm FORALL_PAIRED_THM "FORALL_PAIRED_THM";;
+
+let EXISTS_PAIRED_THM = prove 
  (`!P. (?(x,y). P x y) <=> (?x y. P x y)`,
   GEN_TAC THEN MATCH_MP_TAC(TAUT `(~p <=> ~q) ==> (p <=> q)`) THEN
   REWRITE_TAC[REWRITE_RULE[ETA_AX] NOT_EXISTS_THM; FORALL_PAIR_THM]);;
+
+export_namedthm EXISTS_PAIRED_THM "EXISTS_PAIRED_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Likewise for tripled quantifiers (could continue with the same proof).    *)
 (* ------------------------------------------------------------------------- *)
 
-let FORALL_TRIPLED_THM = prove
+let FORALL_TRIPLED_THM = prove 
  (`!P. (!(x,y,z). P x y z) <=> (!x y z. P x y z)`,
-  GEN_TAC THEN GEN_REWRITE_TAC (LAND_CONV o RATOR_CONV) [FORALL_DEF] THEN
-  REWRITE_TAC[FUN_EQ_THM; FORALL_PAIR_THM]);;
+  (*GEN_TAC THEN GEN_REWRITE_TAC (LAND_CONV o RATOR_CONV) [FORALL_DEF] THEN
+  REWRITE_TAC[FUN_EQ_THM; FORALL_PAIR_THM]*)
+  GEN_TAC THEN MATCH_MP_TAC(TAUT `(~p <=> ~q) ==> (p <=> q)`) THEN
+  REWRITE_TAC[REWRITE_RULE[ETA_AX] NOT_FORALL_THM; EXISTS_PAIR_THM]);;
 
-let EXISTS_TRIPLED_THM = prove
+export_namedthm FORALL_TRIPLED_THM "FORALL_TRIPLED_THM";;
+
+let EXISTS_TRIPLED_THM = prove 
  (`!P. (?(x,y,z). P x y z) <=> (?x y z. P x y z)`,
   GEN_TAC THEN MATCH_MP_TAC(TAUT `(~p <=> ~q) ==> (p <=> q)`) THEN
   REWRITE_TAC[REWRITE_RULE[ETA_AX] NOT_EXISTS_THM; FORALL_PAIR_THM]);;
+
+export_namedthm EXISTS_TRIPLED_THM "EXISTS_TRIPLED_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Similar theorems for the choice operator.                                 *)
 (* ------------------------------------------------------------------------- *)
 
-let CHOICE_UNPAIR_THM = prove
+let CHOICE_UNPAIR_THM = prove 
  (`!P. (@(x:A,y:B). P x y) = (@p. P (FST p) (SND p))`,
   REWRITE_TAC[LAMBDA_PAIR]);;
 
-let CHOICE_PAIRED_THM = prove
+export_namedthm CHOICE_UNPAIR_THM "CHOICE_UNPAIR_THM";;
+
+let CHOICE_PAIRED_THM = prove 
  (`!P Q. (?x:A y:B. P x y) /\ (!x y. P x y ==> Q(x,y)) ==> Q (@(x,y). P x y)`,
   INTRO_TAC "!P Q; (@x0 y0. P0) PQ" THEN
   SUBGOAL_THEN `(\ (x:A,y:B). P x y:bool) = (\p. P (FST p) (SND p))`
@@ -414,6 +497,8 @@ let CHOICE_PAIRED_THM = prove
   INTRO_TAC "![c]; c" THEN ONCE_REWRITE_TAC[GSYM PAIR] THEN
   REMOVE_THEN "PQ" MATCH_MP_TAC THEN REMOVE_THEN "c" MATCH_MP_TAC THEN
   REWRITE_TAC[EXISTS_PAIR_THM] THEN ASM_MESON_TAC[]);;
+
+export_namedthm CHOICE_PAIRED_THM "CHOICE_PAIRED_THM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Expansion of a let-term.                                                  *)
@@ -478,3 +563,5 @@ let (LET_TAC:tactic) =
      W(fun (asl',w') ->
         let tm' = follow_path path w' in
         CONV_TAC(PATH_CONV path (K(let_CONV tm'))))) gl;;
+
+export_theory "dummy";;

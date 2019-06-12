@@ -133,5 +133,3 @@ export_namedthm EXISTS_ONE_THM "EXISTS_ONE_THM";;
 
 inductive_type_store :=
   ("1",(1,one_INDUCT,one_RECURSION))::(!inductive_type_store);;
-
-export_theory "dummy";;
