@@ -2271,6 +2271,3 @@ let BITS_ELIM_CONV : conv =
     | Comb _ -> COMB_CONV BITS_ELIM_CONV tm
     | Abs _ -> ABS_CONV BITS_ELIM_CONV tm in
   BITS_ELIM_CONV;;
-
-export_theory "dummy";;
-
