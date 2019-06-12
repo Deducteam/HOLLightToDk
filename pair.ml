@@ -563,5 +563,3 @@ let (LET_TAC:tactic) =
      W(fun (asl',w') ->
         let tm' = follow_path path w' in
         CONV_TAC(PATH_CONV path (K(let_CONV tm'))))) gl;;
-
-export_theory "dummy";;

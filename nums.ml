@@ -1,3 +1,4 @@
+
 (* ========================================================================= *)
 (* The axiom of infinity; construction of the natural numbers.               *)
 (*                                                                           *)
@@ -19,23 +20,37 @@ new_type ("ind",0);;
 (* We assert the axiom of infinity as in HOL88, but then we can forget it!   *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "function-def";;
+
 let ONE_ONE = new_definition
   `ONE_ONE(f:A->B) = !x1 x2. (f x1 = f x2) ==> (x1 = x2)`;;
+
+export_namedthm ONE_ONE "ONE_ONE";;
 
 let ONTO = new_definition
   `ONTO(f:A->B) = !y. ?x. y = f x`;;
 
+export_namedthm ONTO "ONTO";;
+
+export_theory "axiom-infinity";;
+
 let INFINITY_AX = new_axiom
   `?f:ind->ind. ONE_ONE f /\ ~(ONTO f)`;;
+
+export_namedthm INFINITY_AX "INFINITY_AX";;
 
 (* ------------------------------------------------------------------------- *)
 (* Actually introduce constants.                                             *)
 (* ------------------------------------------------------------------------- *)
 
-let IND_SUC_0_EXISTS = prove
+export_theory "natural";;
+
+let IND_SUC_0_EXISTS = prove 
  (`?(f:ind->ind) z. (!x1 x2. (f x1 = f x2) = (x1 = x2)) /\ (!x. ~(f x = z))`,
   X_CHOOSE_TAC `f:ind->ind` INFINITY_AX THEN EXISTS_TAC `f:ind->ind` THEN
   POP_ASSUM MP_TAC THEN REWRITE_TAC[ONE_ONE; ONTO] THEN MESON_TAC[]);;
+
+export_namedthm IND_SUC_0_EXISTS "IND_SUC_0_EXISTS";;
 
 let IND_SUC_SPEC =
   let th1 = new_definition
@@ -72,12 +87,14 @@ let SUC_DEF = new_definition
 (* Distinctness and injectivity of constructors.                             *)
 (* ------------------------------------------------------------------------- *)
 
-let NOT_SUC = prove
+let NOT_SUC = prove 
  (`!n. ~(SUC n = _0)`,
   REWRITE_TAC[SUC_DEF; ZERO_DEF] THEN
   MESON_TAC[NUM_REP_RULES; fst num_tydef; snd num_tydef; IND_SUC_0]);;
 
-let SUC_INJ = prove
+export_namedthm NOT_SUC "NOT_SUC";;
+
+let SUC_INJ = prove 
  (`!m n. SUC m = SUC n <=> m = n`,
   REPEAT GEN_TAC THEN REWRITE_TAC[SUC_DEF] THEN
   EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
@@ -89,11 +106,13 @@ let SUC_INJ = prove
   DISCH_THEN(MP_TAC o AP_TERM `mk_num`) THEN
   REWRITE_TAC[fst num_tydef]);;
 
+export_namedthm SUC_INJ "SUC_INJ";;
+
 (* ------------------------------------------------------------------------- *)
 (* Induction.                                                                *)
 (* ------------------------------------------------------------------------- *)
 
-let num_INDUCTION = prove
+let num_INDUCTION = prove 
  (`!P. P(_0) /\ (!n. P(n) ==> P(SUC n)) ==> !n. P n`,
   REPEAT STRIP_TAC THEN
   MP_TAC(SPEC `\i. NUM_REP i /\ P(mk_num i):bool` NUM_REP_INDUCT) THEN
@@ -109,11 +128,13 @@ let num_INDUCTION = prove
     DISCH_THEN(MP_TAC o SPEC `dest_num n`) THEN
     REWRITE_TAC[fst num_tydef; snd num_tydef]]);;
 
+export_namedthm num_INDUCTION "num_INDUCTION";;
+
 (* ------------------------------------------------------------------------- *)
 (* Recursion.                                                                *)
 (* ------------------------------------------------------------------------- *)
 
-let num_Axiom = prove
+let num_Axiom = prove 
  (`!(e:A) f. ?!fn. (fn _0 = e) /\
                    (!n. fn (SUC n) = f (fn n) n)`,
   REPEAT GEN_TAC THEN ONCE_REWRITE_TAC[EXISTS_UNIQUE_THM] THEN CONJ_TAC THENL
@@ -142,6 +163,8 @@ let num_Axiom = prove
     MATCH_MP_TAC num_INDUCTION THEN ASM_REWRITE_TAC[] THEN
     REPEAT STRIP_TAC THEN ASM_REWRITE_TAC[]]);;
 
+export_namedthm num_Axiom "num_Axiom";;
+
 (* ------------------------------------------------------------------------- *)
 (* The basic numeral tag; rewrite existing instances of "_0".                *)
 (* ------------------------------------------------------------------------- *)
@@ -152,6 +175,8 @@ let NUMERAL =
   let numeral_tm = mk_var("NUMERAL",funn_ty) in
   let n_tm = mk_var("n",num_ty) in
   new_definition(mk_eq(mk_comb(numeral_tm,n_tm),n_tm));;
+
+export_namedthm NUMERAL "NUMERAL";;
 
 let [NOT_SUC; num_INDUCTION; num_Axiom] =
   let th = prove(`_0 = 0`,REWRITE_TAC[NUMERAL]) in
@@ -174,9 +199,11 @@ let num_RECURSION =
 (* Cases theorem.                                                            *)
 (* ------------------------------------------------------------------------- *)
 
-let num_CASES = prove
+let num_CASES = prove 
  (`!m. (m = 0) \/ (?n. m = SUC n)`,
   INDUCT_TAC THEN MESON_TAC[]);;
+
+export_namedthm num_CASES "num_CASES";;
 
 (* ------------------------------------------------------------------------- *)
 (* Augmenting inductive type store.                                          *)
@@ -189,6 +216,8 @@ inductive_type_store :=
 (* "Bitwise" binary representation of numerals.                              *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "natural-numeral-def";;
+
 let BIT0_DEF =
   let funn_ty = type_of(rator(lhand(snd(dest_forall(concl NUMERAL))))) in
   let bit0_tm = mk_var("BIT0",funn_ty) in
@@ -197,12 +226,16 @@ let BIT0_DEF =
   and th = BETA_RULE(ISPECL [`0`; `\m n:num. SUC(SUC m)`] num_RECURSION) in
   REWRITE_RULE[GSYM def] (SELECT_RULE th);;
 
+export_namedthm BIT0_DEF "BIT0_DEF";;
+
 let BIT1_DEF =
   let funn_ty = type_of(rator(lhand(lhand(concl BIT0_DEF)))) in
   let num_ty = snd(dest_fun_ty funn_ty) in
   let n_tm = mk_var("n",num_ty) in
   let bit1_tm = mk_var("BIT1",funn_ty) in
   new_definition(mk_eq(mk_comb(bit1_tm,n_tm),`SUC (BIT0 n)`));;
+
+export_namedthm BIT1_DEF "BIT1_DEF";;
 
 (* ------------------------------------------------------------------------- *)
 (* Syntax operations on numerals.                                            *)
@@ -297,3 +330,5 @@ let new_specification =
           let sth = specifies names th in
           the_specifications := ((names,th),sth)::(!the_specifications);
           sth;;
+
+export_theory "dummy";;
