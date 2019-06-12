@@ -1,3 +1,4 @@
+
 (* ========================================================================= *)
 (* Inductive (or free recursive) types.                                      *)
 (*                                                                           *)
@@ -9,11 +10,13 @@
 
 needs "grobner.ml";;
 
+export_theory "ind-types";;
+
 (* ------------------------------------------------------------------------- *)
 (* Abstract left inverses for binary injections (we could construct them...) *)
 (* ------------------------------------------------------------------------- *)
 
-let INJ_INVERSE2 = prove
+let INJ_INVERSE2 = prove 
  (`!P:A->B->C.
     (!x1 y1 x2 y2. (P x1 y1 = P x2 y2) <=> (x1 = x2) /\ (y1 = y2))
     ==> ?X Y. !x y. (X(P x y) = x) /\ (Y(P x y) = y)`,
@@ -25,6 +28,8 @@ let INJ_INVERSE2 = prove
   EQ_TAC THEN STRIP_TAC THEN ASM_REWRITE_TAC[] THEN
   W(EXISTS_TAC o rand o snd o dest_exists o snd) THEN REFL_TAC);;
 
+export_namedthm INJ_INVERSE2 "INJ_INVERSE2";;
+
 (* ------------------------------------------------------------------------- *)
 (* Define an injective pairing function on ":num".                           *)
 (* ------------------------------------------------------------------------- *)
@@ -32,7 +37,9 @@ let INJ_INVERSE2 = prove
 let NUMPAIR = new_definition
   `NUMPAIR x y = (2 EXP x) * (2 * y + 1)`;;
 
-let NUMPAIR_INJ_LEMMA = prove
+export_namedthm NUMPAIR "NUMPAIR";;
+
+let NUMPAIR_INJ_LEMMA = prove 
  (`!x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) ==> (x1 = x2)`,
   REWRITE_TAC[NUMPAIR] THEN REPEAT(INDUCT_TAC THEN GEN_TAC) THEN
   ASM_REWRITE_TAC[EXP; GSYM MULT_ASSOC; ARITH; EQ_MULT_LCANCEL;
@@ -40,12 +47,16 @@ let NUMPAIR_INJ_LEMMA = prove
   DISCH_THEN(MP_TAC o AP_TERM `EVEN`) THEN
   REWRITE_TAC[EVEN_MULT; EVEN_ADD; ARITH]);;
 
-let NUMPAIR_INJ = prove
+export_namedthm NUMPAIR_INJ_LEMMA "NUMPAIR_INJ_LEMMA";;
+
+let NUMPAIR_INJ = prove 
  (`!x1 y1 x2 y2. (NUMPAIR x1 y1 = NUMPAIR x2 y2) <=> (x1 = x2) /\ (y1 = y2)`,
   REPEAT GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
   FIRST_ASSUM(SUBST_ALL_TAC o MATCH_MP NUMPAIR_INJ_LEMMA) THEN
   POP_ASSUM MP_TAC THEN REWRITE_TAC[NUMPAIR] THEN
   REWRITE_TAC[EQ_MULT_LCANCEL; EQ_ADD_RCANCEL; EXP_EQ_0; ARITH]);;
+
+export_namedthm NUMPAIR_INJ "NUMPAIR_INJ";;
 
 let NUMPAIR_DEST = new_specification
   ["NUMFST"; "NUMSND"]
@@ -58,13 +69,17 @@ let NUMPAIR_DEST = new_specification
 let NUMSUM = new_definition
   `NUMSUM b x = if b then SUC(2 * x) else 2 * x`;;
 
-let NUMSUM_INJ = prove
+export_namedthm NUMSUM "NUMSUM";;
+
+let NUMSUM_INJ = prove 
  (`!b1 x1 b2 x2. (NUMSUM b1 x1 = NUMSUM b2 x2) <=> (b1 = b2) /\ (x1 = x2)`,
   REPEAT GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
   POP_ASSUM(MP_TAC o REWRITE_RULE[NUMSUM]) THEN
   DISCH_THEN(fun th -> MP_TAC th THEN MP_TAC(AP_TERM `EVEN` th)) THEN
   REPEAT COND_CASES_TAC THEN REWRITE_TAC[EVEN; EVEN_DOUBLE] THEN
   REWRITE_TAC[SUC_INJ; EQ_MULT_LCANCEL; ARITH]);;
+
+export_namedthm NUMSUM_INJ "NUMSUM_INJ";;
 
 let NUMSUM_DEST = new_specification
   ["NUMLEFT"; "NUMRIGHT"]
@@ -77,11 +92,15 @@ let NUMSUM_DEST = new_specification
 let INJN = new_definition
  `INJN (m:num) = \(n:num) (a:A). n = m`;;
 
-let INJN_INJ = prove
+export_namedthm INJN "INJN";;
+
+let INJN_INJ = prove 
  (`!n1 n2. (INJN n1 :num->A->bool = INJN n2) <=> (n1 = n2)`,
   REPEAT GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
   POP_ASSUM(MP_TAC o C AP_THM `n1:num` o REWRITE_RULE[INJN]) THEN
   DISCH_THEN(MP_TAC o C AP_THM `a:A`) THEN REWRITE_TAC[BETA_THM]);;
+
+export_namedthm INJN_INJ "INJN_INJ";;
 
 (* ------------------------------------------------------------------------- *)
 (* Injection A->Z, where Z == num->A->bool.                                  *)
@@ -90,11 +109,15 @@ let INJN_INJ = prove
 let INJA = new_definition
  `INJA (a:A) = \(n:num) b. b = a`;;
 
-let INJA_INJ = prove
+export_namedthm INJA "INJA";;
+
+let INJA_INJ = prove 
  (`!a1 a2. (INJA a1 = INJA a2) <=> (a1:A = a2)`,
   REPEAT GEN_TAC THEN REWRITE_TAC[INJA; FUN_EQ_THM] THEN EQ_TAC THENL
    [DISCH_THEN(MP_TAC o SPEC `a1:A`) THEN REWRITE_TAC[];
     DISCH_THEN SUBST1_TAC THEN REWRITE_TAC[]]);;
+
+export_namedthm INJA_INJ "INJA_INJ";;
 
 (* ------------------------------------------------------------------------- *)
 (* Injection (num->Z)->Z, where Z == num->A->bool.                           *)
@@ -103,7 +126,9 @@ let INJA_INJ = prove
 let INJF = new_definition
   `INJF (f:num->(num->A->bool)) = \n. f (NUMFST n) (NUMSND n)`;;
 
-let INJF_INJ = prove
+export_namedthm INJF "INJF";;
+
+let INJF_INJ = prove 
  (`!f1 f2. (INJF f1 :num->A->bool = INJF f2) <=> (f1 = f2)`,
   REPEAT GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
   REWRITE_TAC[FUN_EQ_THM] THEN
@@ -111,6 +136,8 @@ let INJF_INJ = prove
   POP_ASSUM(MP_TAC o REWRITE_RULE[INJF]) THEN
   DISCH_THEN(MP_TAC o C AP_THM `a:A` o C AP_THM `NUMPAIR n m`) THEN
   REWRITE_TAC[NUMPAIR_DEST]);;
+
+export_namedthm INJF_INJ "INJF_INJ";;
 
 (* ------------------------------------------------------------------------- *)
 (* Injection Z->Z->Z, where Z == num->A->bool.                               *)
@@ -120,7 +147,9 @@ let INJP = new_definition
   `INJP f1 f2:num->A->bool =
         \n a. if NUMLEFT n then f1 (NUMRIGHT n) a else f2 (NUMRIGHT n) a`;;
 
-let INJP_INJ = prove
+export_namedthm INJP "INJP";;
+
+let INJP_INJ = prove 
  (`!(f1:num->A->bool) f1' f2 f2'.
         (INJP f1 f2 = INJP f1' f2') <=> (f1 = f1') /\ (f2 = f2')`,
   REPEAT GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
@@ -130,6 +159,8 @@ let INJP_INJ = prove
   DISCH_THEN(fun th -> MP_TAC(SPEC `T` th) THEN MP_TAC(SPEC `F` th)) THEN
   ASM_SIMP_TAC[NUMSUM_DEST; ETA_AX]);;
 
+export_namedthm INJP_INJ "INJP_INJ";;
+
 (* ------------------------------------------------------------------------- *)
 (* Now, set up "constructor" and "bottom" element.                           *)
 (* ------------------------------------------------------------------------- *)
@@ -138,12 +169,18 @@ let ZCONSTR = new_definition
   `ZCONSTR c i r :num->A->bool
      = INJP (INJN (SUC c)) (INJP (INJA i) (INJF r))`;;
 
+export_namedthm ZCONSTR "ZCONSTR";;
+
 let ZBOT = new_definition
   `ZBOT = INJP (INJN 0) (@z:num->A->bool. T)`;;
 
-let ZCONSTR_ZBOT = prove
+export_namedthm ZBOT "ZBOT";;
+
+let ZCONSTR_ZBOT = prove 
  (`!c i r. ~(ZCONSTR c i r :num->A->bool = ZBOT)`,
   REWRITE_TAC[ZCONSTR; ZBOT; INJP_INJ; INJN_INJ; NOT_SUC]);;
+
+export_namedthm ZCONSTR_ZBOT "ZCONSTR_ZBOT";;
 
 (* ------------------------------------------------------------------------- *)
 (* Carve out an inductively defined set.                                     *)
@@ -165,15 +202,19 @@ let recspace_tydef =
 let BOTTOM = new_definition
   `BOTTOM = _mk_rec (ZBOT:num->A->bool)`;;
 
+export_namedthm BOTTOM "BOTTOM";;
+
 let CONSTR = new_definition
   `CONSTR c i r :(A)recspace
      = _mk_rec (ZCONSTR c i (\n. _dest_rec(r n)))`;;
+
+export_namedthm CONSTR "CONSTR";;
 
 (* ------------------------------------------------------------------------- *)
 (* Some lemmas.                                                              *)
 (* ------------------------------------------------------------------------- *)
 
-let MK_REC_INJ = prove
+let MK_REC_INJ = prove 
  (`!x y. (_mk_rec x :(A)recspace = _mk_rec y)
          ==> (ZRECSPACE x /\ ZRECSPACE y ==> (x = y))`,
   REPEAT GEN_TAC THEN DISCH_TAC THEN
@@ -181,18 +222,22 @@ let MK_REC_INJ = prove
   DISCH_THEN(fun th -> ONCE_REWRITE_TAC[GSYM th]) THEN
   ASM_REWRITE_TAC[]);;
 
-let DEST_REC_INJ = prove
+export_namedthm MK_REC_INJ "MK_REC_INJ";;
+
+let DEST_REC_INJ = prove 
  (`!x y. (_dest_rec x = _dest_rec y) <=> (x:(A)recspace = y)`,
   REPEAT GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
   POP_ASSUM(MP_TAC o AP_TERM
     `_mk_rec:(num->A->bool)->(A)recspace`) THEN
   REWRITE_TAC[fst recspace_tydef]);;
 
+export_namedthm DEST_REC_INJ "DEST_REC_INJ";;
+
 (* ------------------------------------------------------------------------- *)
 (* Show that the set is freely inductively generated.                        *)
 (* ------------------------------------------------------------------------- *)
 
-let CONSTR_BOT = prove
+let CONSTR_BOT = prove 
  (`!c i r. ~(CONSTR c i r :(A)recspace = BOTTOM)`,
   REPEAT GEN_TAC THEN REWRITE_TAC[CONSTR; BOTTOM] THEN
   DISCH_THEN(MP_TAC o MATCH_MP MK_REC_INJ) THEN
@@ -200,7 +245,9 @@ let CONSTR_BOT = prove
   MATCH_MP_TAC(CONJUNCT2 ZRECSPACE_RULES) THEN
   REWRITE_TAC[fst recspace_tydef; snd recspace_tydef]);;
 
-let CONSTR_INJ = prove
+export_namedthm CONSTR_BOT "CONSTR_BOT";;
+
+let CONSTR_INJ = prove 
  (`!c1 i1 r1 c2 i2 r2. (CONSTR c1 i1 r1 :(A)recspace = CONSTR c2 i2 r2) <=>
                        (c1 = c2) /\ (i1 = i2) /\ (r1 = r2)`,
   REPEAT GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
@@ -214,7 +261,9 @@ let CONSTR_INJ = prove
     ONCE_REWRITE_TAC[FUN_EQ_THM] THEN BETA_TAC THEN
     REWRITE_TAC[SUC_INJ; DEST_REC_INJ]]);;
 
-let CONSTR_IND = prove
+export_namedthm CONSTR_INJ "CONSTR_INJ";;
+
+let CONSTR_IND = prove 
  (`!P. P(BOTTOM) /\
        (!c i r. (!n. P(r n)) ==> P(CONSTR c i r))
        ==> !x:(A)recspace. P(x)`,
@@ -237,11 +286,13 @@ let CONSTR_IND = prove
     DISCH_THEN MATCH_MP_TAC THEN
     REWRITE_TAC[fst recspace_tydef; snd recspace_tydef]]);;
 
+export_namedthm CONSTR_IND "CONSTR_IND";;
+
 (* ------------------------------------------------------------------------- *)
 (* Now prove the recursion theorem (this subcase is all we need).            *)
 (* ------------------------------------------------------------------------- *)
 
-let CONSTR_REC = prove
+let CONSTR_REC = prove 
  (`!Fn:num->A->(num->(A)recspace)->(num->B)->B.
      ?f. (!c i r. f (CONSTR c i r) = Fn c i r (\n. f (r n)))`,
   REPEAT STRIP_TAC THEN (MP_TAC o prove_inductive_relations_exist)
@@ -278,6 +329,8 @@ let CONSTR_REC = prove
     FIRST_ASSUM(fun th -> GEN_REWRITE_TAC I [GSYM th]) THEN
     REWRITE_TAC[BETA_THM]]);;
 
+export_namedthm CONSTR_REC "CONSTR_REC";;
+
 (* ------------------------------------------------------------------------- *)
 (* The following is useful for coding up functions casewise.                 *)
 (* ------------------------------------------------------------------------- *)
@@ -286,13 +339,19 @@ let FCONS = new_recursive_definition num_RECURSION
  `(!a f. FCONS (a:A) f 0 = a) /\
   (!a f n. FCONS (a:A) f (SUC n) = f n)`;;
 
-let FCONS_UNDO = prove
+export_namedthm FCONS "FCONS";;
+
+let FCONS_UNDO = prove 
  (`!f:num->A. f = FCONS (f 0) (f o SUC)`,
   GEN_TAC THEN REWRITE_TAC[FUN_EQ_THM] THEN
   INDUCT_TAC THEN REWRITE_TAC[FCONS; o_THM]);;
 
+export_namedthm FCONS_UNDO "FCONS_UNDO";;
+
 let FNIL = new_definition
   `FNIL (n:num) = @x:A. T`;;
+
+export_namedthm FNIL "FNIL";;
 
 (* ------------------------------------------------------------------------- *)
 (* The initial mutual type definition function, with a type-restricted       *)
@@ -765,14 +824,23 @@ let parse_inductive_type_specification =
 (* Use this temporary version to define the sum type.                        *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "sum-def";;
+
 let sum_INDUCT,sum_RECURSION =
   define_type_raw (parse_inductive_type_specification "sum = INL A | INR B");;
+
+export_namedthm sum_INDUCT "sum_INDUCT";;
+export_namedthm sum_RECURSION "sum_RECURSION";;
 
 let OUTL = new_recursive_definition sum_RECURSION
   `OUTL (INL x :A+B) = x`;;
 
+export_namedthm OUTL "OUTL";;
+
 let OUTR = new_recursive_definition sum_RECURSION
   `OUTR (INR y :A+B) = y`;;
+
+export_namedthm OUTR "OUTR";;
 
 (* ------------------------------------------------------------------------- *)
 (* Generalize the recursion theorem to multiple domain types.                *)
@@ -878,13 +946,23 @@ let define_type_raw =
 (* Set up options and lists.                                                 *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "option-def";;
+
 let option_INDUCT,option_RECURSION =
   define_type_raw
    (parse_inductive_type_specification "option = NONE | SOME A");;
 
+export_namedthm option_INDUCT "option_INDUCT";;
+export_namedthm option_RECURSION "option_RECURSION";;
+
+export_theory "list-def";;
+
 let list_INDUCT,list_RECURSION =
   define_type_raw
    (parse_inductive_type_specification "list = NIL | CONS A list");;
+
+export_namedthm list_INDUCT "list_INDUCT";;
+export_namedthm list_RECURSION "list_RECURSION";;
 
 (* ------------------------------------------------------------------------- *)
 (* Tools for proving injectivity and distinctness of constructors.           *)
@@ -1041,24 +1119,34 @@ let cases ty =
 (* Convenient definitions for type isomorphism.                              *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "type-iso";;
+
 let ISO = new_definition
   `ISO (f:A->B) (g:B->A) <=> (!x. f(g x) = x) /\ (!y. g(f y) = y)`;;
 
-let ISO_REFL = prove
+export_namedthm ISO "ISO";;
+
+let ISO_REFL = prove 
  (`ISO (\x:A. x) (\x. x)`,
   REWRITE_TAC[ISO]);;
 
-let ISO_FUN = prove
+export_namedthm ISO_REFL "ISO_REFL";;
+
+let ISO_FUN = prove 
  (`ISO (f:A->A') f' /\ ISO (g:B->B') g'
    ==> ISO (\h a'. g(h(f' a'))) (\h a. g'(h(f a)))`,
   REWRITE_TAC[ISO; FUN_EQ_THM] THEN MESON_TAC[]);;
 
-let ISO_USAGE = prove
+export_namedthm ISO_FUN "ISO_FUN";;
+
+let ISO_USAGE = prove 
  (`ISO f g
    ==> (!P. (!x. P x) <=> (!x. P(g x))) /\
        (!P. (?x. P x) <=> (?x. P(g x))) /\
        (!a b. (a = g b) <=> (f a = b))`,
   REWRITE_TAC[ISO; FUN_EQ_THM] THEN MESON_TAC[]);;
+
+export_namedthm ISO_USAGE "ISO_USAGE";;
 
 (* ------------------------------------------------------------------------- *)
 (* Hence extend type definition to nested types.                             *)
@@ -1553,3 +1641,5 @@ let FORALL_UNWIND_CONV =
         CONV_RULE (RAND_CONV FORALL_UNWIND_CONV) (TRANS th3 th4)
     with Failure _ -> REFL tm in
   FORALL_UNWIND_CONV;;
+
+export_theory "dummy";;
