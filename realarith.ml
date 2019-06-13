@@ -1,3 +1,4 @@
+
 (* ========================================================================= *)
 (* Framework for universal real decision procedures, and a simple instance.  *)
 (*                                                                           *)
@@ -13,87 +14,127 @@ needs "calc_int.ml";;
 (* Some lemmas needed now just to drive the decision procedure.              *)
 (* ------------------------------------------------------------------------- *)
 
-let REAL_LTE_TOTAL = prove
+export_theory "real-misc";;
+
+let REAL_LTE_TOTAL = prove 
  (`!x y. x < y \/ y <= x`,
   REWRITE_TAC[real_lt] THEN CONV_TAC TAUT);;
 
-let REAL_LET_TOTAL = prove
+export_namedthm REAL_LTE_TOTAL "REAL_LTE_TOTAL";;
+
+let REAL_LET_TOTAL = prove 
  (`!x y. x <= y \/ y < x`,
   REWRITE_TAC[real_lt] THEN CONV_TAC TAUT);;
 
-let REAL_LT_IMP_LE = prove
+export_namedthm REAL_LET_TOTAL "REAL_LET_TOTAL";;
+
+let REAL_LT_IMP_LE = prove 
  (`!x y. x < y ==> x <= y`,
   MESON_TAC[real_lt; REAL_LE_TOTAL]);;
 
-let REAL_LTE_TRANS = prove
+export_namedthm REAL_LT_IMP_LE "REAL_LT_IMP_LE";;
+
+let REAL_LTE_TRANS = prove 
  (`!x y z. x < y /\ y <= z ==> x < z`,
   MESON_TAC[real_lt; REAL_LE_TRANS]);;
 
-let REAL_LET_TRANS = prove
+export_namedthm REAL_LTE_TRANS "REAL_LTE_TRANS";;
+
+let REAL_LET_TRANS = prove 
  (`!x y z. x <= y /\ y < z ==> x < z`,
   MESON_TAC[real_lt; REAL_LE_TRANS]);;
 
-let REAL_LT_TRANS = prove
+export_namedthm REAL_LET_TRANS "REAL_LET_TRANS";;
+
+let REAL_LT_TRANS = prove 
  (`!x y z. x < y /\ y < z ==> x < z`,
   MESON_TAC[REAL_LTE_TRANS; REAL_LT_IMP_LE]);;
 
-let REAL_LE_ADD = prove
+export_namedthm REAL_LT_TRANS "REAL_LT_TRANS";;
+
+let REAL_LE_ADD = prove 
  (`!x y. &0 <= x /\ &0 <= y ==> &0 <= x + y`,
   MESON_TAC[REAL_LE_LADD_IMP; REAL_ADD_RID; REAL_LE_TRANS]);;
 
-let REAL_LTE_ANTISYM = prove
+export_namedthm REAL_LE_ADD "REAL_LE_ADD";;
+
+let REAL_LTE_ANTISYM = prove 
  (`!x y. ~(x < y /\ y <= x)`,
   MESON_TAC[real_lt]);;
 
-let REAL_SUB_LE = prove
+export_namedthm REAL_LTE_ANTISYM "REAL_LTE_ANTISYM";;
+
+let REAL_SUB_LE = prove 
  (`!x y. &0 <= (x - y) <=> y <= x`,
   REWRITE_TAC[real_sub; GSYM REAL_LE_LNEG; REAL_LE_NEG2]);;
 
-let REAL_NEG_SUB = prove
+export_namedthm REAL_SUB_LE "REAL_SUB_LE";;
+
+let REAL_NEG_SUB = prove 
  (`!x y. --(x - y) = y - x`,
   REWRITE_TAC[real_sub; REAL_NEG_ADD; REAL_NEG_NEG] THEN
   REWRITE_TAC[REAL_ADD_AC]);;
 
-let REAL_LE_LT = prove
+export_namedthm REAL_NEG_SUB "REAL_NEG_SUB";;
+
+let REAL_LE_LT = prove 
  (`!x y. x <= y <=> x < y \/ (x = y)`,
   REWRITE_TAC[real_lt] THEN MESON_TAC[REAL_LE_ANTISYM; REAL_LE_TOTAL]);;
 
-let REAL_SUB_LT = prove
+export_namedthm REAL_LE_LT "REAL_LE_LT";;
+
+let REAL_SUB_LT = prove 
  (`!x y. &0 < (x - y) <=> y < x`,
   REWRITE_TAC[real_lt] THEN ONCE_REWRITE_TAC[GSYM REAL_NEG_SUB] THEN
   REWRITE_TAC[REAL_LE_LNEG; REAL_ADD_RID; REAL_SUB_LE]);;
 
-let REAL_NOT_LT = prove
+export_namedthm REAL_SUB_LT "REAL_SUB_LT";;
+
+let REAL_NOT_LT = prove 
  (`!x y. ~(x < y) <=> y <= x`,
   REWRITE_TAC[real_lt]);;
 
-let REAL_SUB_0 = prove
+export_namedthm REAL_NOT_LT "REAL_NOT_LT";;
+
+let REAL_SUB_0 = prove 
  (`!x y. (x - y = &0) <=> (x = y)`,
   REPEAT GEN_TAC THEN REWRITE_TAC[GSYM REAL_LE_ANTISYM] THEN
   GEN_REWRITE_TAC (LAND_CONV o LAND_CONV) [GSYM REAL_NOT_LT] THEN
   REWRITE_TAC[REAL_SUB_LE; REAL_SUB_LT] THEN REWRITE_TAC[REAL_NOT_LT]);;
 
-let REAL_LT_LE = prove
+export_namedthm REAL_SUB_0 "REAL_SUB_0";;
+
+let REAL_LT_LE = prove 
  (`!x y. x < y <=> x <= y /\ ~(x = y)`,
   MESON_TAC[real_lt; REAL_LE_TOTAL; REAL_LE_ANTISYM]);;
 
-let REAL_LT_REFL = prove
+export_namedthm REAL_LT_LE "REAL_LT_LE";;
+
+let REAL_LT_REFL = prove 
  (`!x. ~(x < x)`,
   REWRITE_TAC[real_lt; REAL_LE_REFL]);;
 
-let REAL_LTE_ADD = prove
+export_namedthm REAL_LT_REFL "REAL_LT_REFL";;
+
+let REAL_LTE_ADD = prove 
  (`!x y. &0 < x /\ &0 <= y ==> &0 < x + y`,
   MESON_TAC[REAL_LE_LADD_IMP; REAL_ADD_RID; REAL_LTE_TRANS]);;
 
-let REAL_LET_ADD = prove
+export_namedthm REAL_LTE_ADD "REAL_LTE_ADD";;
+
+let REAL_LET_ADD = prove 
  (`!x y. &0 <= x /\ &0 < y ==> &0 < x + y`,
   MESON_TAC[REAL_LTE_ADD; REAL_ADD_SYM]);;
 
-let REAL_LT_ADD = prove
+export_namedthm REAL_LET_ADD "REAL_LET_ADD";;
+
+let REAL_LT_ADD = prove 
  (`!x y. &0 < x /\ &0 < y ==> &0 < x + y`,
   MESON_TAC[REAL_LT_IMP_LE; REAL_LTE_ADD]);;
 
-let REAL_ENTIRE = prove
+export_namedthm REAL_LT_ADD "REAL_LT_ADD";;
+
+let REAL_ENTIRE = prove 
  (`!x y. (x * y = &0) <=> (x = &0) \/ (y = &0)`,
   REPEAT GEN_TAC THEN EQ_TAC THEN STRIP_TAC THEN
   ASM_REWRITE_TAC[REAL_MUL_LZERO; REAL_MUL_RZERO] THEN
@@ -103,26 +144,36 @@ let REAL_ENTIRE = prove
   FIRST_ASSUM(fun th -> REWRITE_TAC[MATCH_MP REAL_MUL_LINV th]) THEN
   REWRITE_TAC[REAL_MUL_LID; REAL_MUL_RZERO]);;
 
-let REAL_LE_NEGTOTAL = prove
+export_namedthm REAL_ENTIRE "REAL_ENTIRE";;
+
+let REAL_LE_NEGTOTAL = prove 
  (`!x. &0 <= x \/ &0 <= --x`,
   REWRITE_TAC[REAL_LE_RNEG; REAL_ADD_LID; REAL_LE_TOTAL]);;
 
-let REAL_LE_SQUARE = prove
+export_namedthm REAL_LE_NEGTOTAL "REAL_LE_NEGTOTAL";;
+
+let REAL_LE_SQUARE = prove 
  (`!x. &0 <= x * x`,
   GEN_TAC THEN DISJ_CASES_TAC(SPEC `x:real` REAL_LE_NEGTOTAL) THEN
   POP_ASSUM(fun th -> MP_TAC(MATCH_MP REAL_LE_MUL (CONJ th th))) THEN
   REWRITE_TAC[REAL_MUL_LNEG; REAL_MUL_RNEG; REAL_NEG_NEG]);;
 
-let REAL_MUL_RID = prove
+export_namedthm REAL_LE_SQUARE "REAL_LE_SQUARE";;
+
+let REAL_MUL_RID = prove 
  (`!x. x * &1 = x`,
   MESON_TAC[REAL_MUL_LID; REAL_MUL_SYM]);;
 
-let REAL_POW_2 = prove
+export_namedthm REAL_MUL_RID "REAL_MUL_RID";;
+
+let REAL_POW_2 = prove 
  (`!x. x pow 2 = x * x`,
   REWRITE_TAC[num_CONV `2`; num_CONV `1`] THEN
   REWRITE_TAC[real_pow; REAL_MUL_RID]);;
 
-let REAL_POLY_CLAUSES = prove
+export_namedthm REAL_POW_2 "REAL_POW_2";;
+
+let REAL_POLY_CLAUSES = prove 
  (`(!x y z. x + (y + z) = (x + y) + z) /\
    (!x y. x + y = y + x) /\
    (!x. &0 + x = x) /\
@@ -137,14 +188,20 @@ let REAL_POLY_CLAUSES = prove
   REWRITE_TAC[REAL_MUL_ASSOC; REAL_ADD_LID; REAL_MUL_LID] THEN
   REWRITE_TAC[REAL_ADD_AC] THEN REWRITE_TAC[REAL_MUL_SYM]);;
 
-let REAL_POLY_NEG_CLAUSES = prove
+export_namedthm REAL_POLY_CLAUSES "REAL_POLY_CLAUSES";;
+
+let REAL_POLY_NEG_CLAUSES = prove 
  (`(!x. --x = --(&1) * x) /\
    (!x y. x - y = x + --(&1) * y)`,
   REWRITE_TAC[REAL_MUL_LNEG; real_sub; REAL_MUL_LID]);;
 
-let REAL_POS = prove
+export_namedthm REAL_POLY_NEG_CLAUSES "REAL_POLY_NEG_CLAUSES";;
+
+let REAL_POS = prove 
  (`!n. &0 <= &n`,
   REWRITE_TAC[REAL_OF_NUM_LE; LE_0]);;
+
+export_namedthm REAL_POS "REAL_POS";;
 
 (* ------------------------------------------------------------------------- *)
 (* Data structure for Positivstellensatz refutations.                        *)
@@ -635,3 +692,5 @@ let REAL_ARITH =
     REAL_INT_EQ_CONV,REAL_INT_GE_CONV,REAL_INT_GT_CONV,
     REAL_POLY_CONV,REAL_POLY_NEG_CONV,REAL_POLY_ADD_CONV,REAL_POLY_MUL_CONV,
     REAL_LINEAR_PROVER);;
+
+export_theory "dummy";;

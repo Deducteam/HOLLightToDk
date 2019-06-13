@@ -1,3 +1,4 @@
+
 (* ========================================================================= *)
 (* Calculation with integer-valued reals.                                    *)
 (*                                                                           *)
@@ -63,49 +64,69 @@ let term_of_rat =
 (* Some elementary "bootstrapping" lemmas we need below.                     *)
 (* ------------------------------------------------------------------------- *)
 
-let REAL_ADD_AC = prove
+export_theory "real-misc";;
+
+let REAL_ADD_AC = prove 
  (`(m + n = n + m) /\
    ((m + n) + p = m + (n + p)) /\
    (m + (n + p) = n + (m + p))`,
   MESON_TAC[REAL_ADD_ASSOC; REAL_ADD_SYM]);;
 
-let REAL_ADD_RINV = prove
+export_namedthm REAL_ADD_AC "REAL_ADD_AC";;
+
+let REAL_ADD_RINV = prove 
  (`!x. x + --x = &0`,
   MESON_TAC[REAL_ADD_SYM; REAL_ADD_LINV]);;
 
-let REAL_EQ_ADD_LCANCEL = prove
+export_namedthm REAL_ADD_RINV "REAL_ADD_RINV";;
+
+let REAL_EQ_ADD_LCANCEL = prove 
  (`!x y z. (x + y = x + z) <=> (y = z)`,
   REPEAT GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
   POP_ASSUM(MP_TAC o AP_TERM `(+) (--x)`) THEN
   REWRITE_TAC[REAL_ADD_ASSOC; REAL_ADD_LINV; REAL_ADD_LID]);;
 
-let REAL_EQ_ADD_RCANCEL = prove
+export_namedthm REAL_EQ_ADD_LCANCEL "REAL_EQ_ADD_LCANCEL";;
+
+let REAL_EQ_ADD_RCANCEL = prove 
  (`!x y z. (x + z = y + z) <=> (x = y)`,
   MESON_TAC[REAL_ADD_SYM; REAL_EQ_ADD_LCANCEL]);;
 
-let REAL_MUL_RZERO = prove
+export_namedthm REAL_EQ_ADD_RCANCEL "REAL_EQ_ADD_RCANCEL";;
+
+let REAL_MUL_RZERO = prove 
  (`!x. x * &0 = &0`,
   MESON_TAC[REAL_EQ_ADD_RCANCEL; REAL_ADD_LDISTRIB; REAL_ADD_LID]);;
 
-let REAL_MUL_LZERO = prove
+export_namedthm REAL_MUL_RZERO "REAL_MUL_RZERO";;
+
+let REAL_MUL_LZERO = prove 
  (`!x. &0 * x = &0`,
   MESON_TAC[REAL_MUL_SYM; REAL_MUL_RZERO]);;
 
-let REAL_NEG_NEG = prove
+export_namedthm REAL_MUL_LZERO "REAL_MUL_LZERO";;
+
+let REAL_NEG_NEG = prove 
  (`!x. --(--x) = x`,
   MESON_TAC
    [REAL_EQ_ADD_RCANCEL; REAL_ADD_LINV; REAL_ADD_SYM; REAL_ADD_LINV]);;
 
-let REAL_MUL_RNEG = prove
+export_namedthm REAL_NEG_NEG "REAL_NEG_NEG";;
+
+let REAL_MUL_RNEG = prove 
  (`!x y. x * (--y) = -- (x * y)`,
   MESON_TAC[REAL_EQ_ADD_RCANCEL; REAL_ADD_LDISTRIB; REAL_ADD_LINV;
             REAL_MUL_RZERO]);;
 
-let REAL_MUL_LNEG = prove
+export_namedthm REAL_MUL_RNEG "REAL_MUL_RNEG";;
+
+let REAL_MUL_LNEG = prove 
  (`!x y. (--x) * y = -- (x * y)`,
   MESON_TAC[REAL_MUL_SYM; REAL_MUL_RNEG]);;
 
-let REAL_NEG_ADD = prove
+export_namedthm REAL_MUL_LNEG "REAL_MUL_LNEG";;
+
+let REAL_NEG_ADD = prove 
  (`!x y. --(x + y) = --x + --y`,
   REPEAT GEN_TAC THEN
   MATCH_MP_TAC(GEN_ALL(fst(EQ_IMP_RULE(SPEC_ALL REAL_EQ_ADD_RCANCEL)))) THEN
@@ -113,15 +134,21 @@ let REAL_NEG_ADD = prove
   ONCE_REWRITE_TAC[AC REAL_ADD_AC `(a + b) + (c + d) = (a + c) + (b + d)`] THEN
   REWRITE_TAC[REAL_ADD_LINV; REAL_ADD_LID]);;
 
-let REAL_ADD_RID = prove
+export_namedthm REAL_NEG_ADD "REAL_NEG_ADD";;
+
+let REAL_ADD_RID = prove 
  (`!x. x + &0 = x`,
   MESON_TAC[REAL_ADD_SYM; REAL_ADD_LID]);;
 
-let REAL_NEG_0 = prove
+export_namedthm REAL_ADD_RID "REAL_ADD_RID";;
+
+let REAL_NEG_0 = prove 
  (`--(&0) = &0`,
   MESON_TAC[REAL_ADD_LINV; REAL_ADD_RID]);;
 
-let REAL_LE_LNEG = prove
+export_namedthm REAL_NEG_0 "REAL_NEG_0";;
+
+let REAL_LE_LNEG = prove 
  (`!x y. --x <= y <=> &0 <= x + y`,
   REPEAT GEN_TAC THEN EQ_TAC THEN
   DISCH_THEN(MP_TAC o MATCH_MP REAL_LE_LADD_IMP) THENL
@@ -131,14 +158,18 @@ let REAL_LE_LNEG = prove
     REWRITE_TAC[REAL_ADD_LINV; REAL_ADD_ASSOC; REAL_ADD_LID;
         ONCE_REWRITE_RULE[REAL_ADD_SYM] REAL_ADD_LID]]);;
 
-let REAL_LE_NEG2 = prove
+export_namedthm REAL_LE_LNEG "REAL_LE_LNEG";;
+
+let REAL_LE_NEG2 = prove 
  (`!x y. --x <= --y <=> y <= x`,
   REPEAT GEN_TAC THEN
   GEN_REWRITE_TAC (RAND_CONV o LAND_CONV) [GSYM REAL_NEG_NEG] THEN
   REWRITE_TAC[REAL_LE_LNEG] THEN
   AP_TERM_TAC THEN MATCH_ACCEPT_TAC REAL_ADD_SYM);;
 
-let REAL_LE_RNEG = prove
+export_namedthm REAL_LE_NEG2 "REAL_LE_NEG2";;
+
+let REAL_LE_RNEG = prove 
  (`!x y. x <= --y <=> x + y <= &0`,
   REPEAT GEN_TAC THEN
   GEN_REWRITE_TAC (LAND_CONV o LAND_CONV) [GSYM REAL_NEG_NEG] THEN
@@ -149,26 +180,36 @@ let REAL_LE_RNEG = prove
   REWRITE_TAC[REAL_NEG_ADD; REAL_NEG_NEG] THEN
   MATCH_ACCEPT_TAC REAL_ADD_SYM);;
 
-let REAL_OF_NUM_POW = prove
+export_namedthm REAL_LE_RNEG "REAL_LE_RNEG";;
+
+let REAL_OF_NUM_POW = prove 
  (`!x n. (&x) pow n = &(x EXP n)`,
   GEN_TAC THEN INDUCT_TAC THEN
   ASM_REWRITE_TAC[real_pow; EXP; REAL_OF_NUM_MUL]);;
 
-let REAL_POW_NEG = prove
+export_namedthm REAL_OF_NUM_POW "REAL_OF_NUM_POW";;
+
+let REAL_POW_NEG = prove 
  (`!x n. (--x) pow n = if EVEN n then x pow n else --(x pow n)`,
   GEN_TAC THEN INDUCT_TAC THEN
   ASM_REWRITE_TAC[real_pow; EVEN] THEN
   ASM_CASES_TAC `EVEN n` THEN
   ASM_REWRITE_TAC[REAL_MUL_RNEG; REAL_MUL_LNEG; REAL_NEG_NEG]);;
 
-let REAL_ABS_NUM = prove
+export_namedthm REAL_POW_NEG "REAL_POW_NEG";;
+
+let REAL_ABS_NUM = prove 
  (`!n. abs(&n) = &n`,
   REWRITE_TAC[real_abs; REAL_OF_NUM_LE; LE_0]);;
 
-let REAL_ABS_NEG = prove
+export_namedthm REAL_ABS_NUM "REAL_ABS_NUM";;
+
+let REAL_ABS_NEG = prove 
  (`!x. abs(--x) = abs x`,
   REWRITE_TAC[real_abs; REAL_LE_RNEG; REAL_NEG_NEG; REAL_ADD_LID] THEN
   MESON_TAC[REAL_LE_TOTAL; REAL_LE_ANTISYM; REAL_NEG_0]);;
+
+export_namedthm REAL_ABS_NEG "REAL_ABS_NEG";;
 
 (* ------------------------------------------------------------------------- *)
 (* First, the conversions on integer constants.                              *)
