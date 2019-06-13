@@ -220,6 +220,8 @@ let LAST_CLAUSES = prove
 
 export_namedthm LAST_CLAUSES "LAST_CLAUSES";;
 
+export_theory "list-append";;
+
 let APPEND_NIL = prove 
  (`!l:A list. APPEND l [] = l`,
   LIST_INDUCT_TAC THEN ASM_REWRITE_TAC[APPEND]);;
@@ -231,6 +233,8 @@ let APPEND_ASSOC = prove
   LIST_INDUCT_TAC THEN ASM_REWRITE_TAC[APPEND]);;
 
 export_namedthm APPEND_ASSOC "APPEND_ASSOC";;
+
+export_theory "list-reverse";;
 
 let REVERSE_APPEND = prove 
  (`!(l:A list) m. REVERSE (APPEND l m) = APPEND (REVERSE m) (REVERSE l)`,
@@ -250,6 +254,8 @@ let REVERSE_EQ_EMPTY = prove
   MESON_TAC[REVERSE_REVERSE; REVERSE]);;
 
 export_namedthm REVERSE_EQ_EMPTY "REVERSE_EQ_EMPTY";;
+
+export_theory "list-misc";;
 
 let CONS_11 = prove 
  (`!(h1:A) h2 t1 t2. (CONS h1 t1 = CONS h2 t2) <=> (h1 = h2) /\ (t1 = t2)`,
@@ -276,6 +282,8 @@ let LIST_EQ = prove
   REWRITE_TAC[EL; HD; TL; LT_0; LT_SUC; CONJ_ACI]);;
 
 export_namedthm LIST_EQ "LIST_EQ";;
+
+export_theory "list-length";;
 
 let LENGTH_APPEND = prove 
  (`!(l:A list) m. LENGTH(APPEND l m) = LENGTH l + LENGTH m`,
@@ -316,6 +324,8 @@ let LENGTH_REVERSE = prove
 
 export_namedthm LENGTH_REVERSE "LENGTH_REVERSE";;
 
+export_theory "list-map";;
+
 let MAP_o = prove 
  (`!f:A->B. !g:B->C. !l. MAP (g o f) l = MAP g (MAP f l)`,
   GEN_TAC THEN GEN_TAC THEN LIST_INDUCT_TAC THEN
@@ -329,6 +339,8 @@ let MAP_EQ = prove
   REWRITE_TAC[MAP; ALL] THEN ASM_MESON_TAC[]);;
 
 export_namedthm MAP_EQ "MAP_EQ";;
+
+export_theory "list-ex-all";;
 
 let ALL_IMP = prove 
  (`!P Q l. (!x. MEM x l /\ P x ==> Q x) /\ ALL P l ==> ALL Q l`,
@@ -444,6 +456,8 @@ let ALL_MEM = prove
 
 export_namedthm ALL_MEM "ALL_MEM";;
 
+export_theory "list-replicate";;
+
 let LENGTH_REPLICATE = prove 
  (`!n x. LENGTH(REPLICATE n x) = n`,
   INDUCT_TAC THEN ASM_REWRITE_TAC[LENGTH; REPLICATE]);;
@@ -456,6 +470,8 @@ let MEM_REPLICATE = prove
   MESON_TAC[]);;
 
 export_namedthm MEM_REPLICATE "MEM_REPLICATE";;
+
+export_theory "list-thm";;
 
 let EX_MAP = prove 
  (`!P f l. EX P (MAP f l) <=> EX (P o f) l`,
@@ -478,6 +494,8 @@ let FORALL_ALL = prove
 
 export_namedthm FORALL_ALL "FORALL_ALL";;
 
+export_theory "list-mem";;
+
 let MEM_APPEND = prove 
  (`!x l1 l2. MEM x (APPEND l1 l2) <=> MEM x l1 \/ MEM x l2`,
   GEN_TAC THEN LIST_INDUCT_TAC THEN ASM_REWRITE_TAC[MEM; APPEND; DISJ_ACI]);;
@@ -490,6 +508,8 @@ let MEM_MAP = prove
   ASM_REWRITE_TAC[MEM; MAP] THEN MESON_TAC[]);;
 
 export_namedthm MEM_MAP "MEM_MAP";;
+
+export_theory "list-filter";;
 
 let FILTER_APPEND = prove 
  (`!P l1 l2. FILTER P (APPEND l1 l2) = APPEND (FILTER P l1) (FILTER P l2)`,
@@ -521,6 +541,8 @@ let EX_MEM = prove
 
 export_namedthm EX_MEM "EX_MEM";;
 
+export_theory "list-zip";;
+
 let MAP_FST_ZIP = prove 
  (`!l1 l2. (LENGTH l1 = LENGTH l2) ==> (MAP FST (ZIP l1 l2) = l1)`,
   LIST_INDUCT_TAC THEN LIST_INDUCT_TAC THEN
@@ -542,6 +564,8 @@ let LENGTH_ZIP = prove
 
 export_namedthm LENGTH_ZIP "LENGTH_ZIP";;
 
+export_theory "list-thm";;
+
 let MEM_ASSOC = prove 
  (`!l x. MEM (x,ASSOC x l) l <=> MEM x (MAP FST l)`,
   LIST_INDUCT_TAC THEN ASM_REWRITE_TAC[MEM; MAP; ASSOC] THEN
@@ -556,6 +580,8 @@ let ALL_APPEND = prove
   ASM_REWRITE_TAC[ALL; APPEND; GSYM CONJ_ASSOC]);;
 
 export_namedthm ALL_APPEND "ALL_APPEND";;
+
+export_theory "list-el";;
 
 let MEM_EL = prove 
  (`!l n. n < LENGTH l ==> MEM (EL n l) l`,
@@ -578,6 +604,8 @@ let ALL_EL = prove
   REWRITE_TAC[GSYM ALL_MEM; MEM_EXISTS_EL] THEN MESON_TAC[]);;
 
 export_namedthm ALL_EL "ALL_EL";;
+
+export_theory "list-all";;
 
 let ALL2_MAP2 = prove 
  (`!l m. ALL2 P (MAP f l) (MAP g m) = ALL2 (\x y. P (f x) (g y)) l m`,
@@ -631,6 +659,8 @@ let ALL2_ALL = prove
 
 export_namedthm ALL2_ALL "ALL2_ALL";;
 
+export_theory "list-append";;
+
 let APPEND_EQ_NIL = prove 
  (`!l m. (APPEND l m = []) <=> (l = []) /\ (m = [])`,
   REWRITE_TAC[GSYM LENGTH_EQ_NIL; LENGTH_APPEND; ADD_EQ_0]);;
@@ -650,6 +680,8 @@ let APPEND_RCANCEL = prove
   REWRITE_TAC[REVERSE_APPEND; APPEND_LCANCEL]);;
 
 export_namedthm APPEND_RCANCEL "APPEND_RCANCEL";;
+
+export_theory "list-map";;
 
 let LENGTH_MAP2 = prove 
  (`!f l m. LENGTH l = LENGTH m ==> LENGTH(MAP2 f l m) = LENGTH m`,
@@ -707,6 +739,8 @@ let MAP_I = prove
   REWRITE_TAC[FUN_EQ_THM; I_DEF; MAP_ID]);;
 
 export_namedthm MAP_I "MAP_I";;
+
+export_theory "list-last";;
 
 let BUTLAST_APPEND = prove 
  (`!l m:A list. BUTLAST(APPEND l m) =
@@ -792,6 +826,8 @@ let CONS_HD_TL = prove
 
 export_namedthm CONS_HD_TL "CONS_HD_TL";;
 
+export_theory "list-thm";;
+
 let EL_MAP = prove 
  (`!f n l. n < LENGTH l ==> EL n (MAP f l) = f(EL n l)`,
   GEN_TAC THEN INDUCT_TAC THEN LIST_INDUCT_TAC THEN
@@ -838,6 +874,8 @@ let MEM_APPEND_DECOMPOSE = prove
 
 export_namedthm MEM_APPEND_DECOMPOSE "MEM_APPEND_DECOMPOSE";;
 
+export_theory "list-pairwise";;
+
 let PAIRWISE_APPEND = prove 
  (`!R:A->A->bool l m.
         PAIRWISE R (APPEND l m) <=>
@@ -877,6 +915,8 @@ let PAIRWISE_TRANSITIVE = prove
   ASM_MESON_TAC[]);;
 
 export_namedthm PAIRWISE_TRANSITIVE "PAIRWISE_TRANSITIVE";;
+
+export_theory "list-seq";;
 
 let LENGTH_LIST_OF_SEQ = prove 
  (`!s:num->A n. LENGTH(list_of_seq s n) = n`,
