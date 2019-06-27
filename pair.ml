@@ -15,11 +15,17 @@ needs "impconv.ml";;
 (* Constants implementing (or at least tagging) syntactic sugar.             *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "syntactic-sugar";;
+
 let LET_DEF = new_definition
  `LET (f:A->B) x = f x`;;
 
+export_namedthm LET_DEF "LET_DEF";;
+
 let LET_END_DEF = new_definition
  `LET_END (t:A) = t`;;
+
+export_namedthm LET_END_DEF "LET_END_DEF";;
 
 let GABS_DEF =
   let def = new_basic_definition `GABS = ((@) : (A -> bool) -> A)` in
@@ -30,6 +36,8 @@ let GABS_DEF =
   (`!(p : A -> bool). GABS p = (@) p`,
    REWRITE_TAC [def]);;
 
+export_namedthm GABS_DEF "GABS_DEF";;
+
 let GEQ_DEF =
   let def = new_basic_definition `GEQ = ((=) : A -> A -> bool)` in
   let alt = REFL (rhs (concl def)) in
@@ -39,20 +47,32 @@ let GEQ_DEF =
   (`!a b : A. GEQ a b <=> a = b`,
    REWRITE_TAC [def]);;
 
+export_namedthm GEQ_DEF "GEQ_DEF";;
+
 let _SEQPATTERN = new_definition
  `_SEQPATTERN = \r s x. if ?y. r x y then r x else s x`;;
+
+export_namedthm _SEQPATTERN "_SEQPATTERN";;
 
 let _UNGUARDED_PATTERN = new_definition
  `_UNGUARDED_PATTERN = \p r. p /\ r`;;
 
+export_namedthm _UNGUARDED_PATTERN "_UNGUARDED_PATTERN";;
+
 let _GUARDED_PATTERN = new_definition
  `_GUARDED_PATTERN = \p g r. p /\ g /\ r`;;
+
+export_namedthm _GUARDED_PATTERN "_GUARDED_PATTERN";;
 
 let _MATCH = new_definition
  `_MATCH =  \e r. if (?!) (r e) then (@) (r e) else @z. F`;;
 
+export_namedthm _MATCH "_MATCH";;
+
 let _FUNCTION = new_definition
  `_FUNCTION = \r x. if (?!) (r x) then (@) (r x) else @z. F`;;
+
+export_namedthm _FUNCTION "_FUNCTION";;
 
 (* ------------------------------------------------------------------------- *)
 (* Pair type.                                                                *)
@@ -74,6 +94,8 @@ export_namedthm PAIR_EXISTS_THM "PAIR_EXISTS_THM";;
 let prod_tybij = new_type_definition
   "prod" ("ABS_prod","REP_prod") PAIR_EXISTS_THM;;
 
+export_namedthm prod_tybij "prod_tybij";;
+
 let REP_ABS_PAIR = prove 
  (`!(x:A) (y:B). REP_prod (ABS_prod (mk_pair x y)) = mk_pair x y`,
   MESON_TAC[prod_tybij]);;
@@ -85,11 +107,17 @@ parse_as_infix (",",(14,"right"));;
 let COMMA_DEF = new_definition
  `(x:A),(y:B) = ABS_prod(mk_pair x y)`;;
 
+export_namedthm COMMA_DEF "COMMA_DEF";;
+
 let FST_DEF = new_definition
  `FST (p:A#B) = @x. ?y. p = x,y`;;
 
+export_namedthm FST_DEF "FST_DEF";;
+
 let SND_DEF = new_definition
  `SND (p:A#B) = @y. ?x. p = x,y`;;
+
+export_namedthm SND_DEF "SND_DEF";;
 
 let PAIR_EQ = prove 
  (`!(x:A) (y:B) a b. (x,y = a,b) <=> (x = a) /\ (y = b)`,
@@ -222,11 +250,17 @@ let new_definition =
 let CURRY_DEF = new_definition
  `CURRY(f:A#B->C) x y = f(x,y)`;;
 
+export_namedthm CURRY_DEF "CURRY_DEF";;
+
 let UNCURRY_DEF = new_definition
  `!f x y. UNCURRY(f:A->B->C)(x,y) = f x y`;;
 
+export_namedthm UNCURRY_DEF "UNCURRY_DEF";;
+
 let PASSOC_DEF = new_definition
  `!f x y z. PASSOC (f:(A#B)#C->D) (x,y,z) = f ((x,y),z)`;;
+
+export_namedthm PASSOC_DEF "PASSOC_DEF";;
 
 (* ------------------------------------------------------------------------- *)
 (* Analog of ABS_CONV for generalized abstraction.                           *)

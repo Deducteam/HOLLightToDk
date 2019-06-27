@@ -129,6 +129,8 @@ export_namedthm IMP_CONJ "IMP_CONJ";;
 
 let IMP_IMP = GSYM IMP_CONJ;;
 
+export_namedthm IMP_IMP "IMP_IMP";;
+
 let IMP_CONJ_ALT = prove 
  (`p /\ q ==> r <=> q ==> p ==> r`,
   ITAUT_TAC);;
@@ -471,11 +473,19 @@ export_namedthm TRIV_EXISTS_IMP_THM "TRIV_EXISTS_IMP_THM";;
 
 let MONO_AND = ITAUT `(A ==> B) /\ (C ==> D) ==> (A /\ C ==> B /\ D)`;;
 
+export_namedthm MONO_AND "MONO_AND";;
+
 let MONO_OR = ITAUT `(A ==> B) /\ (C ==> D) ==> (A \/ C ==> B \/ D)`;;
+
+export_namedthm MONO_OR "MONO_OR";;
 
 let MONO_IMP = ITAUT `(B ==> A) /\ (C ==> D) ==> ((A ==> C) ==> (B ==> D))`;;
 
+export_namedthm MONO_IMP "MONO_IMP";;
+
 let MONO_NOT = ITAUT `(B ==> A) ==> (~A ==> ~B)`;;
+
+export_namedthm MONO_NOT "MONO_NOT";;
 
 let MONO_FORALL = prove 
  (`(!x:A. P x ==> Q x) ==> ((!x. P x) ==> (!x. Q x))`,

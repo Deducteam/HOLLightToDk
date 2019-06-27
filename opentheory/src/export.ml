@@ -323,7 +323,7 @@ let (log_term,log_proof,log_clear) =
               let () = log_type_var (dest_vartype ty) in
               let () = log_command "varType" in
               () in
-        (*let _ = save_top_obj ob in*)
+        let _ = save_top_obj ob in
         ()
     and log_const_def th =
         let (c,tm) = dest_eq (concl th) in
@@ -430,7 +430,7 @@ let (log_term,log_proof,log_clear) =
               let () = log_term b in
               let () = log_command "absTerm" in
               () in
-        (*let _ = save_top_obj ob in*)
+        let _ = save_top_obj ob in
         ()
     and log_subst ins = log_object (Object.mk_subst ins)
     and log_proof th =
@@ -812,6 +812,8 @@ let filter_the_exported_thms thys =
     let pred (th,(_,thy)) = if mem thy thys then Some th else None in
     map_partial pred (list_the_exported_thms ());;
 
+let the_exported_thm_names = ref [];;
+
 (* ------------------------------------------------------------------------- *)
 (* Exporting theorems.                                                       *)
 (* ------------------------------------------------------------------------- *)
@@ -892,6 +894,7 @@ let export_namedthm th s =
     let () = if not_logging () then () else log_namedthm th s in
     let thy = get_the_current_theory () in
     let () = add_exported_namedthm thy s th in
+    let () = (the_exported_thm_names := s::!the_exported_thm_names) in
     ();;
 
 (* ------------------------------------------------------------------------- *)

@@ -1489,3 +1489,8 @@ let LEANCOP = Leancop.LEANCOP;;
 let NANOCOP_TAC = Nanocop.NANOCOP_TAC;;
 
 let NANOCOP = Nanocop.NANOCOP;;
+
+export_namedthm Hashek.hashek_def "hashek_def";;
+export_namedthm Hashek.hashek_thm "hashek_thm";;
+export_namedthm Hashek.hashek_prop "hashek_prop";;
+export_namedthm Hashek.hashek_eq "hashek_eq";;

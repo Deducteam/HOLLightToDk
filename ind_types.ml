@@ -62,6 +62,8 @@ let NUMPAIR_DEST = new_specification
   ["NUMFST"; "NUMSND"]
   (MATCH_MP INJ_INVERSE2 NUMPAIR_INJ);;
 
+export_namedthm NUMPAIR_DEST "NUMPAIR_DEST";;
+
 (* ------------------------------------------------------------------------- *)
 (* Also, an injective map bool->num->num (even easier!)                      *)
 (* ------------------------------------------------------------------------- *)
@@ -84,6 +86,8 @@ export_namedthm NUMSUM_INJ "NUMSUM_INJ";;
 let NUMSUM_DEST = new_specification
   ["NUMLEFT"; "NUMRIGHT"]
   (MATCH_MP INJ_INVERSE2 NUMSUM_INJ);;
+
+export_namedthm NUMSUM_DEST "NUMSUM_DEST";;
 
 (* ------------------------------------------------------------------------- *)
 (* Injection num->Z, where Z == num->A->bool.                                *)
@@ -190,6 +194,10 @@ let ZRECSPACE_RULES,ZRECSPACE_INDUCT,ZRECSPACE_CASES =
   new_inductive_definition
    `ZRECSPACE (ZBOT:num->A->bool) /\
     (!c i r. (!n. ZRECSPACE (r n)) ==> ZRECSPACE (ZCONSTR c i r))`;;
+
+export_namedthm ZRECSPACE_RULES "ZRECSPACE_RULES";;
+export_namedthm ZRECSPACE_INDUCT "ZRECSPACE_INDUCT";;
+export_namedthm ZRECSPACE_CASES "ZRECSPACE_CASES";;
 
 let recspace_tydef =
   new_basic_type_definition "recspace" ("_mk_rec","_dest_rec")

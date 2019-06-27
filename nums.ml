@@ -62,7 +62,12 @@ let IND_SUC_SPEC =
                     (!x. ~(IND_SUC x = z))` in
   REWRITE_RULE[GSYM th3] (SELECT_RULE th2);;
 
+export_namedthm IND_SUC_SPEC "IND_SUC_SPEC";;
+
 let IND_SUC_INJ,IND_SUC_0 = CONJ_PAIR IND_SUC_SPEC;;
+
+export_namedthm IND_SUC_INJ "IND_SUC_INJ";;
+export_namedthm IND_SUC_0 "IND_SUC_0";;
 
 (* ------------------------------------------------------------------------- *)
 (* Carve out the natural numbers inductively.                                *)
@@ -73,6 +78,10 @@ let NUM_REP_RULES,NUM_REP_INDUCT,NUM_REP_CASES =
    `NUM_REP IND_0 /\
     (!i. NUM_REP i ==> NUM_REP (IND_SUC i))`;;
 
+export_namedthm NUM_REP_RULES "NUM_REP_RULES";;
+export_namedthm NUM_REP_INDUCT "NUM_REP_INDUCT";;
+export_namedthm NUM_REP_CASES "NUM_REP_CASES";;
+
 let num_tydef = new_basic_type_definition
   "num" ("mk_num","dest_num")
     (CONJUNCT1 NUM_REP_RULES);;
@@ -80,8 +89,12 @@ let num_tydef = new_basic_type_definition
 let ZERO_DEF = new_definition
  `_0 = mk_num IND_0`;;
 
+export_namedthm ZERO_DEF "ZERO_DEF";;
+
 let SUC_DEF = new_definition
  `SUC n = mk_num(IND_SUC(dest_num n))`;;
+
+export_namedthm SUC_DEF "SUC_DEF";;
 
 (* ------------------------------------------------------------------------- *)
 (* Distinctness and injectivity of constructors.                             *)
@@ -194,6 +207,8 @@ let (INDUCT_TAC:tactic) =
 let num_RECURSION =
   let avs = fst(strip_forall(concl num_Axiom)) in
   GENL avs (EXISTENCE (SPECL avs num_Axiom));;
+
+export_namedthm num_RECURSION "num_RECURSION";;
 
 (* ------------------------------------------------------------------------- *)
 (* Cases theorem.                                                            *)

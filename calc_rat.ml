@@ -1,3 +1,5 @@
+
+
 (* ========================================================================= *)
 (* Calculation with rational-valued reals.                                   *)
 (*                                                                           *)
@@ -13,14 +15,20 @@ needs "real.ml";;
 (* Constant for decimal fractions written #xxx.yyy                           *)
 (* ------------------------------------------------------------------------- *)
 
-let DECIMAL = new_definition
+export_theory "decimal-def";;
+
+let DECIMAL = new_definition 
   `DECIMAL x y = &x / &y`;;
+
+export_namedthm DECIMAL "DECIMAL";;
 
 (* ------------------------------------------------------------------------- *)
 (* Various handy lemmas.                                                     *)
 (* ------------------------------------------------------------------------- *)
 
-let RAT_LEMMA1 = prove
+export_theory "rat-lemma";;
+
+let RAT_LEMMA1 = prove 
  (`~(y1 = &0) /\ ~(y2 = &0) ==>
       ((x1 / y1) + (x2 / y2) = (x1 * y2 + x2 * y1) * inv(y1) * inv(y2))`,
   STRIP_TAC THEN REWRITE_TAC[real_div; REAL_ADD_RDISTRIB] THEN BINOP_TAC THENL
@@ -32,7 +40,9 @@ let RAT_LEMMA1 = prove
   DISJ2_TAC THEN CONV_TAC SYM_CONV THEN MATCH_MP_TAC REAL_MUL_RINV THEN
   ASM_REWRITE_TAC[]);;
 
-let RAT_LEMMA2 = prove
+export_namedthm RAT_LEMMA1 "RAT_LEMMA1";;
+
+let RAT_LEMMA2 = prove 
  (`&0 < y1 /\ &0 < y2 ==>
       ((x1 / y1) + (x2 / y2) = (x1 * y2 + x2 * y1) * inv(y1) * inv(y2))`,
   DISCH_TAC THEN MATCH_MP_TAC RAT_LEMMA1 THEN POP_ASSUM MP_TAC THEN
@@ -40,14 +50,18 @@ let RAT_LEMMA2 = prove
   REWRITE_TAC[DE_MORGAN_THM] THEN STRIP_TAC THEN
   ASM_REWRITE_TAC[REAL_LT_REFL]);;
 
-let RAT_LEMMA3 = prove
+export_namedthm RAT_LEMMA2 "RAT_LEMMA2";;
+
+let RAT_LEMMA3 = prove 
  (`&0 < y1 /\ &0 < y2 ==>
       ((x1 / y1) - (x2 / y2) = (x1 * y2 - x2 * y1) * inv(y1) * inv(y2))`,
   DISCH_THEN(MP_TAC o GEN_ALL o MATCH_MP RAT_LEMMA2) THEN
   REWRITE_TAC[real_div] THEN DISCH_TAC THEN
   ASM_REWRITE_TAC[real_sub; GSYM REAL_MUL_LNEG]);;
 
-let RAT_LEMMA4 = prove
+export_namedthm RAT_LEMMA3 "RAT_LEMMA3";;
+
+let RAT_LEMMA4 = prove 
  (`&0 < y1 /\ &0 < y2 ==> (x1 / y1 <= x2 / y2 <=> x1 * y2 <= x2 * y1)`,
   let lemma = prove
    (`&0 < y ==> (&0 <= x * y <=> &0 <= x)`,
@@ -71,11 +85,15 @@ let RAT_LEMMA4 = prove
   MATCH_MP_TAC lemma THEN MATCH_MP_TAC REAL_LT_INV THEN
   ASM_REWRITE_TAC[]);;
 
-let RAT_LEMMA5 = prove
+export_namedthm RAT_LEMMA4 "RAT_LEMMA4";;
+
+let RAT_LEMMA5 = prove 
  (`&0 < y1 /\ &0 < y2 ==> ((x1 / y1 = x2 / y2) <=> (x1 * y2 = x2 * y1))`,
   REPEAT DISCH_TAC THEN REWRITE_TAC[GSYM REAL_LE_ANTISYM] THEN
   MATCH_MP_TAC(TAUT `(a <=> a') /\ (b <=> b') ==> (a /\ b <=> a' /\ b')`) THEN
   CONJ_TAC THEN MATCH_MP_TAC RAT_LEMMA4 THEN ASM_REWRITE_TAC[]);;
+
+export_namedthm RAT_LEMMA5 "RAT_LEMMA5";;
 
 (* ------------------------------------------------------------------------- *)
 (* Create trivial rational from integer or decimal, and postconvert back.    *)
@@ -541,19 +559,27 @@ let ASM_REAL_ARITH_TAC =
 (* A few handy equivalential forms of transitivity.                          *)
 (* ------------------------------------------------------------------------- *)
 
-let REAL_LE_TRANS_LE = prove
+export_theory "real-misc";;
+
+let REAL_LE_TRANS_LE = prove 
  (`!x y:real. x <= y <=> (!z. y <= z ==> x <= z)`,
   MESON_TAC[REAL_LE_TRANS; REAL_LE_REFL]);;
 
-let REAL_LE_TRANS_LTE = prove
+export_namedthm REAL_LE_TRANS_LE "REAL_LE_TRANS_LE";;
+
+let REAL_LE_TRANS_LTE = prove 
  (`!x y:real. x <= y <=> (!z. y < z ==> x <= z)`,
   REPEAT GEN_TAC THEN EQ_TAC THENL [REAL_ARITH_TAC; ALL_TAC] THEN
   DISCH_THEN(MP_TAC o SPEC `y + (x - y) / &2`) THEN REAL_ARITH_TAC);;
 
-let REAL_LE_TRANS_LT = prove
+export_namedthm REAL_LE_TRANS_LTE "REAL_LE_TRANS_LTE";;
+
+let REAL_LE_TRANS_LT = prove 
  (`!x y:real. x <= y <=> (!z. y < z ==> x < z)`,
   REPEAT GEN_TAC THEN EQ_TAC THENL [REAL_ARITH_TAC; ALL_TAC] THEN
   DISCH_THEN(MP_TAC o SPEC `y + (x - y) / &2`) THEN REAL_ARITH_TAC);;
+
+export_namedthm REAL_LE_TRANS_LT "REAL_LE_TRANS_LT";;
 
 (* ------------------------------------------------------------------------- *)
 (* A simple "field" rule.                                                    *)
@@ -612,14 +638,18 @@ let REAL_FIELD =
 (* Useful monotone mappings between R and (-1,1)                             *)
 (* ------------------------------------------------------------------------- *)
 
-let REAL_SHRINK_RANGE = prove
+export_theory "real-shrink";;
+
+let REAL_SHRINK_RANGE = prove 
  (`!x. abs(x / (&1 + abs x)) < &1`,
   GEN_TAC THEN
   REWRITE_TAC[REAL_ABS_DIV; REAL_ARITH `abs(&1 + abs x) = &1 + abs x`] THEN
   SIMP_TAC[REAL_LT_LDIV_EQ; REAL_ARITH `&0 < &1 + abs x`] THEN
   REAL_ARITH_TAC);;
 
-let REAL_SHRINK_LT = prove
+export_namedthm REAL_SHRINK_RANGE "REAL_SHRINK_RANGE";;
+
+let REAL_SHRINK_LT = prove 
  (`!x y. x / (&1 + abs x) < y / (&1 + abs y) <=> x < y`,
   REPEAT GEN_TAC THEN MATCH_MP_TAC(REAL_ARITH
    `(&0 < x' <=> &0 < x) /\ (&0 < y' <=> &0 < y) /\
@@ -635,15 +665,21 @@ let REAL_SHRINK_LT = prove
   SIMP_TAC[REAL_LT_LDIV_EQ; REAL_ARITH `&0 < &1 + abs x`] THEN
   REAL_ARITH_TAC);;
 
-let REAL_SHRINK_LE = prove
+export_namedthm REAL_SHRINK_LT "REAL_SHRINK_LT";;
+
+let REAL_SHRINK_LE = prove 
  (`!x y. x / (&1 + abs x) <= y / (&1 + abs y) <=> x <= y`,
   REWRITE_TAC[GSYM REAL_NOT_LT; REAL_SHRINK_LT]);;
 
-let REAL_SHRINK_EQ = prove
+export_namedthm REAL_SHRINK_LE "REAL_SHRINK_LE";;
+
+let REAL_SHRINK_EQ = prove 
  (`!x y. x / (&1 + abs x) = y / (&1 + abs y) <=> x = y`,
   REWRITE_TAC[GSYM REAL_LE_ANTISYM; REAL_SHRINK_LE]);;
 
-let REAL_SHRINK_GALOIS = prove
+export_namedthm REAL_SHRINK_EQ "REAL_SHRINK_EQ";;
+
+let REAL_SHRINK_GALOIS = prove 
  (`!x y. x / (&1 + abs x) = y <=> abs y < &1 /\ y / (&1 - abs y) = x`,
   REPEAT GEN_TAC THEN EQ_TAC THEN STRIP_TAC THEN
   FIRST_X_ASSUM(SUBST1_TAC o SYM) THEN
@@ -655,15 +691,23 @@ let REAL_SHRINK_GALOIS = prove
   MATCH_MP_TAC(REAL_FIELD `x * y = &1 ==> inv x * inv y = &1`) THEN
   REPEAT(POP_ASSUM MP_TAC) THEN CONV_TAC REAL_FIELD);;
 
-let REAL_GROW_SHRINK = prove
+export_namedthm REAL_SHRINK_GALOIS "REAL_SHRINK_GALOIS";;
+
+let REAL_GROW_SHRINK = prove 
  (`!x y. x / (&1 + abs x) / (&1 - abs(x / (&1 + abs x))) = x`,
   MESON_TAC[REAL_SHRINK_GALOIS; REAL_SHRINK_RANGE]);;
 
-let REAL_SHRINK_GROW_EQ = prove
+export_namedthm REAL_GROW_SHRINK "REAL_GROW_SHRINK";;
+
+let REAL_SHRINK_GROW_EQ = prove 
  (`!x y. x / (&1 - abs x) / (&1 + abs(x / (&1 - abs x))) = x <=> abs x < &1`,
   MESON_TAC[REAL_SHRINK_GALOIS; REAL_SHRINK_RANGE]);;
 
-let REAL_SHRINK_GROW = prove
+export_namedthm REAL_SHRINK_GROW_EQ "REAL_SHRINK_GROW_EQ";;
+
+let REAL_SHRINK_GROW = prove 
  (`!x y. abs x < &1
          ==> x / (&1 - abs x) / (&1 + abs(x / (&1 - abs x))) = x`,
   REWRITE_TAC[REAL_SHRINK_GROW_EQ]);;
+
+export_namedthm REAL_SHRINK_GROW "REAL_SHRINK_GROW";;

@@ -170,7 +170,11 @@ export_namedthm ARITH_LT "ARITH_LT";;
 
 let ARITH_GE = REWRITE_RULE[GSYM GE; GSYM GT] ARITH_LE;;
 
+export_namedthm ARITH_GE "ARITH_GE";;
+
 let ARITH_GT = REWRITE_RULE[GSYM GE; GSYM GT] ARITH_LT;;
+
+export_namedthm ARITH_GT "ARITH_GT";;
 
 let ARITH_EQ = prove 
  (`(!m n. (NUMERAL m = NUMERAL n) <=> (m = n)) /\
@@ -217,6 +221,8 @@ let ARITH = end_itlist CONJ
    ARITH_EVEN; ARITH_ODD;
    ARITH_EQ; ARITH_LE; ARITH_LT; ARITH_GE; ARITH_GT;
    ARITH_SUB];;
+
+export_namedthm ARITH "ARITH";;
 
 (* ------------------------------------------------------------------------- *)
 (* Now more delicate conversions for situations where efficiency matters.    *)

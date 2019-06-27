@@ -289,6 +289,8 @@ export_namedthm WF_REC_num "WF_REC_num";;
 let MEASURE = new_definition
   `MEASURE m = \x y. m(x) < m(y)`;;
 
+export_namedthm MEASURE "MEASURE";;
+
 let WF_MEASURE = prove 
  (`!m:A->num. WF(MEASURE m)`,
   REPEAT GEN_TAC THEN REWRITE_TAC[MEASURE] THEN

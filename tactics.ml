@@ -98,7 +98,11 @@ let (compose_insts :instantiation->instantiation->instantiation) =
 (* Construct A,_FALSITY_ |- p; contortion so falsity is the last element.    *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "falsity";;
+
 let _FALSITY_ = new_definition `_FALSITY_ = F`;;
+
+export_namedthm _FALSITY_ "_FALSITY_";;
 
 let mk_fthm =
   let pth = UNDISCH(fst(EQ_IMP_RULE _FALSITY_))

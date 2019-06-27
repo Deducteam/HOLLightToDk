@@ -703,7 +703,7 @@ let MAP_EQ_NIL  = prove
  (`!f l. MAP f l = [] <=> l = []`,
   GEN_TAC THEN LIST_INDUCT_TAC THEN REWRITE_TAC[MAP; NOT_CONS_NIL]);;
 
-export_namedthm MAP_EQ_NIL  "MAP_EQ_NIL ";;
+export_namedthm MAP_EQ_NIL  "MAP_EQ_NIL";;
 
 let INJECTIVE_MAP = prove 
  (`!f:A->B. (!l m. MAP f l = MAP f m ==> l = m) <=>
@@ -999,6 +999,9 @@ let rec LIST_CONV conv tm =
 
 let char_INDUCT,char_RECURSION = define_type
  "char = ASCII bool bool bool bool bool bool bool bool";;
+
+export_namedthm char_INDUCT "char_INDUCT";;
+export_namedthm char_RECURSION "char_RECURSION";;
 
 new_type_abbrev("string",`:char list`);;
 

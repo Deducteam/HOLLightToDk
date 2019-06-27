@@ -159,7 +159,6 @@ loads "lists.ml";;      (* Theory of lists                                   *)
 loads "realax.ml";;     (* Definition of real numbers                        *)
 loads "calc_int.ml";;   (* Calculation with integer-valued reals             *)
 loads "realarith.ml";;  (* Universal linear real decision procedure          *)
-(*
 loads "real.ml";;       (* Derived properties of reals                       *)
 loads "calc_rat.ml";;   (* Calculation with rational-valued reals            *)
 loads "int.ml";;        (* Definition of integers                            *)
@@ -174,4 +173,3 @@ loads "define.ml";;     (* Support for general recursive definitions         *)
 
 loads "help.ml";;       (* Online help using the entries in Help directory   *)
 loads "database.ml";;   (* List of name-theorem pairs for search system      *)
-*)

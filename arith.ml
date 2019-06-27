@@ -1443,6 +1443,8 @@ export_namedthm DIVMOD_EXIST_0 "DIVMOD_EXIST_0";;
 let DIVISION_0 =  new_specification ["DIV"; "MOD"]
   (REWRITE_RULE[SKOLEM_THM] DIVMOD_EXIST_0);;
 
+export_namedthm DIVISION_0 "DIVISION_0";;
+
 let DIVISION = prove 
  (`!m n. ~(n = 0) ==> (m = m DIV n * n + m MOD n) /\ m MOD n < n`,
   MESON_TAC[DIVISION_0]);;
@@ -2070,19 +2072,28 @@ let DIV_EXP,MOD_EXP = (CONJ_PAIR o prove)
   REWRITE_TAC[LT; GSYM NOT_LT; ONE; TWO] THEN
   ASM_REWRITE_TAC[SYM ONE; GSYM NOT_LE]);;
 
+export_namedthm DIV_EXP "DIV_EXP";;
+export_namedthm MOD_EXP "MOD_EXP";;
+
 (* ------------------------------------------------------------------------- *)
 (* Theorems for eliminating cutoff subtraction, predecessor, DIV and MOD.    *)
 (* We have versions that introduce universal or existential quantifiers.     *)
 (* ------------------------------------------------------------------------- *)
+
+export_theory "arith-elim-op";;
 
 let PRE_ELIM_THM = prove 
  (`P(PRE n) <=> !m. n = SUC m \/ m = 0 /\ n = 0 ==> P m`,
   SPEC_TAC(`n:num`,`n:num`) THEN INDUCT_TAC THEN
   REWRITE_TAC[NOT_SUC; SUC_INJ; PRE] THEN MESON_TAC[]);;
 
+export_namedthm PRE_ELIM_THM "PRE_ELIM_THM";;
+
 let PRE_ELIM_THM' = prove 
  (`P(PRE n) <=> ?m. (n = SUC m \/ m = 0 /\ n = 0) /\ P m`,
   MP_TAC(INST [`\x:num. ~P x`,`P:num->bool`] PRE_ELIM_THM) THEN MESON_TAC[]);;
+
+export_namedthm PRE_ELIM_THM' "PRE_ELIM_THM'";;
 
 let SUB_ELIM_THM = prove 
  (`P(a - b) <=> !d. a = b + d \/ a < b /\ d = 0 ==> P d`,
@@ -2091,9 +2102,13 @@ let SUB_ELIM_THM = prove
   FIRST_ASSUM(X_CHOOSE_THEN `e:num` SUBST1_TAC o REWRITE_RULE[LE_EXISTS]) THEN
   SIMP_TAC[ADD_SUB2; GSYM NOT_LE; LE_ADD; EQ_ADD_LCANCEL] THEN MESON_TAC[]);;
 
+export_namedthm SUB_ELIM_THM "SUB_ELIM_THM";;
+
 let SUB_ELIM_THM' = prove 
  (`P(a - b) <=> ?d. (a = b + d \/ a < b /\ d = 0) /\ P d`,
   MP_TAC(INST [`\x:num. ~P x`,`P:num->bool`] SUB_ELIM_THM) THEN MESON_TAC[]);;
+
+export_namedthm SUB_ELIM_THM' "SUB_ELIM_THM'";;
 
 let DIVMOD_ELIM_THM = prove 
  (`P (m DIV n) (m MOD n) <=>
@@ -2102,11 +2117,15 @@ let DIVMOD_ELIM_THM = prove
    [ASM_MESON_TAC[DIVISION_0; LT];
     FIRST_ASSUM(MP_TAC o MATCH_MP DIVISION) THEN MESON_TAC[DIVMOD_UNIQ]]);;
 
+export_namedthm DIVMOD_ELIM_THM "DIVMOD_ELIM_THM";;
+
 let DIVMOD_ELIM_THM' = prove 
  (`P (m DIV n) (m MOD n) <=>
         ?q r. (n = 0 /\ q = 0 /\ r = m \/ m = q * n + r /\ r < n) /\ P q r`,
   MP_TAC(INST [`\x:num y:num. ~P x y`,`P:num->num->bool`] DIVMOD_ELIM_THM) THEN
   MESON_TAC[]);;
+
+export_namedthm DIVMOD_ELIM_THM' "DIVMOD_ELIM_THM'";;
 
 (* ------------------------------------------------------------------------- *)
 (* Crude but useful conversion for cancelling down equations.                *)
@@ -2157,6 +2176,8 @@ parse_as_binder "minimal";;
 let minimal = new_definition
   `(minimal) (P:num->bool) = @n. P n /\ !m. m < n ==> ~(P m)`;;
 
+export_namedthm minimal "minimal";;
+
 let MINIMAL = prove 
  (`!P. (?n. P n) <=> P((minimal) P) /\ (!m. m < (minimal) P ==> ~(P m))`,
   GEN_TAC THEN REWRITE_TAC[minimal] THEN CONV_TAC(RAND_CONV SELECT_CONV) THEN
@@ -2199,6 +2220,8 @@ let TRANSITIVE_STEPWISE_LE_EQ = prove
   GEN_TAC THEN ONCE_REWRITE_TAC[SWAP_FORALL_THM] THEN
   REWRITE_TAC[LEFT_FORALL_IMP_THM; EXISTS_REFL; ADD_CLAUSES] THEN
   INDUCT_TAC THEN REWRITE_TAC[ADD_CLAUSES] THEN ASM_MESON_TAC[]);;
+
+export_namedthm TRANSITIVE_STEPWISE_LE_EQ "TRANSITIVE_STEPWISE_LE_EQ";;
 
 let TRANSITIVE_STEPWISE_LE = prove 
  (`!R. (!x. R x x) /\ (!x y z. R x y /\ R y z ==> R x z) /\

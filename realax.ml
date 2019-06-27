@@ -42,7 +42,7 @@ make_overloadable "&" `:num->A`;;
 
 do_list overload_interface
  ["+",`(+):num->num->num`; "-",`(-):num->num->num`;
-  "*",`(*):num->num->num`; "<",`(<):num->num->bool`;
+  "*",`( * ):num->num->num`; "<",`(<):num->num->bool`;
   "<=",`(<=):num->num->bool`; ">",`(>):num->num->bool`;
   ">=",`(>=):num->num->bool`];;
 

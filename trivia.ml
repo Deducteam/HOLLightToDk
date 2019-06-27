@@ -73,6 +73,8 @@ export_namedthm EXISTS_ONE_REP "EXISTS_ONE_REP";;
 let one_tydef =
   new_type_definition "1" ("one_ABS","one_REP") EXISTS_ONE_REP;;
 
+export_namedthm one_tydef "one_tydef";;
+
 let one_DEF = new_definition
  `one = @x:1. T`;;
 

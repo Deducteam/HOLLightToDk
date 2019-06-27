@@ -1,3 +1,6 @@
+
+
+
 (* ========================================================================= *)
 (* Theory of integers.                                                       *)
 (*                                                                           *)
@@ -17,12 +20,18 @@ needs "calc_rat.ml";;
 (* compatibility with former definition of "is_int" constant, now removed.   *)
 (* ------------------------------------------------------------------------- *)
 
-let integer = new_definition
+export_theory "int-def";;
+
+let integer = new_definition 
   `integer(x) <=> ?n. abs(x) = &n`;;
 
-let is_int = prove
+export_namedthm integer "integer";;
+
+let is_int = prove 
  (`integer(x) <=> ?n. x = &n \/ x = -- &n`,
   REWRITE_TAC[integer] THEN AP_TERM_TAC THEN ABS_TAC THEN REAL_ARITH_TAC);;
+
+export_namedthm is_int "is_int";;
 
 (* ------------------------------------------------------------------------- *)
 (* Type of integers.                                                         *)
@@ -33,26 +42,39 @@ let int_tybij = new_type_definition "int" ("int_of_real","real_of_int")
        EXISTS_TAC `&0` THEN
        REWRITE_TAC[is_int; REAL_OF_NUM_EQ; EXISTS_OR_THM; GSYM EXISTS_REFL]));;
 
+export_namedthm int_tybij "int_tybij";;
+
 let int_abstr,int_rep =
   SPEC_ALL(CONJUNCT1 int_tybij),SPEC_ALL(CONJUNCT2 int_tybij);;
 
-let dest_int_rep = prove
+export_namedthm int_abstr "int_abstr";;
+export_namedthm int_rep "int_rep";;
+
+let dest_int_rep = prove 
  (`!i. ?n. (real_of_int i = &n) \/ (real_of_int i = --(&n))`,
   REWRITE_TAC[GSYM is_int; int_rep; int_abstr]);;
 
-let INTEGER_REAL_OF_INT = prove
+export_namedthm dest_int_rep "dest_int_rep";;
+
+let INTEGER_REAL_OF_INT = prove 
  (`!x. integer(real_of_int x)`,
   MESON_TAC[int_tybij]);;
+
+export_namedthm INTEGER_REAL_OF_INT "INTEGER_REAL_OF_INT";;
 
 (* ------------------------------------------------------------------------- *)
 (* We want the following too.                                                *)
 (* ------------------------------------------------------------------------- *)
 
-let int_eq = prove
+export_theory "int-eq";;
+
+let int_eq = prove 
  (`!x y. (x = y) <=> (real_of_int x = real_of_int y)`,
   REPEAT GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN ASM_REWRITE_TAC[] THEN
   POP_ASSUM(MP_TAC o AP_TERM `int_of_real`) THEN
   REWRITE_TAC[int_abstr]);;
+
+export_namedthm int_eq "int_eq";;
 
 (* ------------------------------------------------------------------------- *)
 (* Set up interface map.                                                     *)
@@ -73,40 +95,60 @@ let prioritize_int() = prioritize_overload(mk_type("int",[]));;
 (* Definitions and closure derivations of all operations but "inv" and "/".  *)
 (* ------------------------------------------------------------------------- *)
 
-let int_le = new_definition
+export_theory "int-op";;
+
+let int_le = new_definition 
   `x <= y <=> (real_of_int x) <= (real_of_int y)`;;
 
-let int_lt = new_definition
+export_namedthm int_le "int_le";;
+
+let int_lt = new_definition 
   `x < y <=> (real_of_int x) < (real_of_int y)`;;
 
-let int_ge = new_definition
+export_namedthm int_lt "int_lt";;
+
+let int_ge = new_definition 
   `x >= y <=> (real_of_int x) >= (real_of_int y)`;;
 
-let int_gt = new_definition
+export_namedthm int_ge "int_ge";;
+
+let int_gt = new_definition 
   `x > y <=> (real_of_int x) > (real_of_int y)`;;
 
-let int_of_num = new_definition
+export_namedthm int_gt "int_gt";;
+
+let int_of_num = new_definition 
   `&n = int_of_real(real_of_num n)`;;
 
-let int_of_num_th = prove
+export_namedthm int_of_num "int_of_num";;
+
+let int_of_num_th = prove 
  (`!n. real_of_int(int_of_num n) = real_of_num n`,
   REWRITE_TAC[int_of_num; GSYM int_rep; is_int] THEN
   REWRITE_TAC[REAL_OF_NUM_EQ; EXISTS_OR_THM; GSYM EXISTS_REFL]);;
 
-let int_neg = new_definition
+export_namedthm int_of_num_th "int_of_num_th";;
+
+let int_neg = new_definition 
  `--i = int_of_real(--(real_of_int i))`;;
 
-let int_neg_th = prove
+export_namedthm int_neg "int_neg";;
+
+let int_neg_th = prove 
  (`!x. real_of_int(int_neg x) = --(real_of_int x)`,
   REWRITE_TAC[int_neg; GSYM int_rep; is_int] THEN
   GEN_TAC THEN STRIP_ASSUME_TAC(SPEC `x:int` dest_int_rep) THEN
   ASM_REWRITE_TAC[REAL_NEG_NEG; EXISTS_OR_THM; REAL_EQ_NEG2;
     REAL_OF_NUM_EQ; GSYM EXISTS_REFL]);;
 
-let int_add = new_definition
+export_namedthm int_neg_th "int_neg_th";;
+
+let int_add = new_definition 
  `x + y = int_of_real((real_of_int x) + (real_of_int y))`;;
 
-let int_add_th = prove
+export_namedthm int_add "int_add";;
+
+let int_add_th = prove 
  (`!x y. real_of_int(x + y) = (real_of_int x) + (real_of_int y)`,
   REWRITE_TAC[int_add; GSYM int_rep; is_int] THEN REPEAT GEN_TAC THEN
   X_CHOOSE_THEN `m:num` DISJ_CASES_TAC (SPEC `x:int` dest_int_rep) THEN
@@ -120,18 +162,26 @@ let int_add_th = prove
   REWRITE_TAC[EXISTS_OR_THM; GSYM REAL_NEG_ADD; REAL_EQ_NEG2;
     REAL_OF_NUM_ADD; REAL_OF_NUM_EQ; GSYM EXISTS_REFL]);;
 
-let int_sub = new_definition
+export_namedthm int_add_th "int_add_th";;
+
+let int_sub = new_definition 
   `x - y = int_of_real(real_of_int x - real_of_int y)`;;
 
-let int_sub_th = prove
+export_namedthm int_sub "int_sub";;
+
+let int_sub_th = prove 
  (`!x y. real_of_int(x - y) = (real_of_int x) - (real_of_int y)`,
   REWRITE_TAC[int_sub; real_sub; GSYM int_neg_th; GSYM int_add_th] THEN
   REWRITE_TAC[int_abstr]);;
 
-let int_mul = new_definition
+export_namedthm int_sub_th "int_sub_th";;
+
+let int_mul = new_definition 
   `x * y = int_of_real ((real_of_int x) * (real_of_int y))`;;
 
-let int_mul_th = prove
+export_namedthm int_mul "int_mul";;
+
+let int_mul_th = prove 
  (`!x y. real_of_int(x * y) = (real_of_int x) * (real_of_int y)`,
   REPEAT GEN_TAC THEN REWRITE_TAC[int_mul; GSYM int_rep; is_int] THEN
   X_CHOOSE_THEN `m:num` DISJ_CASES_TAC (SPEC `x:int` dest_int_rep) THEN
@@ -140,43 +190,63 @@ let int_mul_th = prove
   REWRITE_TAC[REAL_MUL_LNEG; REAL_MUL_RNEG; REAL_NEG_NEG; REAL_OF_NUM_MUL] THEN
   REWRITE_TAC[REAL_EQ_NEG2; REAL_OF_NUM_EQ; GSYM EXISTS_REFL]);;
 
-let int_abs = new_definition
+export_namedthm int_mul_th "int_mul_th";;
+
+let int_abs = new_definition 
   `abs x = int_of_real(abs(real_of_int x))`;;
 
-let int_abs_th = prove
+export_namedthm int_abs "int_abs";;
+
+let int_abs_th = prove 
  (`!x. real_of_int(abs x) = abs(real_of_int x)`,
   GEN_TAC THEN REWRITE_TAC[int_abs; real_abs] THEN COND_CASES_TAC THEN
   REWRITE_TAC[GSYM int_neg; int_neg_th; int_abstr]);;
 
-let int_sgn = new_definition
+export_namedthm int_abs_th "int_abs_th";;
+
+let int_sgn = new_definition 
   `int_sgn x = int_of_real(real_sgn(real_of_int x))`;;
 
-let int_sgn_th = prove
+export_namedthm int_sgn "int_sgn";;
+
+let int_sgn_th = prove 
  (`!x. real_of_int(int_sgn x) = real_sgn(real_of_int x)`,
   GEN_TAC THEN REWRITE_TAC[int_sgn; real_sgn; GSYM int_rep] THEN
   REPEAT(COND_CASES_TAC THEN ASM_REWRITE_TAC[]) THEN
   MESON_TAC[is_int]);;
 
-let int_max = new_definition
+export_namedthm int_sgn_th "int_sgn_th";;
+
+let int_max = new_definition 
   `int_max x y = int_of_real(max (real_of_int x) (real_of_int y))`;;
 
-let int_max_th = prove
+export_namedthm int_max "int_max";;
+
+let int_max_th = prove 
  (`!x y. real_of_int(max x y) = max (real_of_int x) (real_of_int y)`,
   REPEAT GEN_TAC THEN REWRITE_TAC[int_max; real_max] THEN
   COND_CASES_TAC THEN REWRITE_TAC[int_abstr]);;
 
-let int_min = new_definition
+export_namedthm int_max_th "int_max_th";;
+
+let int_min = new_definition 
   `int_min x y = int_of_real(min (real_of_int x) (real_of_int y))`;;
 
-let int_min_th = prove
+export_namedthm int_min "int_min";;
+
+let int_min_th = prove 
  (`!x y. real_of_int(min x y) = min (real_of_int x) (real_of_int y)`,
   REPEAT GEN_TAC THEN REWRITE_TAC[int_min; real_min] THEN
   COND_CASES_TAC THEN REWRITE_TAC[int_abstr]);;
 
-let int_pow = new_definition
+export_namedthm int_min_th "int_min_th";;
+
+let int_pow = new_definition 
   `x pow n = int_of_real((real_of_int x) pow n)`;;
 
-let int_pow_th = prove
+export_namedthm int_pow "int_pow";;
+
+let int_pow_th = prove 
  (`!x n. real_of_int(x pow n) = (real_of_int x) pow n`,
   GEN_TAC THEN REWRITE_TAC[int_pow] THEN INDUCT_TAC THEN
   REWRITE_TAC[real_pow] THENL
@@ -184,11 +254,15 @@ let int_pow_th = prove
     POP_ASSUM(SUBST1_TAC o SYM) THEN
     ASM_REWRITE_TAC[GSYM int_mul; int_mul_th]]);;
 
+export_namedthm int_pow_th "int_pow_th";;
+
 (* ------------------------------------------------------------------------- *)
 (* A few convenient theorems about the integer type.                         *)
 (* ------------------------------------------------------------------------- *)
 
-let INT_IMAGE = prove
+export_theory "int-thm";;
+
+let INT_IMAGE = prove 
  (`!x. (?n. x = &n) \/ (?n. x = --(&n))`,
   GEN_TAC THEN
   X_CHOOSE_THEN `n:num` DISJ_CASES_TAC (SPEC `x:int` dest_int_rep) THEN
@@ -198,11 +272,15 @@ let INT_IMAGE = prove
   EXISTS_TAC `n:num` THEN REWRITE_TAC[int_abstr] THEN
   REWRITE_TAC[GSYM int_of_num; int_of_num_th]);;
 
-let FORALL_INT_CASES = prove
+export_namedthm INT_IMAGE "INT_IMAGE";;
+
+let FORALL_INT_CASES = prove 
  (`!P:int->bool. (!x. P x) <=> (!n. P(&n)) /\ (!n. P(-- &n))`,
   MESON_TAC[INT_IMAGE]);;
 
-let INT_LT_DISCRETE = prove
+export_namedthm FORALL_INT_CASES "FORALL_INT_CASES";;
+
+let INT_LT_DISCRETE = prove 
  (`!x y. x < y <=> (x + &1) <= y`,
   REPEAT GEN_TAC THEN
   REWRITE_TAC[int_le; int_lt; int_add_th] THEN
@@ -221,10 +299,14 @@ let INT_LT_DISCRETE = prove
   REWRITE_TAC[SYM(REWRITE_CONV[ARITH_SUC] `SUC 0`)] THEN
   REWRITE_TAC[ADD_CLAUSES; LE_SUC_LT; LT_SUC_LE]);;
 
-let INT_GT_DISCRETE = prove
+export_namedthm INT_LT_DISCRETE "INT_LT_DISCRETE";;
+
+let INT_GT_DISCRETE = prove 
  (`!x y. x > y <=> x >= (y + &1)`,
   REWRITE_TAC[int_gt; int_ge; real_ge; real_gt; GSYM int_le; GSYM int_lt] THEN
   MATCH_ACCEPT_TAC INT_LT_DISCRETE);;
+
+export_namedthm INT_GT_DISCRETE "INT_GT_DISCRETE";;
 
 (* ------------------------------------------------------------------------- *)
 (* Conversions of integer constants to and from OCaml numbers.               *)
@@ -293,270 +375,582 @@ let INT_OF_REAL_THM =
 (* Collect together all the theorems derived automatically.                  *)
 (* ------------------------------------------------------------------------- *)
 
-let INT_ABS_0 = INT_OF_REAL_THM REAL_ABS_0;;
-let INT_ABS_1 = INT_OF_REAL_THM REAL_ABS_1;;
-let INT_ABS_ABS = INT_OF_REAL_THM REAL_ABS_ABS;;
-let INT_ABS_BETWEEN = INT_OF_REAL_THM REAL_ABS_BETWEEN;;
-let INT_ABS_BETWEEN1 = INT_OF_REAL_THM REAL_ABS_BETWEEN1;;
-let INT_ABS_BETWEEN2 = INT_OF_REAL_THM REAL_ABS_BETWEEN2;;
-let INT_ABS_BOUND = INT_OF_REAL_THM REAL_ABS_BOUND;;
-let INT_ABS_CASES = INT_OF_REAL_THM REAL_ABS_CASES;;
-let INT_ABS_CIRCLE = INT_OF_REAL_THM REAL_ABS_CIRCLE;;
-let INT_ABS_LE = INT_OF_REAL_THM REAL_ABS_LE;;
-let INT_ABS_MUL = INT_OF_REAL_THM REAL_ABS_MUL;;
-let INT_ABS_NEG = INT_OF_REAL_THM REAL_ABS_NEG;;
-let INT_ABS_NUM = INT_OF_REAL_THM REAL_ABS_NUM;;
-let INT_ABS_NZ = INT_OF_REAL_THM REAL_ABS_NZ;;
-let INT_ABS_POS = INT_OF_REAL_THM REAL_ABS_POS;;
-let INT_ABS_POW = INT_OF_REAL_THM REAL_ABS_POW;;
-let INT_ABS_REFL = INT_OF_REAL_THM REAL_ABS_REFL;;
-let INT_ABS_SGN = INT_OF_REAL_THM REAL_ABS_SGN;;
-let INT_ABS_SIGN = INT_OF_REAL_THM REAL_ABS_SIGN;;
-let INT_ABS_SIGN2 = INT_OF_REAL_THM REAL_ABS_SIGN2;;
-let INT_ABS_STILLNZ = INT_OF_REAL_THM REAL_ABS_STILLNZ;;
-let INT_ABS_SUB = INT_OF_REAL_THM REAL_ABS_SUB;;
-let INT_ABS_SUB_ABS = INT_OF_REAL_THM REAL_ABS_SUB_ABS;;
-let INT_ABS_TRIANGLE = INT_OF_REAL_THM REAL_ABS_TRIANGLE;;
-let INT_ABS_ZERO = INT_OF_REAL_THM REAL_ABS_ZERO;;
-let INT_ADD2_SUB2 = INT_OF_REAL_THM REAL_ADD2_SUB2;;
-let INT_ADD_AC = INT_OF_REAL_THM REAL_ADD_AC;;
-let INT_ADD_ASSOC = INT_OF_REAL_THM REAL_ADD_ASSOC;;
-let INT_ADD_LDISTRIB = INT_OF_REAL_THM REAL_ADD_LDISTRIB;;
-let INT_ADD_LID = INT_OF_REAL_THM REAL_ADD_LID;;
-let INT_ADD_LINV = INT_OF_REAL_THM REAL_ADD_LINV;;
-let INT_ADD_RDISTRIB = INT_OF_REAL_THM REAL_ADD_RDISTRIB;;
-let INT_ADD_RID = INT_OF_REAL_THM REAL_ADD_RID;;
-let INT_ADD_RINV = INT_OF_REAL_THM REAL_ADD_RINV;;
-let INT_ADD_SUB = INT_OF_REAL_THM REAL_ADD_SUB;;
-let INT_ADD_SUB2 = INT_OF_REAL_THM REAL_ADD_SUB2;;
-let INT_ADD_SYM = INT_OF_REAL_THM REAL_ADD_SYM;;
-let INT_BOUNDS_LE = INT_OF_REAL_THM REAL_BOUNDS_LE;;
-let INT_BOUNDS_LT = INT_OF_REAL_THM REAL_BOUNDS_LT;;
-let INT_DIFFSQ = INT_OF_REAL_THM REAL_DIFFSQ;;
-let INT_ENTIRE = INT_OF_REAL_THM REAL_ENTIRE;;
-let INT_EQ_ADD_LCANCEL = INT_OF_REAL_THM REAL_EQ_ADD_LCANCEL;;
-let INT_EQ_ADD_LCANCEL_0 = INT_OF_REAL_THM REAL_EQ_ADD_LCANCEL_0;;
-let INT_EQ_ADD_RCANCEL = INT_OF_REAL_THM REAL_EQ_ADD_RCANCEL;;
-let INT_EQ_ADD_RCANCEL_0 = INT_OF_REAL_THM REAL_EQ_ADD_RCANCEL_0;;
-let INT_EQ_IMP_LE = INT_OF_REAL_THM REAL_EQ_IMP_LE;;
-let INT_EQ_MUL_LCANCEL = INT_OF_REAL_THM REAL_EQ_MUL_LCANCEL;;
-let INT_EQ_MUL_RCANCEL = INT_OF_REAL_THM REAL_EQ_MUL_RCANCEL;;
-let INT_EQ_NEG2 = INT_OF_REAL_THM REAL_EQ_NEG2;;
-let INT_EQ_SGN_ABS = INT_OF_REAL_THM REAL_EQ_SGN_ABS;;
-let INT_EQ_SQUARE_ABS = INT_OF_REAL_THM REAL_EQ_SQUARE_ABS;;
-let INT_EQ_SUB_LADD = INT_OF_REAL_THM REAL_EQ_SUB_LADD;;
-let INT_EQ_SUB_RADD = INT_OF_REAL_THM REAL_EQ_SUB_RADD;;
-let INT_LET_ADD = INT_OF_REAL_THM REAL_LET_ADD;;
-let INT_LET_ADD2 = INT_OF_REAL_THM REAL_LET_ADD2;;
-let INT_LET_ANTISYM = INT_OF_REAL_THM REAL_LET_ANTISYM;;
-let INT_LET_TOTAL = INT_OF_REAL_THM REAL_LET_TOTAL;;
-let INT_LET_TRANS = INT_OF_REAL_THM REAL_LET_TRANS;;
-let INT_LE_01 = INT_OF_REAL_THM REAL_LE_01;;
-let INT_LE_ADD = INT_OF_REAL_THM REAL_LE_ADD;;
-let INT_LE_ADD2 = INT_OF_REAL_THM REAL_LE_ADD2;;
-let INT_LE_ADDL = INT_OF_REAL_THM REAL_LE_ADDL;;
-let INT_LE_ADDR = INT_OF_REAL_THM REAL_LE_ADDR;;
-let INT_LE_ANTISYM = INT_OF_REAL_THM REAL_LE_ANTISYM;;
-let INT_LE_DOUBLE = INT_OF_REAL_THM REAL_LE_DOUBLE;;
-let INT_LE_LADD = INT_OF_REAL_THM REAL_LE_LADD;;
-let INT_LE_LADD_IMP = INT_OF_REAL_THM REAL_LE_LADD_IMP;;
-let INT_LE_LMUL = INT_OF_REAL_THM REAL_LE_LMUL;;
-let INT_LE_LMUL_EQ = INT_OF_REAL_THM REAL_LE_LMUL_EQ;;
-let INT_LE_LNEG = INT_OF_REAL_THM REAL_LE_LNEG;;
-let INT_LE_LT = INT_OF_REAL_THM REAL_LE_LT;;
-let INT_LE_MAX = INT_OF_REAL_THM REAL_LE_MAX;;
-let INT_LE_MIN = INT_OF_REAL_THM REAL_LE_MIN;;
-let INT_LE_MUL = INT_OF_REAL_THM REAL_LE_MUL;;
-let INT_LE_MUL_EQ = INT_OF_REAL_THM REAL_LE_MUL_EQ;;
-let INT_LE_NEG2 = INT_OF_REAL_THM REAL_LE_NEG2;;
-let INT_LE_NEGL = INT_OF_REAL_THM REAL_LE_NEGL;;
-let INT_LE_NEGR = INT_OF_REAL_THM REAL_LE_NEGR;;
-let INT_LE_NEGTOTAL = INT_OF_REAL_THM REAL_LE_NEGTOTAL;;
-let INT_LE_POW2 = INT_OF_REAL_THM REAL_LE_POW2;;
-let INT_LE_RADD = INT_OF_REAL_THM REAL_LE_RADD;;
-let INT_LE_REFL = INT_OF_REAL_THM REAL_LE_REFL;;
-let INT_LE_RMUL = INT_OF_REAL_THM REAL_LE_RMUL;;
-let INT_LE_RNEG = INT_OF_REAL_THM REAL_LE_RNEG;;
-let INT_LE_SQUARE = INT_OF_REAL_THM REAL_LE_SQUARE;;
-let INT_LE_SQUARE_ABS = INT_OF_REAL_THM REAL_LE_SQUARE_ABS;;
-let INT_LE_SUB_LADD = INT_OF_REAL_THM REAL_LE_SUB_LADD;;
-let INT_LE_SUB_RADD = INT_OF_REAL_THM REAL_LE_SUB_RADD;;
-let INT_LE_TOTAL = INT_OF_REAL_THM REAL_LE_TOTAL;;
-let INT_LE_TRANS = INT_OF_REAL_THM REAL_LE_TRANS;;
-let INT_LNEG_UNIQ = INT_OF_REAL_THM REAL_LNEG_UNIQ;;
-let INT_LTE_ADD = INT_OF_REAL_THM REAL_LTE_ADD;;
-let INT_LTE_ADD2 = INT_OF_REAL_THM REAL_LTE_ADD2;;
-let INT_LTE_ANTISYM = INT_OF_REAL_THM REAL_LTE_ANTISYM;;
-let INT_LTE_TOTAL = INT_OF_REAL_THM REAL_LTE_TOTAL;;
-let INT_LTE_TRANS = INT_OF_REAL_THM REAL_LTE_TRANS;;
-let INT_LT_01 = INT_OF_REAL_THM REAL_LT_01;;
-let INT_LT_ADD = INT_OF_REAL_THM REAL_LT_ADD;;
-let INT_LT_ADD1 = INT_OF_REAL_THM REAL_LT_ADD1;;
-let INT_LT_ADD2 = INT_OF_REAL_THM REAL_LT_ADD2;;
-let INT_LT_ADDL = INT_OF_REAL_THM REAL_LT_ADDL;;
-let INT_LT_ADDNEG = INT_OF_REAL_THM REAL_LT_ADDNEG;;
-let INT_LT_ADDNEG2 = INT_OF_REAL_THM REAL_LT_ADDNEG2;;
-let INT_LT_ADDR = INT_OF_REAL_THM REAL_LT_ADDR;;
-let INT_LT_ADD_SUB = INT_OF_REAL_THM REAL_LT_ADD_SUB;;
-let INT_LT_ANTISYM = INT_OF_REAL_THM REAL_LT_ANTISYM;;
-let INT_LT_GT = INT_OF_REAL_THM REAL_LT_GT;;
-let INT_LT_IMP_LE = INT_OF_REAL_THM REAL_LT_IMP_LE;;
-let INT_LT_IMP_NE = INT_OF_REAL_THM REAL_LT_IMP_NE;;
-let INT_LT_LADD = INT_OF_REAL_THM REAL_LT_LADD;;
-let INT_LT_LE = INT_OF_REAL_THM REAL_LT_LE;;
-let INT_LT_LMUL_EQ = INT_OF_REAL_THM REAL_LT_LMUL_EQ;;
-let INT_LT_MAX = INT_OF_REAL_THM REAL_LT_MAX;;
-let INT_LT_MIN = INT_OF_REAL_THM REAL_LT_MIN;;
-let INT_LT_MUL = INT_OF_REAL_THM REAL_LT_MUL;;
-let INT_LT_MUL_EQ = INT_OF_REAL_THM REAL_LT_MUL_EQ;;
-let INT_LT_NEG2 = INT_OF_REAL_THM REAL_LT_NEG2;;
-let INT_LT_NEGTOTAL = INT_OF_REAL_THM REAL_LT_NEGTOTAL;;
-let INT_LT_POW2 = INT_OF_REAL_THM REAL_LT_POW2;;
-let INT_LT_RADD = INT_OF_REAL_THM REAL_LT_RADD;;
-let INT_LT_REFL = INT_OF_REAL_THM REAL_LT_REFL;;
-let INT_LT_RMUL_EQ = INT_OF_REAL_THM REAL_LT_RMUL_EQ;;
-let INT_LT_SQUARE_ABS = INT_OF_REAL_THM REAL_LT_SQUARE_ABS;;
-let INT_LT_SUB_LADD = INT_OF_REAL_THM REAL_LT_SUB_LADD;;
-let INT_LT_SUB_RADD = INT_OF_REAL_THM REAL_LT_SUB_RADD;;
-let INT_LT_TOTAL = INT_OF_REAL_THM REAL_LT_TOTAL;;
-let INT_LT_TRANS = INT_OF_REAL_THM REAL_LT_TRANS;;
-let INT_MAX_ACI = INT_OF_REAL_THM REAL_MAX_ACI;;
-let INT_MAX_ASSOC = INT_OF_REAL_THM REAL_MAX_ASSOC;;
-let INT_MAX_LE = INT_OF_REAL_THM REAL_MAX_LE;;
-let INT_MAX_LT = INT_OF_REAL_THM REAL_MAX_LT;;
-let INT_MAX_MAX = INT_OF_REAL_THM REAL_MAX_MAX;;
-let INT_MAX_MIN = INT_OF_REAL_THM REAL_MAX_MIN;;
-let INT_MAX_SYM = INT_OF_REAL_THM REAL_MAX_SYM;;
-let INT_MIN_ACI = INT_OF_REAL_THM REAL_MIN_ACI;;
-let INT_MIN_ASSOC = INT_OF_REAL_THM REAL_MIN_ASSOC;;
-let INT_MIN_LE = INT_OF_REAL_THM REAL_MIN_LE;;
-let INT_MIN_LT = INT_OF_REAL_THM REAL_MIN_LT;;
-let INT_MIN_MAX = INT_OF_REAL_THM REAL_MIN_MAX;;
-let INT_MIN_MIN = INT_OF_REAL_THM REAL_MIN_MIN;;
-let INT_MIN_SYM = INT_OF_REAL_THM REAL_MIN_SYM;;
-let INT_MUL_AC = INT_OF_REAL_THM REAL_MUL_AC;;
-let INT_MUL_ASSOC = INT_OF_REAL_THM REAL_MUL_ASSOC;;
-let INT_MUL_LID = INT_OF_REAL_THM REAL_MUL_LID;;
-let INT_MUL_LNEG = INT_OF_REAL_THM REAL_MUL_LNEG;;
-let INT_MUL_LZERO = INT_OF_REAL_THM REAL_MUL_LZERO;;
-let INT_MUL_POS_LE = INT_OF_REAL_THM REAL_MUL_POS_LE;;
-let INT_MUL_POS_LT = INT_OF_REAL_THM REAL_MUL_POS_LT;;
-let INT_MUL_RID = INT_OF_REAL_THM REAL_MUL_RID;;
-let INT_MUL_RNEG = INT_OF_REAL_THM REAL_MUL_RNEG;;
-let INT_MUL_RZERO = INT_OF_REAL_THM REAL_MUL_RZERO;;
-let INT_MUL_SYM = INT_OF_REAL_THM REAL_MUL_SYM;;
-let INT_NEG_0 = INT_OF_REAL_THM REAL_NEG_0;;
-let INT_NEG_ADD = INT_OF_REAL_THM REAL_NEG_ADD;;
-let INT_NEG_EQ = INT_OF_REAL_THM REAL_NEG_EQ;;
-let INT_NEG_EQ_0 = INT_OF_REAL_THM REAL_NEG_EQ_0;;
-let INT_NEG_GE0 = INT_OF_REAL_THM REAL_NEG_GE0;;
-let INT_NEG_GT0 = INT_OF_REAL_THM REAL_NEG_GT0;;
-let INT_NEG_LE0 = INT_OF_REAL_THM REAL_NEG_LE0;;
-let INT_NEG_LMUL = INT_OF_REAL_THM REAL_NEG_LMUL;;
-let INT_NEG_LT0 = INT_OF_REAL_THM REAL_NEG_LT0;;
-let INT_NEG_MINUS1 = INT_OF_REAL_THM REAL_NEG_MINUS1;;
-let INT_NEG_MUL2 = INT_OF_REAL_THM REAL_NEG_MUL2;;
-let INT_NEG_NEG = INT_OF_REAL_THM REAL_NEG_NEG;;
-let INT_NEG_RMUL = INT_OF_REAL_THM REAL_NEG_RMUL;;
-let INT_NEG_SUB = INT_OF_REAL_THM REAL_NEG_SUB;;
-let INT_NOT_EQ = INT_OF_REAL_THM REAL_NOT_EQ;;
-let INT_NOT_LE = INT_OF_REAL_THM REAL_NOT_LE;;
-let INT_NOT_LT = INT_OF_REAL_THM REAL_NOT_LT;;
-let INT_OF_NUM_ADD = INT_OF_REAL_THM REAL_OF_NUM_ADD;;
-let INT_OF_NUM_EQ = INT_OF_REAL_THM REAL_OF_NUM_EQ;;
-let INT_OF_NUM_GE = INT_OF_REAL_THM REAL_OF_NUM_GE;;
-let INT_OF_NUM_GT = INT_OF_REAL_THM REAL_OF_NUM_GT;;
-let INT_OF_NUM_LE = INT_OF_REAL_THM REAL_OF_NUM_LE;;
-let INT_OF_NUM_LT = INT_OF_REAL_THM REAL_OF_NUM_LT;;
-let INT_OF_NUM_MAX = INT_OF_REAL_THM REAL_OF_NUM_MAX;;
-let INT_OF_NUM_MIN = INT_OF_REAL_THM REAL_OF_NUM_MIN;;
-let INT_OF_NUM_MUL = INT_OF_REAL_THM REAL_OF_NUM_MUL;;
-let INT_OF_NUM_POW = INT_OF_REAL_THM REAL_OF_NUM_POW;;
-let INT_OF_NUM_SUB = INT_OF_REAL_THM REAL_OF_NUM_SUB;;
-let INT_OF_NUM_SUC = INT_OF_REAL_THM REAL_OF_NUM_SUC;;
-let INT_POS = INT_OF_REAL_THM REAL_POS;;
-let INT_POS_NZ = INT_OF_REAL_THM REAL_LT_IMP_NZ;;
-let INT_POW2_ABS = INT_OF_REAL_THM REAL_POW2_ABS;;
-let INT_POW_1 = INT_OF_REAL_THM REAL_POW_1;;
-let INT_POW_1_LE = INT_OF_REAL_THM REAL_POW_1_LE;;
-let INT_POW_1_LT = INT_OF_REAL_THM REAL_POW_1_LT;;
-let INT_POW_2 = INT_OF_REAL_THM REAL_POW_2;;
-let INT_POW_ADD = INT_OF_REAL_THM REAL_POW_ADD;;
-let INT_POW_EQ = INT_OF_REAL_THM REAL_POW_EQ;;
-let INT_POW_EQ_0 = INT_OF_REAL_THM REAL_POW_EQ_0;;
-let INT_POW_EQ_ABS = INT_OF_REAL_THM REAL_POW_EQ_ABS;;
-let INT_POW_LE = INT_OF_REAL_THM REAL_POW_LE;;
-let INT_POW_LE2 = INT_OF_REAL_THM REAL_POW_LE2;;
-let INT_POW_LE2_ODD = INT_OF_REAL_THM REAL_POW_LE2_ODD;;
-let INT_POW_LE2_REV = INT_OF_REAL_THM REAL_POW_LE2_REV;;
-let INT_POW_LE_1 = INT_OF_REAL_THM REAL_POW_LE_1;;
-let INT_POW_LT = INT_OF_REAL_THM REAL_POW_LT;;
-let INT_POW_LT2 = INT_OF_REAL_THM REAL_POW_LT2;;
-let INT_POW_LT2_REV = INT_OF_REAL_THM REAL_POW_LT2_REV;;
-let INT_POW_LT_1 = INT_OF_REAL_THM REAL_POW_LT_1;;
-let INT_POW_MONO = INT_OF_REAL_THM REAL_POW_MONO;;
-let INT_POW_MONO_LT = INT_OF_REAL_THM REAL_POW_MONO_LT;;
-let INT_POW_MUL = INT_OF_REAL_THM REAL_POW_MUL;;
-let INT_POW_NEG = INT_OF_REAL_THM REAL_POW_NEG;;
-let INT_POW_NZ = INT_OF_REAL_THM REAL_POW_NZ;;
-let INT_POW_ONE = INT_OF_REAL_THM REAL_POW_ONE;;
-let INT_POW_POW = INT_OF_REAL_THM REAL_POW_POW;;
-let INT_POW_ZERO = INT_OF_REAL_THM REAL_POW_ZERO;;
-let INT_RNEG_UNIQ = INT_OF_REAL_THM REAL_RNEG_UNIQ;;
-let INT_SGN = INT_OF_REAL_THM real_sgn;;
-let INT_SGN_0 = INT_OF_REAL_THM REAL_SGN_0;;
-let INT_SGN_ABS = INT_OF_REAL_THM REAL_SGN_ABS;;
-let INT_SGN_ABS_ALT = INT_OF_REAL_THM REAL_SGN_ABS_ALT;;
-let INT_SGN_CASES = INT_OF_REAL_THM REAL_SGN_CASES;;
-let INT_SGN_EQ = INT_OF_REAL_THM REAL_SGN_EQ;;
-let INT_SGN_EQ_INEQ = INT_OF_REAL_THM REAL_SGN_EQ_INEQ;;
-let INT_SGN_INEQS = INT_OF_REAL_THM REAL_SGN_INEQS;;
-let INT_SGN_MUL = INT_OF_REAL_THM REAL_SGN_MUL;;
-let INT_SGN_NEG = INT_OF_REAL_THM REAL_SGN_NEG;;
-let INT_SGN_POW = INT_OF_REAL_THM REAL_SGN_POW;;
-let INT_SGN_POW_2 = INT_OF_REAL_THM REAL_SGN_POW_2;;
-let INT_SGN_INT_SGN = INT_OF_REAL_THM REAL_SGN_REAL_SGN;;
-let INT_SGNS_EQ = INT_OF_REAL_THM REAL_SGNS_EQ;;
-let INT_SGNS_EQ_ALT = INT_OF_REAL_THM REAL_SGNS_EQ_ALT;;
-let INT_SOS_EQ_0 = INT_OF_REAL_THM REAL_SOS_EQ_0;;
-let INT_SUB_0 = INT_OF_REAL_THM REAL_SUB_0;;
-let INT_SUB_ABS = INT_OF_REAL_THM REAL_SUB_ABS;;
-let INT_SUB_ADD = INT_OF_REAL_THM REAL_SUB_ADD;;
-let INT_SUB_ADD2 = INT_OF_REAL_THM REAL_SUB_ADD2;;
-let INT_SUB_LDISTRIB = INT_OF_REAL_THM REAL_SUB_LDISTRIB;;
-let INT_SUB_LE = INT_OF_REAL_THM REAL_SUB_LE;;
-let INT_SUB_LNEG = INT_OF_REAL_THM REAL_SUB_LNEG;;
-let INT_SUB_LT = INT_OF_REAL_THM REAL_SUB_LT;;
-let INT_SUB_LZERO = INT_OF_REAL_THM REAL_SUB_LZERO;;
-let INT_SUB_NEG2 = INT_OF_REAL_THM REAL_SUB_NEG2;;
-let INT_SUB_RDISTRIB = INT_OF_REAL_THM REAL_SUB_RDISTRIB;;
-let INT_SUB_REFL = INT_OF_REAL_THM REAL_SUB_REFL;;
-let INT_SUB_RNEG = INT_OF_REAL_THM REAL_SUB_RNEG;;
-let INT_SUB_RZERO = INT_OF_REAL_THM REAL_SUB_RZERO;;
-let INT_SUB_SUB = INT_OF_REAL_THM REAL_SUB_SUB;;
-let INT_SUB_SUB2 = INT_OF_REAL_THM REAL_SUB_SUB2;;
-let INT_SUB_TRIANGLE = INT_OF_REAL_THM REAL_SUB_TRIANGLE;;
+export_theory "int-abs";;
 
-let INT_WLOG_LE = prove
+let INT_ABS_0 = INT_OF_REAL_THM REAL_ABS_0;;
+export_namedthm INT_ABS_0 "INT_ABS_0";;
+let INT_ABS_1 = INT_OF_REAL_THM REAL_ABS_1;;
+export_namedthm INT_ABS_1 "INT_ABS_1";;
+let INT_ABS_ABS = INT_OF_REAL_THM REAL_ABS_ABS;;
+export_namedthm INT_ABS_ABS "INT_ABS_ABS";;
+let INT_ABS_BETWEEN = INT_OF_REAL_THM REAL_ABS_BETWEEN;;
+export_namedthm INT_ABS_BETWEEN "INT_ABS_BETWEEN";;
+let INT_ABS_BETWEEN1 = INT_OF_REAL_THM REAL_ABS_BETWEEN1;;
+export_namedthm INT_ABS_BETWEEN1 "INT_ABS_BETWEEN1";;
+let INT_ABS_BETWEEN2 = INT_OF_REAL_THM REAL_ABS_BETWEEN2;;
+export_namedthm INT_ABS_BETWEEN2 "INT_ABS_BETWEEN2";;
+let INT_ABS_BOUND = INT_OF_REAL_THM REAL_ABS_BOUND;;
+export_namedthm INT_ABS_BOUND "INT_ABS_BOUND";;
+let INT_ABS_CASES = INT_OF_REAL_THM REAL_ABS_CASES;;
+export_namedthm INT_ABS_CASES "INT_ABS_CASES";;
+let INT_ABS_CIRCLE = INT_OF_REAL_THM REAL_ABS_CIRCLE;;
+export_namedthm INT_ABS_CIRCLE "INT_ABS_CIRCLE";;
+let INT_ABS_LE = INT_OF_REAL_THM REAL_ABS_LE;;
+export_namedthm INT_ABS_LE "INT_ABS_LE";;
+let INT_ABS_MUL = INT_OF_REAL_THM REAL_ABS_MUL;;
+export_namedthm INT_ABS_MUL "INT_ABS_MUL";;
+let INT_ABS_NEG = INT_OF_REAL_THM REAL_ABS_NEG;;
+export_namedthm INT_ABS_NEG "INT_ABS_NEG";;
+let INT_ABS_NUM = INT_OF_REAL_THM REAL_ABS_NUM;;
+export_namedthm INT_ABS_NUM "INT_ABS_NUM";;
+let INT_ABS_NZ = INT_OF_REAL_THM REAL_ABS_NZ;;
+export_namedthm INT_ABS_NZ "INT_ABS_NZ";;
+let INT_ABS_POS = INT_OF_REAL_THM REAL_ABS_POS;;
+export_namedthm INT_ABS_POS "INT_ABS_POS";;
+let INT_ABS_POW = INT_OF_REAL_THM REAL_ABS_POW;;
+export_namedthm INT_ABS_POW "INT_ABS_POW";;
+let INT_ABS_REFL = INT_OF_REAL_THM REAL_ABS_REFL;;
+export_namedthm INT_ABS_REFL "INT_ABS_REFL";;
+let INT_ABS_SGN = INT_OF_REAL_THM REAL_ABS_SGN;;
+export_namedthm INT_ABS_SGN "INT_ABS_SGN";;
+let INT_ABS_SIGN = INT_OF_REAL_THM REAL_ABS_SIGN;;
+export_namedthm INT_ABS_SIGN "INT_ABS_SIGN";;
+let INT_ABS_SIGN2 = INT_OF_REAL_THM REAL_ABS_SIGN2;;
+export_namedthm INT_ABS_SIGN2 "INT_ABS_SIGN2";;
+let INT_ABS_STILLNZ = INT_OF_REAL_THM REAL_ABS_STILLNZ;;
+export_namedthm INT_ABS_STILLNZ "INT_ABS_STILLNZ";;
+let INT_ABS_SUB = INT_OF_REAL_THM REAL_ABS_SUB;;
+export_namedthm INT_ABS_SUB "INT_ABS_SUB";;
+let INT_ABS_SUB_ABS = INT_OF_REAL_THM REAL_ABS_SUB_ABS;;
+export_namedthm INT_ABS_SUB_ABS "INT_ABS_SUB_ABS";;
+let INT_ABS_TRIANGLE = INT_OF_REAL_THM REAL_ABS_TRIANGLE;;
+export_namedthm INT_ABS_TRIANGLE "INT_ABS_TRIANGLE";;
+let INT_ABS_ZERO = INT_OF_REAL_THM REAL_ABS_ZERO;;
+export_namedthm INT_ABS_ZERO "INT_ABS_ZERO";;
+let INT_ADD2_SUB2 = INT_OF_REAL_THM REAL_ADD2_SUB2;;
+
+export_theory "int-add";;
+
+export_namedthm INT_ADD2_SUB2 "INT_ADD2_SUB2";;
+let INT_ADD_AC = INT_OF_REAL_THM REAL_ADD_AC;;
+export_namedthm INT_ADD_AC "INT_ADD_AC";;
+let INT_ADD_ASSOC = INT_OF_REAL_THM REAL_ADD_ASSOC;;
+export_namedthm INT_ADD_ASSOC "INT_ADD_ASSOC";;
+let INT_ADD_LDISTRIB = INT_OF_REAL_THM REAL_ADD_LDISTRIB;;
+export_namedthm INT_ADD_LDISTRIB "INT_ADD_LDISTRIB";;
+let INT_ADD_LID = INT_OF_REAL_THM REAL_ADD_LID;;
+export_namedthm INT_ADD_LID "INT_ADD_LID";;
+let INT_ADD_LINV = INT_OF_REAL_THM REAL_ADD_LINV;;
+export_namedthm INT_ADD_LINV "INT_ADD_LINV";;
+let INT_ADD_RDISTRIB = INT_OF_REAL_THM REAL_ADD_RDISTRIB;;
+export_namedthm INT_ADD_RDISTRIB "INT_ADD_RDISTRIB";;
+let INT_ADD_RID = INT_OF_REAL_THM REAL_ADD_RID;;
+export_namedthm INT_ADD_RID "INT_ADD_RID";;
+let INT_ADD_RINV = INT_OF_REAL_THM REAL_ADD_RINV;;
+export_namedthm INT_ADD_RINV "INT_ADD_RINV";;
+let INT_ADD_SUB = INT_OF_REAL_THM REAL_ADD_SUB;;
+export_namedthm INT_ADD_SUB "INT_ADD_SUB";;
+let INT_ADD_SUB2 = INT_OF_REAL_THM REAL_ADD_SUB2;;
+export_namedthm INT_ADD_SUB2 "INT_ADD_SUB2";;
+let INT_ADD_SYM = INT_OF_REAL_THM REAL_ADD_SYM;;
+export_namedthm INT_ADD_SYM "INT_ADD_SYM";;
+
+export_theory "int-bounds";;
+
+let INT_BOUNDS_LE = INT_OF_REAL_THM REAL_BOUNDS_LE;;
+export_namedthm INT_BOUNDS_LE "INT_BOUNDS_LE";;
+let INT_BOUNDS_LT = INT_OF_REAL_THM REAL_BOUNDS_LT;;
+export_namedthm INT_BOUNDS_LT "INT_BOUNDS_LT";;
+
+export_theory "int-misc";;
+
+let INT_DIFFSQ = INT_OF_REAL_THM REAL_DIFFSQ;;
+export_namedthm INT_DIFFSQ "INT_DIFFSQ";;
+let INT_ENTIRE = INT_OF_REAL_THM REAL_ENTIRE;;
+export_namedthm INT_ENTIRE "INT_ENTIRE";;
+
+export_theory "int-eq";;
+
+let INT_EQ_ADD_LCANCEL = INT_OF_REAL_THM REAL_EQ_ADD_LCANCEL;;
+export_namedthm INT_EQ_ADD_LCANCEL "INT_EQ_ADD_LCANCEL";;
+let INT_EQ_ADD_LCANCEL_0 = INT_OF_REAL_THM REAL_EQ_ADD_LCANCEL_0;;
+export_namedthm INT_EQ_ADD_LCANCEL_0 "INT_EQ_ADD_LCANCEL_0";;
+let INT_EQ_ADD_RCANCEL = INT_OF_REAL_THM REAL_EQ_ADD_RCANCEL;;
+export_namedthm INT_EQ_ADD_RCANCEL "INT_EQ_ADD_RCANCEL";;
+let INT_EQ_ADD_RCANCEL_0 = INT_OF_REAL_THM REAL_EQ_ADD_RCANCEL_0;;
+export_namedthm INT_EQ_ADD_RCANCEL_0 "INT_EQ_ADD_RCANCEL_0";;
+let INT_EQ_IMP_LE = INT_OF_REAL_THM REAL_EQ_IMP_LE;;
+export_namedthm INT_EQ_IMP_LE "INT_EQ_IMP_LE";;
+let INT_EQ_MUL_LCANCEL = INT_OF_REAL_THM REAL_EQ_MUL_LCANCEL;;
+export_namedthm INT_EQ_MUL_LCANCEL "INT_EQ_MUL_LCANCEL";;
+let INT_EQ_MUL_RCANCEL = INT_OF_REAL_THM REAL_EQ_MUL_RCANCEL;;
+export_namedthm INT_EQ_MUL_RCANCEL "INT_EQ_MUL_RCANCEL";;
+let INT_EQ_NEG2 = INT_OF_REAL_THM REAL_EQ_NEG2;;
+export_namedthm INT_EQ_NEG2 "INT_EQ_NEG2";;
+let INT_EQ_SGN_ABS = INT_OF_REAL_THM REAL_EQ_SGN_ABS;;
+export_namedthm INT_EQ_SGN_ABS "INT_EQ_SGN_ABS";;
+let INT_EQ_SQUARE_ABS = INT_OF_REAL_THM REAL_EQ_SQUARE_ABS;;
+export_namedthm INT_EQ_SQUARE_ABS "INT_EQ_SQUARE_ABS";;
+let INT_EQ_SUB_LADD = INT_OF_REAL_THM REAL_EQ_SUB_LADD;;
+export_namedthm INT_EQ_SUB_LADD "INT_EQ_SUB_LADD";;
+let INT_EQ_SUB_RADD = INT_OF_REAL_THM REAL_EQ_SUB_RADD;;
+export_namedthm INT_EQ_SUB_RADD "INT_EQ_SUB_RADD";;
+
+export_theory "int-let";;
+
+let INT_LET_ADD = INT_OF_REAL_THM REAL_LET_ADD;;
+export_namedthm INT_LET_ADD "INT_LET_ADD";;
+let INT_LET_ADD2 = INT_OF_REAL_THM REAL_LET_ADD2;;
+export_namedthm INT_LET_ADD2 "INT_LET_ADD2";;
+let INT_LET_ANTISYM = INT_OF_REAL_THM REAL_LET_ANTISYM;;
+export_namedthm INT_LET_ANTISYM "INT_LET_ANTISYM";;
+let INT_LET_TOTAL = INT_OF_REAL_THM REAL_LET_TOTAL;;
+export_namedthm INT_LET_TOTAL "INT_LET_TOTAL";;
+let INT_LET_TRANS = INT_OF_REAL_THM REAL_LET_TRANS;;
+export_namedthm INT_LET_TRANS "INT_LET_TRANS";;
+let INT_LE_01 = INT_OF_REAL_THM REAL_LE_01;;
+
+export_theory "int-le";;
+
+export_namedthm INT_LE_01 "INT_LE_01";;
+let INT_LE_ADD = INT_OF_REAL_THM REAL_LE_ADD;;
+export_namedthm INT_LE_ADD "INT_LE_ADD";;
+let INT_LE_ADD2 = INT_OF_REAL_THM REAL_LE_ADD2;;
+export_namedthm INT_LE_ADD2 "INT_LE_ADD2";;
+let INT_LE_ADDL = INT_OF_REAL_THM REAL_LE_ADDL;;
+export_namedthm INT_LE_ADDL "INT_LE_ADDL";;
+let INT_LE_ADDR = INT_OF_REAL_THM REAL_LE_ADDR;;
+export_namedthm INT_LE_ADDR "INT_LE_ADDR";;
+let INT_LE_ANTISYM = INT_OF_REAL_THM REAL_LE_ANTISYM;;
+export_namedthm INT_LE_ANTISYM "INT_LE_ANTISYM";;
+let INT_LE_DOUBLE = INT_OF_REAL_THM REAL_LE_DOUBLE;;
+export_namedthm INT_LE_DOUBLE "INT_LE_DOUBLE";;
+let INT_LE_LADD = INT_OF_REAL_THM REAL_LE_LADD;;
+export_namedthm INT_LE_LADD "INT_LE_LADD";;
+let INT_LE_LADD_IMP = INT_OF_REAL_THM REAL_LE_LADD_IMP;;
+export_namedthm INT_LE_LADD_IMP "INT_LE_LADD_IMP";;
+let INT_LE_LMUL = INT_OF_REAL_THM REAL_LE_LMUL;;
+export_namedthm INT_LE_LMUL "INT_LE_LMUL";;
+let INT_LE_LMUL_EQ = INT_OF_REAL_THM REAL_LE_LMUL_EQ;;
+export_namedthm INT_LE_LMUL_EQ "INT_LE_LMUL_EQ";;
+let INT_LE_LNEG = INT_OF_REAL_THM REAL_LE_LNEG;;
+export_namedthm INT_LE_LNEG "INT_LE_LNEG";;
+let INT_LE_LT = INT_OF_REAL_THM REAL_LE_LT;;
+export_namedthm INT_LE_LT "INT_LE_LT";;
+let INT_LE_MAX = INT_OF_REAL_THM REAL_LE_MAX;;
+export_namedthm INT_LE_MAX "INT_LE_MAX";;
+let INT_LE_MIN = INT_OF_REAL_THM REAL_LE_MIN;;
+export_namedthm INT_LE_MIN "INT_LE_MIN";;
+let INT_LE_MUL = INT_OF_REAL_THM REAL_LE_MUL;;
+export_namedthm INT_LE_MUL "INT_LE_MUL";;
+let INT_LE_MUL_EQ = INT_OF_REAL_THM REAL_LE_MUL_EQ;;
+export_namedthm INT_LE_MUL_EQ "INT_LE_MUL_EQ";;
+let INT_LE_NEG2 = INT_OF_REAL_THM REAL_LE_NEG2;;
+export_namedthm INT_LE_NEG2 "INT_LE_NEG2";;
+let INT_LE_NEGL = INT_OF_REAL_THM REAL_LE_NEGL;;
+export_namedthm INT_LE_NEGL "INT_LE_NEGL";;
+let INT_LE_NEGR = INT_OF_REAL_THM REAL_LE_NEGR;;
+export_namedthm INT_LE_NEGR "INT_LE_NEGR";;
+let INT_LE_NEGTOTAL = INT_OF_REAL_THM REAL_LE_NEGTOTAL;;
+export_namedthm INT_LE_NEGTOTAL "INT_LE_NEGTOTAL";;
+let INT_LE_POW2 = INT_OF_REAL_THM REAL_LE_POW2;;
+export_namedthm INT_LE_POW2 "INT_LE_POW2";;
+let INT_LE_RADD = INT_OF_REAL_THM REAL_LE_RADD;;
+export_namedthm INT_LE_RADD "INT_LE_RADD";;
+let INT_LE_REFL = INT_OF_REAL_THM REAL_LE_REFL;;
+export_namedthm INT_LE_REFL "INT_LE_REFL";;
+let INT_LE_RMUL = INT_OF_REAL_THM REAL_LE_RMUL;;
+export_namedthm INT_LE_RMUL "INT_LE_RMUL";;
+let INT_LE_RNEG = INT_OF_REAL_THM REAL_LE_RNEG;;
+export_namedthm INT_LE_RNEG "INT_LE_RNEG";;
+let INT_LE_SQUARE = INT_OF_REAL_THM REAL_LE_SQUARE;;
+export_namedthm INT_LE_SQUARE "INT_LE_SQUARE";;
+let INT_LE_SQUARE_ABS = INT_OF_REAL_THM REAL_LE_SQUARE_ABS;;
+export_namedthm INT_LE_SQUARE_ABS "INT_LE_SQUARE_ABS";;
+let INT_LE_SUB_LADD = INT_OF_REAL_THM REAL_LE_SUB_LADD;;
+export_namedthm INT_LE_SUB_LADD "INT_LE_SUB_LADD";;
+let INT_LE_SUB_RADD = INT_OF_REAL_THM REAL_LE_SUB_RADD;;
+export_namedthm INT_LE_SUB_RADD "INT_LE_SUB_RADD";;
+let INT_LE_TOTAL = INT_OF_REAL_THM REAL_LE_TOTAL;;
+export_namedthm INT_LE_TOTAL "INT_LE_TOTAL";;
+let INT_LE_TRANS = INT_OF_REAL_THM REAL_LE_TRANS;;
+export_namedthm INT_LE_TRANS "INT_LE_TRANS";;
+
+export_theory "int-lneg";;
+
+let INT_LNEG_UNIQ = INT_OF_REAL_THM REAL_LNEG_UNIQ;;
+export_namedthm INT_LNEG_UNIQ "INT_LNEG_UNIQ";;
+
+export_theory "int-lte";;
+
+let INT_LTE_ADD = INT_OF_REAL_THM REAL_LTE_ADD;;
+export_namedthm INT_LTE_ADD "INT_LTE_ADD";;
+let INT_LTE_ADD2 = INT_OF_REAL_THM REAL_LTE_ADD2;;
+export_namedthm INT_LTE_ADD2 "INT_LTE_ADD2";;
+let INT_LTE_ANTISYM = INT_OF_REAL_THM REAL_LTE_ANTISYM;;
+export_namedthm INT_LTE_ANTISYM "INT_LTE_ANTISYM";;
+let INT_LTE_TOTAL = INT_OF_REAL_THM REAL_LTE_TOTAL;;
+export_namedthm INT_LTE_TOTAL "INT_LTE_TOTAL";;
+let INT_LTE_TRANS = INT_OF_REAL_THM REAL_LTE_TRANS;;
+export_namedthm INT_LTE_TRANS "INT_LTE_TRANS";;
+let INT_LT_01 = INT_OF_REAL_THM REAL_LT_01;;
+
+export_theory "int-lt";;
+
+export_namedthm INT_LT_01 "INT_LT_01";;
+let INT_LT_ADD = INT_OF_REAL_THM REAL_LT_ADD;;
+export_namedthm INT_LT_ADD "INT_LT_ADD";;
+let INT_LT_ADD1 = INT_OF_REAL_THM REAL_LT_ADD1;;
+export_namedthm INT_LT_ADD1 "INT_LT_ADD1";;
+let INT_LT_ADD2 = INT_OF_REAL_THM REAL_LT_ADD2;;
+export_namedthm INT_LT_ADD2 "INT_LT_ADD2";;
+let INT_LT_ADDL = INT_OF_REAL_THM REAL_LT_ADDL;;
+export_namedthm INT_LT_ADDL "INT_LT_ADDL";;
+let INT_LT_ADDNEG = INT_OF_REAL_THM REAL_LT_ADDNEG;;
+export_namedthm INT_LT_ADDNEG "INT_LT_ADDNEG";;
+let INT_LT_ADDNEG2 = INT_OF_REAL_THM REAL_LT_ADDNEG2;;
+export_namedthm INT_LT_ADDNEG2 "INT_LT_ADDNEG2";;
+let INT_LT_ADDR = INT_OF_REAL_THM REAL_LT_ADDR;;
+export_namedthm INT_LT_ADDR "INT_LT_ADDR";;
+let INT_LT_ADD_SUB = INT_OF_REAL_THM REAL_LT_ADD_SUB;;
+export_namedthm INT_LT_ADD_SUB "INT_LT_ADD_SUB";;
+let INT_LT_ANTISYM = INT_OF_REAL_THM REAL_LT_ANTISYM;;
+export_namedthm INT_LT_ANTISYM "INT_LT_ANTISYM";;
+let INT_LT_GT = INT_OF_REAL_THM REAL_LT_GT;;
+export_namedthm INT_LT_GT "INT_LT_GT";;
+let INT_LT_IMP_LE = INT_OF_REAL_THM REAL_LT_IMP_LE;;
+export_namedthm INT_LT_IMP_LE "INT_LT_IMP_LE";;
+let INT_LT_IMP_NE = INT_OF_REAL_THM REAL_LT_IMP_NE;;
+export_namedthm INT_LT_IMP_NE "INT_LT_IMP_NE";;
+let INT_LT_LADD = INT_OF_REAL_THM REAL_LT_LADD;;
+export_namedthm INT_LT_LADD "INT_LT_LADD";;
+let INT_LT_LE = INT_OF_REAL_THM REAL_LT_LE;;
+export_namedthm INT_LT_LE "INT_LT_LE";;
+let INT_LT_LMUL_EQ = INT_OF_REAL_THM REAL_LT_LMUL_EQ;;
+export_namedthm INT_LT_LMUL_EQ "INT_LT_LMUL_EQ";;
+let INT_LT_MAX = INT_OF_REAL_THM REAL_LT_MAX;;
+export_namedthm INT_LT_MAX "INT_LT_MAX";;
+let INT_LT_MIN = INT_OF_REAL_THM REAL_LT_MIN;;
+export_namedthm INT_LT_MIN "INT_LT_MIN";;
+let INT_LT_MUL = INT_OF_REAL_THM REAL_LT_MUL;;
+export_namedthm INT_LT_MUL "INT_LT_MUL";;
+let INT_LT_MUL_EQ = INT_OF_REAL_THM REAL_LT_MUL_EQ;;
+export_namedthm INT_LT_MUL_EQ "INT_LT_MUL_EQ";;
+let INT_LT_NEG2 = INT_OF_REAL_THM REAL_LT_NEG2;;
+export_namedthm INT_LT_NEG2 "INT_LT_NEG2";;
+let INT_LT_NEGTOTAL = INT_OF_REAL_THM REAL_LT_NEGTOTAL;;
+export_namedthm INT_LT_NEGTOTAL "INT_LT_NEGTOTAL";;
+let INT_LT_POW2 = INT_OF_REAL_THM REAL_LT_POW2;;
+export_namedthm INT_LT_POW2 "INT_LT_POW2";;
+let INT_LT_RADD = INT_OF_REAL_THM REAL_LT_RADD;;
+export_namedthm INT_LT_RADD "INT_LT_RADD";;
+let INT_LT_REFL = INT_OF_REAL_THM REAL_LT_REFL;;
+export_namedthm INT_LT_REFL "INT_LT_REFL";;
+let INT_LT_RMUL_EQ = INT_OF_REAL_THM REAL_LT_RMUL_EQ;;
+export_namedthm INT_LT_RMUL_EQ "INT_LT_RMUL_EQ";;
+let INT_LT_SQUARE_ABS = INT_OF_REAL_THM REAL_LT_SQUARE_ABS;;
+export_namedthm INT_LT_SQUARE_ABS "INT_LT_SQUARE_ABS";;
+let INT_LT_SUB_LADD = INT_OF_REAL_THM REAL_LT_SUB_LADD;;
+export_namedthm INT_LT_SUB_LADD "INT_LT_SUB_LADD";;
+let INT_LT_SUB_RADD = INT_OF_REAL_THM REAL_LT_SUB_RADD;;
+export_namedthm INT_LT_SUB_RADD "INT_LT_SUB_RADD";;
+let INT_LT_TOTAL = INT_OF_REAL_THM REAL_LT_TOTAL;;
+export_namedthm INT_LT_TOTAL "INT_LT_TOTAL";;
+let INT_LT_TRANS = INT_OF_REAL_THM REAL_LT_TRANS;;
+export_namedthm INT_LT_TRANS "INT_LT_TRANS";;
+
+export_theory "int-max";;
+
+let INT_MAX_ACI = INT_OF_REAL_THM REAL_MAX_ACI;;
+export_namedthm INT_MAX_ACI "INT_MAX_ACI";;
+let INT_MAX_ASSOC = INT_OF_REAL_THM REAL_MAX_ASSOC;;
+export_namedthm INT_MAX_ASSOC "INT_MAX_ASSOC";;
+let INT_MAX_LE = INT_OF_REAL_THM REAL_MAX_LE;;
+export_namedthm INT_MAX_LE "INT_MAX_LE";;
+let INT_MAX_LT = INT_OF_REAL_THM REAL_MAX_LT;;
+export_namedthm INT_MAX_LT "INT_MAX_LT";;
+let INT_MAX_MAX = INT_OF_REAL_THM REAL_MAX_MAX;;
+export_namedthm INT_MAX_MAX "INT_MAX_MAX";;
+let INT_MAX_MIN = INT_OF_REAL_THM REAL_MAX_MIN;;
+export_namedthm INT_MAX_MIN "INT_MAX_MIN";;
+let INT_MAX_SYM = INT_OF_REAL_THM REAL_MAX_SYM;;
+export_namedthm INT_MAX_SYM "INT_MAX_SYM";;
+
+export_theory "int-min";;
+
+let INT_MIN_ACI = INT_OF_REAL_THM REAL_MIN_ACI;;
+export_namedthm INT_MIN_ACI "INT_MIN_ACI";;
+let INT_MIN_ASSOC = INT_OF_REAL_THM REAL_MIN_ASSOC;;
+export_namedthm INT_MIN_ASSOC "INT_MIN_ASSOC";;
+let INT_MIN_LE = INT_OF_REAL_THM REAL_MIN_LE;;
+export_namedthm INT_MIN_LE "INT_MIN_LE";;
+let INT_MIN_LT = INT_OF_REAL_THM REAL_MIN_LT;;
+export_namedthm INT_MIN_LT "INT_MIN_LT";;
+let INT_MIN_MAX = INT_OF_REAL_THM REAL_MIN_MAX;;
+export_namedthm INT_MIN_MAX "INT_MIN_MAX";;
+let INT_MIN_MIN = INT_OF_REAL_THM REAL_MIN_MIN;;
+export_namedthm INT_MIN_MIN "INT_MIN_MIN";;
+let INT_MIN_SYM = INT_OF_REAL_THM REAL_MIN_SYM;;
+export_namedthm INT_MIN_SYM "INT_MIN_SYM";;
+
+export_theory "int-mul";;
+
+let INT_MUL_AC = INT_OF_REAL_THM REAL_MUL_AC;;
+export_namedthm INT_MUL_AC "INT_MUL_AC";;
+let INT_MUL_ASSOC = INT_OF_REAL_THM REAL_MUL_ASSOC;;
+export_namedthm INT_MUL_ASSOC "INT_MUL_ASSOC";;
+let INT_MUL_LID = INT_OF_REAL_THM REAL_MUL_LID;;
+export_namedthm INT_MUL_LID "INT_MUL_LID";;
+let INT_MUL_LNEG = INT_OF_REAL_THM REAL_MUL_LNEG;;
+export_namedthm INT_MUL_LNEG "INT_MUL_LNEG";;
+let INT_MUL_LZERO = INT_OF_REAL_THM REAL_MUL_LZERO;;
+export_namedthm INT_MUL_LZERO "INT_MUL_LZERO";;
+let INT_MUL_POS_LE = INT_OF_REAL_THM REAL_MUL_POS_LE;;
+export_namedthm INT_MUL_POS_LE "INT_MUL_POS_LE";;
+let INT_MUL_POS_LT = INT_OF_REAL_THM REAL_MUL_POS_LT;;
+export_namedthm INT_MUL_POS_LT "INT_MUL_POS_LT";;
+let INT_MUL_RID = INT_OF_REAL_THM REAL_MUL_RID;;
+export_namedthm INT_MUL_RID "INT_MUL_RID";;
+let INT_MUL_RNEG = INT_OF_REAL_THM REAL_MUL_RNEG;;
+export_namedthm INT_MUL_RNEG "INT_MUL_RNEG";;
+let INT_MUL_RZERO = INT_OF_REAL_THM REAL_MUL_RZERO;;
+export_namedthm INT_MUL_RZERO "INT_MUL_RZERO";;
+let INT_MUL_SYM = INT_OF_REAL_THM REAL_MUL_SYM;;
+export_namedthm INT_MUL_SYM "INT_MUL_SYM";;
+
+export_theory "int-neg";;
+
+let INT_NEG_0 = INT_OF_REAL_THM REAL_NEG_0;;
+export_namedthm INT_NEG_0 "INT_NEG_0";;
+let INT_NEG_ADD = INT_OF_REAL_THM REAL_NEG_ADD;;
+export_namedthm INT_NEG_ADD "INT_NEG_ADD";;
+let INT_NEG_EQ = INT_OF_REAL_THM REAL_NEG_EQ;;
+export_namedthm INT_NEG_EQ "INT_NEG_EQ";;
+let INT_NEG_EQ_0 = INT_OF_REAL_THM REAL_NEG_EQ_0;;
+export_namedthm INT_NEG_EQ_0 "INT_NEG_EQ_0";;
+let INT_NEG_GE0 = INT_OF_REAL_THM REAL_NEG_GE0;;
+export_namedthm INT_NEG_GE0 "INT_NEG_GE0";;
+let INT_NEG_GT0 = INT_OF_REAL_THM REAL_NEG_GT0;;
+export_namedthm INT_NEG_GT0 "INT_NEG_GT0";;
+let INT_NEG_LE0 = INT_OF_REAL_THM REAL_NEG_LE0;;
+export_namedthm INT_NEG_LE0 "INT_NEG_LE0";;
+let INT_NEG_LMUL = INT_OF_REAL_THM REAL_NEG_LMUL;;
+export_namedthm INT_NEG_LMUL "INT_NEG_LMUL";;
+let INT_NEG_LT0 = INT_OF_REAL_THM REAL_NEG_LT0;;
+export_namedthm INT_NEG_LT0 "INT_NEG_LT0";;
+let INT_NEG_MINUS1 = INT_OF_REAL_THM REAL_NEG_MINUS1;;
+export_namedthm INT_NEG_MINUS1 "INT_NEG_MINUS1";;
+let INT_NEG_MUL2 = INT_OF_REAL_THM REAL_NEG_MUL2;;
+export_namedthm INT_NEG_MUL2 "INT_NEG_MUL2";;
+let INT_NEG_NEG = INT_OF_REAL_THM REAL_NEG_NEG;;
+export_namedthm INT_NEG_NEG "INT_NEG_NEG";;
+let INT_NEG_RMUL = INT_OF_REAL_THM REAL_NEG_RMUL;;
+export_namedthm INT_NEG_RMUL "INT_NEG_RMUL";;
+let INT_NEG_SUB = INT_OF_REAL_THM REAL_NEG_SUB;;
+export_namedthm INT_NEG_SUB "INT_NEG_SUB";;
+
+export_theory "int-not";;
+
+let INT_NOT_EQ = INT_OF_REAL_THM REAL_NOT_EQ;;
+export_namedthm INT_NOT_EQ "INT_NOT_EQ";;
+let INT_NOT_LE = INT_OF_REAL_THM REAL_NOT_LE;;
+export_namedthm INT_NOT_LE "INT_NOT_LE";;
+let INT_NOT_LT = INT_OF_REAL_THM REAL_NOT_LT;;
+export_namedthm INT_NOT_LT "INT_NOT_LT";;
+
+export_theory "int-ofnum";;
+
+let INT_OF_NUM_ADD = INT_OF_REAL_THM REAL_OF_NUM_ADD;;
+export_namedthm INT_OF_NUM_ADD "INT_OF_NUM_ADD";;
+let INT_OF_NUM_EQ = INT_OF_REAL_THM REAL_OF_NUM_EQ;;
+export_namedthm INT_OF_NUM_EQ "INT_OF_NUM_EQ";;
+let INT_OF_NUM_GE = INT_OF_REAL_THM REAL_OF_NUM_GE;;
+export_namedthm INT_OF_NUM_GE "INT_OF_NUM_GE";;
+let INT_OF_NUM_GT = INT_OF_REAL_THM REAL_OF_NUM_GT;;
+export_namedthm INT_OF_NUM_GT "INT_OF_NUM_GT";;
+let INT_OF_NUM_LE = INT_OF_REAL_THM REAL_OF_NUM_LE;;
+export_namedthm INT_OF_NUM_LE "INT_OF_NUM_LE";;
+let INT_OF_NUM_LT = INT_OF_REAL_THM REAL_OF_NUM_LT;;
+export_namedthm INT_OF_NUM_LT "INT_OF_NUM_LT";;
+let INT_OF_NUM_MAX = INT_OF_REAL_THM REAL_OF_NUM_MAX;;
+export_namedthm INT_OF_NUM_MAX "INT_OF_NUM_MAX";;
+let INT_OF_NUM_MIN = INT_OF_REAL_THM REAL_OF_NUM_MIN;;
+export_namedthm INT_OF_NUM_MIN "INT_OF_NUM_MIN";;
+let INT_OF_NUM_MUL = INT_OF_REAL_THM REAL_OF_NUM_MUL;;
+export_namedthm INT_OF_NUM_MUL "INT_OF_NUM_MUL";;
+let INT_OF_NUM_POW = INT_OF_REAL_THM REAL_OF_NUM_POW;;
+export_namedthm INT_OF_NUM_POW "INT_OF_NUM_POW";;
+let INT_OF_NUM_SUB = INT_OF_REAL_THM REAL_OF_NUM_SUB;;
+export_namedthm INT_OF_NUM_SUB "INT_OF_NUM_SUB";;
+let INT_OF_NUM_SUC = INT_OF_REAL_THM REAL_OF_NUM_SUC;;
+export_namedthm INT_OF_NUM_SUC "INT_OF_NUM_SUC";;
+
+export_theory "int-pos";;
+
+let INT_POS = INT_OF_REAL_THM REAL_POS;;
+export_namedthm INT_POS "INT_POS";;
+let INT_POS_NZ = INT_OF_REAL_THM REAL_LT_IMP_NZ;;
+export_namedthm INT_POS_NZ "INT_POS_NZ";;
+
+export_theory "int-pow";;
+
+let INT_POW2_ABS = INT_OF_REAL_THM REAL_POW2_ABS;;
+export_namedthm INT_POW2_ABS "INT_POW2_ABS";;
+let INT_POW_1 = INT_OF_REAL_THM REAL_POW_1;;
+export_namedthm INT_POW_1 "INT_POW_1";;
+let INT_POW_1_LE = INT_OF_REAL_THM REAL_POW_1_LE;;
+export_namedthm INT_POW_1_LE "INT_POW_1_LE";;
+let INT_POW_1_LT = INT_OF_REAL_THM REAL_POW_1_LT;;
+export_namedthm INT_POW_1_LT "INT_POW_1_LT";;
+let INT_POW_2 = INT_OF_REAL_THM REAL_POW_2;;
+export_namedthm INT_POW_2 "INT_POW_2";;
+let INT_POW_ADD = INT_OF_REAL_THM REAL_POW_ADD;;
+export_namedthm INT_POW_ADD "INT_POW_ADD";;
+let INT_POW_EQ = INT_OF_REAL_THM REAL_POW_EQ;;
+export_namedthm INT_POW_EQ "INT_POW_EQ";;
+let INT_POW_EQ_0 = INT_OF_REAL_THM REAL_POW_EQ_0;;
+export_namedthm INT_POW_EQ_0 "INT_POW_EQ_0";;
+let INT_POW_EQ_ABS = INT_OF_REAL_THM REAL_POW_EQ_ABS;;
+export_namedthm INT_POW_EQ_ABS "INT_POW_EQ_ABS";;
+let INT_POW_LE = INT_OF_REAL_THM REAL_POW_LE;;
+export_namedthm INT_POW_LE "INT_POW_LE";;
+let INT_POW_LE2 = INT_OF_REAL_THM REAL_POW_LE2;;
+export_namedthm INT_POW_LE2 "INT_POW_LE2";;
+let INT_POW_LE2_ODD = INT_OF_REAL_THM REAL_POW_LE2_ODD;;
+export_namedthm INT_POW_LE2_ODD "INT_POW_LE2_ODD";;
+let INT_POW_LE2_REV = INT_OF_REAL_THM REAL_POW_LE2_REV;;
+export_namedthm INT_POW_LE2_REV "INT_POW_LE2_REV";;
+let INT_POW_LE_1 = INT_OF_REAL_THM REAL_POW_LE_1;;
+export_namedthm INT_POW_LE_1 "INT_POW_LE_1";;
+let INT_POW_LT = INT_OF_REAL_THM REAL_POW_LT;;
+export_namedthm INT_POW_LT "INT_POW_LT";;
+let INT_POW_LT2 = INT_OF_REAL_THM REAL_POW_LT2;;
+export_namedthm INT_POW_LT2 "INT_POW_LT2";;
+let INT_POW_LT2_REV = INT_OF_REAL_THM REAL_POW_LT2_REV;;
+export_namedthm INT_POW_LT2_REV "INT_POW_LT2_REV";;
+let INT_POW_LT_1 = INT_OF_REAL_THM REAL_POW_LT_1;;
+export_namedthm INT_POW_LT_1 "INT_POW_LT_1";;
+let INT_POW_MONO = INT_OF_REAL_THM REAL_POW_MONO;;
+export_namedthm INT_POW_MONO "INT_POW_MONO";;
+let INT_POW_MONO_LT = INT_OF_REAL_THM REAL_POW_MONO_LT;;
+export_namedthm INT_POW_MONO_LT "INT_POW_MONO_LT";;
+let INT_POW_MUL = INT_OF_REAL_THM REAL_POW_MUL;;
+export_namedthm INT_POW_MUL "INT_POW_MUL";;
+let INT_POW_NEG = INT_OF_REAL_THM REAL_POW_NEG;;
+export_namedthm INT_POW_NEG "INT_POW_NEG";;
+let INT_POW_NZ = INT_OF_REAL_THM REAL_POW_NZ;;
+export_namedthm INT_POW_NZ "INT_POW_NZ";;
+let INT_POW_ONE = INT_OF_REAL_THM REAL_POW_ONE;;
+export_namedthm INT_POW_ONE "INT_POW_ONE";;
+let INT_POW_POW = INT_OF_REAL_THM REAL_POW_POW;;
+export_namedthm INT_POW_POW "INT_POW_POW";;
+let INT_POW_ZERO = INT_OF_REAL_THM REAL_POW_ZERO;;
+export_namedthm INT_POW_ZERO "INT_POW_ZERO";;
+let INT_RNEG_UNIQ = INT_OF_REAL_THM REAL_RNEG_UNIQ;;
+export_namedthm INT_RNEG_UNIQ "INT_RNEG_UNIQ";;
+
+export_theory "int-sgn";;
+
+let INT_SGN = INT_OF_REAL_THM real_sgn;;
+export_namedthm INT_SGN "INT_SGN";;
+let INT_SGN_0 = INT_OF_REAL_THM REAL_SGN_0;;
+export_namedthm INT_SGN_0 "INT_SGN_0";;
+let INT_SGN_ABS = INT_OF_REAL_THM REAL_SGN_ABS;;
+export_namedthm INT_SGN_ABS "INT_SGN_ABS";;
+let INT_SGN_ABS_ALT = INT_OF_REAL_THM REAL_SGN_ABS_ALT;;
+export_namedthm INT_SGN_ABS_ALT "INT_SGN_ABS_ALT";;
+let INT_SGN_CASES = INT_OF_REAL_THM REAL_SGN_CASES;;
+export_namedthm INT_SGN_CASES "INT_SGN_CASES";;
+let INT_SGN_EQ = INT_OF_REAL_THM REAL_SGN_EQ;;
+export_namedthm INT_SGN_EQ "INT_SGN_EQ";;
+let INT_SGN_EQ_INEQ = INT_OF_REAL_THM REAL_SGN_EQ_INEQ;;
+export_namedthm INT_SGN_EQ_INEQ "INT_SGN_EQ_INEQ";;
+let INT_SGN_INEQS = INT_OF_REAL_THM REAL_SGN_INEQS;;
+export_namedthm INT_SGN_INEQS "INT_SGN_INEQS";;
+let INT_SGN_MUL = INT_OF_REAL_THM REAL_SGN_MUL;;
+export_namedthm INT_SGN_MUL "INT_SGN_MUL";;
+let INT_SGN_NEG = INT_OF_REAL_THM REAL_SGN_NEG;;
+export_namedthm INT_SGN_NEG "INT_SGN_NEG";;
+let INT_SGN_POW = INT_OF_REAL_THM REAL_SGN_POW;;
+export_namedthm INT_SGN_POW "INT_SGN_POW";;
+let INT_SGN_POW_2 = INT_OF_REAL_THM REAL_SGN_POW_2;;
+export_namedthm INT_SGN_POW_2 "INT_SGN_POW_2";;
+let INT_SGN_INT_SGN = INT_OF_REAL_THM REAL_SGN_REAL_SGN;;
+export_namedthm INT_SGN_INT_SGN "INT_SGN_INT_SGN";;
+let INT_SGNS_EQ = INT_OF_REAL_THM REAL_SGNS_EQ;;
+export_namedthm INT_SGNS_EQ "INT_SGNS_EQ";;
+let INT_SGNS_EQ_ALT = INT_OF_REAL_THM REAL_SGNS_EQ_ALT;;
+export_namedthm INT_SGNS_EQ_ALT "INT_SGNS_EQ_ALT";;
+let INT_SOS_EQ_0 = INT_OF_REAL_THM REAL_SOS_EQ_0;;
+export_namedthm INT_SOS_EQ_0 "INT_SOS_EQ_0";;
+let INT_SUB_0 = INT_OF_REAL_THM REAL_SUB_0;;
+
+export_theory "int-sub";;
+
+export_namedthm INT_SUB_0 "INT_SUB_0";;
+let INT_SUB_ABS = INT_OF_REAL_THM REAL_SUB_ABS;;
+export_namedthm INT_SUB_ABS "INT_SUB_ABS";;
+let INT_SUB_ADD = INT_OF_REAL_THM REAL_SUB_ADD;;
+export_namedthm INT_SUB_ADD "INT_SUB_ADD";;
+let INT_SUB_ADD2 = INT_OF_REAL_THM REAL_SUB_ADD2;;
+export_namedthm INT_SUB_ADD2 "INT_SUB_ADD2";;
+let INT_SUB_LDISTRIB = INT_OF_REAL_THM REAL_SUB_LDISTRIB;;
+export_namedthm INT_SUB_LDISTRIB "INT_SUB_LDISTRIB";;
+let INT_SUB_LE = INT_OF_REAL_THM REAL_SUB_LE;;
+export_namedthm INT_SUB_LE "INT_SUB_LE";;
+let INT_SUB_LNEG = INT_OF_REAL_THM REAL_SUB_LNEG;;
+export_namedthm INT_SUB_LNEG "INT_SUB_LNEG";;
+let INT_SUB_LT = INT_OF_REAL_THM REAL_SUB_LT;;
+export_namedthm INT_SUB_LT "INT_SUB_LT";;
+let INT_SUB_LZERO = INT_OF_REAL_THM REAL_SUB_LZERO;;
+export_namedthm INT_SUB_LZERO "INT_SUB_LZERO";;
+let INT_SUB_NEG2 = INT_OF_REAL_THM REAL_SUB_NEG2;;
+export_namedthm INT_SUB_NEG2 "INT_SUB_NEG2";;
+let INT_SUB_RDISTRIB = INT_OF_REAL_THM REAL_SUB_RDISTRIB;;
+export_namedthm INT_SUB_RDISTRIB "INT_SUB_RDISTRIB";;
+let INT_SUB_REFL = INT_OF_REAL_THM REAL_SUB_REFL;;
+export_namedthm INT_SUB_REFL "INT_SUB_REFL";;
+let INT_SUB_RNEG = INT_OF_REAL_THM REAL_SUB_RNEG;;
+export_namedthm INT_SUB_RNEG "INT_SUB_RNEG";;
+let INT_SUB_RZERO = INT_OF_REAL_THM REAL_SUB_RZERO;;
+export_namedthm INT_SUB_RZERO "INT_SUB_RZERO";;
+let INT_SUB_SUB = INT_OF_REAL_THM REAL_SUB_SUB;;
+export_namedthm INT_SUB_SUB "INT_SUB_SUB";;
+let INT_SUB_SUB2 = INT_OF_REAL_THM REAL_SUB_SUB2;;
+export_namedthm INT_SUB_SUB2 "INT_SUB_SUB2";;
+let INT_SUB_TRIANGLE = INT_OF_REAL_THM REAL_SUB_TRIANGLE;;
+export_namedthm INT_SUB_TRIANGLE "INT_SUB_TRIANGLE";;
+
+export_theory "int-wlog";;
+
+let INT_WLOG_LE = prove 
  (`(!x y:int. P x y <=> P y x) /\ (!x y. x <= y ==> P x y) ==> !x y. P x y`,
   MESON_TAC[INT_LE_TOTAL]);;
 
-let INT_WLOG_LT = prove
+export_namedthm INT_WLOG_LE "INT_WLOG_LE";;
+
+let INT_WLOG_LT = prove 
  (`(!x:int. P x x) /\ (!x y. P x y <=> P y x) /\ (!x y. x < y ==> P x y)
    ==> !x y. P x y`,
   MESON_TAC[INT_LT_TOTAL]);;
 
-let INT_WLOG_LE_3 = prove
+export_namedthm INT_WLOG_LT "INT_WLOG_LT";;
+
+let INT_WLOG_LE_3 = prove 
  (`!P. (!x y z. P x y z ==> P y x z /\ P x z y) /\
        (!x y z:int. x <= y /\ y <= z ==> P x y z)
        ==> !x y z. P x y z`,
   MESON_TAC[INT_LE_TOTAL]);;
 
+export_namedthm INT_WLOG_LE_3 "INT_WLOG_LE_3";;
+
 (* ------------------------------------------------------------------------- *)
 (* More useful "image" theorems.                                             *)
 (* ------------------------------------------------------------------------- *)
 
-let INT_FORALL_POS = prove
+export_theory "int-forall-exists";;
+
+let INT_FORALL_POS = prove 
  (`!P. (!n. P(&n)) <=> (!i:int. &0 <= i ==> P(i))`,
   GEN_TAC THEN EQ_TAC THEN DISCH_TAC THEN GEN_TAC THENL
    [DISJ_CASES_THEN (CHOOSE_THEN SUBST1_TAC) (SPEC `i:int` INT_IMAGE) THEN
@@ -564,45 +958,65 @@ let INT_FORALL_POS = prove
     DISCH_THEN SUBST1_TAC THEN ASM_REWRITE_TAC[INT_NEG_0];
     FIRST_ASSUM MATCH_MP_TAC THEN REWRITE_TAC[INT_OF_NUM_LE; LE_0]]);;
 
-let INT_EXISTS_POS = prove
+export_namedthm INT_FORALL_POS "INT_FORALL_POS";;
+
+let INT_EXISTS_POS = prove 
  (`!P. (?n. P(&n)) <=> (?i:int. &0 <= i /\ P(i))`,
   GEN_TAC THEN GEN_REWRITE_TAC I [TAUT `(p <=> q) <=> (~p <=> ~q)`] THEN
   REWRITE_TAC[NOT_EXISTS_THM; INT_FORALL_POS] THEN MESON_TAC[]);;
 
-let INT_FORALL_ABS = prove
+export_namedthm INT_EXISTS_POS "INT_EXISTS_POS";;
+
+let INT_FORALL_ABS = prove 
  (`!P. (!n. P(&n)) <=> (!x:int. P(abs x))`,
   REWRITE_TAC[INT_FORALL_POS] THEN MESON_TAC[INT_ABS_POS; INT_ABS_REFL]);;
 
-let INT_EXISTS_ABS = prove
+export_namedthm INT_FORALL_ABS "INT_FORALL_ABS";;
+
+let INT_EXISTS_ABS = prove 
  (`!P. (?n. P(&n)) <=> (?x:int. P(abs x))`,
   GEN_TAC THEN GEN_REWRITE_TAC I [TAUT `(p <=> q) <=> (~p <=> ~q)`] THEN
   REWRITE_TAC[NOT_EXISTS_THM; INT_FORALL_ABS] THEN MESON_TAC[]);;
+
+export_namedthm INT_EXISTS_ABS "INT_EXISTS_ABS";;
 
 (* ------------------------------------------------------------------------- *)
 (* A few "pseudo definitions".                                               *)
 (* ------------------------------------------------------------------------- *)
 
-let INT_POW = prove
+export_theory "int-pseudo-defs";;
+
+let INT_POW = prove 
  (`(x pow 0 = &1) /\
    (!n. x pow (SUC n) = x * x pow n)`,
   REWRITE_TAC(map INT_OF_REAL_THM (CONJUNCTS real_pow)));;
 
-let INT_ABS = prove
+export_namedthm INT_POW "INT_POW";;
+
+let INT_ABS = prove 
  (`!x. abs(x) = if &0 <= x then x else --x`,
   GEN_TAC THEN MP_TAC(INT_OF_REAL_THM(SPEC `x:real` real_abs)) THEN
   COND_CASES_TAC THEN REWRITE_TAC[int_eq]);;
 
-let INT_GE = prove
+export_namedthm INT_ABS "INT_ABS";;
+
+let INT_GE = prove 
  (`!x y. x >= y <=> y <= x`,
   REWRITE_TAC[int_ge; int_le; real_ge]);;
 
-let INT_GT = prove
+export_namedthm INT_GE "INT_GE";;
+
+let INT_GT = prove 
  (`!x y. x > y <=> y < x`,
   REWRITE_TAC[int_gt; int_lt; real_gt]);;
 
-let INT_LT = prove
+export_namedthm INT_GT "INT_GT";;
+
+let INT_LT = prove 
  (`!x y. x < y <=> ~(y <= x)`,
   REWRITE_TAC[int_lt; int_le; real_lt]);;
+
+export_namedthm INT_LT "INT_LT";;
 
 (* ------------------------------------------------------------------------- *)
 (* Now a decision procedure for the integers.                                *)
@@ -651,33 +1065,49 @@ let ASM_INT_ARITH_TAC =
 
 let INT_SUB = INT_ARITH `!x y. x - y = x + --y`;;
 
+export_namedthm INT_SUB "INT_SUB";;
+
 let INT_MAX = INT_ARITH `!x y. max x y = if x <= y then y else x`;;
 
+export_namedthm INT_MAX "INT_MAX";;
+
 let INT_MIN = INT_ARITH `!x y. min x y = if x <= y then x else y`;;
+
+export_namedthm INT_MIN "INT_MIN";;
 
 (* ------------------------------------------------------------------------- *)
 (* Additional useful lemmas.                                                 *)
 (* ------------------------------------------------------------------------- *)
 
-let INT_OF_NUM_EXISTS = prove
+export_theory "int-misc";;
+
+let INT_OF_NUM_EXISTS = prove 
  (`!x:int. (?n. x = &n) <=> &0 <= x`,
   GEN_TAC THEN EQ_TAC THEN STRIP_TAC THEN ASM_SIMP_TAC[INT_POS] THEN
   MP_TAC(ISPEC `x:int` INT_IMAGE) THEN
   REWRITE_TAC[OR_EXISTS_THM] THEN MATCH_MP_TAC MONO_EXISTS THEN
   ASM_INT_ARITH_TAC);;
 
+export_namedthm INT_OF_NUM_EXISTS "INT_OF_NUM_EXISTS";;
+
 let INT_LE_DISCRETE = INT_ARITH `!x y:int. x <= y <=> x < y + &1`;;
 
-let INT_LE_TRANS_LE = prove
+export_namedthm INT_LE_DISCRETE "INT_LE_DISCRETE";;
+
+let INT_LE_TRANS_LE = prove 
  (`!x y:int. x <= y <=> (!z. y <= z ==> x <= z)`,
   MESON_TAC[INT_LE_TRANS; INT_LE_REFL]);;
 
-let INT_LE_TRANS_LT = prove
+export_namedthm INT_LE_TRANS_LE "INT_LE_TRANS_LE";;
+
+let INT_LE_TRANS_LT = prove 
  (`!x y:int. x <= y <=> (!z. y < z ==> x < z)`,
   REPEAT GEN_TAC THEN EQ_TAC THENL [INT_ARITH_TAC; ALL_TAC] THEN
   DISCH_THEN(MP_TAC o SPEC `y + &1:int`) THEN INT_ARITH_TAC);;
 
-let INT_MUL_EQ_1 = prove
+export_namedthm INT_LE_TRANS_LT "INT_LE_TRANS_LT";;
+
+let INT_MUL_EQ_1 = prove 
  (`!x y:int. x * y = &1 <=> x = &1 /\ y = &1 \/ x = --(&1) /\ y = --(&1)`,
   REPEAT GEN_TAC THEN
   MP_TAC(ISPEC `x:int` INT_IMAGE) THEN
@@ -688,14 +1118,18 @@ let INT_MUL_EQ_1 = prove
      INT_ARITH `~(&n:int = -- &1)`; INT_OF_NUM_EQ; INT_NEG_EQ] THEN
   REWRITE_TAC[MULT_EQ_1]);;
 
-let INT_ABS_MUL_1 = prove
+export_namedthm INT_MUL_EQ_1 "INT_MUL_EQ_1";;
+
+let INT_ABS_MUL_1 = prove 
  (`!x y. abs(x * y) = &1 <=> abs(x) = &1 /\ abs(y) = &1`,
   REPEAT GEN_TAC THEN REWRITE_TAC[INT_ABS_MUL] THEN
   MP_TAC(SPEC `y:int` INT_ABS_POS) THEN SPEC_TAC(`abs(y)`,`b:int`) THEN
   MP_TAC(SPEC `x:int` INT_ABS_POS) THEN SPEC_TAC(`abs(x)`,`a:int`) THEN
   REWRITE_TAC[GSYM INT_FORALL_POS; INT_OF_NUM_MUL; INT_OF_NUM_EQ; MULT_EQ_1]);;
 
-let INT_WOP = prove
+export_namedthm INT_ABS_MUL_1 "INT_ABS_MUL_1";;
+
+let INT_WOP = prove 
  (`(?x. &0 <= x /\ P x) <=>
    (?x. &0 <= x /\ P x /\ !y. &0 <= y /\ P y ==> x <= y)`,
   ONCE_REWRITE_TAC[MESON[] `(?x. P x /\ Q x) <=> ~(!x. P x ==> ~Q x)`] THEN
@@ -703,11 +1137,15 @@ let INT_WOP = prove
   REWRITE_TAC[NOT_FORALL_THM] THEN GEN_REWRITE_TAC LAND_CONV [num_WOP] THEN
   REWRITE_TAC[GSYM NOT_LE; CONTRAPOS_THM]);;
 
+export_namedthm INT_WOP "INT_WOP";;
+
 (* ------------------------------------------------------------------------- *)
 (* Archimedian property for the integers.                                    *)
 (* ------------------------------------------------------------------------- *)
 
-let INT_ARCH = prove
+export_theory "int-archimedian";;
+
+let INT_ARCH = prove 
  (`!x d. ~(d = &0) ==> ?c. x < c * d`,
   SUBGOAL_THEN `!x. &0 <= x ==> ?n. x <= &n` ASSUME_TAC THENL
    [REWRITE_TAC[GSYM INT_FORALL_POS; INT_OF_NUM_LE] THEN MESON_TAC[LE_REFL];
@@ -726,11 +1164,15 @@ let INT_ARCH = prove
   ASM_MESON_TAC[INT_ARITH `--x * y = x * --y`;
                 INT_ARITH `~(d = &0) ==> &0 < d \/ &0 < --d`]);;
 
+export_namedthm INT_ARCH "INT_ARCH";;
+
 (* ------------------------------------------------------------------------- *)
 (* Definitions of ("Euclidean") integer division and remainder.              *)
 (* ------------------------------------------------------------------------- *)
 
-let INT_DIVMOD_EXIST_0 = prove
+export_theory "int-divmod";;
+
+let INT_DIVMOD_EXIST_0 = prove 
  (`!m n:int. ?q r. if n = &0 then q = &0 /\ r = m
                    else &0 <= r /\ r < abs(n) /\ m = q * n + r`,
   REPEAT GEN_TAC THEN ASM_CASES_TAC `n = &0` THEN
@@ -750,38 +1192,54 @@ let INT_DIVMOD_EXIST_0 = prove
     DISCH_THEN(MP_TAC o SPEC `if &0 <= n then q + &1 else q - &1`) THEN
     ASM_INT_ARITH_TAC]);;
 
+export_namedthm INT_DIVMOD_EXIST_0 "INT_DIVMOD_EXIST_0";;
+
 parse_as_infix("div",(22,"left"));;
 parse_as_infix("rem",(22,"left"));;
 
 let INT_DIVISION_0 =  new_specification ["div"; "rem"]
   (REWRITE_RULE[SKOLEM_THM] INT_DIVMOD_EXIST_0);;
 
-let INT_DIVISION = prove
+export_namedthm INT_DIVISION_0 "INT_DIVISION_0";;
+
+let INT_DIVISION = prove 
  (`!m n. ~(n = &0)
          ==> m = m div n * n + m rem n /\ &0 <= m rem n /\ m rem n < abs n`,
   MESON_TAC[INT_DIVISION_0]);;
 
-let INT_DIVISION_DECOMP = prove
+export_namedthm INT_DIVISION "INT_DIVISION";;
+
+let INT_DIVISION_DECOMP = prove 
  (`!m n. m div n * n + m rem n = m`,
   MP_TAC INT_DIVISION_0 THEN REPEAT(MATCH_MP_TAC MONO_FORALL THEN GEN_TAC) THEN
   COND_CASES_TAC THEN ASM_SIMP_TAC[] THEN CONV_TAC INT_ARITH);;
 
-let INT_DIV_0 = prove
+export_namedthm INT_DIVISION_DECOMP "INT_DIVISION_DECOMP";;
+
+let INT_DIV_0 = prove 
  (`!m. m div &0 = &0`,
   MESON_TAC[INT_DIVISION_0]);;
 
-let INT_REM_0 = prove
+export_namedthm INT_DIV_0 "INT_DIV_0";;
+
+let INT_REM_0 = prove 
  (`!m. m rem &0 = m`,
   MESON_TAC[INT_DIVISION_0]);;
 
-let INT_REM_DIV = prove
+export_namedthm INT_REM_0 "INT_REM_0";;
+
+let INT_REM_DIV = prove 
  (`!m n. m rem n = m - m div n * n`,
   REWRITE_TAC[INT_ARITH `a:int = b - c <=> c + a = b`] THEN
   REWRITE_TAC[INT_DIVISION_DECOMP]);;
 
-let INT_LT_REM = prove
+export_namedthm INT_REM_DIV "INT_REM_DIV";;
+
+let INT_LT_REM = prove 
  (`!x n. &0 < n ==> x rem n < n`,
   MESON_TAC[INT_DIVISION; INT_LT_REFL; INT_ARITH `&0:int < n ==> abs n = n`]);;
+
+export_namedthm INT_LT_REM "INT_LT_REM";;
 
 (* ------------------------------------------------------------------------- *)
 (* Arithmetic operations on integers. Essentially a clone of stuff for reals *)
@@ -1076,17 +1534,23 @@ make_overloadable "gcd" `:A#A->A`;;
 (* The general notion of congruence: just syntax for equivalence relation.   *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "int-congruence-def";;
+
 parse_as_infix("==",(10,"right"));;
 
-let cong = new_definition
+let cong = new_definition 
   `(x == y) (rel:A->A->bool) <=> rel x y`;;
+
+export_namedthm cong "cong";;
 
 (* ------------------------------------------------------------------------- *)
 (* Get real moduli defined and out of the way first.                         *)
 (* ------------------------------------------------------------------------- *)
 
-let real_mod = new_definition
+let real_mod = new_definition 
   `real_mod n (x:real) y = ?q. integer q /\ x - y = q * n`;;
+
+export_namedthm real_mod "real_mod";;
 
 overload_interface ("mod",`real_mod`);;
 
@@ -1094,47 +1558,65 @@ overload_interface ("mod",`real_mod`);;
 (* Integer divisibility.                                                     *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "int-divisibility";;
+
 parse_as_infix("divides",(12,"right"));;
 overload_interface("divides",`int_divides:int->int->bool`);;
 
-let int_divides = new_definition
+let int_divides = new_definition 
   `a divides b <=> ?x. b = a * x`;;
 
-let INT_DIVIDES_LE = prove
+export_namedthm int_divides "int_divides";;
+
+let INT_DIVIDES_LE = prove 
  (`!x y:int. x divides y ==> abs(x) <= abs(y) \/ y = &0`,
   SIMP_TAC[int_divides; LEFT_IMP_EXISTS_THM; INT_ABS_MUL; INT_ENTIRE] THEN
   REWRITE_TAC[TAUT `p \/ q \/ r <=> ~q /\ ~r ==> p`] THEN
   REWRITE_TAC[INT_ARITH `x:int <= x * y <=> &0 <= x * (y - &1)`] THEN
   REPEAT STRIP_TAC THEN MATCH_MP_TAC INT_LE_MUL THEN ASM_INT_ARITH_TAC);;
 
+export_namedthm INT_DIVIDES_LE "INT_DIVIDES_LE";;
+
 (* ------------------------------------------------------------------------- *)
 (* Integer congruences.                                                      *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "int-congruence-thm";;
+
 parse_as_prefix "mod";;
 overload_interface ("mod",`int_mod:int->int->int->bool`);;
 
-let int_mod = new_definition
+let int_mod = new_definition 
   `(mod n) x y = n divides (x - y)`;;
 
-let int_congruent = prove
+export_namedthm int_mod "int_mod";;
+
+let int_congruent = prove 
  (`!x y n. (x == y) (mod n) <=> ?d. x - y = n * d`,
   REWRITE_TAC[int_mod; cong; int_divides]);;
 
-let INT_CONG_IMP_EQ = prove
+export_namedthm int_congruent "int_congruent";;
+
+let INT_CONG_IMP_EQ = prove 
  (`!x y n:int. abs(x - y) < n /\ (x == y) (mod n) ==> x = y`,
   REWRITE_TAC[int_congruent; GSYM int_divides] THEN
   REPEAT STRIP_TAC THEN FIRST_ASSUM(MP_TAC o MATCH_MP INT_DIVIDES_LE) THEN
   ASM_INT_ARITH_TAC);;
 
+export_namedthm INT_CONG_IMP_EQ "INT_CONG_IMP_EQ";;
+
 (* ------------------------------------------------------------------------- *)
 (* Integer coprimality.                                                      *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "int-coprime";;
+
 overload_interface("coprime",`int_coprime:int#int->bool`);;
 
-let int_coprime = new_definition
+let int_coprime = new_definition 
  `!a b. coprime(a,b) <=> ?x y. a * x + b * y = &1`;;
+
+export_namedthm int_coprime "int_coprime";;
 
 (* ------------------------------------------------------------------------- *)
 (* A tactic for simple divisibility/congruence/coprimality goals.            *)
@@ -1240,13 +1722,15 @@ let INTEGER_TAC =
   REPEAT DISCH_TAC THEN CONV_TAC GENVAR_EXISTS_CONV THEN
   CONV_TAC(ONCE_DEPTH_CONV INT_POLYEQ_CONV) THEN EXISTS_POLY_TAC;;
 
-let INTEGER_RULE tm = prove(tm,INTEGER_TAC);;
+let INTEGER_RULE tm = prove (tm,INTEGER_TAC);;
 
 (* ------------------------------------------------------------------------- *)
 (* More div and rem properties.                                              *)
 (* ------------------------------------------------------------------------- *)
 
-let INT_DIVMOD_UNIQ = prove
+export_theory "int-div-rem-thm";;
+
+let INT_DIVMOD_UNIQ = prove 
  (`!m n q r. m = q * n + r /\ &0 <= r /\ r < abs n
              ==> m div n = q /\ m rem n = r`,
   REPEAT GEN_TAC THEN STRIP_TAC THEN
@@ -1264,17 +1748,23 @@ let INT_DIVMOD_UNIQ = prove
    [MATCH_MP_TAC INT_LE_RMUL THEN ASM_INT_ARITH_TAC;
     AP_TERM_TAC THEN REPEAT(POP_ASSUM MP_TAC) THEN CONV_TAC INT_RING]);;
 
-let INT_DIV_UNIQ = prove
+export_namedthm INT_DIVMOD_UNIQ "INT_DIVMOD_UNIQ";;
+
+let INT_DIV_UNIQ = prove 
  (`!m n q r. m = q * n + r /\ &0 <= r /\ r < abs n
              ==> m div n = q`,
   MESON_TAC[INT_DIVMOD_UNIQ]);;
 
-let INT_REM_UNIQ = prove
+export_namedthm INT_DIV_UNIQ "INT_DIV_UNIQ";;
+
+let INT_REM_UNIQ = prove 
  (`!m n q r. m = q * n + r /\ &0 <= r /\ r < abs n
              ==> m rem n = r`,
     MESON_TAC[INT_DIVMOD_UNIQ]);;
 
-let INT_DIV_LT,INT_REM_LT = (CONJ_PAIR o prove)
+export_namedthm INT_REM_UNIQ "INT_REM_UNIQ";;
+
+let INT_DIV_LT,INT_REM_LT = (CONJ_PAIR o prove) 
  (`(!m n. (~(n = &0) ==> &0 <= m) /\ m < n ==> m div n = &0) /\
    (!m n. (~(n = &0) ==> &0 <= m) /\ m < n ==> m rem n = m)`,
   REWRITE_TAC[AND_FORALL_THM] THEN REPEAT GEN_TAC THEN
@@ -1282,7 +1772,10 @@ let INT_DIV_LT,INT_REM_LT = (CONJ_PAIR o prove)
   REWRITE_TAC[TAUT `(p ==> q) /\ (p ==> r) <=> p ==> q /\ r`] THEN
   STRIP_TAC THEN MATCH_MP_TAC INT_DIVMOD_UNIQ THEN ASM_INT_ARITH_TAC);;
 
-let INT_DIV_RNEG,INT_REM_RNEG = (CONJ_PAIR o prove)
+export_namedthm INT_DIV_LT "INT_DIV_LT";;
+export_namedthm INT_REM_LT "INT_REM_LT";;
+
+let INT_DIV_RNEG,INT_REM_RNEG = (CONJ_PAIR o prove) 
  (`(!m n. m div (--n) = --(m div n)) /\
    (!m n. m rem (--n) = m rem n)`,
   REWRITE_TAC[AND_FORALL_THM] THEN REPEAT GEN_TAC THEN
@@ -1292,7 +1785,10 @@ let INT_DIV_RNEG,INT_REM_RNEG = (CONJ_PAIR o prove)
   MP_TAC(SPECL [`m:int`; `n:int`] INT_DIVISION) THEN
   ASM_INT_ARITH_TAC);;
 
-let INT_REM_REM = prove
+export_namedthm INT_DIV_RNEG "INT_DIV_RNEG";;
+export_namedthm INT_REM_RNEG "INT_REM_RNEG";;
+
+let INT_REM_REM = prove 
  (`!m n. (m rem n) rem n = m rem n`,
   REPEAT GEN_TAC THEN
   ASM_CASES_TAC `n:int = &0` THEN ASM_REWRITE_TAC[INT_REM_0] THEN
@@ -1300,7 +1796,9 @@ let INT_REM_REM = prove
   REWRITE_TAC[INT_MUL_LZERO; INT_ADD_LID] THEN
   ASM_MESON_TAC[INT_DIVISION]);;
 
-let INT_REM_EQ = prove
+export_namedthm INT_REM_REM "INT_REM_REM";;
+
+let INT_REM_EQ = prove 
  (`!m n p. m rem p = n rem p <=> (m == n) (mod p)`,
   REPEAT GEN_TAC THEN REWRITE_TAC[int_congruent] THEN
   EQ_TAC THENL
@@ -1316,66 +1814,87 @@ let INT_REM_EQ = prove
     MP_TAC(SPECL [`n:int`; `p:int`] INT_DIVISION) THEN
     ASM_SIMP_TAC[] THEN CONV_TAC INT_RING]);;
 
-let INT_DIV_ZERO,INT_REM_ZERO = (CONJ_PAIR o prove)
+export_namedthm INT_REM_EQ "INT_REM_EQ";;
+
+let INT_DIV_ZERO,INT_REM_ZERO = (CONJ_PAIR o prove) 
  (`(!n. &0 div n = &0) /\ (!n. &0 rem n = &0)`,
   REWRITE_TAC[AND_FORALL_THM] THEN GEN_TAC THEN
   ASM_CASES_TAC `n:int = &0` THEN ASM_REWRITE_TAC[INT_DIV_0; INT_REM_0] THEN
   MATCH_MP_TAC INT_DIVMOD_UNIQ THEN
   ASM_INT_ARITH_TAC);;
 
-let INT_REM_EQ_0 = prove
+export_namedthm INT_DIV_ZERO "INT_DIV_ZERO";;
+export_namedthm INT_REM_ZERO "INT_REM_ZERO";;
+
+let INT_REM_EQ_0 = prove 
  (`!m n. m rem n = &0 <=> n divides m`,
   REPEAT GEN_TAC THEN
   SUBST1_TAC(SYM(SPEC `n:int` INT_REM_ZERO)) THEN
   REWRITE_TAC[INT_REM_EQ] THEN CONV_TAC INTEGER_RULE);;
 
-let INT_REM_MOD_SELF = prove
+export_namedthm INT_REM_EQ_0 "INT_REM_EQ_0";;
+
+let INT_REM_MOD_SELF = prove 
  (`!m n. (m rem n == m) (mod n)`,
   REPEAT GEN_TAC THEN REWRITE_TAC[int_congruent] THEN
   EXISTS_TAC `--(m div n)` THEN
   REWRITE_TAC[INT_ARITH `r - m:int = n * --d <=> d * n + r = m`] THEN
   REWRITE_TAC[INT_DIVISION_DECOMP]);;
 
-let INT_CONG_SOLVE_BOUNDS = prove
+export_namedthm INT_REM_MOD_SELF "INT_REM_MOD_SELF";;
+
+let INT_CONG_SOLVE_BOUNDS = prove 
  (`!a n:int. ~(n = &0) ==> ?x. &0 <= x /\ x < abs n /\ (x == a) (mod n)`,
   MESON_TAC[INT_DIVISION; INT_REM_MOD_SELF]);;
 
-let INT_NEG_REM = prove
+export_namedthm INT_CONG_SOLVE_BOUNDS "INT_CONG_SOLVE_BOUNDS";;
+
+let INT_NEG_REM = prove 
  (`!n p. --(n rem p) rem p = --n rem p`,
   REPEAT GEN_TAC THEN REWRITE_TAC[INT_REM_EQ] THEN
   MATCH_MP_TAC(INTEGER_RULE
    `(a:int == b) (mod n) ==> (--a == --b) (mod n)`) THEN
   REWRITE_TAC[INT_REM_MOD_SELF]);;
 
-let INT_ADD_REM = prove
+export_namedthm INT_NEG_REM "INT_NEG_REM";;
+
+let INT_ADD_REM = prove 
  (`!m n p. (m rem p + n rem p) rem p = (m + n) rem p`,
   REPEAT GEN_TAC THEN REWRITE_TAC[INT_REM_EQ] THEN MATCH_MP_TAC(INTEGER_RULE
    `(x:int == x') (mod n) /\ (y == y') (mod n)
     ==> (x + y == x' + y') (mod n)`) THEN
   REWRITE_TAC[INT_REM_MOD_SELF]);;
 
-let INT_SUB_REM = prove
+export_namedthm INT_ADD_REM "INT_ADD_REM";;
+
+let INT_SUB_REM = prove 
  (`!m n p. (m rem p - n rem p) rem p = (m - n) rem p`,
   REPEAT GEN_TAC THEN REWRITE_TAC[INT_REM_EQ] THEN MATCH_MP_TAC(INTEGER_RULE
    `(x:int == x') (mod n) /\ (y == y') (mod n)
     ==> (x - y == x' - y') (mod n)`) THEN
   REWRITE_TAC[INT_REM_MOD_SELF]);;
 
-let INT_MUL_REM = prove
+export_namedthm INT_SUB_REM "INT_SUB_REM";;
+
+let INT_MUL_REM = prove 
  (`!m n p. (m rem p * n rem p) rem p = (m * n) rem p`,
   REPEAT GEN_TAC THEN REWRITE_TAC[INT_REM_EQ] THEN MATCH_MP_TAC(INTEGER_RULE
    `(x:int == x') (mod n) /\ (y == y') (mod n)
     ==> (x * y == x' * y') (mod n)`) THEN
   REWRITE_TAC[INT_REM_MOD_SELF]);;
 
-let INT_POW_REM = prove
+export_namedthm INT_MUL_REM "INT_MUL_REM";;
+
+let INT_POW_REM = prove 
  (`!m n p. ((m rem p) pow n) rem p = (m pow n) rem p`,
   GEN_TAC THEN INDUCT_TAC THEN REWRITE_TAC[INT_POW] THEN
   GEN_TAC THEN GEN_REWRITE_TAC LAND_CONV [GSYM INT_MUL_REM] THEN
   ASM_REWRITE_TAC[] THEN REWRITE_TAC[INT_REM_REM] THEN
   REWRITE_TAC[INT_MUL_REM]);;
 
-let INT_OF_NUM_DIV,INT_OF_NUM_REM = (CONJ_PAIR o prove)
+export_namedthm INT_POW_REM "INT_POW_REM";;
+
+let INT_OF_NUM_DIV,INT_OF_NUM_REM = (CONJ_PAIR o prove) 
  (`(!m n. &m div &n = &(m DIV n)) /\
    (!m n. &m rem &n = &(m MOD n))`,
   REWRITE_TAC[AND_FORALL_THM] THEN REPEAT GEN_TAC THEN
@@ -1386,14 +1905,20 @@ let INT_OF_NUM_DIV,INT_OF_NUM_REM = (CONJ_PAIR o prove)
   REWRITE_TAC[INT_POS; INT_OF_NUM_EQ; INT_OF_NUM_LT] THEN
   MATCH_MP_TAC DIVISION THEN ASM_REWRITE_TAC[]);;
 
-let INT_DIV_REFL,INT_REM_REFL = (CONJ_PAIR o prove)
+export_namedthm INT_OF_NUM_DIV "INT_OF_NUM_DIV";;
+export_namedthm INT_OF_NUM_REM "INT_OF_NUM_REM";;
+
+let INT_DIV_REFL,INT_REM_REFL = (CONJ_PAIR o prove) 
  (`(!n. n div n = if n = &0 then &0 else &1) /\
    (!n. n rem n = &0)`,
   REWRITE_TAC[AND_FORALL_THM] THEN X_GEN_TAC `n:int` THEN
   COND_CASES_TAC THENL [ASM_MESON_TAC[INT_DIV_0; INT_REM_0]; ALL_TAC] THEN
   MATCH_MP_TAC INT_DIVMOD_UNIQ THEN ASM_INT_ARITH_TAC);;
 
-let INT_DIV_LNEG,INT_REM_LNEG = (CONJ_PAIR o prove)
+export_namedthm INT_DIV_REFL "INT_DIV_REFL";;
+export_namedthm INT_REM_REFL "INT_REM_REFL";;
+
+let INT_DIV_LNEG,INT_REM_LNEG = (CONJ_PAIR o prove) 
  (`(!m n. --m div n =
           if m rem n = &0 then --(m div n) else --(m div n) - int_sgn n) /\
    (!m n. --m rem n =
@@ -1408,22 +1933,32 @@ let INT_DIV_LNEG,INT_REM_LNEG = (CONJ_PAIR o prove)
    `--m:int = (--x - y) * z + w <=> m = x * z + y * z - w`] THEN
   ASM_REWRITE_TAC[] THEN ASM_INT_ARITH_TAC);;
 
-let INT_DIV_NEG2 = prove
+export_namedthm INT_DIV_LNEG "INT_DIV_LNEG";;
+export_namedthm INT_REM_LNEG "INT_REM_LNEG";;
+
+let INT_DIV_NEG2 = prove 
  (`!m n. --m div --n = if m rem n = &0 then m div n else m div n + int_sgn n`,
   REWRITE_TAC[INT_DIV_RNEG; INT_DIV_LNEG; INT_SGN_NEG; INT_REM_RNEG] THEN
   INT_ARITH_TAC);;
 
-let INT_REM_NEG2 = prove
+export_namedthm INT_DIV_NEG2 "INT_DIV_NEG2";;
+
+let INT_REM_NEG2 = prove 
  (`!m n. --m rem --n = if m rem n = &0 then &0 else abs n - m rem n`,
   REWRITE_TAC[INT_REM_LNEG; INT_REM_RNEG] THEN INT_ARITH_TAC);;
 
-let INT_DIV_1,INT_REM_1 = (CONJ_PAIR o prove)
+export_namedthm INT_REM_NEG2 "INT_REM_NEG2";;
+
+let INT_DIV_1,INT_REM_1 = (CONJ_PAIR o prove) 
  (`(!n. n div &1 = n) /\
    (!n. n rem &1 = &0)`,
   REWRITE_TAC[AND_FORALL_THM] THEN GEN_TAC THEN
   MATCH_MP_TAC INT_DIVMOD_UNIQ THEN INT_ARITH_TAC);;
 
-let INT_DIV_MUL,INT_REM_MUL = (CONJ_PAIR o prove)
+export_namedthm INT_DIV_1 "INT_DIV_1";;
+export_namedthm INT_REM_1 "INT_REM_1";;
+
+let INT_DIV_MUL,INT_REM_MUL = (CONJ_PAIR o prove) 
  (`((!m n. ~(n = &0) ==> (m * n) div n = m) /\
     (!m n. ~(m = &0) ==> (m * n) div m = n)) /\
    ((!m n. (m * n) rem n = &0) /\
@@ -1435,7 +1970,10 @@ let INT_DIV_MUL,INT_REM_MUL = (CONJ_PAIR o prove)
   ASM_REWRITE_TAC[INT_REM_0; INT_MUL_RZERO] THEN
   MATCH_MP_TAC INT_DIVMOD_UNIQ THEN ASM_INT_ARITH_TAC);;
 
-let INT_DIV_LT_EQ = prove
+export_namedthm INT_DIV_MUL "INT_DIV_MUL";;
+export_namedthm INT_REM_MUL "INT_REM_MUL";;
+
+let INT_DIV_LT_EQ = prove 
  (`!a b c. &0 < a ==> (b div a < c <=> b < a * c)`,
   GEN_REWRITE_TAC I [FORALL_INT_CASES] THEN
   REWRITE_TAC[INT_ARITH `~(&0:int < -- &n)`] THEN X_GEN_TAC `n:num` THEN
@@ -1462,19 +2000,27 @@ let INT_DIV_LT_EQ = prove
    `(~(m:int < n * --c) <=> --m < n * c) <=> ~(m = n * --c)`] THEN
   ASM_MESON_TAC[INT_REM_MUL]);;
 
-let INT_LE_DIV_EQ = prove
+export_namedthm INT_DIV_LT_EQ "INT_DIV_LT_EQ";;
+
+let INT_LE_DIV_EQ = prove 
  (`!a b c. &0 < a ==> (c <= b div a <=> a * c <= b)`,
   SIMP_TAC[GSYM INT_NOT_LT; INT_DIV_LT_EQ]);;
 
-let INT_DIV_LE_EQ = prove
+export_namedthm INT_LE_DIV_EQ "INT_LE_DIV_EQ";;
+
+let INT_DIV_LE_EQ = prove 
  (`!a b c. &0 < a ==> (b div a <= c <=> b < a * (c + &1))`,
   SIMP_TAC[INT_LE_DISCRETE; INT_DIV_LT_EQ]);;
 
-let INT_LT_DIV_EQ = prove
+export_namedthm INT_DIV_LE_EQ "INT_DIV_LE_EQ";;
+
+let INT_LT_DIV_EQ = prove 
  (`!a b c. &0 < a ==> (c < b div a <=> a * (c + &1) <= b)`,
   SIMP_TAC[GSYM INT_NOT_LE; INT_DIV_LE_EQ]);;
 
-let INT_DIV_LE = prove
+export_namedthm INT_LT_DIV_EQ "INT_LT_DIV_EQ";;
+
+let INT_DIV_LE = prove 
  (`!m n. abs(m div n) <= abs m`,
   GEN_REWRITE_TAC BINDER_CONV [FORALL_INT_CASES] THEN
   REWRITE_TAC[INT_DIV_RNEG; INT_ABS_NEG] THEN
@@ -1490,7 +2036,9 @@ let INT_DIV_LE = prove
   MATCH_MP_TAC INT_LE_LMUL THEN REWRITE_TAC[INT_ABS_POS] THEN
   ASM_SIMP_TAC[INT_OF_NUM_LE; LE_1]);;
 
-let INT_DIV_DIV,INT_REM_MUL_REM = (CONJ_PAIR o prove)
+export_namedthm INT_DIV_LE "INT_DIV_LE";;
+
+let INT_DIV_DIV,INT_REM_MUL_REM = (CONJ_PAIR o prove) 
  (`(!m n p. &0 <= n ==> (m div n) div p = m div (n * p)) /\
    (!m n p. &0 <= n ==> m rem (n * p) = n * (m div n) rem p + m rem n)`,
   REWRITE_TAC[AND_FORALL_THM] THEN REPEAT GEN_TAC THEN
@@ -1512,7 +2060,10 @@ let INT_DIV_DIV,INT_REM_MUL_REM = (CONJ_PAIR o prove)
       REWRITE_TAC[INT_ARITH `n * (p - &1) + n:int = n * p`; INT_ABS_MUL] THEN
       MATCH_MP_TAC INT_LE_RMUL THEN INT_ARITH_TAC]]);;
 
-let INT_DIV_EQ_0 = prove
+export_namedthm INT_DIV_DIV "INT_DIV_DIV";;
+export_namedthm INT_REM_MUL_REM "INT_REM_MUL_REM";;
+
+let INT_DIV_EQ_0 = prove 
  (`!m n. m div n = &0 <=> n = &0 \/ &0 <= m /\ m < abs n`,
   GEN_REWRITE_TAC BINDER_CONV [FORALL_INT_CASES] THEN
   REWRITE_TAC[INT_DIV_RNEG; INT_NEG_EQ_0; INT_ABS_NEG] THEN
@@ -1521,12 +2072,16 @@ let INT_DIV_EQ_0 = prove
   ASM_SIMP_TAC[GSYM INT_LE_ANTISYM; INT_DIV_LE_EQ; INT_LE_DIV_EQ; CONJ_SYM;
                INT_OF_NUM_LT; LE_1; INT_ADD_LID; INT_MUL_RZERO; INT_MUL_RID]);;
 
-let INT_REM_EQ_SELF = prove
+export_namedthm INT_DIV_EQ_0 "INT_DIV_EQ_0";;
+
+let INT_REM_EQ_SELF = prove 
  (`!m n. m rem n = m <=> n = &0 \/ &0 <= m /\ m < abs n`,
   REWRITE_TAC[INT_REM_DIV; INT_ARITH `m - x:int = m <=> x = &0`] THEN
   REWRITE_TAC[INT_DIV_EQ_0; INT_ENTIRE] THEN INT_ARITH_TAC);;
 
-let INT_DIV_REM = prove
+export_namedthm INT_REM_EQ_SELF "INT_REM_EQ_SELF";;
+
+let INT_DIV_REM = prove 
  (`!m n p. &0 <= n ==> (m div n) rem p = (m rem (n * p)) div n`,
   REPEAT GEN_TAC THEN ASM_CASES_TAC `n:int = &0` THEN
   ASM_REWRITE_TAC[INT_LE_LT; INT_DIV_0; INT_REM_ZERO] THEN DISCH_TAC THEN
@@ -1535,12 +2090,16 @@ let INT_DIV_REM = prove
   EXISTS_TAC `m rem n` THEN ASM_SIMP_TAC[INT_DIVISION] THEN
   REWRITE_TAC[INT_ADD_AC; INT_MUL_AC]);;
 
-let INT_LE_DIV = prove
+export_namedthm INT_DIV_REM "INT_DIV_REM";;
+
+let INT_LE_DIV = prove 
  (`!m n. &0 <= m /\ &0 <= n ==> &0 <= m div n`,
   REWRITE_TAC[GSYM INT_FORALL_POS; IMP_CONJ; RIGHT_FORALL_IMP_THM] THEN
   REWRITE_TAC[INT_OF_NUM_DIV; INT_POS]);;
 
-let INT_LT_DIV = prove
+export_namedthm INT_LE_DIV "INT_LE_DIV";;
+
+let INT_LT_DIV = prove 
  (`!m n. &0 < n /\ n <= m ==> &0 < m div n`,
   REPEAT STRIP_TAC THEN
   REWRITE_TAC[INT_ARITH `&0:int < x <=> &0 <= x /\ ~(x = &0)`] THEN
@@ -1548,7 +2107,9 @@ let INT_LT_DIV = prove
    [MATCH_MP_TAC INT_LE_DIV THEN ASM_INT_ARITH_TAC;
     REWRITE_TAC[INT_DIV_EQ_0] THEN ASM_INT_ARITH_TAC]);;
 
-let INT_REM_MUL_ADD = prove
+export_namedthm INT_LT_DIV "INT_LT_DIV";;
+
+let INT_REM_MUL_ADD = prove 
  (`(!m n p. (m * n + p) rem n = p rem n) /\
    (!m n p. (n * m + p) rem n = p rem n) /\
    (!m n p. (p + m * n) rem n = p rem n) /\
@@ -1556,7 +2117,9 @@ let INT_REM_MUL_ADD = prove
   ONCE_REWRITE_TAC[GSYM INT_ADD_REM] THEN
   REWRITE_TAC[INT_REM_MUL; INT_ADD_LID; INT_ADD_RID; INT_REM_REM]);;
 
-let INT_DIV_MUL_ADD = prove
+export_namedthm INT_REM_MUL_ADD "INT_REM_MUL_ADD";;
+
+let INT_DIV_MUL_ADD = prove 
  (`(!m n p. ~(n = &0) ==> (m * n + p) div n = m + p div n) /\
    (!m n p. ~(n = &0) ==> (n * m + p) div n = m + p div n) /\
    (!m n p. ~(n = &0) ==> (p + m * n) div n = p div n + m) /\
@@ -1566,10 +2129,14 @@ let INT_DIV_MUL_ADD = prove
   MP_TAC(SPECL [`p:int`; `n:int`] INT_DIVISION) THEN
   ASM_REWRITE_TAC[] THEN ASM_INT_ARITH_TAC);;
 
-let INT_CONG_DIV2 = prove
+export_namedthm INT_DIV_MUL_ADD "INT_DIV_MUL_ADD";;
+
+let INT_CONG_DIV2 = prove 
  (`!a n m n.
       &0 <= m /\ (a == b) (mod (m * n)) ==> (a div m == b div m) (mod n)`,
   SIMP_TAC[GSYM INT_REM_EQ; INT_DIV_REM]);;
+
+export_namedthm INT_CONG_DIV2 "INT_CONG_DIV2";;
 
 (* ------------------------------------------------------------------------- *)
 (* Arithmetic operations also on div and rem, hence the whole lot.           *)
@@ -1631,20 +2198,26 @@ let INT_REDUCE_CONV = DEPTH_CONV INT_RED_CONV;;
 (* Existence of integer gcd, and the Bezout identity.                        *)
 (* ------------------------------------------------------------------------- *)
 
-let WF_INT_MEASURE = prove
+export_theory "int-gcd";;
+
+let WF_INT_MEASURE = prove 
  (`!P m. (!x. &0 <= m(x)) /\ (!x. (!y. m(y) < m(x) ==> P(y)) ==> P(x))
          ==> !x:A. P(x)`,
   REPEAT STRIP_TAC THEN SUBGOAL_THEN `!n x:A. m(x) = &n ==> P(x)` MP_TAC THENL
    [MATCH_MP_TAC num_WF; ALL_TAC] THEN
   REWRITE_TAC[GSYM INT_OF_NUM_LT; INT_FORALL_POS] THEN ASM_MESON_TAC[]);;
 
-let WF_INT_MEASURE_2 = prove
+export_namedthm WF_INT_MEASURE "WF_INT_MEASURE";;
+
+let WF_INT_MEASURE_2 = prove 
  (`!P m. (!x y. &0 <= m x y) /\
          (!x y. (!x' y'. m x' y' < m x y ==> P x' y') ==> P x y)
          ==> !x:A y:B. P x y`,
   REWRITE_TAC[FORALL_UNCURRY; GSYM FORALL_PAIR_THM; WF_INT_MEASURE]);;
 
-let INT_GCD_EXISTS = prove
+export_namedthm WF_INT_MEASURE_2 "WF_INT_MEASURE_2";;
+
+let INT_GCD_EXISTS = prove 
  (`!a b. ?d. d divides a /\ d divides b /\ ?x y. d = a * x + b * y`,
   let INT_GCD_EXISTS_CASES = INT_ARITH
    `(a = &0 \/ b = &0) \/
@@ -1659,7 +2232,9 @@ let INT_GCD_EXISTS = prove
     DISCH_THEN(REPEAT_TCL DISJ_CASES_THEN (ANTE_RES_THEN MP_TAC)) THEN
     MATCH_MP_TAC MONO_EXISTS THEN INTEGER_TAC]);;
 
-let INT_GCD_EXISTS_POS = prove
+export_namedthm INT_GCD_EXISTS "INT_GCD_EXISTS";;
+
+let INT_GCD_EXISTS_POS = prove 
  (`!a b. ?d. &0 <= d /\ d divides a /\ d divides b /\ ?x y. d = a * x + b * y`,
   REPEAT GEN_TAC THEN
   X_CHOOSE_TAC `d:int` (SPECL [`a:int`; `b:int`] INT_GCD_EXISTS) THEN
@@ -1667,14 +2242,20 @@ let INT_GCD_EXISTS_POS = prove
   ASM_MESON_TAC[INTEGER_RULE `(--d) divides x <=> d divides x`;
                 INT_ARITH `a * --x + b * --y = --(a * x + b * y)`]);;
 
+export_namedthm INT_GCD_EXISTS_POS "INT_GCD_EXISTS_POS";;
+
 (* ------------------------------------------------------------------------- *)
 (* Hence define (positive) gcd function; add elimination to INTEGER_TAC.      *)
 (* ------------------------------------------------------------------------- *)
+
+export_theory "int-gcd";;
 
 overload_interface("gcd",`int_gcd:int#int->int`);;
 
 let int_gcd = new_specification ["int_gcd"]
  (REWRITE_RULE[EXISTS_UNCURRY; SKOLEM_THM] INT_GCD_EXISTS_POS);;
+
+export_namedthm int_gcd "int_gcd";;
 
 let INTEGER_TAC =
   let GCD_ELIM_TAC =
@@ -1695,52 +2276,74 @@ let INTEGER_TAC =
   GEN_REWRITE_TAC TOP_DEPTH_CONV [pth] THEN
   REPEAT(GEN_TAC ORELSE CONJ_TAC) THEN GCD_ELIM_TAC THEN INTEGER_TAC;;
 
-let INTEGER_RULE tm = prove(tm,INTEGER_TAC);;
+let INTEGER_RULE tm = prove (tm,INTEGER_TAC);;
 
 (* ------------------------------------------------------------------------- *)
 (* Mapping from nonnegative integers back to natural numbers.                *)
 (* ------------------------------------------------------------------------- *)
 
-let num_of_int = new_definition
+export_theory "num-ofint";;
+
+let num_of_int = new_definition 
   `num_of_int x = @n. &n = x`;;
 
-let NUM_OF_INT_OF_NUM = prove
+export_namedthm num_of_int "num_of_int";;
+
+let NUM_OF_INT_OF_NUM = prove 
  (`!n. num_of_int(&n) = n`,
   REWRITE_TAC[num_of_int; INT_OF_NUM_EQ; SELECT_UNIQUE]);;
 
-let INT_OF_NUM_OF_INT = prove
+export_namedthm NUM_OF_INT_OF_NUM "NUM_OF_INT_OF_NUM";;
+
+let INT_OF_NUM_OF_INT = prove 
  (`!x. &0 <= x ==> &(num_of_int x) = x`,
   REWRITE_TAC[GSYM INT_FORALL_POS; num_of_int] THEN
   GEN_TAC THEN CONV_TAC SELECT_CONV THEN MESON_TAC[]);;
 
-let NUM_OF_INT = prove
+export_namedthm INT_OF_NUM_OF_INT "INT_OF_NUM_OF_INT";;
+
+let NUM_OF_INT = prove 
  (`!x. &0 <= x <=> (&(num_of_int x) = x)`,
   MESON_TAC[INT_OF_NUM_OF_INT; INT_POS]);;
+
+export_namedthm NUM_OF_INT "NUM_OF_INT";;
 
 (* ------------------------------------------------------------------------- *)
 (* Now define similar notions over the natural numbers.                      *)
 (* ------------------------------------------------------------------------- *)
+
+export_theory "num-ofint-arith";;
 
 overload_interface("divides",`num_divides:num->num->bool`);;
 overload_interface ("mod",`num_mod:num->num->num->bool`);;
 overload_interface("coprime",`num_coprime:num#num->bool`);;
 overload_interface("gcd",`num_gcd:num#num->num`);;
 
-let num_divides = new_definition
+let num_divides = new_definition 
  `a divides b <=> &a divides &b`;;
 
-let num_mod = new_definition
+export_namedthm num_divides "num_divides";;
+
+let num_mod = new_definition 
   `(mod n) x y <=> (mod &n) (&x) (&y)`;;
 
-let num_congruent = prove
+export_namedthm num_mod "num_mod";;
+
+let num_congruent = prove 
  (`!x y n. (x == y) (mod n) <=> (&x == &y) (mod &n)`,
   REWRITE_TAC[cong; num_mod]);;
 
-let num_coprime = new_definition
+export_namedthm num_congruent "num_congruent";;
+
+let num_coprime = new_definition 
  `coprime(a,b) <=> coprime(&a,&b)`;;
 
-let num_gcd = new_definition
+export_namedthm num_coprime "num_coprime";;
+
+let num_gcd = new_definition 
  `gcd(a,b) = num_of_int(gcd(&a,&b))`;;
+
+export_namedthm num_gcd "num_gcd";;
 
 (* ------------------------------------------------------------------------- *)
 (* Map an assertion over N to an integer equivalent.                         *)
@@ -1799,18 +2402,24 @@ let ASM_ARITH_TAC =
 (* A few miscellaneous applications.                                         *)
 (* ------------------------------------------------------------------------- *)
 
-let BINARY_INDUCT = prove
+export_theory "num-ofint-misc";;
+
+let BINARY_INDUCT = prove 
  (`!P. P 0 /\ (!n. P n ==> P(2 * n) /\ P(2 * n + 1)) ==> !n. P n`,
   GEN_TAC THEN STRIP_TAC THEN MATCH_MP_TAC num_WF THEN GEN_TAC THEN
   STRIP_ASSUME_TAC(ARITH_RULE
    `n = 0 \/ n DIV 2 < n /\ (n = 2 * n DIV 2 \/ n = 2 * n DIV 2 + 1)`) THEN
   ASM_MESON_TAC[]);;
 
-let NUM_CASES_BINARY = prove
+export_namedthm BINARY_INDUCT "BINARY_INDUCT";;
+
+let NUM_CASES_BINARY = prove 
  (`!P. (!n. P n) <=> (!n. P(2 * n)) /\ (!n. P(2 * n + 1))`,
   MESON_TAC[ARITH_RULE `n = 2 * n DIV 2 \/ n = 2 * n DIV 2 + 1`]);;
 
-let num_WF_DOWN = prove
+export_namedthm NUM_CASES_BINARY "NUM_CASES_BINARY";;
+
+let num_WF_DOWN = prove 
  (`!P m:num.
         (!n. m <= n ==> P n) /\
         (!n. n < m /\ (!p. n < p ==> P p) ==> P n)
@@ -1829,31 +2438,45 @@ let num_WF_DOWN = prove
     DISCH_THEN MATCH_MP_TAC THEN ASM_ARITH_TAC;
     ASM_MESON_TAC[ARITH_RULE `~(m <= n) ==> n = m - 1 - (m - 1 - n)`]]);;
 
+export_namedthm num_WF_DOWN "num_WF_DOWN";;
+
 (* ------------------------------------------------------------------------- *)
 (* Also a similar divisibility procedure for natural numbers.                *)
 (* ------------------------------------------------------------------------- *)
 
-let NUM_GCD = prove
+export_theory "num-ofint-divisibility";;
+
+let NUM_GCD = prove 
  (`!a b. &(gcd(a,b)) = gcd(&a,&b)`,
   REWRITE_TAC[num_gcd; GSYM NUM_OF_INT; int_gcd]);;
 
-let CONG = prove
+export_namedthm NUM_GCD "NUM_GCD";;
+
+let CONG = prove 
  (`!x y n. (x == y) (mod n) <=> x MOD n = y MOD n`,
   REWRITE_TAC[num_congruent; GSYM INT_REM_EQ; INT_OF_NUM_REM; INT_OF_NUM_EQ]);;
 
-let CONG_LMOD = prove
+export_namedthm CONG "CONG";;
+
+let CONG_LMOD = prove 
  (`!x y n. (x MOD n == y) (mod n) <=> (x == y) (mod n)`,
   REWRITE_TAC[CONG; MOD_MOD_REFL]);;
 
-let CONG_RMOD = prove
+export_namedthm CONG_LMOD "CONG_LMOD";;
+
+let CONG_RMOD = prove 
  (`!x y n. (x == y MOD n) (mod n) <=> (x == y) (mod n)`,
   REWRITE_TAC[CONG; MOD_MOD_REFL]);;
 
-let CONG_DIV2 = prove
+export_namedthm CONG_RMOD "CONG_RMOD";;
+
+let CONG_DIV2 = prove 
  (`!a n m n. (a == b) (mod (m * n)) ==> (a DIV m == b DIV m) (mod n)`,
   SIMP_TAC[CONG; DIV_MOD]);;
 
-let divides = prove
+export_namedthm CONG_DIV2 "CONG_DIV2";;
+
+let divides = prove 
  (`a divides b <=> ?x. b = a * x`,
   REWRITE_TAC[num_divides; int_divides] THEN
   EQ_TAC THENL [ALL_TAC; MESON_TAC[INT_OF_NUM_MUL; INT_OF_NUM_EQ]] THEN
@@ -1863,7 +2486,9 @@ let divides = prove
   ASM_REWRITE_TAC[GSYM INT_OF_NUM_MUL; INT_ABS_MUL] THEN
   SIMP_TAC[INT_OF_NUM_OF_INT; INT_ABS_POS; INT_ABS_ABS]);;
 
-let DIVIDES_LE = prove
+export_namedthm divides "divides";;
+
+let DIVIDES_LE = prove 
  (`!m n. m divides n ==> m <= n \/ n = 0`,
   SUBGOAL_THEN `!m n. m <= m * n \/ m * n = 0`
     (fun th -> MESON_TAC[divides; th]) THEN
@@ -1871,22 +2496,30 @@ let DIVIDES_LE = prove
    `m <= m * n <=> m * 1 <= m * n`] THEN
   ASM_ARITH_TAC);;
 
-let DIVIDES_LE_STRONG = prove
+export_namedthm DIVIDES_LE "DIVIDES_LE";;
+
+let DIVIDES_LE_STRONG = prove 
  (`!m n. m divides n ==> 1 <= m /\ m <= n \/ n = 0`,
   REPEAT GEN_TAC THEN ASM_CASES_TAC `m = 0` THEN
   ASM_SIMP_TAC[DIVIDES_LE; LE_1; LE_0] THEN
   REWRITE_TAC[divides] THEN MESON_TAC[MULT_CLAUSES]);;
 
-let DIVIDES_ANTISYM = prove
+export_namedthm DIVIDES_LE_STRONG "DIVIDES_LE_STRONG";;
+
+let DIVIDES_ANTISYM = prove 
  (`!m n. m divides n /\ n divides m <=> m = n`,
   REPEAT GEN_TAC THEN EQ_TAC THENL
    [ALL_TAC; REWRITE_TAC[divides] THEN MESON_TAC[MULT_CLAUSES]] THEN
   DISCH_THEN(CONJUNCTS_THEN(MP_TAC o MATCH_MP DIVIDES_LE_STRONG)) THEN
   ARITH_TAC);;
 
-let DIVIDES_ONE = prove
+export_namedthm DIVIDES_ANTISYM "DIVIDES_ANTISYM";;
+
+let DIVIDES_ONE = prove 
  (`!n. n divides 1 <=> n = 1`,
   REWRITE_TAC[divides] THEN MESON_TAC[MULT_EQ_1; MULT_CLAUSES]);;
+
+export_namedthm DIVIDES_ONE "DIVIDES_ONE";;
 
 let NUMBER_TAC =
   let conva = GEN_REWRITE_CONV TRY_CONV [GSYM DIVIDES_ANTISYM] in
@@ -1912,57 +2545,79 @@ let NUMBER_TAC =
   REWRITE_TAC[RIGHT_IMP_FORALL_THM] THEN REPEAT GEN_TAC THEN
   INTEGER_TAC;;
 
-let NUMBER_RULE tm = prove(tm,NUMBER_TAC);;
+let NUMBER_RULE tm = prove (tm,NUMBER_TAC);;
 
 (* ------------------------------------------------------------------------- *)
 (* Definition (and not much more) of primality.                              *)
 (* ------------------------------------------------------------------------- *)
 
-let prime = new_definition
+export_theory "int-primality";;
+
+let prime = new_definition 
   `prime(p) <=> ~(p = 1) /\ !x. x divides p ==> x = 1 \/ x = p`;;
 
-let ONE_OR_PRIME = prove
+export_namedthm prime "prime";;
+
+let ONE_OR_PRIME = prove 
  (`!p. p = 1 \/ prime p <=> !n. n divides p ==> n = 1 \/ n = p`,
   GEN_TAC THEN REWRITE_TAC[prime] THEN
   ASM_CASES_TAC `p = 1` THEN ASM_REWRITE_TAC[DIVIDES_ONE]);;
+
+export_namedthm ONE_OR_PRIME "ONE_OR_PRIME";;
 
 (* ------------------------------------------------------------------------- *)
 (* Integer powers of real numbers.                                           *)
 (* ------------------------------------------------------------------------- *)
 
+export_theory "real-int-pow";;
+
 make_overloadable "zpow" `:A->int->A`;;
 parse_as_infix("zpow",(24,"left"));;
 overload_interface ("zpow",`real_zpow:real->int->real`);;
 
-let real_zpow = new_definition
+let real_zpow = new_definition 
  `(z:real) zpow (i:int) = if &0 <= i then z pow (num_of_int i)
                           else inv(z pow (num_of_int(--i)))`;;
 
-let REAL_POW_ZPOW = prove
+export_namedthm real_zpow "real_zpow";;
+
+let REAL_POW_ZPOW = prove 
  (`!x n. x pow n = x zpow (&n)`,
   REWRITE_TAC[real_zpow; INT_POS; NUM_OF_INT_OF_NUM]);;
 
-let REAL_ZPOW_NUM = prove
+export_namedthm REAL_POW_ZPOW "REAL_POW_ZPOW";;
+
+let REAL_ZPOW_NUM = prove 
  (`!x n. x zpow (&n) = x pow n`,
   REWRITE_TAC[real_zpow; INT_POS; NUM_OF_INT_OF_NUM]);;
 
-let REAL_ZPOW_0 = prove
+export_namedthm REAL_ZPOW_NUM "REAL_ZPOW_NUM";;
+
+let REAL_ZPOW_0 = prove 
  (`!x:real. x zpow (&0) = &1`,
   REWRITE_TAC[REAL_ZPOW_NUM; real_pow]);;
 
-let REAL_ZPOW_1 = prove
+export_namedthm REAL_ZPOW_0 "REAL_ZPOW_0";;
+
+let REAL_ZPOW_1 = prove 
  (`!x:real. x zpow (&1) = x`,
   REWRITE_TAC[REAL_ZPOW_NUM; REAL_POW_1]);;
 
-let REAL_ZPOW_2 = prove
+export_namedthm REAL_ZPOW_1 "REAL_ZPOW_1";;
+
+let REAL_ZPOW_2 = prove 
  (`!x:real. x zpow (&2) = x * x`,
   REWRITE_TAC[REAL_ZPOW_NUM; REAL_POW_2]);;
 
-let REAL_ZPOW_ONE = prove
+export_namedthm REAL_ZPOW_2 "REAL_ZPOW_2";;
+
+let REAL_ZPOW_ONE = prove 
  (`!n. &1 zpow n = &1`,
   REWRITE_TAC[real_zpow; REAL_POW_ONE; REAL_INV_1; COND_ID]);;
 
-let REAL_ZPOW_NEG = prove
+export_namedthm REAL_ZPOW_ONE "REAL_ZPOW_ONE";;
+
+let REAL_ZPOW_NEG = prove 
  (`!x n. x zpow (--n) = inv(x zpow n)`,
   REPEAT GEN_TAC THEN ASM_CASES_TAC `n:int = &0` THEN
   ASM_REWRITE_TAC[INT_NEG_0; REAL_ZPOW_0; REAL_INV_1] THEN
@@ -1970,45 +2625,63 @@ let REAL_ZPOW_NEG = prove
    `~(n:int = &0) ==> (&0 <= --n <=> ~(&0 <= n))`] THEN
   MESON_TAC[REAL_INV_INV]);;
 
-let REAL_ZPOW_MINUS1 = prove
+export_namedthm REAL_ZPOW_NEG "REAL_ZPOW_NEG";;
+
+let REAL_ZPOW_MINUS1 = prove 
  (`!x. x zpow --(&1) = inv x`,
   REWRITE_TAC[REAL_ZPOW_NEG; REAL_ZPOW_1]);;
 
-let REAL_ZPOW_ZERO = prove
+export_namedthm REAL_ZPOW_MINUS1 "REAL_ZPOW_MINUS1";;
+
+let REAL_ZPOW_ZERO = prove 
  (`!n. &0 zpow n = if n = &0 then &1 else &0`,
   REWRITE_TAC[FORALL_INT_CASES; REAL_ZPOW_NEG; REAL_ZPOW_NUM] THEN
   REWRITE_TAC[REAL_POW_ZERO; INT_NEG_EQ_0; INT_OF_NUM_EQ] THEN
   MESON_TAC[REAL_INV_0; REAL_INV_1]);;
 
-let REAL_ZPOW_POW = prove
+export_namedthm REAL_ZPOW_ZERO "REAL_ZPOW_ZERO";;
+
+let REAL_ZPOW_POW = prove 
  (`(!(x:real) n. x zpow (&n) = x pow n) /\
    (!(x:real) n. x zpow (-- &n) = inv(x pow n))`,
   REWRITE_TAC[REAL_ZPOW_NEG; REAL_ZPOW_NUM]);;
 
-let REAL_INV_ZPOW = prove
+export_namedthm REAL_ZPOW_POW "REAL_ZPOW_POW";;
+
+let REAL_INV_ZPOW = prove 
  (`!(x:real) n. inv(x zpow n) = inv(x) zpow n`,
   REWRITE_TAC[FORALL_INT_CASES; REAL_ZPOW_POW] THEN
   REWRITE_TAC[REAL_INV_POW; REAL_INV_INV]);;
 
-let REAL_ZPOW_INV = prove
+export_namedthm REAL_INV_ZPOW "REAL_INV_ZPOW";;
+
+let REAL_ZPOW_INV = prove 
  (`!(x:real) n. inv x zpow n = inv(x zpow n)`,
   REWRITE_TAC[REAL_INV_ZPOW]);;
 
-let REAL_ZPOW_ZPOW = prove
+export_namedthm REAL_ZPOW_INV "REAL_ZPOW_INV";;
+
+let REAL_ZPOW_ZPOW = prove 
  (`!(x:real) m n. (x zpow m) zpow n = x zpow (m * n)`,
   REWRITE_TAC[FORALL_INT_CASES; INT_MUL_LNEG; INT_MUL_RNEG; INT_NEG_NEG] THEN
   REWRITE_TAC[REAL_ZPOW_POW; REAL_INV_POW; INT_OF_NUM_MUL; REAL_INV_INV] THEN
   REWRITE_TAC[REAL_POW_POW]);;
 
-let REAL_ZPOW_MUL = prove
+export_namedthm REAL_ZPOW_ZPOW "REAL_ZPOW_ZPOW";;
+
+let REAL_ZPOW_MUL = prove 
  (`!(x:real) (y:real) n. (x * y) zpow n = x zpow n * y zpow n`,
   REWRITE_TAC[FORALL_INT_CASES; REAL_ZPOW_POW; REAL_POW_MUL; REAL_INV_MUL]);;
 
-let REAL_ZPOW_DIV = prove
+export_namedthm REAL_ZPOW_MUL "REAL_ZPOW_MUL";;
+
+let REAL_ZPOW_DIV = prove 
  (`!(x:real) (y:real) n. (x / y) zpow n = x zpow n / y zpow n`,
   REWRITE_TAC[real_div; REAL_INV_ZPOW; REAL_ZPOW_MUL]);;
 
-let REAL_ZPOW_ADD = prove
+export_namedthm REAL_ZPOW_DIV "REAL_ZPOW_DIV";;
+
+let REAL_ZPOW_ADD = prove 
  (`!(x:real) m n.
         ~(x = &0) ==> x zpow (m + n) = x zpow m * x zpow n`,
   REWRITE_TAC[FORALL_INT_CASES; GSYM INT_NEG_ADD; INT_OF_NUM_ADD] THEN
@@ -2029,33 +2702,47 @@ let REAL_ZPOW_ADD = prove
     REWRITE_TAC[REAL_POW_ADD; REAL_ZPOW_NUM; REAL_MUL_ASSOC] THEN
     ASM_SIMP_TAC[REAL_MUL_LINV; REAL_POW_EQ_0; REAL_MUL_LID]]);;
 
-let REAL_ZPOW_SUB = prove
+export_namedthm REAL_ZPOW_ADD "REAL_ZPOW_ADD";;
+
+let REAL_ZPOW_SUB = prove 
  (`!(x:real) m n.
         ~(x = &0) ==> x zpow (m - n) = x zpow m / x zpow n`,
   SIMP_TAC[INT_SUB; REAL_ZPOW_ADD; REAL_ZPOW_NEG; real_div]);;
 
-let REAL_ZPOW_LE = prove
+export_namedthm REAL_ZPOW_SUB "REAL_ZPOW_SUB";;
+
+let REAL_ZPOW_LE = prove 
  (`!x n. &0 <= x ==> &0 <= x zpow n`,
   SIMP_TAC[FORALL_INT_CASES; REAL_ZPOW_POW; REAL_LE_INV_EQ; REAL_POW_LE]);;
 
-let REAL_ZPOW_LT = prove
+export_namedthm REAL_ZPOW_LE "REAL_ZPOW_LE";;
+
+let REAL_ZPOW_LT = prove 
  (`!x n. &0 < x ==> &0 < x zpow n`,
   SIMP_TAC[FORALL_INT_CASES; REAL_ZPOW_POW; REAL_LT_INV_EQ; REAL_POW_LT]);;
 
-let REAL_ZPOW_EQ_0 = prove
+export_namedthm REAL_ZPOW_LT "REAL_ZPOW_LT";;
+
+let REAL_ZPOW_EQ_0 = prove 
  (`!x n. x zpow n = &0 <=> x = &0 /\ ~(n = &0)`,
   REWRITE_TAC[FORALL_INT_CASES; REAL_ZPOW_POW; REAL_INV_EQ_0] THEN
   REWRITE_TAC[INT_NEG_EQ_0; REAL_POW_EQ_0; INT_OF_NUM_EQ]);;
 
-let REAL_ABS_ZPOW = prove
+export_namedthm REAL_ZPOW_EQ_0 "REAL_ZPOW_EQ_0";;
+
+let REAL_ABS_ZPOW = prove 
  (`!x n. abs(x zpow n) = abs(x) zpow n`,
   REWRITE_TAC[FORALL_INT_CASES; REAL_ZPOW_POW; REAL_ABS_INV; REAL_ABS_POW]);;
 
-let REAL_SGN_ZPOW = prove
+export_namedthm REAL_ABS_ZPOW "REAL_ABS_ZPOW";;
+
+let REAL_SGN_ZPOW = prove 
  (`!x n. real_sgn(x zpow n) = real_sgn(x) zpow n`,
   REWRITE_TAC[FORALL_INT_CASES; REAL_ZPOW_POW] THEN
   REWRITE_TAC[GSYM REAL_SGN_POW] THEN
   REWRITE_TAC[REAL_SGN_INV; REAL_INV_SGN]);;
+
+export_namedthm REAL_SGN_ZPOW "REAL_SGN_ZPOW";;
 
 (* ------------------------------------------------------------------------- *)
 (* Make sure we give priority to N.                                          *)
