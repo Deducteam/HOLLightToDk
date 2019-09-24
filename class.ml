@@ -159,7 +159,7 @@ let new_type_definition tyname (absname,repname) th =
 (* ------------------------------------------------------------------------- *)
 
 export_theory "excluded-middle";;
-
+(*
 let EXCLUDED_MIDDLE = prove 
  (`!t. t \/ ~t`,
   GEN_TAC THEN SUBGOAL_THEN
@@ -173,8 +173,14 @@ let EXCLUDED_MIDDLE = prove
     DISJ2_TAC THEN DISCH_TAC THEN MP_TAC(ITAUT `~(T <=> F)`) THEN
     PURE_ONCE_ASM_REWRITE_TAC[] THEN
     ASM_REWRITE_TAC[ITAUT `p \/ T <=> T`]]);;
+*)
+
+let EXCLUDED_MIDDLE =
+  new_axiom `!t. t \/ ~t`;;
 
 export_namedthm EXCLUDED_MIDDLE "EXCLUDED_MIDDLE";;
+
+export_theory "bool-cases";;
 
 let BOOL_CASES_AX = prove 
  (`!t. (t <=> T) \/ (t <=> F)`,
